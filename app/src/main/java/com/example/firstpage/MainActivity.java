@@ -174,10 +174,10 @@ public class MainActivity extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent i = new Intent(MainActivity.this, Main2Activity.class);
+                Intent i = new Intent(MainActivity.this, HomePage.class);
                 i.putExtra("nickname", nickname.getText().toString());
-                i.putExtra("avatar", avatarID);
-                startActivity(i);*/
+                // i.putExtra("avatar", avatarID);
+                startActivity(i);
             }
         });
 
