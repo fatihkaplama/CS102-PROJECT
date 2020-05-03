@@ -3,6 +3,7 @@ package com.example.firstpage;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         editor = sharedPreferencesNickname.edit();
 
         avatar1.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.batman;
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         avatar2.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.captainamerica;
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         avatar3.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.joker;
