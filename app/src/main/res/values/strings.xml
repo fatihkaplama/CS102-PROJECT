@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">FirstPage</string>
+    <string name="logo">logo</string>
+    <string name="name">Name</string>
+    <string name="user">user</string>
+    <string name="nickname">Nickname</string>
+    <string name="apply">apply</string>
+    <string name="avatar1">Button</string>
+    <string name="avatar2">avatar2</string>
+    <string name="avatar3">avatar3</string>
+    <string name="avatar4">avatar4</string>
+    <string name="avatar5">Button</string>
+    <string name="avatar6">avatar6</string>
+    <string name="avatar7">avatar7</string>
+    <string name="avatar8">avatar8</string>
+    <string name="avatar9">avatar9</string>
+    <string name="textview">TextView</string>
+    <string name="start">start</string>
+
+</resources>
