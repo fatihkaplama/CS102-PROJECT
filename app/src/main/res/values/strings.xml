@@ -20,9 +20,10 @@
     <string name="map2_button2">Button</string>
     <string name="map3_button3">Button</string>
     <string name="map4_button4">Button</string>
-    <string name="go_forward">Go Forward</string>
     <string name="turn_Rıght">turn rıght</string>
     <string name="turnLeft">turn Left</string>
     <string name="bee">bee</string>
+    <string name="goForward">go Forward</string>
+    <string name="honeycomb">honeycomb</string>
 
 </resources>
