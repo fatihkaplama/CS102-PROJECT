@@ -2,6 +2,7 @@ package com.example.firstpage;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -20,16 +21,24 @@ public class HomePage extends AppCompatActivity {
     TextView tv;
     Button b;
     Button play;
+    Button settingsButton;
+    int background;
+
+    ConstraintLayout homePageLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         Intent i = getIntent();
+        homePageLayout = findViewById(R.id.home_page_layout);
+        background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
+        homePageLayout.setBackgroundResource(background);
         userName = i.getStringExtra("nickname");
         tv = findViewById(R.id.userName);
         tv.setText(userName);
-        b = findViewById(R.id.backB);
+        b = findViewById(R.id.return_button_homePage);
         play = findViewById(R.id.play2);
+        settingsButton = findViewById(R.id.settings_button_homePage);
         // avatarPg = findViewById(R.id.avatarH);
         //avatar = AppCompatDrawableManager.get().getDrawable(HomePage.this, avatarId);
         // avatarPg.setBackground(avatar);
@@ -47,6 +56,13 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(HomePage.this, Map1Page.class);
+                startActivity(i);
+            }
+        });
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomePage.this, SettingsPage.class);
                 startActivity(i);
             }
         });

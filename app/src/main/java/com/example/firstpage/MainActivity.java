@@ -2,12 +2,12 @@ package com.example.firstpage;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     int avatarID;
     int volumeoffID;
     int volumeonID;
+    int background;
+    ConstraintLayout mainPageLayout;
     Drawable volumeoff;
     Drawable volumeon;
     Drawable avatar;
@@ -49,9 +51,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         nickname = findViewById(R.id.nickname);
+        mainPageLayout = findViewById(R.id.main_layout);
         final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.daybreaker);
         mediaPlayer.start();
-
+        background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
+        mainPageLayout.setBackgroundResource(background);
         isVolumeOn = true;
         user = findViewById(R.id.user);
         avatar1 = findViewById(R.id.avatar1);
@@ -63,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
         avatar7 = findViewById(R.id.avatar7);
         avatar8 = findViewById(R.id.avatar8);
         avatar9 = findViewById(R.id.avatar9);
-        volume = findViewById(R.id.volume);
-        settings = findViewById(R.id.settings);
+        volume = findViewById(R.id.volume_button_main);
+        settings = findViewById(R.id.settings_button_main);
         apply = findViewById(R.id.apply);
         start = findViewById(R.id.start);
         volumeonID = R.drawable.volumeon;
@@ -181,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         volume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,12 +203,10 @@ public class MainActivity extends AppCompatActivity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, SettingsPage.class);
+//                intent.putExtra("toSettingsPage", "MainActivity");
+                startActivity(intent);
             }
         });
-
-
-
-
     }
 }
