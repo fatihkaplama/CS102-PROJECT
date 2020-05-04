@@ -19,6 +19,7 @@ public class HomePage extends AppCompatActivity {
     int avatarId;
     TextView tv;
     Button b;
+    Button play;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,7 @@ public class HomePage extends AppCompatActivity {
         tv = findViewById(R.id.userName);
         tv.setText(userName);
         b = findViewById(R.id.backB);
+        play = findViewById(R.id.play2);
         // avatarPg = findViewById(R.id.avatarH);
         //avatar = AppCompatDrawableManager.get().getDrawable(HomePage.this, avatarId);
         // avatarPg.setBackground(avatar);
@@ -37,6 +39,14 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(HomePage.this,MainActivity.class);
+                startActivity(i);
+            }
+        });
+
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomePage.this, Map1Page.class);
                 startActivity(i);
             }
         });
