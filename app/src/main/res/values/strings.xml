@@ -24,5 +24,15 @@
     <string name="turn_Rıght">turn rıght</string>
     <string name="turnLeft">turn Left</string>
     <string name="bee">bee</string>
+    <string name="music1_button" >MUSIC 1</>
+    <string name="music2_button">MUSIC 2</string>
+    <string name="music3_button">MUSIC 3</string>
+    <string name="music4_button">MUSIC 4</string>
+    <string name="return_button" />
+    <string name="themes_button">THEMES</string>
+    <string name="musics_button">MUSICS</string>
+    <string name="wallpaper1_button" />
+    <string name="wallpaper2_button" />
+    <string name="wallpaper3_button" />
 
 </resources>

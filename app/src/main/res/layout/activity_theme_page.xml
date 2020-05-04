@@ -76,7 +76,7 @@
         android:layout_marginEnd="128dp"
         android:layout_marginRight="128dp"
         android:background="@drawable/back4"
-        android:text="@string/wallpaper2_button"
+        android:text="@string/wallpaper3_button"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/wallpaper3_button"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />

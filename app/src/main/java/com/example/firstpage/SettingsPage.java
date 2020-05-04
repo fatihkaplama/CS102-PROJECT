@@ -36,7 +36,7 @@ public class SettingsPage extends ThemePage implements View.OnClickListener{
         settingsPage.setBackgroundResource(background);
         isPressed = false;
         returnButton = findViewById(R.id.return_button_settingsPage);
-        voiceButton = findViewById(R.id.voice_button_settingPage);
+        voiceButton = findViewById(R.id.voice_button_settingsPage);
         themesButton = findViewById(R.id.themes_button_settingsPage);
         musicsButton = findViewById(R.id.musics_button_SettingPage);
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
