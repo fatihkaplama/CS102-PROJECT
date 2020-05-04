@@ -73,13 +73,12 @@
         android:id="@+id/wallpaper2_button"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="128dp"
-        android:layout_marginRight="128dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginRight="148dp"
         android:background="@drawable/back4"
-        android:text="@string/wallpaper3_button"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/wallpaper3_button"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toBottomOf="@+id/themes_button" />
 
     <Button
         android:id="@+id/wallpaper3_button"
