@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     EditText nickname;
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         avatar4.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.herofemale;
@@ -116,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         avatar5.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.ironman;
@@ -125,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         avatar6.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.heromale;
@@ -134,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         avatar7.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.thor;
@@ -143,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         avatar8.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.spider;
@@ -152,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         avatar9.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.thanos;
