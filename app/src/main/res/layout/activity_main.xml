@@ -2,13 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background3"
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/settings"
+        android:id="@+id/settings_button_main"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/settings"
@@ -20,7 +21,7 @@
         app:layout_constraintVertical_bias="0.043" />
 
     <Button
-        android:id="@+id/volume"
+        android:id="@+id/volume_button_main"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/volumeon"
@@ -47,7 +48,6 @@
 
     <Button
         android:id="@+id/apply"
-
         android:layout_width="142dp"
         android:layout_height="41dp"
         android:background="@drawable/button_design"
@@ -69,10 +69,10 @@
         android:contentDescription="@string/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintVertical_bias="0.098"
         app:srcCompat="@drawable/logo" />
 
     <EditText
@@ -99,10 +99,17 @@
         android:layout_marginStart="512dp"
         android:layout_marginLeft="512dp"
         android:layout_marginTop="300dp"
+        android:layout_marginEnd="77dp"
+        android:layout_marginRight="77dp"
+        android:layout_marginBottom="70dp"
         android:background="@drawable/button_design"
         android:text="@string/start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.112"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.81" />
 
     <GridLayout
         android:id="@+id/gridlayout"
