@@ -36,7 +36,7 @@ public class Map1Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map1_page);
         bee = findViewById(R.id.bee);
-        honey = findViewById(R.id.);
+       // honey = findViewById(R.id.);
         goForward = findViewById(R.id.goForward);
         turnRight = findViewById(R.id.turnRight);
         turnLeft = findViewById(R.id.turnLeft);

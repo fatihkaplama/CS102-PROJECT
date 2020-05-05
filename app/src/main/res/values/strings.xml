@@ -28,6 +28,12 @@
     <string name="music3_button">MUSIC 3</string>
     <string name="music4_button">MUSIC 4</string>
     <string name="musics_image" />
+    <string name="goForward">go Forward</string>
+    <string name="honeycomb">honeycomb</string>
+    <string name="go_forward">Go forward</string>
+    <string name="turn_Rıght">turn rıght</string>
+    <string name="turnLeft">turn Left</string>
+    <string name="bee">bee</string>
 >>>>>>> Stashed changes
 
 </resources>
