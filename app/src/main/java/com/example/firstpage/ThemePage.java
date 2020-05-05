@@ -83,7 +83,6 @@ public class ThemePage extends AppCompatActivity implements View.OnClickListener
         });
     }
 
-
     @Override
     public void onClick(View v) {
         if (v.getId() == wallpaper1_button.getId()) {
@@ -106,5 +105,6 @@ public class ThemePage extends AppCompatActivity implements View.OnClickListener
             Intent intent = new Intent(ThemePage.this, SettingsPage.class);
             startActivity(intent);
         }
+
     }
 }
