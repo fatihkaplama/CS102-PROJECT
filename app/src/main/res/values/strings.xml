@@ -34,6 +34,8 @@
     <string name="turn_Rıght">turn rıght</string>
     <string name="turnLeft">turn Left</string>
     <string name="bee">bee</string>
+    <string name="functions_creativeMode">FUNCTIONS</string>
+    <string name="workingSpace_creativeMode">WORKING SPACE</string>
     >>>>>>> Stashed changes
 
 </resources>
