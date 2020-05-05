@@ -72,19 +72,6 @@ public class Map1Page extends AppCompatActivity {
             }
         });
 
-        turnLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (leftCount == 1){
-                    layout.addView(left,params);
-                    TurnLeft();
-                    leftCount++;
-                }
-                else {
-                    TurnLeft();
-                }
-            }
-        });
 
         turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
