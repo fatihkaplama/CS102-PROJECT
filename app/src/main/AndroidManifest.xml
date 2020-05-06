@@ -16,8 +16,9 @@
         <activity android:name=".ThemePage" />
         <activity android:name=".Map1Page" />
         <activity android:name=".HomePage" />
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".AchievementsPage">
+        <activity android:name=".AchievementsPage"/>
+        <activity android:name=".MainActivity">
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
