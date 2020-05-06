@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         nickname = findViewById(R.id.nickname);
         mainPageLayout = findViewById(R.id.main_layout);
-        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.daybreaker);
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.glorious);
         mediaPlayer.start();
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         mainPageLayout.setBackgroundResource(background);

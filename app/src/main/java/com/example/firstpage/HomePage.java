@@ -22,6 +22,7 @@ public class HomePage extends AppCompatActivity {
     Button b;
     Button play;
     Button settingsButton;
+    Button achievements;
     int background;
 
     ConstraintLayout homePageLayout;
@@ -39,6 +40,7 @@ public class HomePage extends AppCompatActivity {
         b = findViewById(R.id.return_button_homePage);
         play = findViewById(R.id.play2);
         settingsButton = findViewById(R.id.settings_button_homePage);
+        achievements = findViewById(R.id.achievements);
         // avatarPg = findViewById(R.id.avatarH);
         //avatar = AppCompatDrawableManager.get().getDrawable(HomePage.this, avatarId);
         // avatarPg.setBackground(avatar);
@@ -63,6 +65,13 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(HomePage.this, SettingsPage.class);
+                startActivity(i);
+            }
+        });
+        achievements.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomePage.this, AchievementsPage.class);
                 startActivity(i);
             }
         });

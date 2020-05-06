@@ -26,22 +26,23 @@ public class MusicsPage extends AppCompatActivity  {
         Button b4 = findViewById(R.id.musıc_buton_musıc_page4);
         Button b5 = findViewById(R.id.return_button_musicsPage);
         Button ibVolume = findViewById(R.id.voice_button_musicsPage);
-        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.daybreaker);
+        final MediaPlayer mediaPlayer = new MediaPlayer();
         //final ImageButton ibMute = findViewById(R.id.imageView3);
         //ibMute.setVisibility(View.INVISIBLE);
         musicsPageLayout = findViewById(R.id.musics_page_layout);
         int myInt = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         musicsPageLayout.setBackgroundResource(myInt);
 
-        music1 = MediaPlayer.create(this, R.raw.glorious);
+        music1 = mediaPlayer.create(this, R.raw.glorious);
         music1.setLooping(true);
-        music2 = MediaPlayer.create(this, R.raw.daybreaker);
-        ((MediaPlayer) music2).setLooping(true);
 
-        music3 = MediaPlayer.create(this, R.raw.wingless);
+        music2 = mediaPlayer.create(this, R.raw.daybreaker);
+        music2.setLooping(true);
+
+        music3 = mediaPlayer.create(this, R.raw.wingless);
         music3.setLooping(true);
 
-        music4 = MediaPlayer.create(this, R.raw.jumper);
+        music4 = mediaPlayer.create(this, R.raw.jumper);
         music4.setLooping(true);
 
 

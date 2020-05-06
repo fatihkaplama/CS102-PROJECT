@@ -1,5 +1,6 @@
 package com.example.firstpage;
 
+import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 import android.widget.Button;
@@ -34,6 +35,7 @@ public class PlayPage extends AppCompatActivity {
     int volumeOffID;
     int volumeOnID;
     ConstraintLayout playPageLayout;
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
