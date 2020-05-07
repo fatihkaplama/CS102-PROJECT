@@ -2,7 +2,10 @@ package com.example.firstpage;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatDrawableManager;
 
 import java.util.ArrayList;
 
@@ -41,6 +45,10 @@ public class Level1Page extends AppCompatActivity {
     LinearLayout layout1;
     LinearLayout layout2;
     LinearLayout.LayoutParams params;
+    int volumeoffID;
+    int volumeonID;
+    Drawable volumeoff;
+    Drawable volumeon;
     float x;
     float y;
     int count = 0;
@@ -52,11 +60,15 @@ public class Level1Page extends AppCompatActivity {
     float beeY;
     float honeyX;
     float honeyY;
+    boolean isVolumeOn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level1_page);
+        //starting activity
         Intent i = getIntent();
+
+        //Views
         reset = findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
         bee = findViewById(R.id.bee);
@@ -73,6 +85,16 @@ public class Level1Page extends AppCompatActivity {
         spinnerForward = findViewById(R.id.spinnerForward);
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
+
+        //volume
+        isVolumeOn = true;
+        volumeonID = R.drawable.volumeon;
+        volumeoffID = R.drawable.volumeoff;
+        volumeon = AppCompatDrawableManager.get().getDrawable(this, volumeonID);
+        volumeoff = AppCompatDrawableManager.get().getDrawable(this, volumeoffID);
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.daybreaker);
+
+        //spinner
         timesAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, times);
         timesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerForward.setAdapter(timesAdapter);
@@ -81,17 +103,20 @@ public class Level1Page extends AppCompatActivity {
         spinnerForward = findViewById(R.id.spinnerForward);
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
+
+        list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
-        up = new Button(this);
+        /*up = new Button(this);
         left = new Button(this);
         right = new Button(this);
-        list = new ArrayList<String>();
+
         up.setText("GO FORWARD");
         up.setBackgroundColor(Color.CYAN);
         left.setText("TURN LEFT");
         left.setBackgroundColor(Color.CYAN);
         right.setText("TURN RIGHT");
-        right.setBackgroundColor(Color.CYAN);
+        right.setBackgroundColor(Color.CYAN);*/
+
         beeX = bee.getTranslationX();
         beeY = bee.getTranslationY();
         honeyX = honey.getTranslationX();
@@ -99,6 +124,37 @@ public class Level1Page extends AppCompatActivity {
 
         isGameOver = false;
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Level1Page.this,LevelPage.class);
+                startActivity(i);
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Level1Page.this, SettingsPage.class);
+                startActivity(i);
+            }
+        });
+
+        volume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isVolumeOn){
+                    volume.setBackground(volumeoff);
+                    isVolumeOn = false;
+                    mediaPlayer.pause();
+                }
+                else {
+                    volume.setBackground(volumeon);
+                    isVolumeOn = true;
+                    mediaPlayer.start();;
+                }
+            }
+        });
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

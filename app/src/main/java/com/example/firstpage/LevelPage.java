@@ -53,7 +53,7 @@ public class LevelPage extends AppCompatActivity {
 
 
 
-        //voilume
+        //volume
         volumeonID = R.drawable.volumeon;
         volumeoffID = R.drawable.volumeoff;
         volumeon = AppCompatDrawableManager.get().getDrawable(this, volumeonID);
