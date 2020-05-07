@@ -23,6 +23,7 @@ public class HomePage extends AppCompatActivity {
     Button play;
     Button settingsButton;
     int background;
+    int avatarID;
 
     ConstraintLayout homePageLayout;
     @Override
@@ -34,14 +35,15 @@ public class HomePage extends AppCompatActivity {
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         homePageLayout.setBackgroundResource(background);
         userName = i.getStringExtra("nickname");
+        avatarID = i.getIntExtra("avatar",0);
         tv = findViewById(R.id.userName);
         tv.setText(userName);
         b = findViewById(R.id.return_button_homePage);
         play = findViewById(R.id.play2);
         settingsButton = findViewById(R.id.settings_button_homePage);
-        // avatarPg = findViewById(R.id.avatarH);
-        //avatar = AppCompatDrawableManager.get().getDrawable(HomePage.this, avatarId);
-        // avatarPg.setBackground(avatar);
+        avatarPg = findViewById(R.id.avatarH);
+        avatar = AppCompatDrawableManager.get().getDrawable(HomePage.this, avatarID);
+        avatarPg.setBackground(avatar);
         //user.setBackground(avatar);
 
         b.setOnClickListener(new View.OnClickListener(){
