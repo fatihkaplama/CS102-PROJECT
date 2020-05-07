@@ -22,6 +22,7 @@ public class HomePage extends AppCompatActivity {
     Button b;
     Button play;
     Button settingsButton;
+    Button achievements;
     int background;
     int avatarID;
 
@@ -41,9 +42,15 @@ public class HomePage extends AppCompatActivity {
         b = findViewById(R.id.return_button_homePage);
         play = findViewById(R.id.play2);
         settingsButton = findViewById(R.id.settings_button_homePage);
+
         avatarPg = findViewById(R.id.avatarH);
         avatar = AppCompatDrawableManager.get().getDrawable(HomePage.this, avatarID);
         avatarPg.setBackground(avatar);
+        achievements = findViewById(R.id.achievements);
+        // avatarPg = findViewById(R.id.avatarH);
+        //avatar = AppCompatDrawableManager.get().getDrawable(HomePage.this, avatarId);
+        // avatarPg.setBackground(avatar);
+
         //user.setBackground(avatar);
 
         b.setOnClickListener(new View.OnClickListener(){
@@ -65,6 +72,13 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(HomePage.this, SettingsPage.class);
+                startActivity(i);
+            }
+        });
+        achievements.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomePage.this, AchievementsPage.class);
                 startActivity(i);
             }
         });

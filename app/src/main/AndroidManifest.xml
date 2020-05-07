@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".LevelPage"></activity>
         <activity android:name=".Level1Page"></activity>
         <activity android:name=".PlayPage" />
@@ -16,7 +17,10 @@
         <activity android:name=".SettingsPage" />
         <activity android:name=".ThemePage" />
         <activity android:name=".HomePage" />
+        <activity android:name=".AchievementsPage"/>
         <activity android:name=".MainActivity">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
