@@ -1,10 +1,12 @@
 package com.example.firstpage;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,6 +24,7 @@ import androidx.appcompat.widget.AppCompatDrawableManager;
 import java.util.ArrayList;
 
 public class Level1Page extends AppCompatActivity {
+    TextView movements;
     Spinner spinnerForward;
     Spinner spinnerLeft;
     Spinner spinnerRight;
@@ -37,9 +40,7 @@ public class Level1Page extends AppCompatActivity {
     Button volume;
     Button back;
     Button info;
-    Button up;
-    Button left;
-    Button right;
+
     Button apply;
     Button reset;
     LinearLayout layout1;
@@ -61,14 +62,15 @@ public class Level1Page extends AppCompatActivity {
     float honeyX;
     float honeyY;
     boolean isVolumeOn;
-    boolean isFinished;
+    int movementsCount;
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level1_page);
         //starting activity
         Intent i = getIntent();
-
+        movementsCount = 0;
         //Views
         reset = findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
@@ -86,6 +88,7 @@ public class Level1Page extends AppCompatActivity {
         spinnerForward = findViewById(R.id.spinnerForward);
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
+        movements = findViewById(R.id.movements);
 
         //volume
         isVolumeOn = true;
@@ -117,6 +120,8 @@ public class Level1Page extends AppCompatActivity {
         left.setBackgroundColor(Color.CYAN);
         right.setText("TURN RIGHT");
         right.setBackgroundColor(Color.CYAN);*/
+
+
 
         beeX = bee.getTranslationX();
         beeY = bee.getTranslationY();
@@ -266,6 +271,8 @@ public class Level1Page extends AppCompatActivity {
                     forward.setBackgroundColor(Color.CYAN);
                     layout2.addView(forward, params);
                     count++;
+                    movementsCount++;
+                    movements.setText("Movements : " + movementsCount);
                 }
 
                 if (count < 9) {
@@ -276,6 +283,8 @@ public class Level1Page extends AppCompatActivity {
                     forward.setBackgroundColor(Color.CYAN);
                     layout1.addView(forward, params);
                     count++;
+                    movementsCount++;
+                    movements.setText("Movements : " + movementsCount);
                 }
             }
         });
@@ -292,6 +301,8 @@ public class Level1Page extends AppCompatActivity {
                     left.setBackgroundColor(Color.CYAN);
                     layout2.addView(left, params);
                     count++;
+                    movementsCount++;
+                    movements.setText("Movements : " + movementsCount);
                 }
                 if (count < 9) {
                     list.add("left" + timesLeft);
@@ -301,6 +312,8 @@ public class Level1Page extends AppCompatActivity {
                     left.setBackgroundColor(Color.CYAN);
                     layout1.addView(left, params);
                     count++;
+                    movementsCount++;
+                    movements.setText("Movements : " + movementsCount);
                 }
             }
         });
@@ -317,6 +330,8 @@ public class Level1Page extends AppCompatActivity {
                     right.setBackgroundColor(Color.CYAN);
                     layout2.addView(right, params);
                     count++;
+                    movementsCount++;
+                    movements.setText("Movements : " + movementsCount);
                 }
                 if (count < 9) {
                     list.add("right" + timesRight);
@@ -326,6 +341,8 @@ public class Level1Page extends AppCompatActivity {
                     right.setBackgroundColor(Color.CYAN);
                     layout1.addView(right, params);
                     count++;
+                    movementsCount++;
+                    movements.setText("Movements : " + movementsCount);
                 }
             }
         });
@@ -371,23 +388,26 @@ public class Level1Page extends AppCompatActivity {
             y += (180);
             bee.setTranslationY(y);
             //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
+
         }
 
         if (bee.getRotation() == -90){
             x -= (200);
             bee.setTranslationX(x);
             //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
+
         }
-        System.out.println(bee.getX());
-        System.out.println(bee.getY());
+
     }
 
     public void TurnRight(){
 
         bee.setRotation(bee.getRotation() + (90));
+        movementsCount++;
     }
     public void TurnLeft(){
 
         bee.setRotation(bee.getRotation() - (90));
+        movementsCount++;
     }
 }

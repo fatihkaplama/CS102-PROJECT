@@ -223,4 +223,17 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.98" />
 
+    <TextView
+        android:id="@+id/movements"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/Movements"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/button_design"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
