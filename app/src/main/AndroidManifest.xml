@@ -14,7 +14,6 @@
         <activity android:name=".MusicsPage" />
         <activity android:name=".SettingsPage" />
         <activity android:name=".ThemePage" />
-        <activity android:name=".Map1Page" />
         <activity android:name=".HomePage" />
         <activity android:name=".MainActivity">
             <intent-filter>
