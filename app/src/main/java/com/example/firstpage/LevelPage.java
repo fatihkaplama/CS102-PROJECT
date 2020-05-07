@@ -76,9 +76,9 @@ public class LevelPage extends AppCompatActivity {
         button13.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent i = new Intent(levelPage.this, map1.class);
-                // startActivity(i);
-                button14.setEnabled(true);
+                Intent i = new Intent(LevelPage.this, Level1Page.class);
+                startActivity(i);
+                //button14.setEnabled(true);
 
             }
         });

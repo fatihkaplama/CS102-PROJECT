@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LevelPage"></activity>
+        <activity android:name=".Level1Page"></activity>
         <activity android:name=".PlayPage" />
         <activity android:name=".MusicsPage" />
         <activity android:name=".SettingsPage" />
