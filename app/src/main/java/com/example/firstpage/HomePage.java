@@ -43,7 +43,7 @@ public class HomePage extends AppCompatActivity {
         settingsButton = findViewById(R.id.settings_button_homePage);
         avatarPg = findViewById(R.id.avatarH);
         avatar = AppCompatDrawableManager.get().getDrawable(HomePage.this, avatarID);
-        avatarPg.setBackground(avatar);
+//        avatarPg.setBackground(avatar);
         //user.setBackground(avatar);
 
         b.setOnClickListener(new View.OnClickListener(){
