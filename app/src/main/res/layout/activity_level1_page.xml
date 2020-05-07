@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background3"
     android:orientation="vertical"
-    tools:context=".Map1Page">
-
+    android:background="@drawable/background3"
+    tools:context=".Level1Page">
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/settings"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginEnd="24dp"
@@ -18,21 +18,21 @@
         android:background="@drawable/settings"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-        android:id="@+id/button13"
+        android:id="@+id/volume"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:background="@drawable/volumeon"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toStartOf="@+id/button12"
+        app:layout_constraintEnd_toStartOf="@+id/settings"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button15"
+        android:id="@+id/back"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
@@ -48,26 +48,36 @@
         android:layout_width="300dp"
         android:layout_height="280dp"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/adsiz"
+        app:columnCount="4"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="1.0"
+        app:rowCount="4">
 
         <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="71dp"
-            android:layout_height="72dp"
+            android:id="@+id/bee"
+            android:layout_width="75dp"
+            android:layout_height="70dp"
             android:contentDescription="@string/bee"
+            android:rotation="90"
             app:layout_column="0"
+            app:layout_row="3"
+            app:srcCompat="@drawable/bee" />
+
+        <ImageView
+            android:id="@+id/honey"
+            android:layout_width="75dp"
+            android:layout_height="70dp"
+            android:contentDescription="@string/honey"
+            app:layout_column="3"
             app:layout_row="0"
-            app:srcCompat="@drawable/joker" />
+            app:srcCompat="@drawable/honeycombs" />
     </androidx.gridlayout.widget.GridLayout>
 
     <LinearLayout
@@ -78,16 +88,28 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:background="@android:color/holo_blue_dark"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
         app:layout_constraintTop_toTopOf="@+id/guideline"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="1.0" >
+
+        <LinearLayout
+            android:id="@+id/leftLayout1"
+            android:layout_width="78dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:id="@+id/leftLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"></LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/linearLayout4"
         android:layout_width="150dp"
         android:layout_height="280dp"
         android:layout_marginEnd="28dp"
@@ -96,41 +118,94 @@
         android:background="@android:color/holo_blue_dark"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <Button
-            android:id="@+id/goForward"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/go_forward"
-             />
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/goForward"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/go_forward"
+                    android:textSize="10sp" />
+
+                <Button
+                    android:id="@+id/turnLeft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/turn_left"
+                    android:textSize="10sp" />
+
+                <Button
+                    android:id="@+id/turnRight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/turn_right"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Spinner
+                    android:id="@+id/spinnerForward"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center" />
+
+                <Spinner
+                    android:id="@+id/spinnerLeft"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_weight="1" />
+
+                <Spinner
+                    android:id="@+id/spinnerRight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <Button
-            android:id="@+id/turnRight"
+            android:id="@+id/apply"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/turn_Rıght"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/apply" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/reset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/turnLeft" />
+            android:text="@string/reset" />
+
     </LinearLayout>
 
     <Button
-        android:id="@+id/button14"
+        android:id="@+id/info"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/info"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toStartOf="@+id/button13"
+        app:layout_constraintEnd_toStartOf="@+id/volume"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -147,6 +222,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="403dp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

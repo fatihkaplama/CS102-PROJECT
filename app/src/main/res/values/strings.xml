@@ -4,7 +4,6 @@
     <string name="name">Name</string>
     <string name="user">user</string>
     <string name="nickname">Nickname</string>
-    <string name="apply">apply</string>
     <string name="avatar1">Button</string>
     <string name="avatar2">avatar2</string>
     <string name="avatar3">avatar3</string>
@@ -30,10 +29,23 @@
     <string name="musics_image" />
     <string name="goForward">go Forward</string>
     <string name="honeycomb">honeycomb</string>
-    <string name="go_forward">Go forward</string>
     <string name="turn_Rıght">turn rıght</string>
     <string name="turnLeft">turn Left</string>
     <string name="bee">bee</string>
+    <string name="honey">honey</string>
+    <string name="go_forward">GO FORWARD</string>
+    <string name="turn_right">TURN RIGHT</string>
+    <string name="turn_left">TURN LEFT</string>
+    <string name="apply">apply</string>
+    <string name="remove">Remove</string>
+    <string name="reset">reset</string>
+    <string name="congratulations">CONGRATULATIONS</string>
+    <string name="menu">MENU</string>
+    <string name="retry">RETRY</string>
+    <string name="continuebtn">CONTINUE</string>
+    <string name="star1">star1</string>
+    <string name="star2">star2</string>
+    <string name="star3">star3</string>
     >>>>>>> Stashed changes
 
 </resources>

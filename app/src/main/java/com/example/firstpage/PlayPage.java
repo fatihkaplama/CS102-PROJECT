@@ -80,7 +80,7 @@ public class PlayPage extends AppCompatActivity {
         educationalMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(PlayPage.this, Map1Page.class);
+                Intent i = new Intent(PlayPage.this, LevelPage.class);
                 startActivity(i);
             }
         });
