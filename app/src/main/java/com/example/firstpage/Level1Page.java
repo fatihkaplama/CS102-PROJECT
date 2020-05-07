@@ -61,6 +61,7 @@ public class Level1Page extends AppCompatActivity {
     float honeyX;
     float honeyY;
     boolean isVolumeOn;
+    boolean isFinished;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -215,6 +216,7 @@ public class Level1Page extends AppCompatActivity {
 
 
                 if (isGameOver == true){
+
                     AlertDialog.Builder builder = new AlertDialog.Builder(Level1Page.this);
                     View myView = getLayoutInflater().inflate(R.layout.finishscreen, null);
                     TextView message = myView.findViewById(R.id.message);
@@ -243,7 +245,9 @@ public class Level1Page extends AppCompatActivity {
                     continuebtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
+                            Intent i = new Intent(Level1Page.this, LevelPage.class);
+                            i.putExtra("finished", isGameOver);
+                            startActivity(i);
                         }
                     });
                 }

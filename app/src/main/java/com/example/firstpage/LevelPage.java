@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class LevelPage extends AppCompatActivity {
+    boolean isLevel1Finished;
     boolean isVolumeOn;
     Drawable volumeoff;
     Drawable volumeon;
@@ -51,7 +52,9 @@ public class LevelPage extends AppCompatActivity {
         returnB = (Button) findViewById(R.id.return_button_LevelPage);
         volumeB = (Button) findViewById(R.id.volume_button_LevelPage);
 
-
+        //getting information from Level 1 Page
+        Intent i = getIntent();
+        isLevel1Finished = i.getBooleanExtra("finished", false);
 
         //volume
         volumeonID = R.drawable.volumeon;
@@ -72,6 +75,9 @@ public class LevelPage extends AppCompatActivity {
         button21.setEnabled(false);
         button22.setEnabled(false);
 
+        if (isLevel1Finished){
+            button14.setEnabled(true);
+        }
         //add clicklistener to buttons
         button13.setOnClickListener(new View.OnClickListener() {
             @Override
