@@ -1,5 +1,6 @@
 package com.example.firstpage;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -55,6 +56,7 @@ public class Level1Page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level1_page);
+        Intent i = getIntent();
         reset = findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
         bee = findViewById(R.id.bee);
