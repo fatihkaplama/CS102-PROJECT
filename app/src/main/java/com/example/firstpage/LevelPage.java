@@ -36,6 +36,7 @@ public class LevelPage extends AppCompatActivity {
     Button settingsB;
     Button returnB;
 
+
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +59,10 @@ public class LevelPage extends AppCompatActivity {
         volumeB = (Button) findViewById(R.id.volume_button_LevelPage);
 
         //getting information from Level 1 Page
-        /*Intent i = getIntent();
-        isLevel1Finished = i.getBooleanExtra("finished", false);*/
+        Intent i = getIntent();
+        if(i.getBooleanExtra("finished1", false)){
+            isLevel1Finished = true;
+        }
 
         //getting info from Level 2 Page
         Intent i2 = getIntent();
@@ -200,4 +203,5 @@ public class LevelPage extends AppCompatActivity {
             }
         });
     }
+
 }

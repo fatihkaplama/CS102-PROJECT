@@ -37,7 +37,6 @@ public class Level1Page extends AppCompatActivity {
     Button volume;
     Button back;
     Button info;
-
     Button apply;
     Button reset;
     LinearLayout layout1;
@@ -214,7 +213,6 @@ public class Level1Page extends AppCompatActivity {
                 if ((bee.getX() == 600) && (bee.getY() == 184)) {
                     System.out.println("true");
                     isGameOver = true;
-
                 }
 
 
@@ -249,7 +247,7 @@ public class Level1Page extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent i = new Intent(Level1Page.this, LevelPage.class);
-                            i.putExtra("finished", isGameOver);
+                            i.putExtra("finished1", isGameOver);
                             startActivity(i);
                         }
                     });
