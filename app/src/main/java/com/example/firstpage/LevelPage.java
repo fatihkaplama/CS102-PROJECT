@@ -12,6 +12,7 @@ import android.widget.Button;
 
 public class LevelPage extends AppCompatActivity {
     boolean isLevel1Finished;
+    boolean isLevel2Finished;
     boolean isVolumeOn;
     Drawable volumeoff;
     Drawable volumeon;
@@ -56,6 +57,11 @@ public class LevelPage extends AppCompatActivity {
         Intent i = getIntent();
         isLevel1Finished = i.getBooleanExtra("finished", false);
 
+        //getting info from Level 2 Page
+        Intent i2 = getIntent();
+        isLevel2Finished = i2.getBooleanExtra("finished2", false);
+
+
         //volume
         volumeonID = R.drawable.volumeon;
         volumeoffID = R.drawable.volumeoff;
@@ -78,6 +84,9 @@ public class LevelPage extends AppCompatActivity {
         if (isLevel1Finished){
             button14.setEnabled(true);
         }
+        if(isLevel2Finished){
+            button15.setEnabled(true);
+        }
         //add clicklistener to buttons
         button13.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,8 +100,8 @@ public class LevelPage extends AppCompatActivity {
         button14.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent i = new Intent(levelPage.this, map2.class);
-                // startActivity(i);
+                 Intent i = new Intent(LevelPage.this, Level2Page.class);
+                 startActivity(i);
             }
         });
         button15.setOnClickListener(new View.OnClickListener() {
