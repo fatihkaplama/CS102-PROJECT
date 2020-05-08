@@ -72,7 +72,7 @@ public class Level2Page extends AppCompatActivity {
         reset = findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
         bee = findViewById(R.id.bee);
-        honey = findViewById(R.id.honey);
+        honey = findViewById(R.id.flower);
         goForward = findViewById(R.id.goForward);
         turnLeft = findViewById(R.id.turnLeft);
         turnRight = findViewById(R.id.turnRight);

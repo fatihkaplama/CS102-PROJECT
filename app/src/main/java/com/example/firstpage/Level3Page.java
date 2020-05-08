@@ -25,19 +25,21 @@ public class Level3Page extends AppCompatActivity {
     Spinner spinnerForward;
     Spinner spinnerLeft;
     Spinner spinnerRight;
+    Spinner spinnerNectar;
     Integer[] times = {1,2,3};
     ArrayAdapter<Integer> timesAdapter;
     ArrayList<String> list;
     ImageView bee;
-    ImageView honey;
+    ImageView flower;
+
     Button goForward;
     Button turnRight;
     Button turnLeft;
+    Button getNectar;
     Button settings;
     Button volume;
     Button back;
     Button info;
-
     Button apply;
     Button reset;
     LinearLayout layout1;
@@ -45,19 +47,20 @@ public class Level3Page extends AppCompatActivity {
     LinearLayout.LayoutParams params;
     int volumeoffID;
     int volumeonID;
+    int flower0ID;
     Drawable volumeoff;
     Drawable volumeon;
+    Drawable flower0;
     float x;
     float y;
     int count = 0;
     int timesForward;
     int timesLeft;
     int timesRight;
+    int timesNectar;
     boolean isGameOver;
     float beeX;
     float beeY;
-    float honeyX;
-    float honeyY;
     boolean isVolumeOn;
     int movementsCount;
 
@@ -73,7 +76,7 @@ public class Level3Page extends AppCompatActivity {
         reset = findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
         bee = findViewById(R.id.bee);
-        honey = findViewById(R.id.honey);
+        flower = findViewById(R.id.flower);
         goForward = findViewById(R.id.goForward);
         turnLeft = findViewById(R.id.turnLeft);
         turnRight = findViewById(R.id.turnRight);
@@ -86,7 +89,9 @@ public class Level3Page extends AppCompatActivity {
         spinnerForward = findViewById(R.id.spinnerForward);
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
+        spinnerNectar = findViewById(R.id.spinnerNectar);
         movements = findViewById(R.id.movements);
+        getNectar = findViewById(R.id.getNectar);
 
         //volume
         isVolumeOn = true;
@@ -102,29 +107,20 @@ public class Level3Page extends AppCompatActivity {
         spinnerForward.setAdapter(timesAdapter);
         spinnerRight.setAdapter(timesAdapter);
         spinnerLeft.setAdapter(timesAdapter);
+        spinnerNectar.setAdapter(timesAdapter);
         spinnerForward = findViewById(R.id.spinnerForward);
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
+        spinnerNectar = findViewById(R.id.spinnerNectar);
 
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
-        /*up = new Button(this);
-        left = new Button(this);
-        right = new Button(this);
 
-        up.setText("GO FORWARD");
-        up.setBackgroundColor(Color.CYAN);
-        left.setText("TURN LEFT");
-        left.setBackgroundColor(Color.CYAN);
-        right.setText("TURN RIGHT");
-        right.setBackgroundColor(Color.CYAN);*/
-
-
+        flower0ID = R.drawable.flower0;
+        flower0 = AppCompatDrawableManager.get().getDrawable(this, flower0ID);
 
         beeX = bee.getTranslationX();
         beeY = bee.getTranslationY();
-        honeyX = honey.getTranslationX();
-        honeyY = honey.getTranslationY();
 
         isGameOver = false;
 
@@ -196,6 +192,7 @@ public class Level3Page extends AppCompatActivity {
                             TurnLeft();
                         }
                     }
+
                     if (list.get(i).equals("right1")) {
                         TurnRight();
                     }
@@ -209,9 +206,23 @@ public class Level3Page extends AppCompatActivity {
                             TurnRight();
                         }
                     }
+
+                    if (list.get(i).equals("nectar1")){
+                        GetNectar();
+                    }
+                    if (list.get(i).equals("nectar2")) {
+                        for (int k = 0; k < 2; k++) {
+                            GetNectar();
+                        }
+                    }
+                    if (list.get(i).equals("nectar3")) {
+                        for (int k = 0; k < 3; k++) {
+                            GetNectar();
+                        }
+                    }
                 }
                 apply.setEnabled(false);
-                if ((bee.getX() == 600) && (bee.getY() == 371)){
+                if (flower.getBackground() == flower0){
                     System.out.println("true");
                     isGameOver = true;
 
@@ -344,6 +355,35 @@ public class Level3Page extends AppCompatActivity {
                 }
             }
         });
+
+        getNectar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timesNectar = (Integer) spinnerNectar.getSelectedItem();
+                if (count >= 9){
+                    list.add("nectar" + timesNectar);
+                    Button nectar = new Button(Level3Page.this);
+                    nectar.setTextSize(10);
+                    nectar.setText(timesNectar + " " + "GET NECTAR");
+                    nectar.setBackgroundColor(Color.CYAN);
+                    layout2.addView(nectar, params);
+                    count++;
+                    movementsCount++;
+                    movements.setText("Movements : " + movementsCount);
+                }
+                if (count < 9){
+                    list.add("nectar" + timesNectar);
+                    Button nectar = new Button(Level3Page.this);
+                    nectar.setTextSize(10);
+                    nectar.setText(timesNectar + " " + "GET NECTAR");
+                    nectar.setBackgroundColor(Color.CYAN);
+                    layout1.addView(nectar, params);
+                    count++;
+                    movementsCount++;
+                    movements.setText("Movements : " + movementsCount);
+                }
+            }
+        });
     }
 
     public void reset(){
@@ -409,4 +449,8 @@ public class Level3Page extends AppCompatActivity {
         movementsCount++;
     }
 
+    public void GetNectar(){
+        flower.setBackground(flower0);
+
+    }
 }

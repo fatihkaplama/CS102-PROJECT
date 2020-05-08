@@ -231,7 +231,7 @@
             app:srcCompat="@drawable/bee" />
 
         <ImageView
-            android:id="@+id/honey"
+            android:id="@+id/flower"
             android:layout_width="75dp"
             android:layout_height="70dp"
             android:layout_marginStart="150dp"

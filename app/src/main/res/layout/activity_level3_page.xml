@@ -50,7 +50,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/adsız3"
+        android:background="@drawable/adsiz3"
         app:columnCount="4"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
@@ -71,7 +71,7 @@
             app:srcCompat="@drawable/bee" />
 
         <ImageView
-            android:id="@+id/honey"
+            android:id="@+id/flower"
             android:layout_width="75dp"
             android:layout_height="70dp"
             android:contentDescription="@string/honey"
@@ -153,6 +153,13 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <Button
+                    android:id="@+id/getNectar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:text="@string/get_nectar" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -175,6 +182,12 @@
 
                 <Spinner
                     android:id="@+id/spinnerRight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <Spinner
+                    android:id="@+id/spinnerNectar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
