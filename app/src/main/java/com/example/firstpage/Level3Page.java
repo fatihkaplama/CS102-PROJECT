@@ -1,13 +1,15 @@
 package com.example.firstpage;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatDrawableManager;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,14 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatDrawableManager;
-
 import java.util.ArrayList;
 
-public class Level1Page extends AppCompatActivity {
+public class Level3Page extends AppCompatActivity {
     TextView movements;
     Spinner spinnerForward;
     Spinner spinnerLeft;
@@ -63,11 +60,12 @@ public class Level1Page extends AppCompatActivity {
     float honeyY;
     boolean isVolumeOn;
     int movementsCount;
+
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level1_page);
+        setContentView(R.layout.activity_level3_page);
         //starting activity
         Intent i = getIntent();
         movementsCount = 0;
@@ -133,7 +131,7 @@ public class Level1Page extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Level1Page.this,LevelPage.class);
+                Intent i = new Intent(Level3Page.this,LevelPage.class);
                 startActivity(i);
             }
         });
@@ -141,7 +139,7 @@ public class Level1Page extends AppCompatActivity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Level1Page.this, SettingsPage.class);
+                Intent i = new Intent(Level3Page.this, SettingsPage.class);
                 startActivity(i);
             }
         });
@@ -213,7 +211,7 @@ public class Level1Page extends AppCompatActivity {
                     }
                 }
                 apply.setEnabled(false);
-                if ((bee.getX() == 600) && (bee.getY() == 11)){
+                if ((bee.getX() == 600) && (bee.getY() == 371)){
                     System.out.println("true");
                     isGameOver = true;
 
@@ -222,7 +220,7 @@ public class Level1Page extends AppCompatActivity {
 
                 if (isGameOver == true){
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Level1Page.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Level3Page.this);
                     View myView = getLayoutInflater().inflate(R.layout.finishscreen, null);
                     TextView message = myView.findViewById(R.id.message);
                     ImageView star1 = myView.findViewById(R.id.star1);
@@ -250,7 +248,7 @@ public class Level1Page extends AppCompatActivity {
                     continuebtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent i = new Intent(Level1Page.this, LevelPage.class);
+                            Intent i = new Intent(Level3Page.this, LevelPage.class);
                             i.putExtra("finished", isGameOver);
                             startActivity(i);
                         }
@@ -265,7 +263,7 @@ public class Level1Page extends AppCompatActivity {
                 timesForward = (Integer)spinnerForward.getSelectedItem();
                 if (count >= 9){
                     list.add("forward" + timesForward);
-                    Button forward = new Button(Level1Page.this);
+                    Button forward = new Button(Level3Page.this);
                     forward.setTextSize(10);
                     forward.setText(timesForward + " " + "GO FORWARD");
                     forward.setBackgroundColor(Color.CYAN);
@@ -277,7 +275,7 @@ public class Level1Page extends AppCompatActivity {
 
                 if (count < 9) {
                     list.add("forward" + timesForward);
-                    Button forward = new Button(Level1Page.this);
+                    Button forward = new Button(Level3Page.this);
                     forward.setTextSize(10);
                     forward.setText(timesForward + " " + "GO FORWARD");
                     forward.setBackgroundColor(Color.CYAN);
@@ -295,7 +293,7 @@ public class Level1Page extends AppCompatActivity {
                 timesLeft = (Integer)spinnerLeft.getSelectedItem();
                 if (count >= 9){
                     list.add("left" + timesLeft);
-                    Button left = new Button(Level1Page.this);
+                    Button left = new Button(Level3Page.this);
                     left.setTextSize(10);
                     left.setText(timesLeft + " " + "TURN LEFT");
                     left.setBackgroundColor(Color.CYAN);
@@ -306,7 +304,7 @@ public class Level1Page extends AppCompatActivity {
                 }
                 if (count < 9) {
                     list.add("left" + timesLeft);
-                    Button left = new Button(Level1Page.this);
+                    Button left = new Button(Level3Page.this);
                     left.setTextSize(10);
                     left.setText(timesLeft + " " + "TURN LEFT");
                     left.setBackgroundColor(Color.CYAN);
@@ -324,7 +322,7 @@ public class Level1Page extends AppCompatActivity {
                 timesRight = (Integer) spinnerRight.getSelectedItem();
                 if (count >= 9){
                     list.add("right" + timesRight);
-                    Button right = new Button(Level1Page.this);
+                    Button right = new Button(Level3Page.this);
                     right.setTextSize(10);
                     right.setText(timesRight + " " + "TURN RIGHT");
                     right.setBackgroundColor(Color.CYAN);
@@ -335,7 +333,7 @@ public class Level1Page extends AppCompatActivity {
                 }
                 if (count < 9) {
                     list.add("right" + timesRight);
-                    Button right = new Button(Level1Page.this);
+                    Button right = new Button(Level3Page.this);
                     right.setTextSize(10);
                     right.setText(timesRight + " " + "TURN RIGHT");
                     right.setBackgroundColor(Color.CYAN);
@@ -410,4 +408,5 @@ public class Level1Page extends AppCompatActivity {
         bee.setRotation(bee.getRotation() - (90));
         movementsCount++;
     }
+
 }

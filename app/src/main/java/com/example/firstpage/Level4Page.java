@@ -1,9 +1,5 @@
 package com.example.firstpage;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatDrawableManager;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,6 +13,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatDrawableManager;
 
 import java.util.ArrayList;
 
@@ -60,7 +60,6 @@ public class Level4Page extends AppCompatActivity {
     float honeyY;
     boolean isVolumeOn;
     int movementsCount;
-
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -408,5 +407,4 @@ public class Level4Page extends AppCompatActivity {
         bee.setRotation(bee.getRotation() - (90));
         movementsCount++;
     }
-
 }

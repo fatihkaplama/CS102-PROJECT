@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Level4Page"></activity>
+        <activity android:name=".Level3Page"></activity>
         <activity android:name=".Level2Page" />
         <activity android:name=".LevelPage" />
-        <activity android:name=".Level1Page" />
+        <activity android:name=".Level4Page" />
         <activity android:name=".PlayPage" />
         <activity android:name=".MusicsPage" />
         <activity android:name=".SettingsPage" />

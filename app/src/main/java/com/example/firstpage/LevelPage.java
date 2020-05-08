@@ -3,6 +3,7 @@ package com.example.firstpage;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -33,6 +34,7 @@ public class LevelPage extends AppCompatActivity {
     Button settingsB;
     Button returnB;
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +93,7 @@ public class LevelPage extends AppCompatActivity {
         button13.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(LevelPage.this, Level1Page.class);
+                Intent i = new Intent(LevelPage.this, Level4Page.class);
                 startActivity(i);
                 //button14.setEnabled(true);
 
@@ -107,8 +109,8 @@ public class LevelPage extends AppCompatActivity {
         button15.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent i = new Intent(levelPage.this, map3.class);
-                // startActivity(i);
+                Intent i = new Intent(LevelPage.this, Level3Page.class);
+                startActivity(i);
             }
         });
         button17.setOnClickListener(new View.OnClickListener() {
