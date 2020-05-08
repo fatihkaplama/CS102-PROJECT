@@ -42,7 +42,11 @@ public class HomePage extends AppCompatActivity {
         play = findViewById(R.id.play2);
         settingsButton = findViewById(R.id.settings_button_homePage);
         avatarPg = findViewById(R.id.avatarH);
-        avatar = AppCompatDrawableManager.get().getDrawable(HomePage.this, avatarID);
+        if(avatarID != 0) {
+            avatar = AppCompatDrawableManager.get().getDrawable(HomePage.this, avatarID);
+        }else{
+            avatar = AppCompatDrawableManager.get().getDrawable(HomePage.this, R.drawable.user);
+        }
         avatarPg.setBackground(avatar);
         //user.setBackground(avatar);
 
