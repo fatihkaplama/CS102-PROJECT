@@ -14,6 +14,8 @@ import android.widget.Button;
 public class LevelPage extends AppCompatActivity {
     boolean isLevel1Finished;
     boolean isLevel2Finished;
+    boolean isLevel3Finished;
+    boolean isLevel4Finished;
     boolean isVolumeOn;
     Drawable volumeoff;
     Drawable volumeon;
@@ -56,13 +58,20 @@ public class LevelPage extends AppCompatActivity {
         volumeB = (Button) findViewById(R.id.volume_button_LevelPage);
 
         //getting information from Level 1 Page
-        Intent i = getIntent();
-        isLevel1Finished = i.getBooleanExtra("finished", false);
+        /*Intent i = getIntent();
+        isLevel1Finished = i.getBooleanExtra("finished", false);*/
 
         //getting info from Level 2 Page
         Intent i2 = getIntent();
         isLevel2Finished = i2.getBooleanExtra("finished2", false);
 
+        //getting info from Level 3 Page
+        Intent i3 = getIntent();
+        isLevel3Finished = i3.getBooleanExtra("finished3", false);
+
+        //getting info from Level 4 Page
+        Intent i4 = getIntent();
+        isLevel4Finished = i4.getBooleanExtra("finished4", false);
 
         //volume
         volumeonID = R.drawable.volumeon;
@@ -88,6 +97,9 @@ public class LevelPage extends AppCompatActivity {
         }
         if(isLevel2Finished){
             button15.setEnabled(true);
+        }
+        if (isLevel3Finished){
+            button17.setEnabled(true);
         }
         //add clicklistener to buttons
         button13.setOnClickListener(new View.OnClickListener() {
@@ -116,8 +128,8 @@ public class LevelPage extends AppCompatActivity {
         button17.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent i = new Intent(levelPage.this, map4.class);
-                //startActivity(i);
+                Intent i = new Intent(LevelPage.this, Level4Page.class);
+                startActivity(i);
             }
         });
         button18.setOnClickListener(new View.OnClickListener() {

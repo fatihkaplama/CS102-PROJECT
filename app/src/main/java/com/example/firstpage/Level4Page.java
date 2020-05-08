@@ -248,7 +248,7 @@ public class Level4Page extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent i = new Intent(Level4Page.this, LevelPage.class);
-                            i.putExtra("finished", isGameOver);
+                            i.putExtra("finished4", isGameOver);
                             startActivity(i);
                         }
                     });
