@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Level5Page extends AppCompatActivity {
+public class Level6Page extends AppCompatActivity {
 
     TextView movements;
     Spinner spinnerForward;
@@ -35,8 +35,8 @@ public class Level5Page extends AppCompatActivity {
     ArrayAdapter<Integer> timesAdapter;
     ArrayList<String> list;
     ImageView bee;
-    ImageView flower;
     ImageView flower2;
+    ImageView flower3;
     Button goForward;
     Button turnRight;
     Button turnLeft;
@@ -77,7 +77,7 @@ public class Level5Page extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level5_page);
+        setContentView(R.layout.activity_level6_page);
         //starting activity
         Intent i = getIntent();
         movementsCount = 0;
@@ -85,8 +85,8 @@ public class Level5Page extends AppCompatActivity {
         reset = findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
         bee = findViewById(R.id.bee);
-        flower = findViewById(R.id.flower);
         flower2 = findViewById(R.id.flower2);
+        flower3 = findViewById(R.id.flower3);
         goForward = findViewById(R.id.goForward);
         turnLeft = findViewById(R.id.turnLeft);
         turnRight = findViewById(R.id.turnRight);
@@ -129,7 +129,7 @@ public class Level5Page extends AppCompatActivity {
         flower0ID = R.drawable.flower0;
         flower00ID = R.drawable.flower00;
         flower0 = AppCompatDrawableManager.get().getDrawable(this, flower0ID);
-        flower00 = AppCompatDrawableManager.get().getDrawable(this, flower00ID);
+        flower00 = AppCompatDrawableManager.get().getDrawable(this,flower00ID);
 
         beeX = bee.getTranslationX();
         beeY = bee.getTranslationY();
@@ -142,7 +142,7 @@ public class Level5Page extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Level5Page.this,LevelPage.class);
+                Intent i = new Intent(Level6Page.this,LevelPage.class);
                 startActivity(i);
             }
         });
@@ -150,7 +150,7 @@ public class Level5Page extends AppCompatActivity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Level5Page.this, SettingsPage.class);
+                Intent i = new Intent(Level6Page.this, SettingsPage.class);
                 startActivity(i);
             }
         });
@@ -249,7 +249,7 @@ public class Level5Page extends AppCompatActivity {
                     }
                 }
                 apply.setEnabled(false);
-                if (flower.getBackground() == flower0 && flower2.getBackground() == flower0){
+                if (flower2.getBackground() == flower0 && flower3.getBackground() == flower00 && bee.getX() == 632 && bee.getY() == 438){
                     System.out.println("true");
                     isGameOver = true;
 
@@ -258,7 +258,7 @@ public class Level5Page extends AppCompatActivity {
 
                 if (isGameOver == true){
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Level5Page.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Level6Page.this);
                     View myView = getLayoutInflater().inflate(R.layout.finishscreen, null);
                     TextView message = myView.findViewById(R.id.message);
                     ImageView star1 = myView.findViewById(R.id.star1);
@@ -286,8 +286,8 @@ public class Level5Page extends AppCompatActivity {
                     continuebtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent i = new Intent(Level5Page.this, LevelPage.class);
-                            et.putBoolean("finished5", isGameOver);
+                            Intent i = new Intent(Level6Page.this, LevelPage.class);
+                            et.putBoolean("finished6", isGameOver);
                             et.apply();
                             startActivity(i);
                         }
@@ -302,7 +302,7 @@ public class Level5Page extends AppCompatActivity {
                 timesForward = (Integer)spinnerForward.getSelectedItem();
                 if (count >= 9){
                     list.add("forward" + timesForward);
-                    Button forward = new Button(Level5Page.this);
+                    Button forward = new Button(Level6Page.this);
                     forward.setTextSize(10);
                     forward.setText(timesForward + " " + "GO FORWARD");
                     forward.setBackgroundColor(Color.CYAN);
@@ -314,7 +314,7 @@ public class Level5Page extends AppCompatActivity {
 
                 if (count < 9) {
                     list.add("forward" + timesForward);
-                    Button forward = new Button(Level5Page.this);
+                    Button forward = new Button(Level6Page.this);
                     forward.setTextSize(10);
                     forward.setText(timesForward + " " + "GO FORWARD");
                     forward.setBackgroundColor(Color.CYAN);
@@ -332,7 +332,7 @@ public class Level5Page extends AppCompatActivity {
                 timesLeft = (Integer)spinnerLeft.getSelectedItem();
                 if (count >= 9){
                     list.add("left" + timesLeft);
-                    Button left = new Button(Level5Page.this);
+                    Button left = new Button(Level6Page.this);
                     left.setTextSize(10);
                     left.setText(timesLeft + " " + "TURN LEFT");
                     left.setBackgroundColor(Color.CYAN);
@@ -343,7 +343,7 @@ public class Level5Page extends AppCompatActivity {
                 }
                 if (count < 9) {
                     list.add("left" + timesLeft);
-                    Button left = new Button(Level5Page.this);
+                    Button left = new Button(Level6Page.this);
                     left.setTextSize(10);
                     left.setText(timesLeft + " " + "TURN LEFT");
                     left.setBackgroundColor(Color.CYAN);
@@ -361,7 +361,7 @@ public class Level5Page extends AppCompatActivity {
                 timesRight = (Integer) spinnerRight.getSelectedItem();
                 if (count >= 9){
                     list.add("right" + timesRight);
-                    Button right = new Button(Level5Page.this);
+                    Button right = new Button(Level6Page.this);
                     right.setTextSize(10);
                     right.setText(timesRight + " " + "TURN RIGHT");
                     right.setBackgroundColor(Color.CYAN);
@@ -372,7 +372,7 @@ public class Level5Page extends AppCompatActivity {
                 }
                 if (count < 9) {
                     list.add("right" + timesRight);
-                    Button right = new Button(Level5Page.this);
+                    Button right = new Button(Level6Page.this);
                     right.setTextSize(10);
                     right.setText(timesRight + " " + "TURN RIGHT");
                     right.setBackgroundColor(Color.CYAN);
@@ -390,7 +390,7 @@ public class Level5Page extends AppCompatActivity {
                 timesNectar = (Integer) spinnerNectar.getSelectedItem();
                 if (count >= 9){
                     list.add("nectar" + timesNectar);
-                    Button nectar = new Button(Level5Page.this);
+                    Button nectar = new Button(Level6Page.this);
                     nectar.setTextSize(10);
                     nectar.setText(timesNectar + " " + "GET NECTAR");
                     nectar.setBackgroundColor(Color.CYAN);
@@ -401,7 +401,7 @@ public class Level5Page extends AppCompatActivity {
                 }
                 if (count < 9){
                     list.add("nectar" + timesNectar);
-                    Button nectar = new Button(Level5Page.this);
+                    Button nectar = new Button(Level6Page.this);
                     nectar.setTextSize(10);
                     nectar.setText(timesNectar + " " + "GET NECTAR");
                     nectar.setBackgroundColor(Color.CYAN);
@@ -437,7 +437,7 @@ public class Level5Page extends AppCompatActivity {
     }
     public void GoForward(){
         if (bee.getRotation() == 0){
-            y -= (180);
+            y -= (146);
             bee.setTranslationY(y);
 
             //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
@@ -445,26 +445,32 @@ public class Level5Page extends AppCompatActivity {
         }
 
         if (bee.getRotation() == 90){
-            x += (200);
+            x += (160);
             bee.setTranslationX(x);
+            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
+
+        }
+        if (bee.getRotation() == 360){
+            y -= (146);
+            bee.setTranslationY(y);
             //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
 
         }
 
         if (bee.getRotation() == 270){
-            x -= (200);
+            x -= (160);
             bee.setTranslationX(x);
         }
 
         if (bee.getRotation() == 180){
-            y += (180);
+            y += (146);
             bee.setTranslationY(y);
             //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
 
         }
 
         if (bee.getRotation() == -90){
-            x -= (200);
+            x -= (160);
             bee.setTranslationX(x);
             //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
 
@@ -485,12 +491,13 @@ public class Level5Page extends AppCompatActivity {
     }
 
     public void GetNectar(){
-        if (bee.getX() == 594 && bee.getY() == 360) {
-            flower.setBackground(flower0);
+        if (bee.getX() == 312 && bee.getY() == 146) {
+            //flower2.setBackground(flower0);
+            flower2.setBackgroundResource(flower0ID);
 
         }
-        if (bee.getX() == 194 && bee.getY() == 540){
-            flower2.setBackground(flower00);
+        if (bee.getX() == 152 && bee.getY() == 292){
+            flower3.setBackground(flower00);
 
         }
     }

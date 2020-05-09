@@ -17,6 +17,8 @@ public class LevelPage extends AppCompatActivity {
     boolean isLevel2Finished;
     boolean isLevel3Finished;
     boolean isLevel4Finished;
+    boolean isLevel5Finished;
+    boolean isLevel6Finished;
     boolean isVolumeOn;
     Drawable volumeoff;
     Drawable volumeon;
@@ -73,6 +75,11 @@ public class LevelPage extends AppCompatActivity {
         //getting info from Level 4 Page
         isLevel4Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished4",false);
 
+        //getting info from Level 5 Page
+        isLevel5Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished5",false);
+
+        //getting info from Level 6 Page
+        isLevel6Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished6",false);
 
         //volume
         volumeonID = R.drawable.volumeon;
@@ -88,7 +95,7 @@ public class LevelPage extends AppCompatActivity {
         button15.setEnabled(true);
         button17.setEnabled(false);
         button18.setEnabled(true);
-        button19.setEnabled(false);
+        button19.setEnabled(true);
         button20.setEnabled(false);
         button21.setEnabled(false);
         button22.setEnabled(false);
@@ -105,6 +112,13 @@ public class LevelPage extends AppCompatActivity {
         if(isLevel4Finished){
             button18.setEnabled(true);
         }
+        if(isLevel5Finished){
+            button19.setEnabled(true);
+        }
+        if(isLevel6Finished){
+            button20.setEnabled(true);
+        }
+
         //add clicklistener to buttons
         button13.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,8 +160,8 @@ public class LevelPage extends AppCompatActivity {
         button19.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent i = new Intent(levelPage.this, map6.class);
-                // startActivity(i);
+                Intent i = new Intent(LevelPage.this, Level6Page.class);
+                startActivity(i);
 
             }
         });
