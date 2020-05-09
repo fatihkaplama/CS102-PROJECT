@@ -2,6 +2,7 @@ package com.example.firstpage;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -63,6 +64,9 @@ public class Level4Page extends AppCompatActivity {
     float honeyY;
     boolean isVolumeOn;
     int movementsCount;
+    //sharedPreferences to update and save levels
+    SharedPreferences sp;
+    SharedPreferences.Editor et;
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +133,9 @@ public class Level4Page extends AppCompatActivity {
         honeyY = honey.getTranslationY();
 
         isGameOver = false;
+        //SharedPreferences to save Level
+        sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
+        et = sp.edit();
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -263,7 +270,8 @@ public class Level4Page extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent i = new Intent(Level4Page.this, LevelPage.class);
-                            i.putExtra("finished4", isGameOver);
+                            et.putBoolean("finished4", isGameOver);
+                            et.apply();
                             startActivity(i);
                         }
                     });

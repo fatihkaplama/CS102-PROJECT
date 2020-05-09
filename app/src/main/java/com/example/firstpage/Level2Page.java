@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatDrawableManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -63,6 +64,10 @@ public class Level2Page extends AppCompatActivity {
     float honeyY;
     boolean isVolumeOn;
     int movementsCount;
+    //sharedPreferences to update and save levels
+    SharedPreferences sp;
+    SharedPreferences.Editor et;
+
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,8 +135,10 @@ public class Level2Page extends AppCompatActivity {
 
         isGameOver = false;
 
-
-         back.setOnClickListener(new View.OnClickListener() {
+        //SharedPreferences to save Level
+        sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
+        et = sp.edit();
+        back.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
         Intent i = new Intent(Level2Page.this,LevelPage.class);
@@ -262,13 +269,14 @@ public class Level2Page extends AppCompatActivity {
                     });
 
 
-                     continuebtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                    Intent i = new Intent(Level2Page.this, LevelPage.class);
-                    i.putExtra("finished2", isGameOver);
-                    startActivity(i);
-                    }
+                    continuebtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(Level2Page.this, LevelPage.class);
+                            et.putBoolean("finished2", isGameOver);
+                            et.apply();
+                            startActivity(i);
+                        }
                     });
 
                 }

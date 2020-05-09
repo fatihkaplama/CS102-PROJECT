@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatDrawableManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -35,7 +36,9 @@ public class LevelPage extends AppCompatActivity {
     // get settings return and volume
     Button settingsB;
     Button returnB;
-
+    //sharedPreferences
+    SharedPreferences sp;
+    SharedPreferences.Editor et;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -59,22 +62,17 @@ public class LevelPage extends AppCompatActivity {
         volumeB = (Button) findViewById(R.id.volume_button_LevelPage);
 
         //getting information from Level 1 Page
-        Intent i = getIntent();
-        if(i.getBooleanExtra("finished1", false)){
-            isLevel1Finished = true;
-        }
+        isLevel1Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished1",false);
 
         //getting info from Level 2 Page
-        Intent i2 = getIntent();
-        isLevel2Finished = i2.getBooleanExtra("finished2", false);
+        isLevel2Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished2",false);
 
         //getting info from Level 3 Page
-        Intent i3 = getIntent();
-        isLevel3Finished = i3.getBooleanExtra("finished3", false);
+        isLevel3Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished3",false);
 
         //getting info from Level 4 Page
-        Intent i4 = getIntent();
-        isLevel4Finished = i4.getBooleanExtra("finished4", false);
+        isLevel4Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished4",false);
+
 
         //volume
         volumeonID = R.drawable.volumeon;
@@ -103,6 +101,9 @@ public class LevelPage extends AppCompatActivity {
         }
         if (isLevel3Finished){
             button17.setEnabled(true);
+        }
+        if(isLevel4Finished){
+            button18.setEnabled(true);
         }
         //add clicklistener to buttons
         button13.setOnClickListener(new View.OnClickListener() {

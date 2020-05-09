@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatDrawableManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -66,7 +67,9 @@ public class Level3Page extends AppCompatActivity {
     float beeY;
     boolean isVolumeOn;
     int movementsCount;
-
+    //sharedPreferences to update and save levels
+    SharedPreferences sp;
+    SharedPreferences.Editor et;
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +129,9 @@ public class Level3Page extends AppCompatActivity {
         beeY = bee.getTranslationY();
 
         isGameOver = false;
+        //SharedPreferences to save Level
+        sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
+        et = sp.edit();
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -275,7 +281,8 @@ public class Level3Page extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent i = new Intent(Level3Page.this, LevelPage.class);
-                            i.putExtra("finished3", isGameOver);
+                            et.putBoolean("finished3", isGameOver);
+                            et.apply();
                             startActivity(i);
                         }
                     });
