@@ -236,7 +236,6 @@ public class Level2Page extends AppCompatActivity {
                 if ((bee.getX() == 400) && (bee.getY() == 8)){
                     System.out.println("true");
                     isGameOver = true;
-
                 }
 
 
