@@ -55,9 +55,11 @@ public class Level5Page extends AppCompatActivity {
     private int volumeoffID;
     private int volumeonID;
     private int flower0ID;
+    private int flower00ID;
     private Drawable volumeoff;
     private Drawable volumeon;
     private Drawable flower0;
+    private Drawable flower00;
     private float x;
     private float y;
     private int count = 0;
