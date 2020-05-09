@@ -175,6 +175,9 @@ public class Level1Page extends AppCompatActivity {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println(bee.getX());
+                System.out.println(bee.getY());
+
                 for (int i = 0; i < list.size(); i++) {
                     if (list.get(i).equals("forward1")) {
                         GoForward();
@@ -220,7 +223,9 @@ public class Level1Page extends AppCompatActivity {
                     System.out.println("true");
                     isGameOver = true;
                 }
-
+                if(!((bee.getY() == 184)&&((bee.getX() == 0)||(bee.getX() == 200)||(bee.getX() == 400)||(bee.getX() == 600))))  {
+                    TryAgain();
+                }
 
                 if (isGameOver == true) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Level1Page.this);
@@ -420,5 +425,20 @@ public class Level1Page extends AppCompatActivity {
 
         bee.setRotation(bee.getRotation() - (90));
         movementsCount++;
+    }
+    public void TryAgain() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Level1Page.this);
+        View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
+        Button menu = (Button) myView.findViewById(R.id.menubtn);
+        Button retry = (Button) myView.findViewById(R.id.retrybtn);
+        retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recreate();
+            }
+        });
+        builder.setView(myView);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
