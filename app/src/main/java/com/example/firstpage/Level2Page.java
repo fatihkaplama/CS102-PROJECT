@@ -419,6 +419,11 @@ public class Level2Page extends AppCompatActivity {
             //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
         }
 
+        if (bee.getRotation() == 270){
+            x -= (200);
+            bee.setTranslationX(x);
+        }
+
         if (bee.getRotation() == -90){
             x -= (200);
             bee.setTranslationX(x);

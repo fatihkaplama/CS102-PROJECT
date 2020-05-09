@@ -445,6 +445,11 @@ public class Level3Page extends AppCompatActivity {
 
         }
 
+        if (bee.getRotation() == 270){
+            x -= (200);
+            bee.setTranslationX(x);
+        }
+
         if (bee.getRotation() == 180){
             y += (180);
             bee.setTranslationY(y);
@@ -473,7 +478,9 @@ public class Level3Page extends AppCompatActivity {
     }
 
     public void GetNectar(){
-        flower.setBackground(flower0);
-
+        if (bee.getX() == 600 && bee.getY() == 371) {
+            flower.setBackground(flower0);
+            System.out.println("çalıştı");
+        }
     }
 }
