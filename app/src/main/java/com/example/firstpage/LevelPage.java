@@ -17,7 +17,6 @@ public class LevelPage extends AppCompatActivity {
     boolean isLevel2Finished;
     boolean isLevel3Finished;
     boolean isLevel4Finished;
-    boolean isLevel5Finished;
     boolean isVolumeOn;
     Drawable volumeoff;
     Drawable volumeon;
@@ -74,8 +73,6 @@ public class LevelPage extends AppCompatActivity {
         //getting info from Level 4 Page
         isLevel4Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished4",false);
 
-        //getting info from Level 5 Page
-        isLevel5Finished = getSharedPreferences("isFinishedBooleans", MODE_PRIVATE).getBoolean("finished5", false);
 
         //volume
         volumeonID = R.drawable.volumeon;
@@ -107,9 +104,6 @@ public class LevelPage extends AppCompatActivity {
         }
         if(isLevel4Finished){
             button18.setEnabled(true);
-        }
-        if (isLevel5Finished){
-            button19.setEnabled(true);
         }
         //add clicklistener to buttons
         button13.setOnClickListener(new View.OnClickListener() {

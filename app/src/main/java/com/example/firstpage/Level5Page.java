@@ -283,7 +283,7 @@ public class Level5Page extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent i = new Intent(Level5Page.this, LevelPage.class);
-                            et.putBoolean("finished5", isGameOver);
+                            et.putBoolean("finished3", isGameOver);
                             et.apply();
                             startActivity(i);
                         }
