@@ -246,8 +246,6 @@ public class Level2Page extends AppCompatActivity {
 
 
                 if (isGameOver == true){
-
-
                      AlertDialog.Builder builder = new AlertDialog.Builder(Level2Page.this);
                      View myView = getLayoutInflater().inflate(R.layout.finishscreen, null);
                      TextView message = myView.findViewById(R.id.message);
