@@ -186,8 +186,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, HomePage.class);
-                i.putExtra("nickname", nickname.getText().toString());
-                i.putExtra("avatar", avatarID);
+               // i.putExtra("nickname", nickname.getText().toString());
+                //i.putExtra("avatar", avatarID);
                 startActivity(i);
             }
         });

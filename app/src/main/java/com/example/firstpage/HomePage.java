@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -34,19 +35,17 @@ public class HomePage extends AppCompatActivity {
         homePageLayout = findViewById(R.id.home_page_layout);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         homePageLayout.setBackgroundResource(background);
-        userName = i.getStringExtra("nickname");
-        avatarID = i.getIntExtra("avatar",0);
+        //set nick name
+        userName = getSharedPreferences("maindata", MODE_PRIVATE).getString("nickname","user");
         tv = findViewById(R.id.userName);
         tv.setText(userName);
         b = findViewById(R.id.return_button_homePage);
         play = findViewById(R.id.play2);
         settingsButton = findViewById(R.id.settings_button_homePage);
+        //get avatar from sharedPref
         avatarPg = findViewById(R.id.avatarH);
-        if(avatarID != 0) {
-            avatar = AppCompatDrawableManager.get().getDrawable(HomePage.this, avatarID);
-        }else{
-            avatar = AppCompatDrawableManager.get().getDrawable(HomePage.this, R.drawable.user);
-        }
+        avatarID = getSharedPreferences("maindata", MODE_PRIVATE).getInt("avatar", R.drawable.user);
+        avatar = AppCompatDrawableManager.get().getDrawable(HomePage.this, avatarID);
         avatarPg.setBackground(avatar);
         //user.setBackground(avatar);
 
