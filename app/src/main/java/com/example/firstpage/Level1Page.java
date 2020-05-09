@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -22,44 +23,45 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class Level1Page extends AppCompatActivity {
-    TextView movements;
-    Spinner spinnerForward;
-    Spinner spinnerLeft;
-    Spinner spinnerRight;
-    Integer[] times = {1, 2, 3};
-    ArrayAdapter<Integer> timesAdapter;
-    ArrayList<String> list;
-    ImageView bee;
-    ImageView honey;
-    Button goForward;
-    Button turnRight;
-    Button turnLeft;
-    Button settings;
-    Button volume;
-    Button back;
-    Button info;
-    Button apply;
-    Button reset;
-    LinearLayout layout1;
-    LinearLayout layout2;
-    LinearLayout.LayoutParams params;
-    int volumeoffID;
-    int volumeonID;
-    Drawable volumeoff;
-    Drawable volumeon;
-    float x;
-    float y;
-    int count = 0;
-    int timesForward;
-    int timesLeft;
-    int timesRight;
-    boolean isGameOver;
-    float beeX;
-    float beeY;
-    float honeyX;
-    float honeyY;
-    boolean isVolumeOn;
-    int movementsCount;
+    private TextView movements;
+    private Spinner spinnerForward;
+    private Spinner spinnerLeft;
+    private Spinner spinnerRight;
+    private Integer[] times = {1, 2, 3};
+    private ArrayAdapter<Integer> timesAdapter;
+    private ArrayList<String> list;
+    private ImageView bee;
+    private  ImageView honey;
+    private Button goForward;
+    private Button turnRight;
+    private Button turnLeft;
+    private Button settings;
+    private Button volume;
+    private Button back;
+    private Button info;
+    private Button apply;
+    private Button reset;
+    private LinearLayout layout1;
+    private LinearLayout layout2;
+    private LinearLayout.LayoutParams params;
+    private int volumeoffID;
+    private int volumeonID;
+    private Drawable volumeoff;
+    private Drawable volumeon;
+    private float x;
+    private float y;
+    private int count = 0;
+    private int timesForward;
+    private int timesLeft;
+    private int timesRight;
+    private boolean isGameOver;
+    private float beeX;
+    private float beeY;
+    private float honeyX;
+    private float honeyY;
+    private boolean isVolumeOn;
+    private int movementsCount;
+    private String code;
     //sharedPreferences to update and save levels
     SharedPreferences sp;
     SharedPreferences.Editor et;
@@ -440,5 +442,17 @@ public class Level1Page extends AppCompatActivity {
         builder.setView(myView);
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void SaveData(String codeMessage) {
+        SharedPreferences sharedPref = Level1Page.this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("CODEMESSAGE", codeMessage);
+        editor.commit();
+    }
+
+    public void setCodeMessage() {
+        SharedPreferences sharedPref = Level1Page.this.getPreferences(Context.MODE_PRIVATE);
+        code += sharedPref.getString("CODEMESSAGE", "") + "\n";
     }
 }
