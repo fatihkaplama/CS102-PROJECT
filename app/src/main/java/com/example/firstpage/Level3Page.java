@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -25,48 +26,50 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class Level3Page extends AppCompatActivity {
-    TextView movements;
-    Spinner spinnerForward;
-    Spinner spinnerLeft;
-    Spinner spinnerRight;
-    Spinner spinnerNectar;
-    Integer[] times = {1,2,3};
-    ArrayAdapter<Integer> timesAdapter;
-    ArrayList<String> list;
-    ImageView bee;
-    ImageView flower;
+    private TextView movements;
+    private Spinner spinnerForward;
+    private Spinner spinnerLeft;
+    private Spinner spinnerRight;
+    private Spinner spinnerNectar;
+    private Integer[] times = {1,2,3};
+    private ArrayAdapter<Integer> timesAdapter;
+    private ArrayList<String> list;
+    private ImageView bee;
+    private ImageView flower;
 
-    Button goForward;
-    Button turnRight;
-    Button turnLeft;
-    Button getNectar;
-    Button settings;
-    Button volume;
-    Button back;
-    Button info;
-    Button apply;
-    Button reset;
-    LinearLayout layout1;
-    LinearLayout layout2;
-    LinearLayout.LayoutParams params;
-    int volumeoffID;
-    int volumeonID;
-    int flower0ID;
-    Drawable volumeoff;
-    Drawable volumeon;
-    Drawable flower0;
-    float x;
-    float y;
-    int count = 0;
-    int timesForward;
-    int timesLeft;
-    int timesRight;
-    int timesNectar;
-    boolean isGameOver;
-    float beeX;
-    float beeY;
-    boolean isVolumeOn;
-    int movementsCount;
+    private Button goForward;
+    private Button turnRight;
+    private Button turnLeft;
+    private Button getNectar;
+    private Button settings;
+    private Button volume;
+    private Button back;
+    private Button info;
+    private Button apply;
+    private Button reset;
+    private LinearLayout layout1;
+    private LinearLayout layout2;
+    private LinearLayout.LayoutParams params;
+    private int volumeoffID;
+    private int volumeonID;
+    private int flower0ID;
+    private Drawable volumeoff;
+    private Drawable volumeon;
+    private Drawable flower0;
+    private float x;
+    private float y;
+    private int count = 0;
+    private int timesForward;
+    private int timesLeft;
+    private int timesRight;
+    private int timesNectar;
+    private boolean isGameOver;
+    private float beeX;
+    private float beeY;
+    private boolean isVolumeOn;
+    private int movementsCount;
+    private Button show;
+    private String code;
     //sharedPreferences to update and save levels
     SharedPreferences sp;
     SharedPreferences.Editor et;
@@ -98,6 +101,8 @@ public class Level3Page extends AppCompatActivity {
         spinnerNectar = findViewById(R.id.spinnerNectar);
         movements = findViewById(R.id.movements);
         getNectar = findViewById(R.id.getNectar);
+        show = findViewById(R.id.showCode_button);
+        code = "";
 
         //volume
         isVolumeOn = true;
@@ -176,11 +181,28 @@ public class Level3Page extends AppCompatActivity {
             }
         });
 
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast;
+                if (code == "") {
+                    toast = Toast.makeText(getApplicationContext(), "No code here yet.", Toast.LENGTH_LONG);
+                } else {
+                    toast = Toast.makeText(getApplicationContext(), code, Toast.LENGTH_LONG);
+                }
+                View view = toast.getView();
+                view.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+            }
+        });
+
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //reset();
                 recreate();
+                code = "";
             }
         });
 
@@ -293,7 +315,16 @@ public class Level3Page extends AppCompatActivity {
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timesForward = (Integer)spinnerForward.getSelectedItem();
+                String codeMessage;
+                timesForward = (Integer) spinnerForward.getSelectedItem();
+                if (timesForward == 1) {
+                    codeMessage = "goForward();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesForward + " ; i++){\n" +
+                            "goForward()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
                 if (count >= 9){
                     list.add("forward" + timesForward);
                     Button forward = new Button(Level3Page.this);
@@ -323,7 +354,16 @@ public class Level3Page extends AppCompatActivity {
         turnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timesLeft = (Integer)spinnerLeft.getSelectedItem();
+                String codeMessage;
+                timesLeft = (Integer) spinnerLeft.getSelectedItem();
+                if (timesLeft == 1) {
+                    codeMessage = "turnLeft();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesLeft + " ; i++){\n" +
+                            "turnLeft()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
                 if (count >= 9){
                     list.add("left" + timesLeft);
                     Button left = new Button(Level3Page.this);
@@ -352,7 +392,16 @@ public class Level3Page extends AppCompatActivity {
         turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String codeMessage;
                 timesRight = (Integer) spinnerRight.getSelectedItem();
+                if (timesRight == 1) {
+                    codeMessage = "turnRight();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesRight + " ; i++){\n" +
+                            "turnRight()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
                 if (count >= 9){
                     list.add("right" + timesRight);
                     Button right = new Button(Level3Page.this);
@@ -381,7 +430,16 @@ public class Level3Page extends AppCompatActivity {
         getNectar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String codeMessage;
                 timesNectar = (Integer) spinnerNectar.getSelectedItem();
+                if (timesNectar == 1) {
+                    codeMessage = "getNectar();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesNectar + " ; i++){\n" +
+                            "getNectar()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
                 if (count >= 9){
                     list.add("nectar" + timesNectar);
                     Button nectar = new Button(Level3Page.this);
@@ -482,5 +540,17 @@ public class Level3Page extends AppCompatActivity {
             flower.setBackground(flower0);
             System.out.println("çalıştı");
         }
+    }
+
+    public void SaveData(String codeMessage) {
+        SharedPreferences sharedPref = Level3Page.this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("CODEMESSAGE", codeMessage);
+        editor.commit();
+    }
+
+    public void setCodeMessage() {
+        SharedPreferences sharedPref = Level3Page.this.getPreferences(Context.MODE_PRIVATE);
+        code += sharedPref.getString("CODEMESSAGE", "") + "\n";
     }
 }

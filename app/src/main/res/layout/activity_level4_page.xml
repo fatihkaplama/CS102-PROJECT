@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/background3"
+    android:orientation="vertical"
     tools:context=".Level3Page">
 
     <Button
         android:id="@+id/settings"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         android:background="@drawable/settings"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/volume"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         android:background="@drawable/volumeon"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toStartOf="@+id/settings"
@@ -42,6 +39,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/showCode_button"
+
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#5A8A60"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="Show code"
+        android:textColor="#121111"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/info"
+        app:layout_constraintStart_toEndOf="@+id/movements"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.937" />
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/gridLayout2"
@@ -92,7 +109,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
         app:layout_constraintTop_toTopOf="@+id/guideline"
-        app:layout_constraintVertical_bias="1.0" >
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:id="@+id/leftLayout1"
@@ -199,10 +216,9 @@
 
     <Button
         android:id="@+id/info"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
         android:background="@drawable/info"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toStartOf="@+id/volume"
@@ -241,9 +257,9 @@
         android:text="@string/Movements"
         app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.03" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

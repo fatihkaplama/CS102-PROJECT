@@ -1,6 +1,7 @@
 package com.example.firstpage;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -29,7 +30,7 @@ public class Level4Page extends AppCompatActivity {
     Spinner spinnerForward;
     Spinner spinnerLeft;
     Spinner spinnerRight;
-    Integer[] times = {1,2,3};
+    Integer[] times = {1, 2, 3};
     ArrayAdapter<Integer> timesAdapter;
     ArrayList<String> list;
     ImageView bee;
@@ -41,6 +42,8 @@ public class Level4Page extends AppCompatActivity {
     Button volume;
     Button back;
     Button info;
+    Button show;
+    String code;
 
     Button apply;
     Button reset;
@@ -67,6 +70,7 @@ public class Level4Page extends AppCompatActivity {
     //sharedPreferences to update and save levels
     SharedPreferences sp;
     SharedPreferences.Editor et;
+
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +97,8 @@ public class Level4Page extends AppCompatActivity {
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
         movements = findViewById(R.id.movements);
+        show = findViewById(R.id.showCode_button);
+        code = "";
 
         //volume
         isVolumeOn = true;
@@ -126,7 +132,6 @@ public class Level4Page extends AppCompatActivity {
         right.setBackgroundColor(Color.CYAN);*/
 
 
-
         beeX = bee.getTranslationX();
         beeY = bee.getTranslationY();
         honeyX = honey.getTranslationX();
@@ -134,13 +139,13 @@ public class Level4Page extends AppCompatActivity {
 
         isGameOver = false;
         //SharedPreferences to save Level
-        sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
+        sp = getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
         et = sp.edit();
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Level4Page.this,LevelPage.class);
+                Intent i = new Intent(Level4Page.this, LevelPage.class);
                 startActivity(i);
             }
         });
@@ -156,15 +161,15 @@ public class Level4Page extends AppCompatActivity {
         volume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isVolumeOn){
+                if (isVolumeOn) {
                     volume.setBackground(volumeoff);
                     isVolumeOn = false;
                     mediaPlayer.pause();
-                }
-                else {
+                } else {
                     volume.setBackground(volumeon);
                     isVolumeOn = true;
-                    mediaPlayer.start();;
+                    mediaPlayer.start();
+                    ;
                 }
             }
         });
@@ -175,7 +180,23 @@ public class Level4Page extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), "Bee needs to reach to hive. Help it with your algorithm!", Toast.LENGTH_LONG);
                 View view = toast.getView();
                 view.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN);
-                toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+            }
+        });
+
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast;
+                if (code == "") {
+                    toast = Toast.makeText(getApplicationContext(), "No code here yet.", Toast.LENGTH_LONG);
+                } else {
+                    toast = Toast.makeText(getApplicationContext(), code, Toast.LENGTH_LONG);
+                }
+                View view = toast.getView();
+                view.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
             }
         });
@@ -185,6 +206,7 @@ public class Level4Page extends AppCompatActivity {
             public void onClick(View v) {
                 //reset();
                 recreate();
+                code = "";
             }
         });
 
@@ -232,14 +254,14 @@ public class Level4Page extends AppCompatActivity {
                     }
                 }
                 apply.setEnabled(false);
-                if ((bee.getX() == 600) && (bee.getY() == 11)){
+                if ((bee.getX() == 600) && (bee.getY() == 11)) {
                     System.out.println("true");
                     isGameOver = true;
 
                 }
 
 
-                if (isGameOver == true){
+                if (isGameOver == true) {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(Level4Page.this);
                     View myView = getLayoutInflater().inflate(R.layout.finishscreen, null);
@@ -282,8 +304,18 @@ public class Level4Page extends AppCompatActivity {
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timesForward = (Integer)spinnerForward.getSelectedItem();
-                if (count >= 9){
+                String codeMessage;
+                timesForward = (Integer) spinnerForward.getSelectedItem();
+                if (timesForward == 1) {
+                    codeMessage = "goForward();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesForward + " ; i++){\n" +
+                            "goForward()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
+
+                if (count >= 9) {
                     list.add("forward" + timesForward);
                     Button forward = new Button(Level4Page.this);
                     forward.setTextSize(10);
@@ -312,8 +344,17 @@ public class Level4Page extends AppCompatActivity {
         turnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timesLeft = (Integer)spinnerLeft.getSelectedItem();
-                if (count >= 9){
+                String codeMessage;
+                timesLeft = (Integer) spinnerLeft.getSelectedItem();
+                if (timesLeft == 1) {
+                    codeMessage = "turnLeft();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesLeft + " ; i++){\n" +
+                            "turnLeft()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
+                if (count >= 9) {
                     list.add("left" + timesLeft);
                     Button left = new Button(Level4Page.this);
                     left.setTextSize(10);
@@ -341,8 +382,17 @@ public class Level4Page extends AppCompatActivity {
         turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String codeMessage;
                 timesRight = (Integer) spinnerRight.getSelectedItem();
-                if (count >= 9){
+                if (timesRight == 1) {
+                    codeMessage = "turnRight();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesRight + " ; i++){\n" +
+                            "turnRight()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
+                if (count >= 9) {
                     list.add("right" + timesRight);
                     Button right = new Button(Level4Page.this);
                     right.setTextSize(10);
@@ -368,14 +418,14 @@ public class Level4Page extends AppCompatActivity {
         });
     }
 
-    public void reset(){
+    public void reset() {
         count = 0;
         layout1.removeAllViewsInLayout();
         int size = list.size();
-        for (int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             list.remove(0);
         }
-        if (!list.isEmpty()){
+        if (!list.isEmpty()) {
             System.out.println(list.get(0));
         }
         x = 0;
@@ -388,8 +438,9 @@ public class Level4Page extends AppCompatActivity {
         bee.setRotation(90);
         apply.setEnabled(true);
     }
-    public void GoForward(){
-        if (bee.getRotation() == 0){
+
+    public void GoForward() {
+        if (bee.getRotation() == 0) {
             y -= (180);
             bee.setTranslationY(y);
 
@@ -397,26 +448,26 @@ public class Level4Page extends AppCompatActivity {
 
         }
 
-        if (bee.getRotation() == 90){
+        if (bee.getRotation() == 90) {
             x += (200);
             bee.setTranslationX(x);
             //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
 
         }
 
-        if (bee.getRotation() == 180){
+        if (bee.getRotation() == 180) {
             y += (180);
             bee.setTranslationY(y);
             //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
 
         }
 
-        if (bee.getRotation() == 270){
+        if (bee.getRotation() == 270) {
             x -= (200);
             bee.setTranslationX(x);
         }
 
-        if (bee.getRotation() == -90){
+        if (bee.getRotation() == -90) {
             x -= (200);
             bee.setTranslationX(x);
             //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
@@ -425,14 +476,27 @@ public class Level4Page extends AppCompatActivity {
 
     }
 
-    public void TurnRight(){
+    public void TurnRight() {
 
         bee.setRotation(bee.getRotation() + (90));
         movementsCount++;
     }
-    public void TurnLeft(){
+
+    public void TurnLeft() {
 
         bee.setRotation(bee.getRotation() - (90));
         movementsCount++;
+    }
+
+    public void SaveData(String codeMessage) {
+        SharedPreferences sharedPref = Level4Page.this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("CODEMESSAGE", codeMessage);
+        editor.commit();
+    }
+
+    public void setCodeMessage() {
+        SharedPreferences sharedPref = Level4Page.this.getPreferences(Context.MODE_PRIVATE);
+        code += sharedPref.getString("CODEMESSAGE", "") + "\n";
     }
 }
