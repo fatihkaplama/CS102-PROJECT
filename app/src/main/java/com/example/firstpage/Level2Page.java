@@ -100,7 +100,6 @@ public class Level2Page extends AppCompatActivity {
         movements = findViewById(R.id.movements);
         show = findViewById(R.id.showCode_button);
         code = "";
-
         //volume
         isVolumeOn = true;
         volumeonID = R.drawable.volumeon;
