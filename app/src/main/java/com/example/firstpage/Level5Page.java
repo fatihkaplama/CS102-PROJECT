@@ -278,7 +278,7 @@ public class Level5Page extends AppCompatActivity {
                     isGameOver = true;
 
                 }
-
+               
 
                 if (isGameOver == true){
 
@@ -553,6 +553,21 @@ public class Level5Page extends AppCompatActivity {
             flower2.setBackground(flower00);
 
         }
+    }
+    public void TryAgain() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Level5Page.this);
+        View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
+        Button menu = (Button) myView.findViewById(R.id.menubtn);
+        Button retry = (Button) myView.findViewById(R.id.retrybtn);
+        retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recreate();
+            }
+        });
+        builder.setView(myView);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public void SaveData(String codeMessage) {

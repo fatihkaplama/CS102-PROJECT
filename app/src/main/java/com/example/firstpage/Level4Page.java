@@ -259,6 +259,10 @@ public class Level4Page extends AppCompatActivity {
                     isGameOver = true;
 
                 }
+                if (((bee.getX() == 200) && (bee.getY() == 551)) || ((bee.getX() == 200) && (bee.getY() == 371)) || ((bee.getX() == 200) && (bee.getY() == 191)) || ((bee.getX() == 400) && (bee.getY() == 191))|| ((bee.getX() == 400) && (bee.getY() == 11))|| ((bee.getX() == 600) && (bee.getY() == 11))) {
+                } else {
+                    TryAgain();
+                }
 
 
                 if (isGameOver == true) {
@@ -473,6 +477,9 @@ public class Level4Page extends AppCompatActivity {
             //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
 
         }
+        System.out.println( bee.getX());
+        System.out.println( bee.getY());
+
 
     }
 
@@ -486,8 +493,23 @@ public class Level4Page extends AppCompatActivity {
 
         bee.setRotation(bee.getRotation() - (90));
         movementsCount++;
-    }
 
+    }
+    public void TryAgain() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Level4Page.this);
+        View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
+        Button menu = (Button) myView.findViewById(R.id.menubtn);
+        Button retry = (Button) myView.findViewById(R.id.retrybtn);
+        retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recreate();
+            }
+        });
+        builder.setView(myView);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
     public void SaveData(String codeMessage) {
         SharedPreferences sharedPref = Level4Page.this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();

@@ -31,7 +31,7 @@ public class Level3Page extends AppCompatActivity {
     private Spinner spinnerLeft;
     private Spinner spinnerRight;
     private Spinner spinnerNectar;
-    private Integer[] times = {1,2,3};
+    private Integer[] times = {1, 2, 3};
     private ArrayAdapter<Integer> timesAdapter;
     private ArrayList<String> list;
     private ImageView bee;
@@ -73,6 +73,7 @@ public class Level3Page extends AppCompatActivity {
     //sharedPreferences to update and save levels
     SharedPreferences sp;
     SharedPreferences.Editor et;
+
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,13 +136,13 @@ public class Level3Page extends AppCompatActivity {
 
         isGameOver = false;
         //SharedPreferences to save Level
-        sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
+        sp = getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
         et = sp.edit();
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Level3Page.this,LevelPage.class);
+                Intent i = new Intent(Level3Page.this, LevelPage.class);
                 startActivity(i);
             }
         });
@@ -157,15 +158,15 @@ public class Level3Page extends AppCompatActivity {
         volume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isVolumeOn){
+                if (isVolumeOn) {
                     volume.setBackground(volumeoff);
                     isVolumeOn = false;
                     mediaPlayer.pause();
-                }
-                else {
+                } else {
                     volume.setBackground(volumeon);
                     isVolumeOn = true;
-                    mediaPlayer.start();;
+                    mediaPlayer.start();
+                    ;
                 }
             }
         });
@@ -176,7 +177,7 @@ public class Level3Page extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), "Bee needs to reach to nectar. Help it with your algorithm!", Toast.LENGTH_LONG);
                 View view = toast.getView();
                 view.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN);
-                toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
             }
         });
@@ -250,7 +251,7 @@ public class Level3Page extends AppCompatActivity {
                         }
                     }
 
-                    if (list.get(i).equals("nectar1")){
+                    if (list.get(i).equals("nectar1")) {
                         GetNectar();
                     }
                     if (list.get(i).equals("nectar2")) {
@@ -265,14 +266,19 @@ public class Level3Page extends AppCompatActivity {
                     }
                 }
                 apply.setEnabled(false);
-                if (flower.getBackground() == flower0){
+                if (flower.getBackground() == flower0) {
                     System.out.println("true");
                     isGameOver = true;
 
                 }
 
+                if (((bee.getX() == 0) && (bee.getY() == 371)) || ((bee.getX() == 200) && (bee.getY() == 371)) || ((bee.getX() == 400) && (bee.getY() == 371)) || ((bee.getX() == 600) && (bee.getY() == 371))) {
+                } else {
+                    TryAgain();
+                }
 
-                if (isGameOver == true){
+
+                if (isGameOver == true) {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(Level3Page.this);
                     View myView = getLayoutInflater().inflate(R.layout.finishscreen, null);
@@ -325,7 +331,7 @@ public class Level3Page extends AppCompatActivity {
                 }
                 SaveData(codeMessage);
                 setCodeMessage();
-                if (count >= 9){
+                if (count >= 9) {
                     list.add("forward" + timesForward);
                     Button forward = new Button(Level3Page.this);
                     forward.setTextSize(10);
@@ -364,7 +370,7 @@ public class Level3Page extends AppCompatActivity {
                 }
                 SaveData(codeMessage);
                 setCodeMessage();
-                if (count >= 9){
+                if (count >= 9) {
                     list.add("left" + timesLeft);
                     Button left = new Button(Level3Page.this);
                     left.setTextSize(10);
@@ -402,7 +408,7 @@ public class Level3Page extends AppCompatActivity {
                 }
                 SaveData(codeMessage);
                 setCodeMessage();
-                if (count >= 9){
+                if (count >= 9) {
                     list.add("right" + timesRight);
                     Button right = new Button(Level3Page.this);
                     right.setTextSize(10);
@@ -440,7 +446,7 @@ public class Level3Page extends AppCompatActivity {
                 }
                 SaveData(codeMessage);
                 setCodeMessage();
-                if (count >= 9){
+                if (count >= 9) {
                     list.add("nectar" + timesNectar);
                     Button nectar = new Button(Level3Page.this);
                     nectar.setTextSize(10);
@@ -451,7 +457,7 @@ public class Level3Page extends AppCompatActivity {
                     movementsCount++;
                     movements.setText("Movements : " + movementsCount);
                 }
-                if (count < 9){
+                if (count < 9) {
                     list.add("nectar" + timesNectar);
                     Button nectar = new Button(Level3Page.this);
                     nectar.setTextSize(10);
@@ -467,14 +473,14 @@ public class Level3Page extends AppCompatActivity {
 
     }
 
-    public void reset(){
+    public void reset() {
         count = 0;
         layout1.removeAllViewsInLayout();
         int size = list.size();
-        for (int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             list.remove(0);
         }
-        if (!list.isEmpty()){
+        if (!list.isEmpty()) {
             System.out.println(list.get(0));
         }
         x = 0;
@@ -487,8 +493,9 @@ public class Level3Page extends AppCompatActivity {
         bee.setRotation(90);
         apply.setEnabled(true);
     }
-    public void GoForward(){
-        if (bee.getRotation() == 0){
+
+    public void GoForward() {
+        if (bee.getRotation() == 0) {
             y -= (180);
             bee.setTranslationY(y);
 
@@ -496,26 +503,26 @@ public class Level3Page extends AppCompatActivity {
 
         }
 
-        if (bee.getRotation() == 90){
+        if (bee.getRotation() == 90) {
             x += (200);
             bee.setTranslationX(x);
             //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
 
         }
 
-        if (bee.getRotation() == 270){
+        if (bee.getRotation() == 270) {
             x -= (200);
             bee.setTranslationX(x);
         }
 
-        if (bee.getRotation() == 180){
+        if (bee.getRotation() == 180) {
             y += (180);
             bee.setTranslationY(y);
             //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
 
         }
 
-        if (bee.getRotation() == -90){
+        if (bee.getRotation() == -90) {
             x -= (200);
             bee.setTranslationX(x);
             //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
@@ -524,22 +531,39 @@ public class Level3Page extends AppCompatActivity {
 
     }
 
-    public void TurnRight(){
+    public void TurnRight() {
 
         bee.setRotation(bee.getRotation() + (90));
         movementsCount++;
     }
-    public void TurnLeft(){
+
+    public void TurnLeft() {
 
         bee.setRotation(bee.getRotation() - (90));
         movementsCount++;
     }
 
-    public void GetNectar(){
+    public void GetNectar() {
         if (bee.getX() == 600 && bee.getY() == 371) {
             flower.setBackground(flower0);
             System.out.println("çalıştı");
         }
+    }
+
+    public void TryAgain() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Level3Page.this);
+        View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
+        Button menu = (Button) myView.findViewById(R.id.menubtn);
+        Button retry = (Button) myView.findViewById(R.id.retrybtn);
+        retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recreate();
+            }
+        });
+        builder.setView(myView);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public void SaveData(String codeMessage) {

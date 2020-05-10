@@ -501,4 +501,19 @@ public class Level6Page extends AppCompatActivity {
 
         }
     }
+    public void TryAgain() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Level6Page.this);
+        View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
+        Button menu = (Button) myView.findViewById(R.id.menubtn);
+        Button retry = (Button) myView.findViewById(R.id.retrybtn);
+        retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recreate();
+            }
+        });
+        builder.setView(myView);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }
