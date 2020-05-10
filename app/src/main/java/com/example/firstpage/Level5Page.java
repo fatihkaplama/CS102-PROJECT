@@ -278,7 +278,10 @@ public class Level5Page extends AppCompatActivity {
                     isGameOver = true;
 
                 }
-               
+                if (((bee.getX() == 394) && (bee.getY() == 180)) || ((bee.getX() == 394) && (bee.getY() == 360)) || ((bee.getX() == 594) && (bee.getY() == 360)) || ((bee.getX() == 194) && (bee.getY() == 360))|| ((bee.getX() == 194) && (bee.getY() == 540))) {
+                } else {
+                    TryAgain();
+                }
 
                 if (isGameOver == true){
 
