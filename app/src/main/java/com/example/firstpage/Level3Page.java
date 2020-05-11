@@ -99,7 +99,7 @@ public class Level3Page extends AppCompatActivity {
         spinnerForward = findViewById(R.id.spinnerForward);
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
-        spinnerNectar = findViewById(R.id.spinnerNectar);
+        spinnerNectar = findViewById(R.id.spinnerKey);
         movements = findViewById(R.id.movements);
         getNectar = findViewById(R.id.getNectar);
         show = findViewById(R.id.showCode_button);
@@ -123,7 +123,7 @@ public class Level3Page extends AppCompatActivity {
         spinnerForward = findViewById(R.id.spinnerForward);
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
-        spinnerNectar = findViewById(R.id.spinnerNectar);
+        spinnerNectar = findViewById(R.id.spinnerKey);
 
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);

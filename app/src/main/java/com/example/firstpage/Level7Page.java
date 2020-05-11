@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -25,56 +24,50 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Level5Page extends AppCompatActivity {
-
-
-    private TextView movements;
-    private Spinner spinnerForward;
-    private Spinner spinnerLeft;
-    private Spinner spinnerRight;
-    private Spinner spinnerNectar;
-    private Integer[] times = {1,2,3};
-    private ArrayAdapter<Integer> timesAdapter;
-    private ArrayList<String> list;
-    private ImageView bee;
-    private ImageView flower;
-    private ImageView flower2;
-    private Button goForward;
-    private Button turnRight;
-    private Button turnLeft;
-    private Button getNectar;
-    private Button settings;
-    private Button volume;
-    private Button back;
-    private Button info;
-    private Button apply;
-    private Button reset;
-    private LinearLayout layout1;
-    private LinearLayout layout2;
-    private LinearLayout.LayoutParams params;
-    private int volumeoffID;
-    private int volumeonID;
-    private int flower0ID;
-    private int flower00ID;
-    private Drawable volumeoff;
-    private Drawable volumeon;
-    private Drawable flower0;
-    private Drawable flower00;
-    private float x;
-    private float y;
-    private int count = 0;
-    private int timesForward;
-    private int timesLeft;
-    private int timesRight;
-    private int timesNectar;
-    private boolean isGameOver;
-    private float beeX;
-    private float beeY;
-    private boolean isVolumeOn;
-    private int movementsCount;
-    private Button show;
-    private String code;
-
+public class Level7Page extends AppCompatActivity {
+    TextView movements;
+    Spinner spinnerForward;
+    Spinner spinnerLeft;
+    Spinner spinnerRight;
+    Spinner spinnerKey;
+    Integer[] times = {1,2,3};
+    ArrayAdapter<Integer> timesAdapter;
+    ArrayList<String> list;
+    ImageView hero;
+    ImageView key;
+    ImageView prisoner;
+    Button goForward;
+    Button turnRight;
+    Button turnLeft;
+    Button getKey;
+    Button settings;
+    Button volume;
+    Button back;
+    Button info;
+    Button apply;
+    Button reset;
+    LinearLayout layout1;
+    LinearLayout layout2;
+    LinearLayout.LayoutParams params;
+    int volumeoffID;
+    int volumeonID;
+    int princessID;
+    Drawable volumeoff;
+    Drawable volumeon;
+    Drawable princess;
+    float x;
+    float y;
+    int count = 0;
+    int timesForward;
+    int timesLeft;
+    int timesRight;
+    int timesKey;
+    boolean isGameOver;
+    float heroX;
+    float heroY;
+    boolean isVolumeOn;
+    boolean heroHasKey;
+    int movementsCount;
     //sharedPreferences to update and save levels
     SharedPreferences sp;
     SharedPreferences.Editor et;
@@ -82,16 +75,16 @@ public class Level5Page extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level5_page);
+        setContentView(R.layout.activity_level7_page);
         //starting activity
         Intent i = getIntent();
         movementsCount = 0;
         //Views
         reset = findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
-        bee = findViewById(R.id.bee);
-        flower = findViewById(R.id.flower);
-        flower2 = findViewById(R.id.flower2);
+        hero = findViewById(R.id.hero);
+        key = findViewById(R.id.key);
+        prisoner = findViewById(R.id.prisoner);
         goForward = findViewById(R.id.goForward);
         turnLeft = findViewById(R.id.turnLeft);
         turnRight = findViewById(R.id.turnRight);
@@ -104,11 +97,9 @@ public class Level5Page extends AppCompatActivity {
         spinnerForward = findViewById(R.id.spinnerForward);
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
-        spinnerNectar = findViewById(R.id.spinnerKey);
+        spinnerKey = findViewById(R.id.spinnerKey);
         movements = findViewById(R.id.movements);
-        getNectar = findViewById(R.id.getNectar);
-        show = findViewById(R.id.showCode_button);
-        code = "";
+        getKey = findViewById(R.id.getKey);
 
         //volume
         isVolumeOn = true;
@@ -124,22 +115,21 @@ public class Level5Page extends AppCompatActivity {
         spinnerForward.setAdapter(timesAdapter);
         spinnerRight.setAdapter(timesAdapter);
         spinnerLeft.setAdapter(timesAdapter);
-        spinnerNectar.setAdapter(timesAdapter);
+        spinnerKey.setAdapter(timesAdapter);
         spinnerForward = findViewById(R.id.spinnerForward);
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
-        spinnerNectar = findViewById(R.id.spinnerKey);
+        spinnerKey = findViewById(R.id.spinnerKey);
 
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
 
-        flower0ID = R.drawable.flower0;
-        flower00ID = R.drawable.flower00;
-        flower0 = AppCompatDrawableManager.get().getDrawable(this, flower0ID);
-        flower00 = AppCompatDrawableManager.get().getDrawable(this, flower00ID);
+        princessID = R.drawable.princess;
+        princess = AppCompatDrawableManager.get().getDrawable(this, princessID);
+        heroHasKey = false;
 
-        beeX = bee.getTranslationX();
-        beeY = bee.getTranslationY();
+        heroX = hero.getTranslationX();
+        heroX = hero.getTranslationY();
 
         isGameOver = false;
         //SharedPreferences to save Level
@@ -149,7 +139,7 @@ public class Level5Page extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Level5Page.this,LevelPage.class);
+                Intent i = new Intent(Level7Page.this,LevelPage.class);
                 startActivity(i);
             }
         });
@@ -157,7 +147,7 @@ public class Level5Page extends AppCompatActivity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Level5Page.this, SettingsPage.class);
+                Intent i = new Intent(Level7Page.this, SettingsPage.class);
                 startActivity(i);
             }
         });
@@ -189,28 +179,11 @@ public class Level5Page extends AppCompatActivity {
             }
         });
 
-        show.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast toast;
-                if (code == "") {
-                    toast = Toast.makeText(getApplicationContext(), "No code here yet.", Toast.LENGTH_LONG);
-                } else {
-                    toast = Toast.makeText(getApplicationContext(), code, Toast.LENGTH_LONG);
-                }
-                View view = toast.getView();
-                view.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-                toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
-                toast.show();
-            }
-        });
-
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //reset();
                 recreate();
-                code = "";
             }
         });
 
@@ -258,34 +231,40 @@ public class Level5Page extends AppCompatActivity {
                         }
                     }
 
-                    if (list.get(i).equals("nectar1")){
-                        GetNectar();
+                    if (list.get(i).equals("key1")){
+                        GetKey();
                     }
-                    if (list.get(i).equals("nectar2")) {
+                    if (list.get(i).equals("key2")) {
                         for (int k = 0; k < 2; k++) {
-                            GetNectar();
+                            GetKey();
                         }
                     }
-                    if (list.get(i).equals("nectar3")) {
+                    if (list.get(i).equals("key3")) {
                         for (int k = 0; k < 3; k++) {
-                            GetNectar();
+                            GetKey();
                         }
                     }
                 }
                 apply.setEnabled(false);
-                if (flower.getBackground() == flower0 && flower2.getBackground() == flower0){
+                if (hero.getX() == 532 && hero.getY() == 9 && heroHasKey){
                     System.out.println("true");
                     isGameOver = true;
 
                 }
-                if (((bee.getX() == 394) && (bee.getY() == 180)) || ((bee.getX() == 394) && (bee.getY() == 360)) || ((bee.getX() == 594) && (bee.getY() == 360)) || ((bee.getX() == 194) && (bee.getY() == 360))|| ((bee.getX() == 194) && (bee.getY() == 540))) {
-                } else {
-                    TryAgain();
+                /*if (((hero.getX() == 0) && (hero.getY() == 393)) || ((hero.getX() == 133) && (hero.getY() == 393)) || ((hero.getX() == 266) && (hero.getY() == 393)))  {
+                } else if (((hero.getX() == 399) && (hero.getY() == 372)) || ((hero.getX() == 532) && (hero.getY() == 372)) || ((hero.getX() == 399) && (hero.getY() == 251))) {
+                } else if (((hero.getX() == 133) && (hero.getY() == 130)) || ((hero.getX() == 266) && (hero.getY() == 130)) || (hero.getX() == 399) && (hero.getY() == 130)) {
+                } else if ((hero.getX() == 532) && (hero.getY() == 130) || (hero.getX() == 665) && (hero.getY() == 130) || hero.getX() == 133 && hero.getY() == 9){
+                } else if ((hero.getX() == 532 && hero.getY() == 9) || (hero.getX() == 399) && (hero.getY() == 393)){
                 }
+                else{
+                    TryAgain();
+                }*/
+
 
                 if (isGameOver == true){
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Level5Page.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Level7Page.this);
                     View myView = getLayoutInflater().inflate(R.layout.finishscreen, null);
                     TextView message = myView.findViewById(R.id.message);
                     ImageView star1 = myView.findViewById(R.id.star1);
@@ -313,8 +292,8 @@ public class Level5Page extends AppCompatActivity {
                     continuebtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent i = new Intent(Level5Page.this, LevelPage.class);
-                            et.putBoolean("finished5", isGameOver);
+                            Intent i = new Intent(Level7Page.this, LevelPage.class);
+                            et.putBoolean("finished7", isGameOver);
                             et.apply();
                             startActivity(i);
                         }
@@ -326,19 +305,10 @@ public class Level5Page extends AppCompatActivity {
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String codeMessage;
-                timesForward = (Integer) spinnerForward.getSelectedItem();
-                if (timesForward == 1) {
-                    codeMessage = "goForward();";
-                } else {
-                    codeMessage = "for(int i = 0 ; i < " + timesForward + " ; i++){\n" +
-                            "goForward()\n}";
-                }
-                SaveData(codeMessage);
-                setCodeMessage();
+                timesForward = (Integer)spinnerForward.getSelectedItem();
                 if (count >= 9){
                     list.add("forward" + timesForward);
-                    Button forward = new Button(Level5Page.this);
+                    Button forward = new Button(Level7Page.this);
                     forward.setTextSize(10);
                     forward.setText(timesForward + " " + "GO FORWARD");
                     forward.setBackgroundColor(Color.CYAN);
@@ -350,7 +320,7 @@ public class Level5Page extends AppCompatActivity {
 
                 if (count < 9) {
                     list.add("forward" + timesForward);
-                    Button forward = new Button(Level5Page.this);
+                    Button forward = new Button(Level7Page.this);
                     forward.setTextSize(10);
                     forward.setText(timesForward + " " + "GO FORWARD");
                     forward.setBackgroundColor(Color.CYAN);
@@ -365,19 +335,10 @@ public class Level5Page extends AppCompatActivity {
         turnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String codeMessage;
-                timesLeft = (Integer) spinnerLeft.getSelectedItem();
-                if (timesLeft == 1) {
-                    codeMessage = "turnLeft();";
-                } else {
-                    codeMessage = "for(int i = 0 ; i < " + timesLeft + " ; i++){\n" +
-                            "turnLeft()\n}";
-                }
-                SaveData(codeMessage);
-                setCodeMessage();
+                timesLeft = (Integer)spinnerLeft.getSelectedItem();
                 if (count >= 9){
                     list.add("left" + timesLeft);
-                    Button left = new Button(Level5Page.this);
+                    Button left = new Button(Level7Page.this);
                     left.setTextSize(10);
                     left.setText(timesLeft + " " + "TURN LEFT");
                     left.setBackgroundColor(Color.CYAN);
@@ -388,7 +349,7 @@ public class Level5Page extends AppCompatActivity {
                 }
                 if (count < 9) {
                     list.add("left" + timesLeft);
-                    Button left = new Button(Level5Page.this);
+                    Button left = new Button(Level7Page.this);
                     left.setTextSize(10);
                     left.setText(timesLeft + " " + "TURN LEFT");
                     left.setBackgroundColor(Color.CYAN);
@@ -403,19 +364,10 @@ public class Level5Page extends AppCompatActivity {
         turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String codeMessage;
                 timesRight = (Integer) spinnerRight.getSelectedItem();
-                if (timesRight == 1) {
-                    codeMessage = "turnRight();";
-                } else {
-                    codeMessage = "for(int i = 0 ; i < " + timesRight + " ; i++){\n" +
-                            "turnRight()\n}";
-                }
-                SaveData(codeMessage);
-                setCodeMessage();
                 if (count >= 9){
                     list.add("right" + timesRight);
-                    Button right = new Button(Level5Page.this);
+                    Button right = new Button(Level7Page.this);
                     right.setTextSize(10);
                     right.setText(timesRight + " " + "TURN RIGHT");
                     right.setBackgroundColor(Color.CYAN);
@@ -426,7 +378,7 @@ public class Level5Page extends AppCompatActivity {
                 }
                 if (count < 9) {
                     list.add("right" + timesRight);
-                    Button right = new Button(Level5Page.this);
+                    Button right = new Button(Level7Page.this);
                     right.setTextSize(10);
                     right.setText(timesRight + " " + "TURN RIGHT");
                     right.setBackgroundColor(Color.CYAN);
@@ -438,24 +390,15 @@ public class Level5Page extends AppCompatActivity {
             }
         });
 
-        getNectar.setOnClickListener(new View.OnClickListener() {
+        getKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String codeMessage;
-                timesNectar = (Integer) spinnerNectar.getSelectedItem();
-                if (timesNectar == 1) {
-                    codeMessage = "getNectar();";
-                } else {
-                    codeMessage = "for(int i = 0 ; i < " + timesNectar + " ; i++){\n" +
-                            "getNectar()\n}";
-                }
-                SaveData(codeMessage);
-                setCodeMessage();
+                timesKey = (Integer) spinnerKey.getSelectedItem();
                 if (count >= 9){
-                    list.add("nectar" + timesNectar);
-                    Button nectar = new Button(Level5Page.this);
+                    list.add("key" + timesKey);
+                    Button nectar = new Button(Level7Page.this);
                     nectar.setTextSize(10);
-                    nectar.setText(timesNectar + " " + "GET NECTAR");
+                    nectar.setText(timesKey + " " + "GET KEY");
                     nectar.setBackgroundColor(Color.CYAN);
                     layout2.addView(nectar, params);
                     count++;
@@ -463,10 +406,10 @@ public class Level5Page extends AppCompatActivity {
                     movements.setText("Movements : " + movementsCount);
                 }
                 if (count < 9){
-                    list.add("nectar" + timesNectar);
-                    Button nectar = new Button(Level5Page.this);
+                    list.add("key" + timesKey);
+                    Button nectar = new Button(Level7Page.this);
                     nectar.setTextSize(10);
-                    nectar.setText(timesNectar + " " + "GET NECTAR");
+                    nectar.setText(timesKey + " " + "GET KEY");
                     nectar.setBackgroundColor(Color.CYAN);
                     layout1.addView(nectar, params);
                     count++;
@@ -493,72 +436,79 @@ public class Level5Page extends AppCompatActivity {
         timesForward = 0;
         timesRight = 0;
         timesLeft = 0;
-        bee.setTranslationX(beeX);
-        bee.setTranslationY(beeY);
-        bee.setRotation(90);
+        hero.setTranslationX(heroX);
+        hero.setTranslationY(heroY);
+        hero.setRotation(90);
         apply.setEnabled(true);
     }
     public void GoForward(){
-        if (bee.getRotation() == 0){
-            y -= (180);
-            bee.setTranslationY(y);
+        if (hero.getRotation() == 0){
+            y -= (121);
+            hero.setTranslationY(y);
 
             //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
 
         }
 
-        if (bee.getRotation() == 90){
-            x += (200);
-            bee.setTranslationX(x);
+        if (hero.getRotation() == 90){
+            x += (133);
+            hero.setTranslationX(x);
+            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
+
+        }
+        if (hero.getRotation() == 360){
+            y -= (121);
+            hero.setTranslationY(y);
             //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
 
         }
 
-        if (bee.getRotation() == 270){
-            x -= (200);
-            bee.setTranslationX(x);
+        if (hero.getRotation() == 270){
+            x -= (133);
+            hero.setTranslationX(x);
         }
 
-        if (bee.getRotation() == 180){
-            y += (180);
-            bee.setTranslationY(y);
+        if (hero.getRotation() == 180){
+            y += (121);
+            hero.setTranslationY(y);
             //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
 
         }
 
-        if (bee.getRotation() == -90){
-            x -= (200);
-            bee.setTranslationX(x);
+        if (hero.getRotation() == -270){
+            x += (133);
+            hero.setTranslationX(x);
+        }
+
+        if (hero.getRotation() == -90){
+            x -= (133);
+            hero.setTranslationX(x);
             //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
 
         }
-        System.out.println(bee.getX());
-        System.out.println(bee.getY());
+        System.out.println(hero.getX());
+        System.out.println(hero.getY());
     }
 
     public void TurnRight(){
 
-        bee.setRotation(bee.getRotation() + (90));
+        hero.setRotation(hero.getRotation() + (90));
         movementsCount++;
     }
     public void TurnLeft(){
 
-        bee.setRotation(bee.getRotation() - (90));
+        hero.setRotation(hero.getRotation() - (90));
         movementsCount++;
     }
 
-    public void GetNectar(){
-        if (bee.getX() == 594 && bee.getY() == 360) {
-            flower.setBackground(flower0);
-
-        }
-        if (bee.getX() == 194 && bee.getY() == 540){
-            flower2.setBackground(flower00);
-
+    public void GetKey(){
+        if (hero.getX() == 266 && hero.getY() == 130) {
+            key.setVisibility(View.INVISIBLE);
+            heroHasKey = true;
         }
     }
     public void TryAgain() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Level5Page.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(Level7Page.this);
         View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
         Button menu = (Button) myView.findViewById(R.id.menubtn);
         Button retry = (Button) myView.findViewById(R.id.retrybtn);
@@ -571,17 +521,5 @@ public class Level5Page extends AppCompatActivity {
         builder.setView(myView);
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
-
-    public void SaveData(String codeMessage) {
-        SharedPreferences sharedPref = Level5Page.this.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("CODEMESSAGE", codeMessage);
-        editor.commit();
-    }
-
-    public void setCodeMessage() {
-        SharedPreferences sharedPref = Level5Page.this.getPreferences(Context.MODE_PRIVATE);
-        code += sharedPref.getString("CODEMESSAGE", "") + "\n";
     }
 }

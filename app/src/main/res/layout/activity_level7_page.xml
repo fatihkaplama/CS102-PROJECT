@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background3"
-    tools:context=".Level5Page">
+    tools:context=".Level7Page">
 
     <Button
         android:id="@+id/settings"
@@ -43,26 +43,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/showCode_button"
-
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-
-        android:background="@drawable/buttonshape"
-        android:shadowColor="#5A8A60"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        android:text="Show code"
-        android:textColor="#121111"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toStartOf="@+id/info"
-        app:layout_constraintStart_toEndOf="@+id/movements"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.937" />
-
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/gridLayout2"
         android:layout_width="300dp"
@@ -70,43 +50,54 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/level5"
-        app:columnCount="4"
+        android:background="@drawable/leve77"
+        app:columnCount="6"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline"
         app:layout_constraintVertical_bias="1.0"
-        app:rowCount="4">
+        app:rowCount="6">
 
         <ImageView
-            android:id="@+id/flower2"
-            android:layout_width="75dp"
-            android:layout_height="70dp"
-            android:contentDescription="@string/bee"
-            app:layout_column="1"
-            app:layout_row="3"
-            app:srcCompat="@drawable/flower2" />
-
-        <ImageView
-            android:id="@+id/bee"
-            android:layout_width="75dp"
-            android:layout_height="70dp"
-            android:contentDescription="@string/bee"
-            android:rotation="180"
+            android:id="@+id/key"
+            android:layout_width="50dp"
+            android:layout_height="46dp"
             app:layout_column="2"
-            app:layout_row="0"
-            app:srcCompat="@drawable/bee" />
+            app:layout_row="1"
+            app:srcCompat="@drawable/key" />
 
         <ImageView
-            android:id="@+id/flower"
-            android:layout_width="75dp"
-            android:layout_height="70dp"
-            android:contentDescription="@string/honey"
+            android:id="@+id/imageView25"
+            android:layout_width="50dp"
+            android:layout_height="46dp"
+            app:layout_column="1"
+            app:layout_row="1" />
+
+        <ImageView
+            android:id="@+id/prisoner"
+            android:layout_width="50dp"
+            android:layout_height="46dp"
+            android:background="@drawable/prisoner"
+            app:layout_column="4"
+            app:layout_row="0" />
+
+        <ImageView
+            android:id="@+id/imageView17"
+            android:layout_width="50dp"
+            android:layout_height="46dp"
             app:layout_column="3"
-            app:layout_row="2"
-            app:srcCompat="@drawable/flower" />
+            app:layout_row="5" />
+
+        <ImageView
+            android:id="@+id/hero"
+            android:layout_width="50dp"
+            android:layout_height="46dp"
+            android:background="@drawable/heromale"
+            app:layout_column="0"
+            app:layout_row="4" />
+
     </androidx.gridlayout.widget.GridLayout>
 
     <LinearLayout
@@ -183,10 +174,10 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/getNectar"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/getKey"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="get nectar"
+                    android:text="@string/get_key"
                     android:textSize="10sp" />
 
             </LinearLayout>
@@ -216,7 +207,7 @@
                     android:layout_weight="1" />
 
                 <Spinner
-                    android:id="@+id/spinnerNectar"
+                    android:id="@+id/spinnerKey"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -283,9 +274,9 @@
         android:text="@string/Movements"
         app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.436"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.03" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

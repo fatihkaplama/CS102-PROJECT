@@ -19,6 +19,7 @@ public class LevelPage extends AppCompatActivity {
     boolean isLevel4Finished;
     boolean isLevel5Finished;
     boolean isLevel6Finished;
+    boolean isLevel7Finished;
     boolean isVolumeOn;
     Drawable volumeoff;
     Drawable volumeon;
@@ -81,6 +82,9 @@ public class LevelPage extends AppCompatActivity {
         //getting info from Level 6 Page
         isLevel6Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished6",false);
 
+        //getting info from Level 7 Page
+        isLevel7Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished7", false);
+
         //volume
         volumeonID = R.drawable.volumeon;
         volumeoffID = R.drawable.volumeoff;
@@ -96,29 +100,32 @@ public class LevelPage extends AppCompatActivity {
         button17.setEnabled(false);
         button18.setEnabled(true);
         button19.setEnabled(true);
-        button20.setEnabled(false);
+        button20.setEnabled(true);
         button21.setEnabled(false);
         button22.setEnabled(false);
 
         if (isLevel1Finished){
             button14.setEnabled(true);
         }
-        if(isLevel2Finished){
+        if (isLevel2Finished){
             button15.setEnabled(true);
         }
         if (isLevel3Finished){
             button17.setEnabled(true);
         }
-        if(isLevel4Finished){
+        if (isLevel4Finished){
             button18.setEnabled(true);
         }
-        if(isLevel5Finished){
+        if (isLevel5Finished){
             button19.setEnabled(true);
         }
-        if(isLevel6Finished){
+        if (isLevel6Finished){
             button20.setEnabled(true);
         }
 
+        if (isLevel7Finished){
+            button21.setEnabled(true);
+        }
         //add clicklistener to buttons
         button13.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,8 +175,8 @@ public class LevelPage extends AppCompatActivity {
         button20.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent i = new Intent(levelPage.this, map7.class);
-                //  startActivity(i);
+                Intent i = new Intent(LevelPage.this, Level7Page.class);
+                startActivity(i);
             }
         });
         button21.setOnClickListener(new View.OnClickListener() {
