@@ -267,12 +267,22 @@ public class Level2Page extends AppCompatActivity {
 
 
                 if (isGameOver == true){
+                    et.putBoolean("finished2", isGameOver);
+                    et.apply();
                      AlertDialog.Builder builder = new AlertDialog.Builder(Level2Page.this);
                      View myView = getLayoutInflater().inflate(R.layout.finishscreen, null);
                      TextView message = myView.findViewById(R.id.message);
                      ImageView star1 = myView.findViewById(R.id.star1);
                      ImageView star2 = myView.findViewById(R.id.star2);
                      ImageView star3 = myView.findViewById(R.id.star3);
+                    if (movementsCount > 12){
+                        star2.setVisibility(View.INVISIBLE);
+                    }
+                    if (movementsCount > 15){
+                        star1.setVisibility(View.INVISIBLE);
+                        star2.setVisibility(View.VISIBLE);
+                        star3.setVisibility(View.INVISIBLE);
+                    }
                      Button menu = (Button) myView.findViewById(R.id.menubtn);
                      Button retry = (Button) myView.findViewById(R.id.retrybtn);
                      Button continuebtn = (Button) myView.findViewById(R.id.continuebtn);
@@ -288,17 +298,15 @@ public class Level2Page extends AppCompatActivity {
                      menu.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        Intent i = new Intent(Level2Page.this, HomePage.class);
+                        startActivity(i);
                     }
                     });
-
 
                     continuebtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent i = new Intent(Level2Page.this, LevelPage.class);
-                            et.putBoolean("finished2", isGameOver);
-                            et.apply();
                             startActivity(i);
                         }
                     });
@@ -486,12 +494,10 @@ public class Level2Page extends AppCompatActivity {
     public void TurnRight(){
 
         bee.setRotation(bee.getRotation() + (90));
-        movementsCount++;
     }
     public void TurnLeft(){
 
         bee.setRotation(bee.getRotation() - (90));
-        movementsCount++;
     }
     public void TryAgain() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Level2Page.this);
