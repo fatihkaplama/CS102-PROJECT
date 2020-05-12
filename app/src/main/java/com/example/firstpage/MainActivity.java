@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
+    boolean isAvatarSelected;
     boolean isVolumeOn;
     ImageView user;
     Button avatar1;
@@ -41,9 +41,6 @@ public class MainActivity extends AppCompatActivity {
     Drawable volumeoff;
     Drawable volumeon;
     Drawable avatar;
-    SharedPreferences sharedPreferencesNickname;
-    SharedPreferences sharedPreferencesAvatar;
-    SharedPreferences.Editor editor;
     EditText nickname;
 
     @SuppressLint("RestrictedApi")
@@ -72,13 +69,14 @@ public class MainActivity extends AppCompatActivity {
         settings = findViewById(R.id.settings_button_main);
         apply = findViewById(R.id.apply);
         start = findViewById(R.id.start);
+        start.setEnabled(false);
         volumeonID = R.drawable.volumeon;
         volumeoffID = R.drawable.volumeoff;
         volumeon = AppCompatDrawableManager.get().getDrawable(this, volumeonID);
         volumeoff = AppCompatDrawableManager.get().getDrawable(this, volumeoffID);
 
-        sharedPreferencesNickname = getSharedPreferences("maindata",MODE_PRIVATE);
-        editor = sharedPreferencesNickname.edit();
+
+
 
         avatar1.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
@@ -87,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 avatarID = R.drawable.batman;
                 avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
                 user.setBackground(avatar);
+                isAvatarSelected = true;
             }
         });
 
@@ -98,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 avatarID = R.drawable.captainamerica;
                 avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
                 user.setBackground(avatar);
+                isAvatarSelected = true;
             }
         });
 
@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 avatarID = R.drawable.joker;
                 avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
                 user.setBackground(avatar);
+                isAvatarSelected = true;
             }
         });
 
@@ -118,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 avatarID = R.drawable.herofemale;
                 avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
                 user.setBackground(avatar);
+                isAvatarSelected = true;
             }
         });
 
@@ -128,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 avatarID = R.drawable.ironman;
                 avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
                 user.setBackground(avatar);
+                isAvatarSelected = true;
             }
         });
 
@@ -138,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 avatarID = R.drawable.heromale;
                 avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
                 user.setBackground(avatar);
+                isAvatarSelected = true;
             }
         });
 
@@ -148,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 avatarID = R.drawable.thor;
                 avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
                 user.setBackground(avatar);
+                isAvatarSelected = true;
             }
         });
 
@@ -158,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
                 avatarID = R.drawable.spider;
                 avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
                 user.setBackground(avatar);
+                isAvatarSelected = true;
             }
         });
 
@@ -168,17 +174,27 @@ public class MainActivity extends AppCompatActivity {
                 avatarID = R.drawable.thanos;
                 avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
                 user.setBackground(avatar);
+                isAvatarSelected = true;
             }
         });
 
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editor.putString("nickname", nickname.getText().toString());
-                editor.putInt("avatar", avatarID );
-                editor.commit();
-                //apply.setEnabled(false);
-                Toast.makeText(MainActivity.this, "User was created", Toast.LENGTH_SHORT).show();
+                if (!nickname.getText().toString().isEmpty() && isAvatarSelected) {
+                    SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("nickname", nickname.getText().toString());
+                    editor.putInt("avatar", avatarID);
+                    editor.commit();
+                    //apply.setEnabled(false);
+                    Toast.makeText(MainActivity.this, "User was created", Toast.LENGTH_SHORT).show();
+                    start.setEnabled(true);
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Please enter your nickname and select an avatar", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

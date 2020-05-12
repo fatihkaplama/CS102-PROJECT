@@ -72,6 +72,8 @@ public class Level7Page extends AppCompatActivity {
     private boolean isVolumeOn;
     private boolean heroHasKey;
     private int movementsCount;
+    private int avatarID;
+    private Drawable avatar;
     //sharedPreferences to update and save levels
     private SharedPreferences sp;
     private SharedPreferences.Editor et;
@@ -82,11 +84,18 @@ public class Level7Page extends AppCompatActivity {
         setContentView(R.layout.activity_level7_page);
         //starting activity
         Intent i = getIntent();
+        SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
+
+        //setting the avatar
+        avatarID = sharedPreferences.getInt("avatar", 0);
+        avatar = AppCompatDrawableManager.get().getDrawable(Level7Page.this, avatarID);
+        hero = findViewById(R.id.hero);
+        hero.setBackground(avatar);
+
         movementsCount = 0;
         //Views
         reset = findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
-        hero = findViewById(R.id.hero);
         key = findViewById(R.id.key);
         prisoner = findViewById(R.id.prisoner);
         goForward = findViewById(R.id.goForward);

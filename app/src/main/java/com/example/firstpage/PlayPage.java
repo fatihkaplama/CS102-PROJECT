@@ -1,5 +1,7 @@
 package com.example.firstpage;
 
+import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 import android.widget.Button;
@@ -34,17 +36,29 @@ public class PlayPage extends AppCompatActivity {
     int volumeOffID;
     int volumeOnID;
     ConstraintLayout playPageLayout;
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_page);
         Intent i =getIntent();
+        SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
+
         playPageLayout =findViewById(R.id.play_page_layout);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         playPageLayout.setBackgroundResource(background);
-        userName = i.getStringExtra("nickname");
+
+        //setting nickname
+        userName = sharedPreferences.getString("nickname", "user");
         tv = findViewById(R.id.userName);
         tv.setText(userName);
+
+        //setting avatar
+        avatarId = sharedPreferences.getInt("avatar",0);
+        avatar = AppCompatDrawableManager.get().getDrawable(PlayPage.this, avatarId);
+        user = findViewById(R.id.user);
+        user.setBackground(avatar);
+
         isVolumeon = true;
         volume = findViewById(R.id.volume_button_playPage);
         volumeOnID = R.drawable.volumeon;

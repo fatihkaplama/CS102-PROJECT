@@ -94,7 +94,6 @@
             android:id="@+id/hero"
             android:layout_width="50dp"
             android:layout_height="46dp"
-            android:background="@drawable/heromale"
             app:layout_column="0"
             app:layout_row="4" />
 
