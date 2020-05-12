@@ -217,41 +217,41 @@ public class Level1Page extends AppCompatActivity {
 
                 for (int i = 0; i < list.size(); i++) {
                     if (list.get(i).equals("forward1")) {
-                        GoForward();
+                        GoForward(bee);
                     } else if (list.get(i).equals("forward2")) {
                         for (int k = 0; k < 2; k++) {
-                            GoForward();
+                            GoForward(bee);
                         }
                     } else if (list.get(i).equals("forward3")) {
                         for (int k = 0; k < 3; k++) {
-                            GoForward();
+                            GoForward(bee);
 
                         }
                     }
                     if (list.get(i).equals("left1")) {
-                        TurnLeft();
+                        TurnLeft(bee);
                     }
                     if (list.get(i).equals("left2")) {
                         for (int k = 0; k < 2; k++) {
-                            TurnLeft();
+                            TurnLeft(bee);
                         }
                     }
                     if (list.get(i).equals("left3")) {
                         for (int k = 0; k < 3; k++) {
-                            TurnLeft();
+                            TurnLeft(bee);
                         }
                     }
                     if (list.get(i).equals("right1")) {
-                        TurnRight();
+                        TurnRight(bee);
                     }
                     if (list.get(i).equals("right2")) {
                         for (int k = 0; k < 2; k++) {
-                            TurnRight();
+                            TurnRight(bee);
                         }
                     }
                     if (list.get(i).equals("right3")) {
                         for (int k = 0; k < 3; k++) {
-                            TurnRight();
+                            TurnRight(bee);
                         }
                     }
                 }
@@ -450,7 +450,7 @@ public class Level1Page extends AppCompatActivity {
         apply.setEnabled(true);
     }
 
-    public void GoForward() {
+    public void GoForward(ImageView bee) {
         if (bee.getRotation() == 0) {
             y -= (180);
             bee.setTranslationY(y);
@@ -488,12 +488,12 @@ public class Level1Page extends AppCompatActivity {
         System.out.println(bee.getY());
     }
 
-    public void TurnRight() {
+    public void TurnRight(ImageView bee) {
 
         bee.setRotation(bee.getRotation() + (90));
     }
 
-    public void TurnLeft() {
+    public void TurnLeft(ImageView bee) {
 
         bee.setRotation(bee.getRotation() - (90));
     }

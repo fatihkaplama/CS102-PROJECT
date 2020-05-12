@@ -26,8 +26,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-public class Level2Page extends AppCompatActivity {
-   private TextView movements;
+public class Level2Page extends Level1Page {
+    private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
     private Spinner spinnerRight;
@@ -43,7 +43,6 @@ public class Level2Page extends AppCompatActivity {
     private Button volume;
     private Button back;
     private Button info;
-
     private Button apply;
     private Button reset;
     private LinearLayout layout1;
@@ -216,41 +215,41 @@ public class Level2Page extends AppCompatActivity {
             public void onClick(View v) {
                 for (int i = 0; i < list.size(); i++) {
                     if (list.get(i).equals("forward1")) {
-                        GoForward();
+                        GoForward(bee);
                     } else if (list.get(i).equals("forward2")) {
                         for (int k = 0; k < 2; k++) {
-                            GoForward();
+                            GoForward(bee);
                         }
                     } else if (list.get(i).equals("forward3")) {
                         for (int k = 0; k < 3; k++) {
-                            GoForward();
+                            GoForward(bee);
 
                         }
                     }
                     if (list.get(i).equals("left1")) {
-                        TurnLeft();
+                        TurnLeft(bee);
                     }
                     if (list.get(i).equals("left2")) {
                         for (int k = 0; k < 2; k++) {
-                            TurnLeft();
+                            TurnLeft(bee);
                         }
                     }
                     if (list.get(i).equals("left3")) {
                         for (int k = 0; k < 3; k++) {
-                            TurnLeft();
+                            TurnLeft(bee);
                         }
                     }
                     if (list.get(i).equals("right1")) {
-                        TurnRight();
+                        TurnRight(bee);
                     }
                     if (list.get(i).equals("right2")) {
                         for (int k = 0; k < 2; k++) {
-                            TurnRight();
+                            TurnRight(bee);
                         }
                     }
                     if (list.get(i).equals("right3")) {
                         for (int k = 0; k < 3; k++) {
-                            TurnRight();
+                            TurnRight(bee);
                         }
                     }
                 }
@@ -430,75 +429,9 @@ public class Level2Page extends AppCompatActivity {
             }
         });
 
-
     }
 
-    public void reset(){
-        count = 0;
-        layout1.removeAllViewsInLayout();
-        int size = list.size();
-        for (int i = 0; i < size; i++){
-            list.remove(0);
-        }
-        if (!list.isEmpty()){
-            System.out.println(list.get(0));
-        }
-        x = 0;
-        y = 0;
-        timesForward = 0;
-        timesRight = 0;
-        timesLeft = 0;
-        bee.setTranslationX(beeX);
-        bee.setTranslationY(beeY);
-        bee.setRotation(90);
-        apply.setEnabled(true);
-    }
-    public void GoForward(){
-        if (bee.getRotation() == 0){
-            y -= (180);
-            bee.setTranslationY(y);
 
-            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
-
-        }
-
-        if (bee.getRotation() == 90){
-            x += (200);
-            bee.setTranslationX(x);
-            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
-
-        }
-
-        if (bee.getRotation() == 180){
-            y += (180);
-            bee.setTranslationY(y);
-            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
-        }
-
-        if (bee.getRotation() == 270){
-            x -= (200);
-            bee.setTranslationX(x);
-        }
-
-        if (bee.getRotation() == -90){
-            x -= (200);
-            bee.setTranslationX(x);
-            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
-
-        }
-
-        System.out.println(bee.getX());
-        System.out.println(bee.getY());
-    }
-
-    public void TurnRight(){
-
-        bee.setRotation(bee.getRotation() + (90));
-    }
-    public void TurnLeft(){
-
-        bee.setRotation(bee.getRotation() - (90));
-    }
     public void TryAgain() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Level2Page.this);
         View myView = getLayoutInflater().inflate(R.layout.tryagain, null);

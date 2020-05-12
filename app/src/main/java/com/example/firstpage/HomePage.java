@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class HomePage extends AppCompatActivity {
+public class HomePage extends MainActivity {
 
     String userName;
     Drawable avatar;
