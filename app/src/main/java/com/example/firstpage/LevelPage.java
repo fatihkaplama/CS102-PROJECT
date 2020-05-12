@@ -101,7 +101,7 @@ public class LevelPage extends AppCompatActivity {
         button18.setEnabled(true);
         button19.setEnabled(true);
         button20.setEnabled(true);
-        button21.setEnabled(false);
+        button21.setEnabled(true);
         button22.setEnabled(false);
 
         if (isLevel1Finished){
@@ -182,8 +182,8 @@ public class LevelPage extends AppCompatActivity {
         button21.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent i = new Intent(levelPage.this, map8.class);
-                //startActivity(i);
+                 Intent i = new Intent(LevelPage.this, Level8Page.class);
+                startActivity(i);
             }
         });
         button22.setOnClickListener(new View.OnClickListener() {
