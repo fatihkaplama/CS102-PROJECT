@@ -206,7 +206,6 @@ public class Level2Page extends Level1Page {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //reset();
                 recreate();
                 code = "";
             }
@@ -215,7 +214,7 @@ public class Level2Page extends Level1Page {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MoveLoop();
+                MoveLoop(list, bee, changeX, changeY);
                 apply.setEnabled(false);
                 if ((bee.getX() == 400) && (bee.getY() == 8)){
                     System.out.println("true");

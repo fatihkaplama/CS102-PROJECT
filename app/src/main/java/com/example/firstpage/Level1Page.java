@@ -216,7 +216,7 @@ public class Level1Page extends DefaultLevelPage {
             public void onClick(View v) {
                 System.out.println(bee.getX());
                 System.out.println(bee.getY());
-                MoveLoop();
+                MoveLoop(list, bee, changeX, changeY);
 
 
                 apply.setEnabled(false);
@@ -449,7 +449,8 @@ public class Level1Page extends DefaultLevelPage {
         SharedPreferences sharedPref = Level1Page.this.getPreferences(Context.MODE_PRIVATE);
         code += sharedPref.getString("CODEMESSAGE", "") + "\n";
     }
-    public void MoveLoop(){
+    public void MoveLoop(ArrayList<String> list, ImageView bee, int changeX, int changeY){
+        System.out.println("deneme");
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).equals("forward1")) {
                 GoForward(bee,changeX,changeY);
