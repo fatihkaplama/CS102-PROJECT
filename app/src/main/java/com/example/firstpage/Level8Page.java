@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -27,7 +28,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Timer;
 
-public class Level8Page extends AppCompatActivity {
+public class Level8Page extends AppCompatActivity implements ShowCodeI {
     //variables
     private TextView movements;
     private Spinner spinnerForward;
@@ -72,6 +73,8 @@ public class Level8Page extends AppCompatActivity {
     private boolean isVolumeOn;
     private boolean heroHasKey;
     private int movementsCount;
+    private Button show;
+    private String code;
     //sharedPreferences to update and save levels
     private SharedPreferences sp;
     private SharedPreferences.Editor et;
@@ -104,7 +107,8 @@ public class Level8Page extends AppCompatActivity {
         spinnerKey = findViewById(R.id.spinnerKey);
         movements = findViewById(R.id.movements);
         getKey = findViewById(R.id.getKey);
-
+        show = findViewById(R.id.showCode_button);
+        code = "";
         //volume
         isVolumeOn = true;
         volumeonID = R.drawable.volumeon;
@@ -190,12 +194,29 @@ public class Level8Page extends AppCompatActivity {
             }
         });
 
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast;
+                if (code == "") {
+                    toast = Toast.makeText(getApplicationContext(), "No code here yet.", Toast.LENGTH_LONG);
+                } else {
+                    toast = Toast.makeText(getApplicationContext(), code, Toast.LENGTH_LONG);
+                }
+                View view = toast.getView();
+                view.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+            }
+        });
+
         //when the user click the RESET button
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //reset();
                 recreate();
+                code = "";
             }
         });
 
@@ -329,9 +350,18 @@ public class Level8Page extends AppCompatActivity {
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //creating the parameter for showButton
+                String codeMessage;
                 //to find out how many times the user will move forward
-                timesForward = (Integer)spinnerForward.getSelectedItem();
-                //if the number of buttons added is more than 9, add this button to the second layout
+                timesForward = (Integer) spinnerForward.getSelectedItem();
+                if (timesForward == 1) {
+                    codeMessage = "goForward();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesForward + " ; i++){\n" +
+                            "goForward()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
                 if (count >= 9){
                     list.add("forward" + timesForward);
                     Button forward = new Button(Level8Page.this);
@@ -363,9 +393,18 @@ public class Level8Page extends AppCompatActivity {
         turnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //creating the parameter for showButton
+                String codeMessage;
                 //to find out how many times the user will turn left
-                timesLeft = (Integer)spinnerLeft.getSelectedItem();
-                //if the number of buttons added is more than 9, add this button to the second layout
+                timesLeft = (Integer) spinnerLeft.getSelectedItem();
+                if (timesLeft == 1) {
+                    codeMessage = "turnLeft();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesLeft + " ; i++){\n" +
+                            "turnLeft()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
                 if (count >= 9){
                     list.add("left" + timesLeft);
                     Button left = new Button(Level8Page.this);
@@ -397,9 +436,18 @@ public class Level8Page extends AppCompatActivity {
         turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //creating the parameter for showButton
+                String codeMessage;
                 //to find out how many times the user will turn right
                 timesRight = (Integer) spinnerRight.getSelectedItem();
-                //if the number of buttons added is more than 9, add this button to the second layout
+                if (timesRight == 1) {
+                    codeMessage = "turnRight();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesRight + " ; i++){\n" +
+                            "turnRight()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
                 if (count >= 9){
                     list.add("right" + timesRight);
                     Button right = new Button(Level8Page.this);
@@ -431,8 +479,18 @@ public class Level8Page extends AppCompatActivity {
         getKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //creating the parameter for showButton
+                String codeMessage;
                 //to find out how many times the key will be taken
                 timesKey = (Integer) spinnerKey.getSelectedItem();
+                if (timesKey == 1) {
+                    codeMessage = "turnRight();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesKey + " ; i++){\n" +
+                            "turnRight()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
                 //if the number of buttons added is more than 9, add this button to the second layout
                 if (count >= 9){
                     list.add("key" + timesKey);
@@ -583,4 +641,17 @@ public class Level8Page extends AppCompatActivity {
      dialog.show();
      }
 
+    @Override
+    public void SaveData(String codeMessage) {
+        SharedPreferences sharedPref = Level8Page.this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("CODEMESSAGE", codeMessage);
+        editor.commit();
+    }
+
+    @Override
+    public void setCodeMessage() {
+        SharedPreferences sharedPref = Level8Page.this.getPreferences(Context.MODE_PRIVATE);
+        code += sharedPref.getString("CODEMESSAGE", "") + "\n";
+    }
 }
