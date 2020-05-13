@@ -1,4 +1,4 @@
-package com.example.firstpage;
+package com.example.FunAlgo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;

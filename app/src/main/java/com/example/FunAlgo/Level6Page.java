@@ -1,4 +1,4 @@
-package com.example.firstpage;
+package com.example.FunAlgo;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,60 +25,62 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Level3Page extends Level1Page implements ShowCodeI {
-    private TextView movements;
-    private Spinner spinnerForward;
-    private Spinner spinnerLeft;
-    private Spinner spinnerRight;
-    private Spinner spinnerNectar;
-    private Integer[] times = {1, 2, 3};
-    private ArrayAdapter<Integer> timesAdapter;
-    private ArrayList<String> list;
-    private ImageView bee;
-    private ImageView flower;
+public class Level6Page extends Level1Page {
 
-    private Button goForward;
-    private Button turnRight;
-    private Button turnLeft;
-    private Button getNectar;
-    private Button settings;
-    private Button volume;
-    private Button back;
-    private Button info;
-    private Button apply;
-    private Button reset;
-    private LinearLayout layout1;
-    private LinearLayout layout2;
-    private LinearLayout.LayoutParams params;
-    private int volumeoffID;
-    private int volumeonID;
-    private int flower0ID;
-    private Drawable volumeoff;
-    private Drawable volumeon;
-    private Drawable flower0;
-    private float x;
-    private float y;
-    private int count = 0;
-    private int timesForward;
-    private int timesLeft;
-    private int timesRight;
-    private int timesNectar;
-    private boolean isGameOver;
-    private float beeX;
-    private float beeY;
-    private boolean isVolumeOn;
-    private int movementsCount;
+    TextView movements;
+    Spinner spinnerForward;
+    Spinner spinnerLeft;
+    Spinner spinnerRight;
+    Spinner spinnerNectar;
+    Integer[] times = {1,2,3};
+    ArrayAdapter<Integer> timesAdapter;
+    ArrayList<String> list;
+    ImageView bee;
+    ImageView flower2;
+    ImageView flower3;
+    Button goForward;
+    Button turnRight;
+    Button turnLeft;
+    Button getNectar;
+    Button settings;
+    Button volume;
+    Button back;
+    Button info;
+    Button apply;
+    Button reset;
+    LinearLayout layout1;
+    LinearLayout layout2;
+    LinearLayout.LayoutParams params;
+    int volumeoffID;
+    int volumeonID;
+    int flower0ID;
+    int flower00ID;
+    Drawable volumeoff;
+    Drawable volumeon;
+    Drawable flower0;
+    Drawable flower00;
+    float x;
+    float y;
+    int count = 0;
+    int timesForward;
+    int timesLeft;
+    int timesRight;
+    int timesNectar;
+    boolean isGameOver;
+    float beeX;
+    float beeY;
+    boolean isVolumeOn;
+    int movementsCount;
     private Button show;
     private String code;
     //sharedPreferences to update and save levels
     SharedPreferences sp;
     SharedPreferences.Editor et;
-
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level3_page);
+        setContentView(R.layout.activity_level6_page);
         //starting activity
         Intent i = getIntent();
         movementsCount = 0;
@@ -86,7 +88,8 @@ public class Level3Page extends Level1Page implements ShowCodeI {
         reset = findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
         bee = findViewById(R.id.bee);
-        flower = findViewById(R.id.flower);
+        flower2 = findViewById(R.id.flower2);
+        flower3 = findViewById(R.id.flower3);
         goForward = findViewById(R.id.goForward);
         turnLeft = findViewById(R.id.turnLeft);
         turnRight = findViewById(R.id.turnRight);
@@ -104,7 +107,6 @@ public class Level3Page extends Level1Page implements ShowCodeI {
         getNectar = findViewById(R.id.getNectar);
         show = findViewById(R.id.showCode_button);
         code = "";
-
         //volume
         isVolumeOn = true;
         volumeonID = R.drawable.volumeon;
@@ -129,20 +131,22 @@ public class Level3Page extends Level1Page implements ShowCodeI {
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
 
         flower0ID = R.drawable.flower0;
+        flower00ID = R.drawable.flower00;
         flower0 = AppCompatDrawableManager.get().getDrawable(this, flower0ID);
+        flower00 = AppCompatDrawableManager.get().getDrawable(this,flower00ID);
 
         beeX = bee.getTranslationX();
         beeY = bee.getTranslationY();
 
         isGameOver = false;
         //SharedPreferences to save Level
-        sp = getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
+        sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
         et = sp.edit();
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Level3Page.this, LevelPage.class);
+                Intent i = new Intent(Level6Page.this,LevelPage.class);
                 startActivity(i);
             }
         });
@@ -150,7 +154,7 @@ public class Level3Page extends Level1Page implements ShowCodeI {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Level3Page.this, SettingsPage.class);
+                Intent i = new Intent(Level6Page.this, SettingsPage.class);
                 startActivity(i);
             }
         });
@@ -158,15 +162,15 @@ public class Level3Page extends Level1Page implements ShowCodeI {
         volume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isVolumeOn) {
+                if(isVolumeOn){
                     volume.setBackground(volumeoff);
                     isVolumeOn = false;
                     mediaPlayer.pause();
-                } else {
+                }
+                else {
                     volume.setBackground(volumeon);
                     isVolumeOn = true;
-                    mediaPlayer.start();
-                    ;
+                    mediaPlayer.start();;
                 }
             }
         });
@@ -177,7 +181,7 @@ public class Level3Page extends Level1Page implements ShowCodeI {
                 Toast toast = Toast.makeText(getApplicationContext(), "Bee needs to reach to nectar. Help it with your algorithm!", Toast.LENGTH_LONG);
                 View view = toast.getView();
                 view.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN);
-                toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
             }
         });
@@ -251,7 +255,7 @@ public class Level3Page extends Level1Page implements ShowCodeI {
                         }
                     }
 
-                    if (list.get(i).equals("nectar1")) {
+                    if (list.get(i).equals("nectar1")){
                         GetNectar();
                     }
                     if (list.get(i).equals("nectar2")) {
@@ -266,22 +270,23 @@ public class Level3Page extends Level1Page implements ShowCodeI {
                     }
                 }
                 apply.setEnabled(false);
-                if (flower.getBackground() == flower0) {
+                if (flower2.getBackground() == flower0 && flower3.getBackground() == flower00 && bee.getX() == 632 && bee.getY() == 438){
                     System.out.println("true");
                     isGameOver = true;
 
                 }
-
-                if (((bee.getX() == 0) && (bee.getY() == 371)) || ((bee.getX() == 200) && (bee.getY() == 371)) || ((bee.getX() == 400) && (bee.getY() == 371)) || ((bee.getX() == 600) && (bee.getY() == 371))) {
-                } else {
+                if (((bee.getX() == 472) && (bee.getY() == 146)) || ((bee.getX() == 312) && (bee.getY() == 146)) || ((bee.getX() == 152) && (bee.getY() == 146))) {
+                } else if (((bee.getX() == 152) && (bee.getY() == 292)) || ((bee.getX() == 152) && (bee.getY() == 438)) || ((bee.getX() == 312) && (bee.getY() == 438))) {
+                } else if (((bee.getX() == 472) && (bee.getY() == 438)) || ((bee.getX() == 632) && (bee.getY() == 438))) {
+                } else{
                     TryAgain();
                 }
 
 
-                if (isGameOver == true) {
-                    et.putBoolean("finished3", isGameOver);
+                if (isGameOver == true){
+                    et.putBoolean("finished6", isGameOver);
                     et.apply();
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Level3Page.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Level6Page.this);
                     View myView = getLayoutInflater().inflate(R.layout.finishscreen, null);
                     TextView message = myView.findViewById(R.id.message);
                     ImageView star1 = myView.findViewById(R.id.star1);
@@ -310,7 +315,7 @@ public class Level3Page extends Level1Page implements ShowCodeI {
                     menu.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent i = new Intent(Level3Page.this, HomePage.class);
+                            Intent i = new Intent(Level6Page.this, HomePage.class);
                             startActivity(i);
                         }
                     });
@@ -318,7 +323,7 @@ public class Level3Page extends Level1Page implements ShowCodeI {
                     continuebtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent i = new Intent(Level3Page.this, LevelPage.class);
+                            Intent i = new Intent(Level6Page.this, LevelPage.class);
                             startActivity(i);
                         }
                     });
@@ -339,9 +344,9 @@ public class Level3Page extends Level1Page implements ShowCodeI {
                 }
                 SaveData(codeMessage);
                 setCodeMessage();
-                if (count >= 9) {
+                if (count >= 9){
                     list.add("forward" + timesForward);
-                    Button forward = new Button(Level3Page.this);
+                    Button forward = new Button(Level6Page.this);
                     forward.setTextSize(10);
                     forward.setText(timesForward + " " + "GO FORWARD");
                     forward.setBackgroundColor(Color.CYAN);
@@ -353,7 +358,7 @@ public class Level3Page extends Level1Page implements ShowCodeI {
 
                 if (count < 9) {
                     list.add("forward" + timesForward);
-                    Button forward = new Button(Level3Page.this);
+                    Button forward = new Button(Level6Page.this);
                     forward.setTextSize(10);
                     forward.setText(timesForward + " " + "GO FORWARD");
                     forward.setBackgroundColor(Color.CYAN);
@@ -378,9 +383,9 @@ public class Level3Page extends Level1Page implements ShowCodeI {
                 }
                 SaveData(codeMessage);
                 setCodeMessage();
-                if (count >= 9) {
+                if (count >= 9){
                     list.add("left" + timesLeft);
-                    Button left = new Button(Level3Page.this);
+                    Button left = new Button(Level6Page.this);
                     left.setTextSize(10);
                     left.setText(timesLeft + " " + "TURN LEFT");
                     left.setBackgroundColor(Color.CYAN);
@@ -391,7 +396,7 @@ public class Level3Page extends Level1Page implements ShowCodeI {
                 }
                 if (count < 9) {
                     list.add("left" + timesLeft);
-                    Button left = new Button(Level3Page.this);
+                    Button left = new Button(Level6Page.this);
                     left.setTextSize(10);
                     left.setText(timesLeft + " " + "TURN LEFT");
                     left.setBackgroundColor(Color.CYAN);
@@ -416,9 +421,9 @@ public class Level3Page extends Level1Page implements ShowCodeI {
                 }
                 SaveData(codeMessage);
                 setCodeMessage();
-                if (count >= 9) {
+                if (count >= 9){
                     list.add("right" + timesRight);
-                    Button right = new Button(Level3Page.this);
+                    Button right = new Button(Level6Page.this);
                     right.setTextSize(10);
                     right.setText(timesRight + " " + "TURN RIGHT");
                     right.setBackgroundColor(Color.CYAN);
@@ -429,7 +434,7 @@ public class Level3Page extends Level1Page implements ShowCodeI {
                 }
                 if (count < 9) {
                     list.add("right" + timesRight);
-                    Button right = new Button(Level3Page.this);
+                    Button right = new Button(Level6Page.this);
                     right.setTextSize(10);
                     right.setText(timesRight + " " + "TURN RIGHT");
                     right.setBackgroundColor(Color.CYAN);
@@ -454,9 +459,9 @@ public class Level3Page extends Level1Page implements ShowCodeI {
                 }
                 SaveData(codeMessage);
                 setCodeMessage();
-                if (count >= 9) {
+                if (count >= 9){
                     list.add("nectar" + timesNectar);
-                    Button nectar = new Button(Level3Page.this);
+                    Button nectar = new Button(Level6Page.this);
                     nectar.setTextSize(10);
                     nectar.setText(timesNectar + " " + "GET NECTAR");
                     nectar.setBackgroundColor(Color.CYAN);
@@ -465,9 +470,9 @@ public class Level3Page extends Level1Page implements ShowCodeI {
                     movementsCount++;
                     movements.setText("Movements : " + movementsCount);
                 }
-                if (count < 9) {
+                if (count < 9){
                     list.add("nectar" + timesNectar);
-                    Button nectar = new Button(Level3Page.this);
+                    Button nectar = new Button(Level6Page.this);
                     nectar.setTextSize(10);
                     nectar.setText(timesNectar + " " + "GET NECTAR");
                     nectar.setBackgroundColor(Color.CYAN);
@@ -481,14 +486,14 @@ public class Level3Page extends Level1Page implements ShowCodeI {
 
     }
 
-    public void reset() {
+    public void reset(){
         count = 0;
         layout1.removeAllViewsInLayout();
         int size = list.size();
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++){
             list.remove(0);
         }
-        if (!list.isEmpty()) {
+        if (!list.isEmpty()){
             System.out.println(list.get(0));
         }
         x = 0;
@@ -501,63 +506,72 @@ public class Level3Page extends Level1Page implements ShowCodeI {
         bee.setRotation(90);
         apply.setEnabled(true);
     }
-
-    public void GoForward() {
-        if (bee.getRotation() == 0) {
-            y -= (180);
+    public void GoForward(){
+        if (bee.getRotation() == 0){
+            y -= (146);
             bee.setTranslationY(y);
 
             //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
 
         }
 
-        if (bee.getRotation() == 90) {
-            x += (200);
+        if (bee.getRotation() == 90){
+            x += (160);
             bee.setTranslationX(x);
             //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
 
         }
+        if (bee.getRotation() == 360){
+            y -= (146);
+            bee.setTranslationY(y);
+            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
 
-        if (bee.getRotation() == 270) {
-            x -= (200);
+        }
+
+        if (bee.getRotation() == 270){
+            x -= (160);
             bee.setTranslationX(x);
         }
 
-        if (bee.getRotation() == 180) {
-            y += (180);
+        if (bee.getRotation() == 180){
+            y += (146);
             bee.setTranslationY(y);
             //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
 
         }
 
-        if (bee.getRotation() == -90) {
-            x -= (200);
+        if (bee.getRotation() == -90){
+            x -= (160);
             bee.setTranslationX(x);
             //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
 
         }
-
+        System.out.println(bee.getX());
+        System.out.println(bee.getY());
     }
 
-    public void TurnRight() {
+    public void TurnRight(){
 
         bee.setRotation(bee.getRotation() + (90));
     }
-
-    public void TurnLeft() {
+    public void TurnLeft(){
 
         bee.setRotation(bee.getRotation() - (90));
     }
 
-    public void GetNectar() {
-        if (bee.getX() == 600 && bee.getY() == 371) {
-            flower.setBackground(flower0);
-            System.out.println("çalıştı");
+    public void GetNectar(){
+        if (bee.getX() == 312 && bee.getY() == 146) {
+            //flower2.setBackground(flower0);
+            flower2.setBackgroundResource(flower0ID);
+
+        }
+        if (bee.getX() == 152 && bee.getY() == 292){
+            flower3.setBackground(flower00);
+
         }
     }
-
     public void TryAgain() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Level3Page.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(Level6Page.this);
         View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
         Button menu = (Button) myView.findViewById(R.id.menubtn);
         Button retry = (Button) myView.findViewById(R.id.retrybtn);
@@ -572,15 +586,17 @@ public class Level3Page extends Level1Page implements ShowCodeI {
         dialog.show();
     }
 
+    @Override
     public void SaveData(String codeMessage) {
-        SharedPreferences sharedPref = Level3Page.this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = Level6Page.this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("CODEMESSAGE", codeMessage);
         editor.commit();
     }
 
+    @Override
     public void setCodeMessage() {
-        SharedPreferences sharedPref = Level3Page.this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = Level6Page.this.getPreferences(Context.MODE_PRIVATE);
         code += sharedPref.getString("CODEMESSAGE", "") + "\n";
     }
 }

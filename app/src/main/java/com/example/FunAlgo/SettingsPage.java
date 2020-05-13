@@ -1,4 +1,4 @@
-package com.example.firstpage;
+package com.example.FunAlgo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.firstpage.ThemePage;
+import com.example.FunAlgo.ThemePage;
 
 public class SettingsPage extends ThemePage implements View.OnClickListener{
     Button returnButton;

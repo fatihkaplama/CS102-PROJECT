@@ -1,4 +1,4 @@
-package com.example.firstpage;
+package com.example.FunAlgo;
 
 import org.junit.Test;
 

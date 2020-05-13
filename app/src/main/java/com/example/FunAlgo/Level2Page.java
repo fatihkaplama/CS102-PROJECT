@@ -1,4 +1,4 @@
-package com.example.firstpage;
+package com.example.FunAlgo;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +26,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-public class Level2Page extends Level1Page implements ShowCodeI {
+public class Level2Page extends Level1Page  {
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;

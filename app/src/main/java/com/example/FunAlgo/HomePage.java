@@ -1,4 +1,4 @@
-package com.example.firstpage;
+package com.example.FunAlgo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class HomePage extends MainActivity {
+public class HomePage extends FirstPage {
 
     String userName;
     Drawable avatar;
@@ -60,7 +60,7 @@ public class HomePage extends MainActivity {
         b.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(HomePage.this,MainActivity.class);
+                Intent i = new Intent(HomePage.this,FirstPage.class);
                 startActivity(i);
             }
         });

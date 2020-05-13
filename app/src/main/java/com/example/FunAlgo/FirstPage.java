@@ -1,4 +1,4 @@
-package com.example.firstpage;
+package com.example.FunAlgo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class FirstPage extends AppCompatActivity {
     boolean isAvatarSelected;
     boolean isVolumeOn;
     ImageView user;
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_first_page);
         nickname = findViewById(R.id.nickname);
         mainPageLayout = findViewById(R.id.main_layout);
         final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.daybreaker);
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.batman;
-                avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
+                avatar = AppCompatDrawableManager.get().getDrawable(FirstPage.this, avatarID);
                 user.setBackground(avatar);
                 isAvatarSelected = true;
             }
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.captainamerica;
-                avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
+                avatar = AppCompatDrawableManager.get().getDrawable(FirstPage.this, avatarID);
                 user.setBackground(avatar);
                 isAvatarSelected = true;
             }
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.joker;
-                avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
+                avatar = AppCompatDrawableManager.get().getDrawable(FirstPage.this, avatarID);
                 user.setBackground(avatar);
                 isAvatarSelected = true;
             }
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.herofemale;
-                avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
+                avatar = AppCompatDrawableManager.get().getDrawable(FirstPage.this, avatarID);
                 user.setBackground(avatar);
                 isAvatarSelected = true;
             }
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.ironman;
-                avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
+                avatar = AppCompatDrawableManager.get().getDrawable(FirstPage.this, avatarID);
                 user.setBackground(avatar);
                 isAvatarSelected = true;
             }
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.heromale;
-                avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
+                avatar = AppCompatDrawableManager.get().getDrawable(FirstPage.this, avatarID);
                 user.setBackground(avatar);
                 isAvatarSelected = true;
             }
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.thor;
-                avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
+                avatar = AppCompatDrawableManager.get().getDrawable(FirstPage.this, avatarID);
                 user.setBackground(avatar);
                 isAvatarSelected = true;
             }
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.spider;
-                avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
+                avatar = AppCompatDrawableManager.get().getDrawable(FirstPage.this, avatarID);
                 user.setBackground(avatar);
                 isAvatarSelected = true;
             }
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 avatarID = R.drawable.thanos;
-                avatar = AppCompatDrawableManager.get().getDrawable(MainActivity.this, avatarID);
+                avatar = AppCompatDrawableManager.get().getDrawable(FirstPage.this, avatarID);
                 user.setBackground(avatar);
                 isAvatarSelected = true;
             }
@@ -188,11 +188,11 @@ public class MainActivity extends AppCompatActivity {
                     editor.putInt("avatar", avatarID);
                     editor.commit();
                     //apply.setEnabled(false);
-                    Toast.makeText(MainActivity.this, "User was created", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FirstPage.this, "User was created", Toast.LENGTH_SHORT).show();
                     start.setEnabled(true);
                 }
                 else {
-                    Toast.makeText(MainActivity.this, "Please enter your nickname and select an avatar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FirstPage.this, "Please enter your nickname and select an avatar", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, HomePage.class);
+                Intent i = new Intent(FirstPage.this, HomePage.class);
                // i.putExtra("nickname", nickname.getText().toString());
                 //i.putExtra("avatar", avatarID);
                 startActivity(i);
@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SettingsPage.class);
+                Intent intent = new Intent(FirstPage.this, SettingsPage.class);
 //                intent.putExtra("toSettingsPage", "MainActivity");
                 startActivity(intent);
             }

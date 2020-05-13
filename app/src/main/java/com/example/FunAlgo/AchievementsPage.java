@@ -1,4 +1,4 @@
-package com.example.firstpage;
+package com.example.FunAlgo;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;

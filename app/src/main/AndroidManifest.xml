@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.firstpage">
+    package="com.example.FunAlgo">
 
     <application
         android:allowBackup="true"
@@ -24,7 +24,7 @@
         <activity android:name=".ThemePage" />
         <activity android:name=".HomePage" />
         <activity android:name=".AchievementsPage" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".FirstPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
