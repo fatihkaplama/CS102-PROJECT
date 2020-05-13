@@ -239,26 +239,26 @@ public class Level1Page extends DefaultLevelPage {
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = goForwardButton(timesForward, layout1, layout2, list, count, movementsCount, movements);
+                movementsCount = goForwardButton(timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerForward);
             }
         });
 
         turnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = turnLeftButton(timesForward, layout1, layout2, list, count, movementsCount, movements);
+                movementsCount = turnLeftButton(timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerLeft);
             }
         });
 
         turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = turnRightButton(timesForward, layout1, layout2, list, count, movementsCount, movements);
+                movementsCount = turnRightButton(timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerRight);
             }
         });
     }
 
-    public int goForwardButton (int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements){
+    public int goForwardButton (int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerForward){
         String codeMessage;
         timesForward = (Integer) spinnerForward.getSelectedItem();
         if (timesForward == 1) {
@@ -295,7 +295,7 @@ public class Level1Page extends DefaultLevelPage {
         return movementsCount;
     }
 
-    public int turnLeftButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements){
+    public int turnLeftButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerLeft){
         String codeMessage;
         timesLeft = (Integer) spinnerLeft.getSelectedItem();
         if (timesLeft == 1) {
@@ -331,7 +331,7 @@ public class Level1Page extends DefaultLevelPage {
         return movementsCount;
     }
 
-    public int turnRightButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements){
+    public int turnRightButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerRight){
         String codeMessage;
         timesRight = (Integer) spinnerRight.getSelectedItem();
         if (timesRight == 1) {
