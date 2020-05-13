@@ -239,119 +239,133 @@ public class Level1Page extends DefaultLevelPage {
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String codeMessage;
-                timesForward = (Integer) spinnerForward.getSelectedItem();
-                if (timesForward == 1) {
-                    codeMessage = "goForward();";
-                } else {
-                    codeMessage = "for(int i = 0 ; i < " + timesForward + " ; i++){\n" +
-                            "goForward()\n}";
-                }
-                SaveData(codeMessage);
-                setCodeMessage();
-                if (count >= 9) {
-                    list.add("forward" + timesForward);
-                    Button forward = new Button(Level1Page.this);
-                    forward.setTextSize(10);
-                    forward.setText(timesForward + " " + "GO FORWARD");
-                    forward.setBackgroundColor(Color.CYAN);
-                    layout2.addView(forward, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                }
-
-                if (count < 9) {
-                    list.add("forward" + timesForward);
-                    Button forward = new Button(Level1Page.this);
-                    forward.setTextSize(10);
-                    forward.setText(timesForward + " " + "GO FORWARD");
-                    forward.setBackgroundColor(Color.CYAN);
-                    layout1.addView(forward, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                }
+                movementsCount = goForwardButton(timesForward, layout1, layout2, list, count, movementsCount, movements);
             }
         });
 
         turnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String codeMessage;
-                timesLeft = (Integer) spinnerLeft.getSelectedItem();
-                if (timesLeft == 1) {
-                    codeMessage = "turnLeft();";
-                } else {
-                    codeMessage = "for(int i = 0 ; i < " + timesLeft + " ; i++){\n" +
-                            "turnLeft()\n}";
-                }
-                SaveData(codeMessage);
-                setCodeMessage();
-                if (count >= 9) {
-                    list.add("left" + timesLeft);
-                    Button left = new Button(Level1Page.this);
-                    left.setTextSize(10);
-                    left.setText(timesLeft + " " + "TURN LEFT");
-                    left.setBackgroundColor(Color.CYAN);
-                    layout2.addView(left, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                }
-                if (count < 9) {
-                    list.add("left" + timesLeft);
-                    Button left = new Button(Level1Page.this);
-                    left.setTextSize(10);
-                    left.setText(timesLeft + " " + "TURN LEFT");
-                    left.setBackgroundColor(Color.CYAN);
-                    layout1.addView(left, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                }
+                movementsCount = turnLeftButton(timesForward, layout1, layout2, list, count, movementsCount, movements);
             }
         });
 
         turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String codeMessage;
-                timesRight = (Integer) spinnerRight.getSelectedItem();
-                if (timesRight == 1) {
-                    codeMessage = "turnRight();";
-                } else {
-                    codeMessage = "for(int i = 0 ; i < " + timesRight + " ; i++){\n" +
-                            "turnRight()\n}";
-                }
-                SaveData(codeMessage);
-                setCodeMessage();
-                if (count >= 9) {
-                    list.add("right" + timesRight);
-                    Button right = new Button(Level1Page.this);
-                    right.setTextSize(10);
-                    right.setText(timesRight + " " + "TURN RIGHT");
-                    right.setBackgroundColor(Color.CYAN);
-                    layout2.addView(right, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                }
-                if (count < 9) {
-                    list.add("right" + timesRight);
-                    Button right = new Button(Level1Page.this);
-                    right.setTextSize(10);
-                    right.setText(timesRight + " " + "TURN RIGHT");
-                    right.setBackgroundColor(Color.CYAN);
-                    layout1.addView(right, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                }
+                movementsCount = turnRightButton(timesForward, layout1, layout2, list, count, movementsCount, movements);
             }
         });
     }
 
+    public int goForwardButton (int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements){
+        String codeMessage;
+        timesForward = (Integer) spinnerForward.getSelectedItem();
+        if (timesForward == 1) {
+            codeMessage = "goForward();";
+        } else {
+            codeMessage = "for(int i = 0 ; i < " + timesForward + " ; i++){\n" +
+                    "goForward()\n}";
+        }
+        SaveData(codeMessage);
+        setCodeMessage();
+        if (count >= 9) {
+            list.add("forward" + timesForward);
+            Button forward = new Button(Level1Page.this);
+            forward.setTextSize(10);
+            forward.setText(timesForward + " " + "GO FORWARD");
+            forward.setBackgroundColor(Color.CYAN);
+            layout2.addView(forward, params);
+            count++;
+            movementsCount++;
+            movements.setText("Movements : " + movementsCount);
+        }
+
+        if (count < 9) {
+            list.add("forward" + timesForward);
+            Button forward = new Button(Level1Page.this);
+            forward.setTextSize(10);
+            forward.setText(timesForward + " " + "GO FORWARD");
+            forward.setBackgroundColor(Color.CYAN);
+            layout1.addView(forward, params);
+            count++;
+            movementsCount++;
+            movements.setText("Movements : " + movementsCount);
+        }
+        return movementsCount;
+    }
+
+    public int turnLeftButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements){
+        String codeMessage;
+        timesLeft = (Integer) spinnerLeft.getSelectedItem();
+        if (timesLeft == 1) {
+            codeMessage = "turnLeft();";
+        } else {
+            codeMessage = "for(int i = 0 ; i < " + timesLeft + " ; i++){\n" +
+                    "turnLeft()\n}";
+        }
+        SaveData(codeMessage);
+        setCodeMessage();
+        if (count >= 9) {
+            list.add("left" + timesLeft);
+            Button left = new Button(Level1Page.this);
+            left.setTextSize(10);
+            left.setText(timesLeft + " " + "TURN LEFT");
+            left.setBackgroundColor(Color.CYAN);
+            layout2.addView(left, params);
+            count++;
+            movementsCount++;
+            movements.setText("Movements : " + movementsCount);
+        }
+        if (count < 9) {
+            list.add("left" + timesLeft);
+            Button left = new Button(Level1Page.this);
+            left.setTextSize(10);
+            left.setText(timesLeft + " " + "TURN LEFT");
+            left.setBackgroundColor(Color.CYAN);
+            layout1.addView(left, params);
+            count++;
+            movementsCount++;
+            movements.setText("Movements : " + movementsCount);
+        }
+        return movementsCount;
+    }
+
+    public int turnRightButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements){
+        String codeMessage;
+        timesRight = (Integer) spinnerRight.getSelectedItem();
+        if (timesRight == 1) {
+            codeMessage = "turnRight();";
+        } else {
+            codeMessage = "for(int i = 0 ; i < " + timesRight + " ; i++){\n" +
+                    "turnRight()\n}";
+        }
+        SaveData(codeMessage);
+        setCodeMessage();
+        if (count >= 9) {
+            list.add("right" + timesRight);
+            Button right = new Button(Level1Page.this);
+            right.setTextSize(10);
+            right.setText(timesRight + " " + "TURN RIGHT");
+            right.setBackgroundColor(Color.CYAN);
+            layout2.addView(right, params);
+            count++;
+            movementsCount++;
+            movements.setText("Movements : " + movementsCount);
+        }
+        if (count < 9) {
+            list.add("right" + timesRight);
+            Button right = new Button(Level1Page.this);
+            right.setTextSize(10);
+            right.setText(timesRight + " " + "TURN RIGHT");
+            right.setBackgroundColor(Color.CYAN);
+            layout1.addView(right, params);
+            count++;
+            movementsCount++;
+            movements.setText("Movements : " + movementsCount);
+        }
+        return movementsCount;
+    }
     public void reset() {
         count = 0;
         layout1.removeAllViewsInLayout();
