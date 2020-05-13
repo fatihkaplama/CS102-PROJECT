@@ -28,7 +28,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Timer;
 
-public class Level8Page extends AppCompatActivity implements ShowCodeI {
+public class Level8Page extends Level1Page implements ShowCodeI {
     //variables
     private TextView movements;
     private Spinner spinnerForward;

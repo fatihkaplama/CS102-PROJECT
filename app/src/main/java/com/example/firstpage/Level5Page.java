@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Level5Page extends AppCompatActivity implements  ShowCodeI {
+public class Level5Page extends Level1Page implements  ShowCodeI {
 
 
     private TextView movements;

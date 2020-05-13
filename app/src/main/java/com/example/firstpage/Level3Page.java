@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Level3Page extends AppCompatActivity implements ShowCodeI {
+public class Level3Page extends Level1Page implements ShowCodeI {
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
