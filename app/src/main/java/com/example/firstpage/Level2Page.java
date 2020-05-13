@@ -121,18 +121,6 @@ public class Level2Page extends Level1Page {
 
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
-        /*up = new Button(this);
-        left = new Button(this);
-        right = new Button(this);
-
-        up.setText("GO FORWARD");
-        up.setBackgroundColor(Color.CYAN);
-        left.setText("TURN LEFT");
-        left.setBackgroundColor(Color.CYAN);
-        right.setText("TURN RIGHT");
-        right.setBackgroundColor(Color.CYAN);*/
-
-
 
         beeX = bee.getTranslationX();
         beeY = bee.getTranslationY();
@@ -147,33 +135,33 @@ public class Level2Page extends Level1Page {
         back.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-        Intent i = new Intent(Level2Page.this,LevelPage.class);
-        startActivity(i);
-        }
+            Intent i = new Intent(Level2Page.this,LevelPage.class);
+            startActivity(i);
+            }
         });
 
          settings.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-        Intent i = new Intent(Level2Page.this, SettingsPage.class);
-        startActivity(i);
-        }
+            Intent i = new Intent(Level2Page.this, SettingsPage.class);
+            startActivity(i);
+            }
         });
 
          volume.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-        if(isVolumeOn){
-        volume.setBackground(volumeoff);
-        isVolumeOn = false;
-        mediaPlayer.pause();
-        }
-        else {
-        volume.setBackground(volumeon);
-        isVolumeOn = true;
-        mediaPlayer.start();;
-        }
-        }
+            if(isVolumeOn){
+                volume.setBackground(volumeoff);
+                isVolumeOn = false;
+                mediaPlayer.pause();
+            }
+            else {
+                volume.setBackground(volumeon);
+                isVolumeOn = true;
+                mediaPlayer.start();;
+                }
+            }
         });
 
         info.setOnClickListener(new View.OnClickListener() {
