@@ -23,6 +23,7 @@
         <activity android:name=".SettingsPage" />
         <activity android:name=".ThemePage" />
         <activity android:name=".HomePage" />
+        <activity android:name=".AchievementsPage" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

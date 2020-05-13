@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -14,7 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class HomePage extends AppCompatActivity {
+public class HomePage extends MainActivity {
 
     String userName;
     Drawable avatar;
@@ -24,10 +25,12 @@ public class HomePage extends AppCompatActivity {
     Button b;
     Button play;
     Button settingsButton;
+    Button achievements;
     int background;
     int avatarID;
 
     ConstraintLayout homePageLayout;
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,7 @@ public class HomePage extends AppCompatActivity {
         b = findViewById(R.id.return_button_homePage);
         play = findViewById(R.id.play2);
         settingsButton = findViewById(R.id.settings_button_homePage);
+        achievements = findViewById(R.id.achievements);
 
         //get avatar from sharedPref
         avatarID = sharedPreferences.getInt("avatar", 0);
@@ -72,6 +76,13 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(HomePage.this, SettingsPage.class);
+                startActivity(i);
+            }
+        });
+        achievements.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomePage.this, AchievementsPage.class);
                 startActivity(i);
             }
         });
