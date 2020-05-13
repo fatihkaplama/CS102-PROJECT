@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Level1Page extends DefaultLevelPage {
+public class Level1Page extends DefaultLevelPage implements ShowCodeI {
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;

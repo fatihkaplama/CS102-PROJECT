@@ -25,7 +25,7 @@ import androidx.appcompat.widget.AppCompatDrawableManager;
 
 import java.util.ArrayList;
 
-public class Level4Page extends AppCompatActivity {
+public class Level4Page extends AppCompatActivity implements ShowCodeI {
     TextView movements;
     Spinner spinnerForward;
     Spinner spinnerLeft;

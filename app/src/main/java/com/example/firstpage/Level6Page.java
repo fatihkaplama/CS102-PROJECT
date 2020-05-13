@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -24,7 +25,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Level6Page extends AppCompatActivity {
+public class Level6Page extends AppCompatActivity implements ShowCodeI {
 
     TextView movements;
     Spinner spinnerForward;
@@ -70,6 +71,8 @@ public class Level6Page extends AppCompatActivity {
     float beeY;
     boolean isVolumeOn;
     int movementsCount;
+    private Button show;
+    private String code;
     //sharedPreferences to update and save levels
     SharedPreferences sp;
     SharedPreferences.Editor et;
@@ -102,7 +105,8 @@ public class Level6Page extends AppCompatActivity {
         spinnerNectar = findViewById(R.id.spinnerNectar);
         movements = findViewById(R.id.movements);
         getNectar = findViewById(R.id.getNectar);
-
+        show = findViewById(R.id.showCode_button);
+        code = "";
         //volume
         isVolumeOn = true;
         volumeonID = R.drawable.volumeon;
@@ -182,11 +186,28 @@ public class Level6Page extends AppCompatActivity {
             }
         });
 
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast;
+                if (code == "") {
+                    toast = Toast.makeText(getApplicationContext(), "No code here yet.", Toast.LENGTH_LONG);
+                } else {
+                    toast = Toast.makeText(getApplicationContext(), code, Toast.LENGTH_LONG);
+                }
+                View view = toast.getView();
+                view.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+            }
+        });
+
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //reset();
                 recreate();
+                code = "";
             }
         });
 
@@ -313,7 +334,16 @@ public class Level6Page extends AppCompatActivity {
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timesForward = (Integer)spinnerForward.getSelectedItem();
+                String codeMessage;
+                timesForward = (Integer) spinnerForward.getSelectedItem();
+                if (timesForward == 1) {
+                    codeMessage = "goForward();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesForward + " ; i++){\n" +
+                            "goForward()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
                 if (count >= 9){
                     list.add("forward" + timesForward);
                     Button forward = new Button(Level6Page.this);
@@ -343,7 +373,16 @@ public class Level6Page extends AppCompatActivity {
         turnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timesLeft = (Integer)spinnerLeft.getSelectedItem();
+                String codeMessage;
+                timesLeft = (Integer) spinnerLeft.getSelectedItem();
+                if (timesLeft == 1) {
+                    codeMessage = "turnLeft();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesLeft + " ; i++){\n" +
+                            "turnLeft()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
                 if (count >= 9){
                     list.add("left" + timesLeft);
                     Button left = new Button(Level6Page.this);
@@ -372,7 +411,16 @@ public class Level6Page extends AppCompatActivity {
         turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String codeMessage;
                 timesRight = (Integer) spinnerRight.getSelectedItem();
+                if (timesRight == 1) {
+                    codeMessage = "turnRight();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesRight + " ; i++){\n" +
+                            "turnRight()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
                 if (count >= 9){
                     list.add("right" + timesRight);
                     Button right = new Button(Level6Page.this);
@@ -401,7 +449,16 @@ public class Level6Page extends AppCompatActivity {
         getNectar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String codeMessage;
                 timesNectar = (Integer) spinnerNectar.getSelectedItem();
+                if (timesNectar == 1) {
+                    codeMessage = "getNectar();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesNectar + " ; i++){\n" +
+                            "getNectar()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
                 if (count >= 9){
                     list.add("nectar" + timesNectar);
                     Button nectar = new Button(Level6Page.this);
@@ -527,5 +584,19 @@ public class Level6Page extends AppCompatActivity {
         builder.setView(myView);
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public void SaveData(String codeMessage) {
+        SharedPreferences sharedPref = Level6Page.this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("CODEMESSAGE", codeMessage);
+        editor.commit();
+    }
+
+    @Override
+    public void setCodeMessage() {
+        SharedPreferences sharedPref = Level6Page.this.getPreferences(Context.MODE_PRIVATE);
+        code += sharedPref.getString("CODEMESSAGE", "") + "\n";
     }
 }
