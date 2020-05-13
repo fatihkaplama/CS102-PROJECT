@@ -34,7 +34,7 @@ public class Level1Page extends AppCompatActivity {
     private ArrayAdapter<Integer> timesAdapter;
     private ArrayList<String> list;
     private ImageView bee;
-    private  ImageView honey;
+    private ImageView honey;
     private Button goForward;
     private Button turnRight;
     private Button turnLeft;

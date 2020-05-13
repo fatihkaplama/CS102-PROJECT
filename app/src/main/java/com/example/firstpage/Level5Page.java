@@ -104,7 +104,7 @@ public class Level5Page extends AppCompatActivity {
         spinnerForward = findViewById(R.id.spinnerForward);
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
-        spinnerNectar = findViewById(R.id.spinnerKey);
+        spinnerNectar = findViewById(R.id.spinnerNectar);
         movements = findViewById(R.id.movements);
         getNectar = findViewById(R.id.getNectar);
         show = findViewById(R.id.showCode_button);
