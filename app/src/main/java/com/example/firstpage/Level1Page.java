@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Level1Page extends AppCompatActivity {
+public class Level1Page extends DefaultLevelPage {
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
@@ -66,6 +66,8 @@ public class Level1Page extends AppCompatActivity {
     private int movementsCount;
     private Button show;
     private String code;
+    final static private int changeX = 200;
+    final static private int changeY = 180;
     //sharedPreferences to update and save levels
     SharedPreferences sp;
     SharedPreferences.Editor et;
@@ -214,101 +216,22 @@ public class Level1Page extends AppCompatActivity {
             public void onClick(View v) {
                 System.out.println(bee.getX());
                 System.out.println(bee.getY());
+                MoveLoop();
 
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).equals("forward1")) {
-                        GoForward(bee);
-                    } else if (list.get(i).equals("forward2")) {
-                        for (int k = 0; k < 2; k++) {
-                            GoForward(bee);
-                        }
-                    } else if (list.get(i).equals("forward3")) {
-                        for (int k = 0; k < 3; k++) {
-                            GoForward(bee);
 
-                        }
-                    }
-                    if (list.get(i).equals("left1")) {
-                        TurnLeft(bee);
-                    }
-                    if (list.get(i).equals("left2")) {
-                        for (int k = 0; k < 2; k++) {
-                            TurnLeft(bee);
-                        }
-                    }
-                    if (list.get(i).equals("left3")) {
-                        for (int k = 0; k < 3; k++) {
-                            TurnLeft(bee);
-                        }
-                    }
-                    if (list.get(i).equals("right1")) {
-                        TurnRight(bee);
-                    }
-                    if (list.get(i).equals("right2")) {
-                        for (int k = 0; k < 2; k++) {
-                            TurnRight(bee);
-                        }
-                    }
-                    if (list.get(i).equals("right3")) {
-                        for (int k = 0; k < 3; k++) {
-                            TurnRight(bee);
-                        }
-                    }
-                }
                 apply.setEnabled(false);
                 if ((bee.getX() == 600) && (bee.getY() == 184)) {
                     System.out.println("true");
                     isGameOver = true;
                 }
                 if(!((bee.getY() == 184)&&((bee.getX() == 0)||(bee.getX() == 200)||(bee.getX() == 400)||(bee.getX() == 600))))  {
-                    TryAgain();
+                    TryAgain(Level1Page.this);
                 }
 
                 if (isGameOver == true) {
-                    et.putBoolean("finished1",true);
+                    et.putBoolean("finished1", true);
                     et.apply();
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Level1Page.this);
-                    View myView = getLayoutInflater().inflate(R.layout.finishscreen, null);
-                    TextView message = myView.findViewById(R.id.message);
-                    ImageView star1 = myView.findViewById(R.id.star1);
-                    ImageView star2 = myView.findViewById(R.id.star2);
-                    ImageView star3 = myView.findViewById(R.id.star3);
-                    if (movementsCount > 12){
-                        star2.setVisibility(View.INVISIBLE);
-                    }
-                    if (movementsCount > 15){
-                        star1.setVisibility(View.INVISIBLE);
-                        star2.setVisibility(View.VISIBLE);
-                        star3.setVisibility(View.INVISIBLE);
-                    }
-                    Button menu = (Button) myView.findViewById(R.id.menubtn);
-                    Button retry = (Button) myView.findViewById(R.id.retrybtn);
-                    Button continuebtn = (Button) myView.findViewById(R.id.continuebtn);
-                    retry.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            recreate();
-                        }
-                    });
-                    builder.setView(myView);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                    menu.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent i = new Intent(Level1Page.this, HomePage.class);
-                            startActivity(i);
-                        }
-                    });
-
-
-                    continuebtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent i = new Intent(Level1Page.this, LevelPage.class);
-                            startActivity(i);
-                        }
-                    });
+                    finishedScreen(Level1Page.this,movementsCount);
                 }
             }
         });
@@ -450,42 +373,43 @@ public class Level1Page extends AppCompatActivity {
         apply.setEnabled(true);
     }
 
-    public void GoForward(ImageView bee) {
-        if (bee.getRotation() == 0) {
-            y -= (180);
-            bee.setTranslationY(y);
 
+    public void GoForward(ImageView bee, int changeX, int changeY) {
+
+        if (bee.getRotation() == 0) {
+            y -= (changeY);
+            bee.setTranslationY(y);
             //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
 
         }
 
         if (bee.getRotation() == 90) {
-            x += (200);
+            x += (changeX);
             bee.setTranslationX(x);
             //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
 
         }
 
         if (bee.getRotation() == 180) {
-            y += (180);
+            y += (changeY);
             bee.setTranslationY(y);
             //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
 
         }
 
-        if (bee.getRotation() == 270){
-            x -= (200);
+        if (bee.getRotation() == 270) {
+            x -= (changeX);
             bee.setTranslationX(x);
         }
 
         if (bee.getRotation() == -90) {
-            x -= (200);
+            x -= (changeX);
             bee.setTranslationX(x);
             //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
 
         }
-        System.out.println(bee.getX());
-        System.out.println(bee.getY());
+        System.out.println( bee.getX());
+        System.out.println( bee.getY());
     }
 
     public void TurnRight(ImageView bee) {
@@ -497,8 +421,10 @@ public class Level1Page extends AppCompatActivity {
 
         bee.setRotation(bee.getRotation() - (90));
     }
-    public void TryAgain() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Level1Page.this);
+
+
+    public void TryAgain(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
         Button menu = (Button) myView.findViewById(R.id.menubtn);
         Button retry = (Button) myView.findViewById(R.id.retrybtn);
@@ -512,7 +438,6 @@ public class Level1Page extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
     public void SaveData(String codeMessage) {
         SharedPreferences sharedPref = Level1Page.this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -523,5 +448,46 @@ public class Level1Page extends AppCompatActivity {
     public void setCodeMessage() {
         SharedPreferences sharedPref = Level1Page.this.getPreferences(Context.MODE_PRIVATE);
         code += sharedPref.getString("CODEMESSAGE", "") + "\n";
+    }
+    public void MoveLoop(){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals("forward1")) {
+                GoForward(bee,changeX,changeY);
+            } else if (list.get(i).equals("forward2")) {
+                for (int k = 0; k < 2; k++) {
+                    GoForward(bee,changeX,changeY);
+                }
+            } else if (list.get(i).equals("forward3")) {
+                for (int k = 0; k < 3; k++) {
+                    GoForward(bee,changeX,changeY);
+                }
+            }
+            if (list.get(i).equals("left1")) {
+                TurnLeft(bee);
+            }
+            if (list.get(i).equals("left2")) {
+                for (int k = 0; k < 2; k++) {
+                    TurnLeft(bee);
+                }
+            }
+            if (list.get(i).equals("left3")) {
+                for (int k = 0; k < 3; k++) {
+                    TurnLeft(bee);
+                }
+            }
+            if (list.get(i).equals("right1")) {
+                TurnRight(bee);
+            }
+            if (list.get(i).equals("right2")) {
+                for (int k = 0; k < 2; k++) {
+                    TurnRight(bee);
+                }
+            }
+            if (list.get(i).equals("right3")) {
+                for (int k = 0; k < 3; k++) {
+                    TurnRight(bee);
+                }
+            }
+        }
     }
 }

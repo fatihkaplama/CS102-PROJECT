@@ -67,6 +67,8 @@ public class Level2Page extends Level1Page {
     private int movementsCount;
     private Button show;
     private String code;
+    final static private int changeX = 180;
+    final static private int changeY = 200;
     //sharedPreferences to update and save levels
     SharedPreferences sp;
     SharedPreferences.Editor et;
@@ -213,103 +215,22 @@ public class Level2Page extends Level1Page {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).equals("forward1")) {
-                        GoForward(bee);
-                    } else if (list.get(i).equals("forward2")) {
-                        for (int k = 0; k < 2; k++) {
-                            GoForward(bee);
-                        }
-                    } else if (list.get(i).equals("forward3")) {
-                        for (int k = 0; k < 3; k++) {
-                            GoForward(bee);
-
-                        }
-                    }
-                    if (list.get(i).equals("left1")) {
-                        TurnLeft(bee);
-                    }
-                    if (list.get(i).equals("left2")) {
-                        for (int k = 0; k < 2; k++) {
-                            TurnLeft(bee);
-                        }
-                    }
-                    if (list.get(i).equals("left3")) {
-                        for (int k = 0; k < 3; k++) {
-                            TurnLeft(bee);
-                        }
-                    }
-                    if (list.get(i).equals("right1")) {
-                        TurnRight(bee);
-                    }
-                    if (list.get(i).equals("right2")) {
-                        for (int k = 0; k < 2; k++) {
-                            TurnRight(bee);
-                        }
-                    }
-                    if (list.get(i).equals("right3")) {
-                        for (int k = 0; k < 3; k++) {
-                            TurnRight(bee);
-                        }
-                    }
-                }
+                MoveLoop();
                 apply.setEnabled(false);
                 if ((bee.getX() == 400) && (bee.getY() == 8)){
                     System.out.println("true");
                     isGameOver = true;
                 }
-                if (((bee.getX() == 200) && (bee.getY() == 368)) || ((bee.getX() == 400) && (bee.getY() == 368)) || ((bee.getX() == 400) && (bee.getY() == 188)) || ((bee.getX() == 400) && (bee.getY() == 8))) {
+                if (((bee.getX() == 180) && (bee.getY() == 368)) || ((bee.getX() == 360) && (bee.getY() == 368)) || ((bee.getX() == 360) && (bee.getY() == 188)) || ((bee.getX() == 360) && (bee.getY() == 8))) {
                 } else {
-                    TryAgain();
+                    TryAgain(Level2Page.this);
                 }
-
 
 
                 if (isGameOver == true){
                     et.putBoolean("finished2", isGameOver);
                     et.apply();
-                     AlertDialog.Builder builder = new AlertDialog.Builder(Level2Page.this);
-                     View myView = getLayoutInflater().inflate(R.layout.finishscreen, null);
-                     TextView message = myView.findViewById(R.id.message);
-                     ImageView star1 = myView.findViewById(R.id.star1);
-                     ImageView star2 = myView.findViewById(R.id.star2);
-                     ImageView star3 = myView.findViewById(R.id.star3);
-                    if (movementsCount > 12){
-                        star2.setVisibility(View.INVISIBLE);
-                    }
-                    if (movementsCount > 15){
-                        star1.setVisibility(View.INVISIBLE);
-                        star2.setVisibility(View.VISIBLE);
-                        star3.setVisibility(View.INVISIBLE);
-                    }
-                     Button menu = (Button) myView.findViewById(R.id.menubtn);
-                     Button retry = (Button) myView.findViewById(R.id.retrybtn);
-                     Button continuebtn = (Button) myView.findViewById(R.id.continuebtn);
-                     retry.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                    recreate();
-                    }
-                    });
-                     builder.setView(myView);
-                     AlertDialog dialog = builder.create();
-                     dialog.show();
-                     menu.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(Level2Page.this, HomePage.class);
-                        startActivity(i);
-                    }
-                    });
-
-                    continuebtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent i = new Intent(Level2Page.this, LevelPage.class);
-                            startActivity(i);
-                        }
-                    });
-
+                    finishedScreen(Level2Page.this,movementsCount);
                 }
             }
         });
@@ -431,22 +352,6 @@ public class Level2Page extends Level1Page {
 
     }
 
-
-    public void TryAgain() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Level2Page.this);
-        View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
-        Button menu = (Button) myView.findViewById(R.id.menubtn);
-        Button retry = (Button) myView.findViewById(R.id.retrybtn);
-        retry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recreate();
-            }
-        });
-        builder.setView(myView);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
 
     public void SaveData(String codeMessage) {
         SharedPreferences sharedPref = Level2Page.this.getPreferences(Context.MODE_PRIVATE);
