@@ -15,7 +15,7 @@ On this page I will keep a weekly record of what I have done for the CS102 group
 + I added the information button to the layouts which simply give brief information about that current level.
 
 ### ~ 11.05.2020 ~
-For achiecements page ı had to create a graph contains the user information. Therefore, i needed a library because android studio doesn't have it in first place. I tried some graphs such as graphview and its various verisons but all of them were problematic or ı couldn't achieve to work them but spent quit a lot of time to theme. Finally graphliv worked and i created the graph and AchievementsPage layout as well.
+For achievements page I had to create a graph contains the user information. Therefore, i needed a library because android studio doesn't have it in first place. I tried some graphs such as graphview and its various verisons but all of them were problematic or I couldn't achieve to work them but spent quit a lot of time to theme. Finally graphlib library worked and i created the graph and AchievementsPage layout as well.
 
 ****
 I have done Music Page, ShowCodeI Page and Achievements Page (Java code with layouts)
