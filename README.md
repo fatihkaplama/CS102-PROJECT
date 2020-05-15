@@ -21,7 +21,7 @@ _Include a concise description of your project here. Be sure to include the prop
 #### Group Members
 - [member1](group/member1_log.md)    _(full name & link to personal log file)_
 - [member2](group/member2_log.md)
-- member3(group/member3_log.md)
+- [member3](group/member3_log.md)
 - member4
 - member5
 
