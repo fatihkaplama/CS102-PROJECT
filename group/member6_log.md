@@ -12,7 +12,7 @@ On this page I will keep a weekly record of what I have done for the CS102 group
 
 ### ~ 04.05.2020 ~
 + This week was very annoying because of GitHub. We have lost so much time because of trying to merge, pull, push and so on. We have tried to  learn the basis of GitHub and finally we have understood by the end of the week.
-+ In this week, me and my friend Remzi have started to do the Creative Mode. Firstly, I had to learn how to do drop and drag, draw a line using canvas, and creating a new button when adding the dragging the button. In this part, the most difficult thing was that creating a line in the view according to user's inputs. Therefore, we had to change our Line View class and we have tried to create bitmap and implementing canvas on it. Fortunately, we have managed to do it successfully.
++ In this week, me and my friend Remzi have started to do the Creative Mode. Firstly, I had to learn how to do drop and drag, draw a line using canvas, and create a new button when adding the dragging the button. In this part, the most difficult thing was that creating a line in the view according to user's inputs. Therefore, we had to change our Line View class and we have tried to create bitmap and implementing canvas on it. Fortunately, we have managed to do it successfully.
 
  ### ~ 11.05.2020 ~
 + In this week, we have tried to add pencil animation which follows to the line. Although I have tried to animation pencil, it cannot follow the line properly. Also, we have tried to add Thread to draw line by line in time, but unfortunately it does not work as well.
