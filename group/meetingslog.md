@@ -54,7 +54,7 @@ At this meeting, everyone shared their task and we made some changes by co-decis
 **ToDo:** Fatih and Alperen will design and code levels in the Educational Mode. Deniz and Remzi will design Creative Mode. Arman and Hüseyin will design and code Achievments Page and Show Codes part.
 
 ****
-### Meeting ~ (05.05.2020, 1 hour)
+### Meeting ~ (05.05.2020, 2 hour)
 ****
 **Present:** Everyone   _**Absent:**_ 
 
