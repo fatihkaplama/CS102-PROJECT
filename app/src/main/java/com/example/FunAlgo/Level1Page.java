@@ -234,7 +234,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                     finishedScreen(Level1Page.this,movementsCount,2,4);
                     SharedPreferences sharedPreferences = getSharedPreferences("starsData",MODE_PRIVATE);
                     starsCount = sharedPreferences.getInt("starsCount",1);
-                    et.putInt("starsCount", starsCount);
+                    et.putInt("starsCountLevel1", starsCount);
                     et.commit();
                 }
             }
@@ -262,6 +262,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     public int goForwardButton (int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerForward){
         String codeMessage;
         timesForward = (Integer) spinnerForward.getSelectedItem();
@@ -335,6 +336,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         return movementsCount;
     }
 
+    @SuppressLint("SetTextI18n")
     public int turnRightButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerRight){
         String codeMessage;
         timesRight = (Integer) spinnerRight.getSelectedItem();
