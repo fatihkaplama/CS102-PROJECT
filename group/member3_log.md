@@ -18,7 +18,7 @@ On this page I will keep a weekly record of what I have done for the CS102 group
 ### ~ 11.05.2020 ~
 + For achievements page I had to create a graph contains the user information. Therefore, i needed a library because android studio doesn't have it in first place. I tried some graphs such as graphview and its various verisons but all of them were problematic or I couldn't achieve to work them but spent quit a lot of time to them. Then I serached for other libraies on SONOTYPE, finally graphlib library has worked.
 + I created the AchievementsPage with the graphlib and code the graph as well as created the layout for it and linked it to other pages.
-
++ Added the data to the graph with shared preferences and also created a button to wipe to datas.
 ### ~ 18.05.2020 ~
 ****
 

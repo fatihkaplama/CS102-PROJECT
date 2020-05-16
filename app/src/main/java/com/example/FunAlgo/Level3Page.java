@@ -233,7 +233,7 @@ public class Level3Page extends Level1Page {
                     et.putBoolean("finished3", isGameOver);
                     finishedScreen(Level3Page.this, movementsCount,5,6);
                     SharedPreferences sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
-                    starsCount = sharedPreferences.getInt("starsCount", 1);
+                    starsCount = sharedPreferences.getInt("starsCountLevel3", 1);
                     et.putInt("starsCount", starsCount);
                     et.commit();
 
