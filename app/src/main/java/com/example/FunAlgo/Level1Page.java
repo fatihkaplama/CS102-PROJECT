@@ -495,8 +495,6 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
     public class ApplyMove implements Runnable {
 
         public void run() {
-            boolean run = true;
-            while (run) {
                 try {
                     for (int i = 0; i < list.size(); i++) {
                         Thread.sleep(1000);
@@ -546,7 +544,6 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                     Intent i = getIntent();
                     finish();
                     startActivity(i);
-                    run = false;
                 }
                 if (!((bee.getY() == 184) && ((bee.getX() == 0) || (bee.getX() == 200) || (bee.getX() == 400) || (bee.getX() == 600)))) {
                     etS.putBoolean("isTry", true);
@@ -554,9 +551,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                     Intent i = getIntent();
                     finish();
                     startActivity(i);
-                    run = false;
                 }
-            }
         }
     }
 
