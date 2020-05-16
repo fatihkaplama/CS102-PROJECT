@@ -456,10 +456,11 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
     }
     public void GetNectar(ImageView bee, ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2){
         if (bee.getX() == valueX1 && bee.getY() == valueY1) {
-            System.out.println("çalıştı2");
+            System.out.println("çalıştı1");
             flower.setBackground(flower0);
         }
         if (bee.getX() == valueX2 && bee.getY() == valueY2){
+            System.out.println("çalıştı2");
             flower2.setBackground(flower00);
         }
 
