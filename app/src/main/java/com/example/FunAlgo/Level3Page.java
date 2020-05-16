@@ -72,8 +72,11 @@ public class Level3Page extends Level1Page {
     private Button show;
     private String code;
     //sharedPreferences to update and save levels
-    SharedPreferences sp;
-    SharedPreferences.Editor et;
+    private SharedPreferences sp;
+    private SharedPreferences.Editor et;
+    // sharedPreferences for transport data to AchievementsPage
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -282,10 +285,11 @@ public class Level3Page extends Level1Page {
                 if (isGameOver == true) {
                     et.putBoolean("finished3", isGameOver);
                     finishedScreen(Level3Page.this, movementsCount,5,6);
-                    SharedPreferences sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
-                    starsCount = sharedPreferences.getInt("starsCountLevel3", 1);
-                    et.putInt("starsCount", starsCount);
-                    et.commit();
+                    sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
+                    editor = sharedPreferences.edit();
+                    starsCount = sharedPreferences.getInt("starsCount", 1);
+                    editor.putInt("starsCountLevel3", starsCount);
+                    editor.commit();
 
                 }
             }
