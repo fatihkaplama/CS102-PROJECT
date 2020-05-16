@@ -289,7 +289,7 @@ public class Level6Page extends Level1Page {
                     finishedScreen(Level6Page.this, movementsCount,12,14);
                     SharedPreferences sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
                     starsCount = sharedPreferences.getInt("starsCount", 1);
-                    et.putInt("starsCount", starsCount);
+                    et.putInt("starsCountLevel6", starsCount);
                     et.commit();
                 }
             }
