@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -24,9 +25,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Level1Page extends DefaultLevelPage implements ShowCodeI {
     private TextView movements;
+    private boolean isTryAgain;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
     private Spinner spinnerRight;
@@ -72,6 +76,10 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
     //sharedPreferences to update and save levels
     SharedPreferences sp;
     SharedPreferences.Editor et;
+    //new sp
+    SharedPreferences sharedP;
+    SharedPreferences.Editor etS;
+
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,16 +141,33 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         right.setBackgroundColor(Color.CYAN);*/
 
 
+
         beeX = bee.getTranslationX();
         beeY = bee.getTranslationY();
         honeyX = honey.getTranslationX();
         honeyY = honey.getTranslationY();
 
         isGameOver = false;
+        isTryAgain = false;
+        // sp of isThisGameOver and Try Again
+        sharedP = getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
+        et = sharedP.edit();
 
         //SharedPreferences to save Level
-        sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
-        et = sp.edit();
+        sharedP = getSharedPreferences("isThis", MODE_PRIVATE);
+        etS = sharedP.edit();
+        isTryAgain = getSharedPreferences("isThis",MODE_PRIVATE).getBoolean("isTry", false);
+        isGameOver = getSharedPreferences("isThis",MODE_PRIVATE).getBoolean("isOver", false);
+        if(isTryAgain){
+            TryAgain(Level1Page.this);
+            etS.putBoolean("isTry",false);
+            etS.commit();
+        }
+        if(isGameOver){
+            finishedScreen(Level1Page.this, movementsCount, 2, 4);
+            etS.putBoolean("isOver",false);
+            etS.commit();
+        }
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,26 +240,21 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(bee.getX());
-                System.out.println(bee.getY());
-                MoveLoop(list, bee, changeX, changeY);
-
-
                 apply.setEnabled(false);
-                if ((bee.getX() == 600) && (bee.getY() == 184)) {
-                    System.out.println("true");
-                    isGameOver = true;
-                }
-                if(!((bee.getY() == 184)&&((bee.getX() == 0)||(bee.getX() == 200)||(bee.getX() == 400)||(bee.getX() == 600))))  {
+                ApplyMove applyMove = new ApplyMove();
+                Thread t1 = new Thread(applyMove);
+                t1.start();
+                System.out.print("alpo");
+
+                if(isTryAgain == true){
                     TryAgain(Level1Page.this);
                 }
-
                 if (isGameOver == true) {
                     et.putBoolean("finished1", true);
-                    finishedScreen(Level1Page.this,movementsCount,2,4);
-                    SharedPreferences sharedPreferences = getSharedPreferences("starsData",MODE_PRIVATE);
-                    starsCount = sharedPreferences.getInt("starsCount",1);
-                    et.putInt("starsCountLevel1", starsCount);
+                    finishedScreen(Level1Page.this, movementsCount, 2, 4);
+                    SharedPreferences sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
+                    starsCount = sharedPreferences.getInt("starsCount", 1);
+                    et.putInt("starsCount", starsCount);
                     et.commit();
                 }
             }
@@ -262,8 +282,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         });
     }
 
-    @SuppressLint("SetTextI18n")
-    public int goForwardButton (int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerForward){
+    public int goForwardButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerForward) {
         String codeMessage;
         timesForward = (Integer) spinnerForward.getSelectedItem();
         if (timesForward == 1) {
@@ -300,7 +319,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         return movementsCount;
     }
 
-    public int turnLeftButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerLeft){
+    public int turnLeftButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerLeft) {
         String codeMessage;
         timesLeft = (Integer) spinnerLeft.getSelectedItem();
         if (timesLeft == 1) {
@@ -336,8 +355,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         return movementsCount;
     }
 
-    @SuppressLint("SetTextI18n")
-    public int turnRightButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerRight){
+    public int turnRightButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerRight) {
         String codeMessage;
         timesRight = (Integer) spinnerRight.getSelectedItem();
         if (timesRight == 1) {
@@ -372,6 +390,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         }
         return movementsCount;
     }
+
     public void reset() {
         count = 0;
         layout1.removeAllViewsInLayout();
@@ -428,8 +447,8 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
 
         }
-        System.out.println( bee.getX());
-        System.out.println( bee.getY());
+        System.out.println(bee.getX());
+        System.out.println(bee.getY());
     }
 
     public void TurnRight(ImageView bee) {
@@ -458,6 +477,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
     public void SaveData(String codeMessage) {
         SharedPreferences sharedPref = Level1Page.this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -469,18 +489,87 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         SharedPreferences sharedPref = Level1Page.this.getPreferences(Context.MODE_PRIVATE);
         code += sharedPref.getString("CODEMESSAGE", "") + "\n";
     }
-    public void MoveLoop(ArrayList<String> list, ImageView bee, int changeX, int changeY){
+
+    public class ApplyMove implements Runnable {
+
+        public void run() {
+            boolean run = true;
+            while (run) {
+                try {
+                    for (int i = 0; i < list.size(); i++) {
+                        Thread.sleep(1000);
+                        if (list.get(i).equals("forward1")) {
+                            GoForward(bee, changeX, changeY);
+                        } else if (list.get(i).equals("forward2")) {
+                            for (int k = 0; k < 2; k++) {
+                                GoForward(bee, changeX, changeY);
+                            }
+                        } else if (list.get(i).equals("forward3")) {
+                            for (int k = 0; k < 3; k++) {
+                                GoForward(bee, changeX, changeY);
+                            }
+                        }
+                        if (list.get(i).equals("left1")) {
+                            TurnLeft(bee);
+                        }
+                        if (list.get(i).equals("left2")) {
+                            for (int k = 0; k < 2; k++) {
+                                TurnLeft(bee);
+                            }
+                        }
+                        if (list.get(i).equals("left3")) {
+                            for (int k = 0; k < 3; k++) {
+                                TurnLeft(bee);
+                            }
+                        }
+                        if (list.get(i).equals("right1")) {
+                            TurnRight(bee);
+                        }
+                        if (list.get(i).equals("right2")) {
+                            for (int k = 0; k < 2; k++) {
+                                TurnRight(bee);
+                            }
+                        }
+                        if (list.get(i).equals("right3")) {
+                            for (int k = 0; k < 3; k++) {
+                                TurnRight(bee);
+                            }
+                        }
+                    }
+                } catch (InterruptedException e) {
+                }
+                if ((bee.getX() == 600) && (bee.getY() == 184)) {
+                    etS.putBoolean("isOver",true);
+                    etS.commit();
+                    Intent i = getIntent();
+                    finish();
+                    startActivity(i);
+                    run = false;
+                }
+                if (!((bee.getY() == 184) && ((bee.getX() == 0) || (bee.getX() == 200) || (bee.getX() == 400) || (bee.getX() == 600)))) {
+                    etS.putBoolean("isTry",true);
+                    etS.commit();
+                    Intent i = getIntent();
+                    finish();
+                    startActivity(i);
+                    run = false;
+                }
+            }
+        }
+    }
+
+    public void MoveLoop(ArrayList<String> list, ImageView bee, int changeX, int changeY) {
         System.out.println("deneme");
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).equals("forward1")) {
-                GoForward(bee,changeX,changeY);
+                GoForward(bee, changeX, changeY);
             } else if (list.get(i).equals("forward2")) {
                 for (int k = 0; k < 2; k++) {
-                    GoForward(bee,changeX,changeY);
+                    GoForward(bee, changeX, changeY);
                 }
             } else if (list.get(i).equals("forward3")) {
                 for (int k = 0; k < 3; k++) {
-                    GoForward(bee,changeX,changeY);
+                    GoForward(bee, changeX, changeY);
                 }
             }
             if (list.get(i).equals("left1")) {
@@ -510,5 +599,6 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                 }
             }
         }
+
     }
 }
