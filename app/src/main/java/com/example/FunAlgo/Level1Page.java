@@ -459,7 +459,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             System.out.println("çalıştı2");
             flower.setBackground(flower0);
         }
-        if (Level5Page.getBee().getX() == valueX2 && Level5Page.getBee().getY() == valueY2){
+        if (bee.getX() == valueX2 && bee.getY() == valueY2){
             flower2.setBackground(flower00);
         }
 
