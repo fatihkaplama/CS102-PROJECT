@@ -55,6 +55,7 @@ public class Level4Page extends Level1Page  {
     private Drawable volumeon;
     private float x;
     private float y;
+    private int starsCount;
     private int count = 0;
     private int timesForward;
     private int timesLeft;
@@ -266,48 +267,11 @@ public class Level4Page extends Level1Page  {
 
                 if (isGameOver == true) {
                     et.putBoolean("finished4", isGameOver);
-                    et.apply();
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Level4Page.this);
-                    View myView = getLayoutInflater().inflate(R.layout.finishscreen, null);
-                    TextView message = myView.findViewById(R.id.message);
-                    ImageView star1 = myView.findViewById(R.id.star1);
-                    ImageView star2 = myView.findViewById(R.id.star2);
-                    ImageView star3 = myView.findViewById(R.id.star3);
-                    if (movementsCount > 12){
-                        star2.setVisibility(View.INVISIBLE);
-                    }
-                    if (movementsCount > 15){
-                        star1.setVisibility(View.INVISIBLE);
-                        star2.setVisibility(View.VISIBLE);
-                        star3.setVisibility(View.INVISIBLE);
-                    }
-                    Button menu = (Button) myView.findViewById(R.id.menubtn);
-                    Button retry = (Button) myView.findViewById(R.id.retrybtn);
-                    Button continuebtn = (Button) myView.findViewById(R.id.continuebtn);
-                    retry.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            recreate();
-                        }
-                    });
-                    builder.setView(myView);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                    menu.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent i = new Intent(Level4Page.this, HomePage.class);
-                            startActivity(i);
-                        }
-                    });
-
-                    continuebtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent i = new Intent(Level4Page.this, LevelPage.class);
-                            startActivity(i);
-                        }
-                    });
+                    finishedScreen(Level4Page.this, movementsCount,9,10);
+                    SharedPreferences sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
+                    starsCount = sharedPreferences.getInt("starsCount", 1);
+                    et.putInt("starsCount", starsCount);
+                    et.commit();
                 }
             }
         });

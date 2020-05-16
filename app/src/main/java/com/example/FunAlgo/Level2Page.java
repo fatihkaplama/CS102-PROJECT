@@ -55,6 +55,7 @@ public class Level2Page extends Level1Page  {
     private float x;
     private float y;
     private int count = 0;
+    private int starsCount;
     private int timesForward;
     private int timesLeft;
     private int timesRight;
@@ -216,8 +217,11 @@ public class Level2Page extends Level1Page  {
 
                 if (isGameOver == true){
                     et.putBoolean("finished2", isGameOver);
-                    et.apply();
-                    finishedScreen(Level2Page.this,movementsCount);
+                    finishedScreen(Level2Page.this,movementsCount,4,5);
+                    SharedPreferences sharedPreferences = getSharedPreferences("starsData",MODE_PRIVATE);
+                    starsCount = sharedPreferences.getInt("starsCount",1);
+                    et.putInt("starsCount", starsCount);
+                    et.commit();
                 }
             }
         });

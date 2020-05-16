@@ -63,6 +63,7 @@ public class Level7Page extends Level1Page {
     private float x;
     private float y;
     private int count = 0;
+    private int starsCount;
     private int timesForward;
     private int timesLeft;
     private int timesRight;
@@ -307,51 +308,11 @@ public class Level7Page extends Level1Page {
                 //show the finish screen if the game is over
                 if (isGameOver == true){
                     et.putBoolean("finished7", isGameOver);
-                    et.apply();
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Level7Page.this);
-                    View myView = getLayoutInflater().inflate(R.layout.finishscreen, null);
-                    TextView message = myView.findViewById(R.id.message);
-                    ImageView star1 = myView.findViewById(R.id.star1);
-                    ImageView star2 = myView.findViewById(R.id.star2);
-                    ImageView star3 = myView.findViewById(R.id.star3);
-                    if (movementsCount > 12){
-                        star2.setVisibility(View.INVISIBLE);
-                    }
-                    if (movementsCount > 15){
-                        star1.setVisibility(View.INVISIBLE);
-                        star2.setVisibility(View.VISIBLE);
-                        star3.setVisibility(View.INVISIBLE);
-                    }
-                    Button menu = (Button) myView.findViewById(R.id.menubtn);
-                    Button retry = (Button) myView.findViewById(R.id.retrybtn);
-                    Button continuebtn = (Button) myView.findViewById(R.id.continuebtn);
-                    builder.setView(myView);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                    //when the user click the RETRY button in finish screen
-                    retry.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            recreate();
-                        }
-                    });
-                    //when the user click the MENU button in finish screen
-                    menu.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent i = new Intent(Level7Page.this, HomePage.class);
-                            startActivity(i);
-                        }
-                    });
-
-                    //when the user click the CONTINUE button in finish screen
-                    continuebtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent i = new Intent(Level7Page.this, LevelPage.class);
-                            startActivity(i);
-                        }
-                    });
+                    finishedScreen(Level7Page.this, movementsCount,11,14);
+                    SharedPreferences sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
+                    starsCount = sharedPreferences.getInt("starsCount", 1);
+                    et.putInt("starsCount", starsCount);
+                    et.commit();
                 }
             }
         });

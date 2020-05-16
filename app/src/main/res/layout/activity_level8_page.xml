@@ -239,8 +239,7 @@
             android:layout_width="44dp"
             android:layout_height="45dp"
             android:layout_marginTop="187dp"
-            android:rotation="0"
-            app:srcCompat="@drawable/heromale" />
+            android:rotation="0" />
 
         <ImageView
             android:id="@+id/prisoner"

@@ -57,6 +57,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
     private int timesForward;
     private int timesLeft;
     private int timesRight;
+    private int starsCount;
     private boolean isGameOver;
     private float beeX;
     private float beeY;
@@ -230,8 +231,11 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
 
                 if (isGameOver == true) {
                     et.putBoolean("finished1", true);
-                    et.apply();
-                    finishedScreen(Level1Page.this,movementsCount);
+                    finishedScreen(Level1Page.this,movementsCount,2,4);
+                    SharedPreferences sharedPreferences = getSharedPreferences("starsData",MODE_PRIVATE);
+                    starsCount = sharedPreferences.getInt("starsCount",1);
+                    et.putInt("starsCount", starsCount);
+                    et.commit();
                 }
             }
         });
