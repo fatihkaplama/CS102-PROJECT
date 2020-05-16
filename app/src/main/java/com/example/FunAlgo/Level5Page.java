@@ -276,16 +276,6 @@ public class Level5Page extends Level1Page  {
         });
     }
 
-    public void GetNectar(){
-        if (bee.getX() == 594 && bee.getY() == 360) {
-            flower.setBackground(flower0);
-
-        }
-        if (bee.getX() == 194 && bee.getY() == 540){
-            flower2.setBackground(flower00);
-
-        }
-    }
     public void TryAgain() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Level5Page.this);
         View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
