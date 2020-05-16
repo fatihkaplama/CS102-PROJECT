@@ -81,6 +81,9 @@ public class Level7Page extends Level1Page {
     //sharedPreferences to update and save levels
     private SharedPreferences sp;
     private SharedPreferences.Editor et;
+    // sharedPreferences for transport data to AchievementsPage
+    private SharedPreferences sharedPreferencesA;
+    private SharedPreferences.Editor editor;
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +91,7 @@ public class Level7Page extends Level1Page {
         setContentView(R.layout.activity_level7_page);
         //starting activity
         Intent i = getIntent();
-        SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
+        final SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
 
         //setting the avatar
         avatarID = sharedPreferences.getInt("avatar", 0);
@@ -309,10 +312,10 @@ public class Level7Page extends Level1Page {
                 if (isGameOver == true){
                     et.putBoolean("finished7", isGameOver);
                     finishedScreen(Level7Page.this, movementsCount,11,14);
-                    SharedPreferences sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
-                    starsCount = sharedPreferences.getInt("starsCount", 1);
-                    et.putInt("starsCountLevel7", starsCount);
-                    et.commit();
+                   sharedPreferencesA = getSharedPreferences("starsData", MODE_PRIVATE);
+                    starsCount = sharedPreferencesA.getInt("starsCount", 1);
+                    editor.putInt("starsCountLevel7", starsCount);
+                    editor.commit();
                 }
             }
         });

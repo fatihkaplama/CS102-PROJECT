@@ -68,8 +68,11 @@ public class Level4Page extends Level1Page  {
     private boolean isVolumeOn;
     private int movementsCount;
     //sharedPreferences to update and save levels
-    SharedPreferences sp;
-    SharedPreferences.Editor et;
+    private SharedPreferences sp;
+    private SharedPreferences.Editor et;
+    // sharedPreferences for transport data to AchievementsPage
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     public static ImageView getBee() {
         return bee;
@@ -234,10 +237,11 @@ public class Level4Page extends Level1Page  {
                 if (isGameOver == true) {
                     et.putBoolean("finished4", isGameOver);
                     finishedScreen(Level4Page.this, movementsCount,9,10);
-                    SharedPreferences sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
+                    sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
+                    editor = sharedPreferences.edit();
                     starsCount = sharedPreferences.getInt("starsCount", 1);
-                    et.putInt("starsCountLevel4", starsCount);
-                    et.commit();
+                    editor.putInt("starsCountLevel4", starsCount);
+                    editor.commit();
                 }
             }
         });

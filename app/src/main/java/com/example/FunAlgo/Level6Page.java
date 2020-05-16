@@ -75,12 +75,17 @@ public class Level6Page extends Level1Page {
     private Button show;
     private String code;
     //sharedPreferences to update and save levels
-    SharedPreferences sp;
-    SharedPreferences.Editor et;
+
+    private SharedPreferences sp;
+    private SharedPreferences.Editor et;
+    // sharedPreferences for transport data to AchievementsPage
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     public static ImageView getBee() {
         return bee;
     }
+
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -254,10 +259,11 @@ public class Level6Page extends Level1Page {
                 if (isGameOver == true){
                     et.putBoolean("finished6", isGameOver);
                     finishedScreen(Level6Page.this, movementsCount,12,14);
-                    SharedPreferences sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
+                    sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
+                    editor = sharedPreferences.edit();
                     starsCount = sharedPreferences.getInt("starsCount", 1);
-                    et.putInt("starsCountLevel6", starsCount);
-                    et.commit();
+                    editor.putInt("starsCountLevel6", starsCount);
+                    editor.commit();
                 }
             }
         });
