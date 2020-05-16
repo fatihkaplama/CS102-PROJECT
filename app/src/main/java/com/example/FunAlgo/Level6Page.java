@@ -529,8 +529,7 @@ public class Level6Page extends Level1Page {
 
     public void GetNectar(){
         if (bee.getX() == 312 && bee.getY() == 146) {
-            //flower2.setBackground(flower0);
-            flower2.setBackgroundResource(flower0ID);
+            flower2.setBackground(flower0);
 
         }
         if (bee.getX() == 152 && bee.getY() == 292){
