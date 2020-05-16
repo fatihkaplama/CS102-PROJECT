@@ -416,9 +416,14 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             y += (changeY);
             bee.setTranslationY(y);
             //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
-
         }
 
+        if (bee.getRotation() == -180) {
+            y += (changeY);
+            bee.setTranslationY(y);
+            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
+
+        }
         if (bee.getRotation() == 270) {
             x -= (changeX);
             bee.setTranslationX(x);

@@ -127,7 +127,7 @@ public class Level3Page extends Level1Page {
         spinnerForward = findViewById(R.id.spinnerForward);
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
-        spinnerNectar = findViewById(R.id.spinnerKey);
+        spinnerNectar = findViewById(R.id.spinnerNectar);
 
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
