@@ -46,6 +46,7 @@ public class AchievementsPage extends AppCompatActivity {
     private int starsCountLevel8;
     private int starsCountLevel9;
     private SharedPreferences sharedPreferences;
+    private Button wipeData;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -67,6 +68,7 @@ public class AchievementsPage extends AppCompatActivity {
         volumeoffID = R.drawable.volumeoff;
         volumeon = AppCompatDrawableManager.get().getDrawable(this, volumeonID);
         volumeoff = AppCompatDrawableManager.get().getDrawable(this, volumeoffID);
+        wipeData = findViewById(R.id.button_wipeData);
 
         //initialising the starsCountLevels
         sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
@@ -129,6 +131,20 @@ public class AchievementsPage extends AppCompatActivity {
                     isVolumeOn = true;
                     mediaPlayer.start();
                 }
+            }
+        });
+        wipeData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                starsCountLevel1 = 0;
+                starsCountLevel2 = 0;
+                starsCountLevel3 = 0;
+                starsCountLevel4 = 0;
+                starsCountLevel5 = 0;
+                starsCountLevel6 = 0;
+                starsCountLevel7 = 0;
+                starsCountLevel8 = 0;
+                starsCountLevel9 = 0;
             }
         });
     }
