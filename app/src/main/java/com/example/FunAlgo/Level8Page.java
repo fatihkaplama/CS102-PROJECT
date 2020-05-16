@@ -81,6 +81,9 @@ public class Level8Page extends Level1Page  {
     //sharedPreferences to update and save levels
     private SharedPreferences sp;
     private SharedPreferences.Editor et;
+    // sharedPreferences for transport data to AchievementsPage
+    private SharedPreferences sharedPreferencesA;
+    private SharedPreferences.Editor editor;
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -309,10 +312,11 @@ public class Level8Page extends Level1Page  {
                  if (isGameOver == true){
                      et.putBoolean("finished8", isGameOver);
                      finishedScreen(Level8Page.this, movementsCount,23,27);
-                     SharedPreferences sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
-                     starsCount = sharedPreferences.getInt("starsCount", 1);
-                     et.putInt("starsCountLevel8", starsCount);
-                     et.commit();
+                     sharedPreferencesA = getSharedPreferences("starsData", MODE_PRIVATE);
+                     editor = sharedPreferencesA.edit();
+                     starsCount = sharedPreferencesA.getInt("starsCount", 1);
+                     editor.putInt("starsCountLevel8", starsCount);
+                     editor.commit();
                  }
             }
         });

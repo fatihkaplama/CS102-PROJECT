@@ -46,6 +46,7 @@ public class AchievementsPage extends AppCompatActivity {
     private int starsCountLevel8;
     private int starsCountLevel9;
     private SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     private Button wipeData;
 
     @SuppressLint("RestrictedApi")
@@ -72,15 +73,15 @@ public class AchievementsPage extends AppCompatActivity {
 
         //initialising the starsCountLevels
         sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
-        starsCountLevel1 = sharedPreferences.getInt("starsCount1", 0);
-        starsCountLevel2 = sharedPreferences.getInt("starsCount2", 0);
-        starsCountLevel3 = sharedPreferences.getInt("starsCount3", 0);
-        starsCountLevel4 = sharedPreferences.getInt("starsCount4", 0);
-        starsCountLevel5 = sharedPreferences.getInt("starsCount5", 0);
-        starsCountLevel6 = sharedPreferences.getInt("starsCount6", 0);
-        starsCountLevel7 = sharedPreferences.getInt("starsCount7", 0);
-        starsCountLevel8 = sharedPreferences.getInt("starsCount8", 0);
-        starsCountLevel9 = sharedPreferences.getInt("starsCount9", 0);
+        starsCountLevel1 = sharedPreferences.getInt("starsCountLevel1", 0);
+        starsCountLevel2 = sharedPreferences.getInt("starsCountLevel2", 0);
+        starsCountLevel3 = sharedPreferences.getInt("starsCountLevel3", 0);
+        starsCountLevel4 = sharedPreferences.getInt("starsCountLevel4", 0);
+        starsCountLevel5 = sharedPreferences.getInt("starsCountLevel5", 0);
+        starsCountLevel6 = sharedPreferences.getInt("starsCountLevel6", 0);
+        starsCountLevel7 = sharedPreferences.getInt("starsCountLevel7", 0);
+        starsCountLevel8 = sharedPreferences.getInt("starsCountLevel8", 0);
+        starsCountLevel9 = sharedPreferences.getInt("starsCountLevel9", 0);
 
         // creating the graph with graphlib library
         Point[] points =
@@ -136,15 +137,9 @@ public class AchievementsPage extends AppCompatActivity {
         wipeData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                starsCountLevel1 = 0;
-                starsCountLevel2 = 0;
-                starsCountLevel3 = 0;
-                starsCountLevel4 = 0;
-                starsCountLevel5 = 0;
-                starsCountLevel6 = 0;
-                starsCountLevel7 = 0;
-                starsCountLevel8 = 0;
-                starsCountLevel9 = 0;
+                editor = sharedPreferences.edit();
+                editor.clear(); 
+                editor.commit();
             }
         });
     }

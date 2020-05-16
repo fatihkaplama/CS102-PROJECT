@@ -26,12 +26,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-public class Level2Page extends Level1Page  {
+public class Level2Page extends Level1Page {
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
     private Spinner spinnerRight;
-    private Integer[] times = {1,2,3};
+    private Integer[] times = {1, 2, 3};
     private ArrayAdapter<Integer> timesAdapter;
     private ArrayList<String> list;
     private ImageView bee;
@@ -71,8 +71,11 @@ public class Level2Page extends Level1Page  {
     final static private int changeX = 180;
     final static private int changeY = 200;
     //sharedPreferences to update and save levels
-    SharedPreferences sp;
-    SharedPreferences.Editor et;
+    private SharedPreferences sp;
+    private SharedPreferences.Editor et;
+    // sharedPreferences for transport data to AchievementsPage
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -131,36 +134,36 @@ public class Level2Page extends Level1Page  {
         isGameOver = false;
 
         //SharedPreferences to save Level
-        sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
+        sp = getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
         et = sp.edit();
         back.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent i = new Intent(Level2Page.this,LevelPage.class);
-            startActivity(i);
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Level2Page.this, LevelPage.class);
+                startActivity(i);
             }
         });
 
-         settings.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent i = new Intent(Level2Page.this, SettingsPage.class);
-            startActivity(i);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Level2Page.this, SettingsPage.class);
+                startActivity(i);
             }
         });
 
-         volume.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if(isVolumeOn){
-                volume.setBackground(volumeoff);
-                isVolumeOn = false;
-                mediaPlayer.pause();
-            }
-            else {
-                volume.setBackground(volumeon);
-                isVolumeOn = true;
-                mediaPlayer.start();;
+        volume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isVolumeOn) {
+                    volume.setBackground(volumeoff);
+                    isVolumeOn = false;
+                    mediaPlayer.pause();
+                } else {
+                    volume.setBackground(volumeon);
+                    isVolumeOn = true;
+                    mediaPlayer.start();
+                    ;
                 }
             }
         });
@@ -203,9 +206,9 @@ public class Level2Page extends Level1Page  {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MoveLoop(list, bee, changeX, changeY, null, null, null, null, 0 , 0 ,0 , 0);
+                MoveLoop(list, bee, changeX, changeY);
                 apply.setEnabled(false);
-                if ((bee.getX() == 400) && (bee.getY() == 8)){
+                if ((bee.getX() == 400) && (bee.getY() == 8)) {
                     System.out.println("true");
                     isGameOver = true;
                 }
@@ -215,13 +218,14 @@ public class Level2Page extends Level1Page  {
                 }
 
 
-                if (isGameOver == true){
+                if (isGameOver == true) {
                     et.putBoolean("finished2", isGameOver);
-                    finishedScreen(Level2Page.this,movementsCount,4,5);
-                    SharedPreferences sharedPreferences = getSharedPreferences("starsData",MODE_PRIVATE);
-                    starsCount = sharedPreferences.getInt("starsCount",1);
-                    et.putInt("starsCountLevel2", starsCount);
-                    et.commit();
+                    finishedScreen(Level2Page.this, movementsCount, 4, 5);
+                    sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
+                    editor = sharedPreferences.edit();
+                    starsCount = sharedPreferences.getInt("starsCount", 1);
+                    editor.putInt("starsCountLevel2", starsCount);
+                    editor.commit();
                 }
             }
         });

@@ -70,8 +70,12 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
     final static private int changeX = 200;
     final static private int changeY = 180;
     //sharedPreferences to update and save levels
-    SharedPreferences sp;
-    SharedPreferences.Editor et;
+    private SharedPreferences sp;
+    private SharedPreferences.Editor et;
+    // sharedPreferences for transport data to AchievementsPage
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,22 +125,11 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
 
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
-        /*up = new Button(this);
-        left = new Button(this);
-        right = new Button(this);
-
-        up.setText("GO FORWARD");
-        up.setBackgroundColor(Color.CYAN);
-        left.setText("TURN LEFT");
-        left.setBackgroundColor(Color.CYAN);
-        right.setText("TURN RIGHT");
-        right.setBackgroundColor(Color.CYAN);*/
-
 
         isGameOver = false;
 
         //SharedPreferences to save Level
-        sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
+        sp = getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
         et = sp.edit();
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -220,17 +213,18 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                     System.out.println("true");
                     isGameOver = true;
                 }
-                if(!((bee.getY() == 184)&&((bee.getX() == 0)||(bee.getX() == 200)||(bee.getX() == 400)||(bee.getX() == 600))))  {
+                if (!((bee.getY() == 184) && ((bee.getX() == 0) || (bee.getX() == 200) || (bee.getX() == 400) || (bee.getX() == 600)))) {
                     TryAgain(Level1Page.this);
                 }
 
                 if (isGameOver == true) {
                     et.putBoolean("finished1", true);
-                    finishedScreen(Level1Page.this,movementsCount,2,4);
-                    SharedPreferences sharedPreferences = getSharedPreferences("starsData",MODE_PRIVATE);
-                    starsCount = sharedPreferences.getInt("starsCount",1);
-                    et.putInt("starsCount", starsCount);
-                    et.commit();
+                    finishedScreen(Level1Page.this, movementsCount, 2, 4);
+                    sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
+                    editor = sharedPreferences.edit();
+                    starsCount = sharedPreferences.getInt("starsCount", 1);
+                    editor.putInt("starsCountLevel1", starsCount);
+                    editor.commit();
                 }
             }
         });
@@ -257,7 +251,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         });
     }
 
-    public int goForwardButton (int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerForward){
+    public int goForwardButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerForward) {
         String codeMessage;
         timesForward = (Integer) spinnerForward.getSelectedItem();
         if (timesForward == 1) {
@@ -294,7 +288,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         return movementsCount;
     }
 
-    public int turnLeftButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerLeft){
+    public int turnLeftButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerLeft) {
         String codeMessage;
         timesLeft = (Integer) spinnerLeft.getSelectedItem();
         if (timesLeft == 1) {
@@ -305,7 +299,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         }
         SaveData(codeMessage);
         setCodeMessage();
-        if (count >= 9) {
+        if (movementsCount >= 9) {
             list.add("left" + timesLeft);
             Button left = new Button(Level1Page.this);
             left.setTextSize(10);
@@ -316,7 +310,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             movementsCount++;
             movements.setText("Movements : " + movementsCount);
         }
-        if (count < 9) {
+        if (movementsCount < 9) {
             list.add("left" + timesLeft);
             Button left = new Button(Level1Page.this);
             left.setTextSize(10);
@@ -330,7 +324,8 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         return movementsCount;
     }
 
-    public int turnRightButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerRight){
+    @SuppressLint("SetTextI18n")
+    public int turnRightButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerRight) {
         String codeMessage;
         timesRight = (Integer) spinnerRight.getSelectedItem();
         if (timesRight == 1) {
@@ -341,7 +336,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         }
         SaveData(codeMessage);
         setCodeMessage();
-        if (count >= 9) {
+        if (movementsCount >= 9) {
             list.add("right" + timesRight);
             Button right = new Button(Level1Page.this);
             right.setTextSize(10);
@@ -352,7 +347,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             movementsCount++;
             movements.setText("Movements : " + movementsCount);
         }
-        if (count < 9) {
+        if (movementsCount < 9) {
             list.add("right" + timesRight);
             Button right = new Button(Level1Page.this);
             right.setTextSize(10);
@@ -365,6 +360,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         }
         return movementsCount;
     }
+
     public int getNectarButton(int timesNectar, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int movementsCount, TextView movements, Spinner spinnerNectar){
         String codeMessage;
         timesNectar = (Integer) spinnerNectar.getSelectedItem();
@@ -423,13 +419,6 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
 
         }
 
-        if (bee.getRotation() == -180) {
-            y += (changeY);
-            bee.setTranslationY(y);
-            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
-
-        }
-
         if (bee.getRotation() == 270) {
             x -= (changeX);
             bee.setTranslationX(x);
@@ -441,8 +430,8 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
 
         }
-        System.out.println( bee.getX());
-        System.out.println( bee.getY());
+        System.out.println(bee.getX());
+        System.out.println(bee.getY());
     }
 
     public void TurnRight(ImageView bee) {
@@ -454,6 +443,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
 
         bee.setRotation(bee.getRotation() - (90));
     }
+
     public void GetNectar(ImageView bee, ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2){
         if (bee.getX() == valueX1 && bee.getY() == valueY1) {
             System.out.println("çalıştı1");
@@ -463,7 +453,6 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             System.out.println("çalıştı2");
             flower2.setBackground(flower00);
         }
-
     }
 
     public void TryAgain(Context context) {
@@ -481,6 +470,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
     public void SaveData(String codeMessage) {
         SharedPreferences sharedPref = Level1Page.this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -492,20 +482,21 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         SharedPreferences sharedPref = Level1Page.this.getPreferences(Context.MODE_PRIVATE);
         code += sharedPref.getString("CODEMESSAGE", "") + "\n";
     }
+
     public void MoveLoop(ArrayList<String> list, ImageView bee, int changeX, int changeY, ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2){
         System.out.println("deneme");
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).equals("forward1")) {
-                GoForward(bee,changeX,changeY);
+                GoForward(bee, changeX, changeY);
             }
             else if (list.get(i).equals("forward2")) {
                 for (int k = 0; k < 2; k++) {
-                    GoForward(bee,changeX,changeY);
+                    GoForward(bee, changeX, changeY);
                 }
             }
             else if (list.get(i).equals("forward3")) {
                 for (int k = 0; k < 3; k++) {
-                    GoForward(bee,changeX,changeY);
+                    GoForward(bee, changeX, changeY);
                 }
             }
             else if (list.get(i).equals("left1")) {
@@ -534,16 +525,16 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                     TurnRight(bee);
                 }
             }
-            if (list.get(i).equals("nectar1")){
+            else if (list.get(i).equals("nectar1")){
                 GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
             }
 
-            if (list.get(i).equals("nectar2")) {
+            else if (list.get(i).equals("nectar2")) {
                 for (int k = 0; k < 2; k++) {
                     GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
                 }
             }
-            if (list.get(i).equals("nectar3")) {
+            else if (list.get(i).equals("nectar3")) {
                 for (int k = 0; k < 3; k++) {
                     GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
                 }
