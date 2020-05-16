@@ -206,7 +206,7 @@ public class Level2Page extends Level1Page {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MoveLoop(list, bee, changeX, changeY);
+                MoveLoop(list, bee, changeX, changeY, null, null, null, null, 0 , 0 ,0 , 0);
                 apply.setEnabled(false);
                 if ((bee.getX() == 400) && (bee.getY() == 8)) {
                     System.out.println("true");

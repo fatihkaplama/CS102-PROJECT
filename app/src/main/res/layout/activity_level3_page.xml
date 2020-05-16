@@ -177,7 +177,7 @@
                     android:id="@+id/getNectar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="get nectar"
+                    android:text="@string/get_nectar"
                     android:textSize="10sp" />
 
             </LinearLayout>

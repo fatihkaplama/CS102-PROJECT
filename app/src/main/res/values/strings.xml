@@ -47,8 +47,8 @@
     <string name="star2">star2</string>
     <string name="star3">star3</string>
     <string name="Movements">Movements</string>
-    <string name="get_nectar">Get Nectar</string>
     <string name="get_key">get key</string>
+    <string name="get_nectar">get nectar</string>
     >>>>>>> Stashed changes
 
 </resources>
