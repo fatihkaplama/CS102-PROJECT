@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -25,12 +24,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Level1Page extends DefaultLevelPage implements ShowCodeI {
     private TextView movements;
-    private boolean isTryAgain;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
     private Spinner spinnerRight;
@@ -76,10 +72,6 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
     //sharedPreferences to update and save levels
     SharedPreferences sp;
     SharedPreferences.Editor et;
-    //new sp
-    SharedPreferences sharedP;
-    SharedPreferences.Editor etS;
-
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,33 +133,11 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         right.setBackgroundColor(Color.CYAN);*/
 
 
-        beeX = bee.getTranslationX();
-        beeY = bee.getTranslationY();
-        honeyX = honey.getTranslationX();
-        honeyY = honey.getTranslationY();
-
-
         isGameOver = false;
-        isTryAgain = false;
-        // sp of isThisGameOver and Try Again
-        sharedP = getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
-        et = sharedP.edit();
 
         //SharedPreferences to save Level
-        sharedP = getSharedPreferences("isThis", MODE_PRIVATE);
-        etS = sharedP.edit();
-        isTryAgain = getSharedPreferences("isThis", MODE_PRIVATE).getBoolean("isTry", false);
-        isGameOver = getSharedPreferences("isThis", MODE_PRIVATE).getBoolean("isOver", false);
-        if (isTryAgain) {
-            TryAgain(Level1Page.this);
-            etS.putBoolean("isTry", false);
-            etS.commit();
-        }
-        if (isGameOver) {
-            finishedScreen(Level1Page.this, movementsCount, 2, 4);
-            etS.putBoolean("isOver", false);
-            etS.commit();
-        }
+        sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
+        et = sp.edit();
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,26 +210,25 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 System.out.println(bee.getX());
                 System.out.println(bee.getY());
                 MoveLoop(list, bee, changeX, changeY, null, null, null, null, 0, 0, 0, 0);
 
 
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove();
-                Thread t1 = new Thread(applyMove);
-                t1.start();
-                System.out.print("alpo");
-
-                if (isTryAgain == true) {
+                if ((bee.getX() == 600) && (bee.getY() == 184)) {
+                    System.out.println("true");
+                    isGameOver = true;
+                }
+                if(!((bee.getY() == 184)&&((bee.getX() == 0)||(bee.getX() == 200)||(bee.getX() == 400)||(bee.getX() == 600))))  {
                     TryAgain(Level1Page.this);
                 }
+
                 if (isGameOver == true) {
                     et.putBoolean("finished1", true);
-                    finishedScreen(Level1Page.this, movementsCount, 2, 4);
-                    SharedPreferences sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
-                    starsCount = sharedPreferences.getInt("starsCount", 1);
+                    finishedScreen(Level1Page.this,movementsCount,2,4);
+                    SharedPreferences sharedPreferences = getSharedPreferences("starsData",MODE_PRIVATE);
+                    starsCount = sharedPreferences.getInt("starsCount",1);
                     et.putInt("starsCount", starsCount);
                     et.commit();
                 }
@@ -288,7 +257,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         });
     }
 
-    public int goForwardButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerForward) {
+    public int goForwardButton (int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerForward){
         String codeMessage;
         timesForward = (Integer) spinnerForward.getSelectedItem();
         if (timesForward == 1) {
@@ -325,7 +294,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         return movementsCount;
     }
 
-    public int turnLeftButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerLeft) {
+    public int turnLeftButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerLeft){
         String codeMessage;
         timesLeft = (Integer) spinnerLeft.getSelectedItem();
         if (timesLeft == 1) {
@@ -361,7 +330,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         return movementsCount;
     }
 
-    public int turnRightButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerRight) {
+    public int turnRightButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerRight){
         String codeMessage;
         timesRight = (Integer) spinnerRight.getSelectedItem();
         if (timesRight == 1) {
@@ -396,8 +365,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         }
         return movementsCount;
     }
-
-    public int getNectarButton(int timesNectar, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int movementsCount, TextView movements, Spinner spinnerNectar) {
+    public int getNectarButton(int timesNectar, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int movementsCount, TextView movements, Spinner spinnerNectar){
         String codeMessage;
         timesNectar = (Integer) spinnerNectar.getSelectedItem();
         if (timesNectar == 1) {
@@ -418,273 +386,165 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             count++;
             movementsCount++;
             movements.setText("Movements : " + movementsCount);
+        }
+        if (movementsCount < 9) {
+            list.add("nectar" + timesNectar);
+            Button nectar = new Button(Level1Page.this);
+            nectar.setTextSize(10);
+            nectar.setText(timesNectar + " " + "GET NECTAR");
+            nectar.setBackgroundColor(Color.CYAN);
+            layout1.addView(nectar, params);
+            count++;
+            movementsCount++;
+            movements.setText("Movements : " + movementsCount);
+        }
+        return movementsCount;
+    }
+    public void GoForward(ImageView bee, int changeX, int changeY) {
 
+        if (bee.getRotation() == 0) {
+            y -= (changeY);
+            bee.setTranslationY(y);
+            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
 
-            public void reset () {
-                count = 0;
-                layout1.removeAllViewsInLayout();
-                int size = list.size();
-                for (int i = 0; i < size; i++) {
-                    list.remove(0);
-                }
-                if (movementsCount < 9) {
-                    list.add("nectar" + timesNectar);
-                    Button nectar = new Button(Level1Page.this);
-                    nectar.setTextSize(10);
-                    nectar.setText(timesNectar + " " + "GET NECTAR");
-                    nectar.setBackgroundColor(Color.CYAN);
-                    layout1.addView(nectar, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                }
-                return movementsCount;
-            }
-            public void GoForward (ImageView bee,int changeX, int changeY){
+        }
 
-                if (bee.getRotation() == 0) {
-                    y -= (changeY);
-                    bee.setTranslationY(y);
-                    //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
+        if (bee.getRotation() == 90) {
+            x += (changeX);
+            bee.setTranslationX(x);
+            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
 
-                }
+        }
 
-                if (bee.getRotation() == 90) {
-                    x += (changeX);
-                    bee.setTranslationX(x);
-                    //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
+        if (bee.getRotation() == 180) {
+            y += (changeY);
+            bee.setTranslationY(y);
+            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
 
-                }
+        }
 
-                if (bee.getRotation() == 180) {
-                    y += (changeY);
-                    bee.setTranslationY(y);
-                    //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
+        if (bee.getRotation() == -180) {
+            y += (changeY);
+            bee.setTranslationY(y);
+            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
 
-                }
+        }
 
-                if (bee.getRotation() == -180) {
-                    y += (changeY);
-                    bee.setTranslationY(y);
-                    //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
+        if (bee.getRotation() == 270) {
+            x -= (changeX);
+            bee.setTranslationX(x);
+        }
 
-                }
+        if (bee.getRotation() == -90) {
+            x -= (changeX);
+            bee.setTranslationX(x);
+            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
 
-                if (bee.getRotation() == 270) {
-                    x -= (changeX);
-                    bee.setTranslationX(x);
-                }
+        }
+        System.out.println( bee.getX());
+        System.out.println( bee.getY());
+    }
 
-                if (bee.getRotation() == -90) {
-                    x -= (changeX);
-                    bee.setTranslationX(x);
-                    //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
+    public void TurnRight(ImageView bee) {
 
-                }
-                System.out.println(bee.getX());
-                System.out.println(bee.getY());
-            }
+        bee.setRotation(bee.getRotation() + (90));
+    }
 
-            public void TurnRight (ImageView bee){
+    public void TurnLeft(ImageView bee) {
 
-                bee.setRotation(bee.getRotation() + (90));
-            }
-
-            public void TurnLeft (ImageView bee){
-
-                bee.setRotation(bee.getRotation() - (90));
-            }
-            public void GetNectar (ImageView bee, ImageView flower, ImageView flower2, Drawable
-            flower0, Drawable flower00,int valueX1, int valueX2, int valueY1, int valueY2){
-                if (bee.getX() == valueX1 && bee.getY() == valueY1) {
-                    System.out.println("çalıştı2");
-                    flower.setBackground(flower0);
-                }
-
-                if (Level5Page.getBee().getX() == valueX2 && Level5Page.getBee().getY() == valueY2) {
-                    flower2.setBackground(flower00);
-                }
-
-        /*else if (Level5Page.getBee().getX() == valueX1 && Level5Page.getBee().getY() == valueY1) {
+        bee.setRotation(bee.getRotation() - (90));
+    }
+    public void GetNectar(ImageView bee, ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2){
+        if (bee.getX() == valueX1 && bee.getY() == valueY1) {
             System.out.println("çalıştı2");
             flower.setBackground(flower0);
         }
-
-        else if (Level5Page.getBee().getX() == valueX2 && Level5Page.getBee().getY() == valueY2){
+        if (Level5Page.getBee().getX() == valueX2 && Level5Page.getBee().getY() == valueY2){
             flower2.setBackground(flower00);
         }
 
-        else if (Level6Page.getBee().getX() == valueX1 && Level6Page.getBee().getY() == valueY1) {
-            System.out.println("çalıştı2");
-            flower.setBackground(flower0);
-        }
+    }
 
-        else if (Level6Page.getBee().getX() == valueX2 && Level6Page.getBee().getY() == valueY2){
-            flower2.setBackground(flower00);
-        }*/
+    public void TryAgain(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
+        Button menu = (Button) myView.findViewById(R.id.menubtn);
+        Button retry = (Button) myView.findViewById(R.id.retrybtn);
+        retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recreate();
+            }
+        });
+        builder.setView(myView);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    public void SaveData(String codeMessage) {
+        SharedPreferences sharedPref = Level1Page.this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("CODEMESSAGE", codeMessage);
+        editor.commit();
+    }
+
+    public void setCodeMessage() {
+        SharedPreferences sharedPref = Level1Page.this.getPreferences(Context.MODE_PRIVATE);
+        code += sharedPref.getString("CODEMESSAGE", "") + "\n";
+    }
+    public void MoveLoop(ArrayList<String> list, ImageView bee, int changeX, int changeY, ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2){
+        System.out.println("deneme");
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals("forward1")) {
+                GoForward(bee,changeX,changeY);
+            }
+            else if (list.get(i).equals("forward2")) {
+                for (int k = 0; k < 2; k++) {
+                    GoForward(bee,changeX,changeY);
+                }
+            }
+            else if (list.get(i).equals("forward3")) {
+                for (int k = 0; k < 3; k++) {
+                    GoForward(bee,changeX,changeY);
+                }
+            }
+            else if (list.get(i).equals("left1")) {
+                TurnLeft(bee);
+            }
+            else if (list.get(i).equals("left2")) {
+                for (int k = 0; k < 2; k++) {
+                    TurnLeft(bee);
+                }
+            }
+            else if (list.get(i).equals("left3")) {
+                for (int k = 0; k < 3; k++) {
+                    TurnLeft(bee);
+                }
+            }
+            else if (list.get(i).equals("right1")) {
+                TurnRight(bee);
+            }
+            else if (list.get(i).equals("right2")) {
+                for (int k = 0; k < 2; k++) {
+                    TurnRight(bee);
+                }
+            }
+            else if (list.get(i).equals("right3")) {
+                for (int k = 0; k < 3; k++) {
+                    TurnRight(bee);
+                }
+            }
+            if (list.get(i).equals("nectar1")){
+                GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
             }
 
-            public void TryAgain (Context context){
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
-                Button menu = (Button) myView.findViewById(R.id.menubtn);
-                Button retry = (Button) myView.findViewById(R.id.retrybtn);
-                retry.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        recreate();
-                    }
-                });
-                builder.setView(myView);
-                AlertDialog dialog = builder.create();
-                dialog.show();
+            if (list.get(i).equals("nectar2")) {
+                for (int k = 0; k < 2; k++) {
+                    GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
+                }
             }
-
-            public void SaveData (String codeMessage){
-                SharedPreferences sharedPref = Level1Page.this.getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("CODEMESSAGE", codeMessage);
-                editor.commit();
-            }
-
-            public void setCodeMessage () {
-                SharedPreferences sharedPref = Level1Page.this.getPreferences(Context.MODE_PRIVATE);
-                code += sharedPref.getString("CODEMESSAGE", "") + "\n";
-            }
-
-            public void MoveLoop (ArrayList < String > list, ImageView bee,int changeX,
-            int changeY, ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00,
-            int valueX1, int valueX2, int valueY1, int valueY2)
-            {
-                System.out.println("deneme");
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).equals("forward1")) {
-                        GoForward(bee, changeX, changeY);
-                    } else if (list.get(i).equals("forward2")) {
-
-
-                        public class ApplyMove implements Runnable {
-
-                            public void run() {
-                                boolean run = true;
-                                while (run) {
-                                    try {
-                                        for (int i = 0; i < list.size(); i++) {
-                                            Thread.sleep(1000);
-                                            if (list.get(i).equals("forward1")) {
-                                                GoForward(bee, changeX, changeY);
-                                            } else if (list.get(i).equals("forward2")) {
-                                                for (int k = 0; k < 2; k++) {
-                                                    GoForward(bee, changeX, changeY);
-                                                }
-                                            } else if (list.get(i).equals("forward3")) {
-                                                for (int k = 0; k < 3; k++) {
-                                                    GoForward(bee, changeX, changeY);
-                                                }
-                                            }
-                                            if (list.get(i).equals("left1")) {
-                                                TurnLeft(bee);
-                                            }
-                                            if (list.get(i).equals("left2")) {
-                                                for (int k = 0; k < 2; k++) {
-                                                    TurnLeft(bee);
-                                                }
-                                            }
-                                            if (list.get(i).equals("left3")) {
-                                                for (int k = 0; k < 3; k++) {
-                                                    TurnLeft(bee);
-                                                }
-                                            }
-                                            if (list.get(i).equals("right1")) {
-                                                TurnRight(bee);
-                                            }
-                                            if (list.get(i).equals("right2")) {
-                                                for (int k = 0; k < 2; k++) {
-                                                    TurnRight(bee);
-                                                }
-                                            }
-                                            if (list.get(i).equals("right3")) {
-                                                for (int k = 0; k < 3; k++) {
-                                                    TurnRight(bee);
-                                                }
-                                            }
-                                        }
-                                    } catch (InterruptedException e) {
-                                    }
-                                    if ((bee.getX() == 600) && (bee.getY() == 184)) {
-                                        etS.putBoolean("isOver", true);
-                                        etS.commit();
-                                        Intent i = getIntent();
-                                        finish();
-                                        startActivity(i);
-                                        run = false;
-                                    }
-                                    if (!((bee.getY() == 184) && ((bee.getX() == 0) || (bee.getX() == 200) || (bee.getX() == 400) || (bee.getX() == 600)))) {
-                                        etS.putBoolean("isTry", true);
-                                        etS.commit();
-                                        Intent i = getIntent();
-                                        finish();
-                                        startActivity(i);
-                                        run = false;
-                                    }
-                                }
-                            }
-                        }
-
-                        public void MoveLoop (ArrayList < String > list, ImageView bee,int changeX,
-                        int changeY){
-                            System.out.println("deneme");
-                            for (int i = 0; i < list.size(); i++) {
-                                if (list.get(i).equals("forward1")) {
-                                    GoForward(bee, changeX, changeY);
-                                } else if (list.get(i).equals("forward2")) {
-
-                                    for (int k = 0; k < 2; k++) {
-                                        GoForward(bee, changeX, changeY);
-                                    }
-                                } else if (list.get(i).equals("forward3")) {
-                                    for (int k = 0; k < 3; k++) {
-                                        GoForward(bee, changeX, changeY);
-                                    }
-                                } else if (list.get(i).equals("left1")) {
-                                    TurnLeft(bee);
-                                } else if (list.get(i).equals("left2")) {
-                                    for (int k = 0; k < 2; k++) {
-                                        TurnLeft(bee);
-                                    }
-                                } else if (list.get(i).equals("left3")) {
-                                    for (int k = 0; k < 3; k++) {
-                                        TurnLeft(bee);
-                                    }
-                                } else if (list.get(i).equals("right1")) {
-                                    TurnRight(bee);
-                                } else if (list.get(i).equals("right2")) {
-                                    for (int k = 0; k < 2; k++) {
-                                        TurnRight(bee);
-                                    }
-                                } else if (list.get(i).equals("right3")) {
-                                    for (int k = 0; k < 3; k++) {
-                                        TurnRight(bee);
-                                    }
-                                }
-                                if (list.get(i).equals("nectar1")) {
-                                    GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
-                                }
-
-                                if (list.get(i).equals("nectar2")) {
-                                    for (int k = 0; k < 2; k++) {
-                                        GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
-                                    }
-                                }
-                                if (list.get(i).equals("nectar3")) {
-                                    for (int k = 0; k < 3; k++) {
-                                        GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
-                                    }
-                                }
-                            }
-
-                        }
-                    }
+            if (list.get(i).equals("nectar3")) {
+                for (int k = 0; k < 3; k++) {
+                    GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
                 }
             }
         }
