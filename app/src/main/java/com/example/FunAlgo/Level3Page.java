@@ -34,8 +34,9 @@ public class Level3Page extends Level1Page {
     private Integer[] times = {1, 2, 3};
     private ArrayAdapter<Integer> timesAdapter;
     private ArrayList<String> list;
-    private static ImageView bee;
+    private ImageView bee;
     private ImageView flower;
+
     private Button goForward;
     private Button turnRight;
     private Button turnLeft;
@@ -60,9 +61,9 @@ public class Level3Page extends Level1Page {
     private int count = 0;
     private int starsCount;
     private int timesForward;
-    private int timesNectar;
     private int timesLeft;
     private int timesRight;
+    private int timesNectar;
     private boolean isGameOver;
     private float beeX;
     private float beeY;
@@ -76,10 +77,6 @@ public class Level3Page extends Level1Page {
     // sharedPreferences for transport data to AchievementsPage
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-
-    public static ImageView getBee() {
-        return bee;
-    }
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -130,7 +127,7 @@ public class Level3Page extends Level1Page {
         spinnerForward = findViewById(R.id.spinnerForward);
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
-        spinnerNectar = findViewById(R.id.spinnerNectar);
+        spinnerNectar = findViewById(R.id.spinnerKey);
 
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
@@ -217,8 +214,61 @@ public class Level3Page extends Level1Page {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MoveLoop(list, bee, 200, 180, flower, null, flower0, null, 600, 194, 371, 540);
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).equals("forward1")) {
+                        GoForward();
+                    } else if (list.get(i).equals("forward2")) {
+                        for (int k = 0; k < 2; k++) {
+                            GoForward();
+                        }
+                    } else if (list.get(i).equals("forward3")) {
+                        for (int k = 0; k < 3; k++) {
+                            GoForward();
 
+                        }
+                    }
+                    if (list.get(i).equals("left1")) {
+                        TurnLeft();
+                    }
+                    if (list.get(i).equals("left2")) {
+                        for (int k = 0; k < 2; k++) {
+                            TurnLeft();
+                        }
+                    }
+                    if (list.get(i).equals("left3")) {
+                        for (int k = 0; k < 3; k++) {
+                            TurnLeft();
+                        }
+                    }
+
+                    if (list.get(i).equals("right1")) {
+                        TurnRight();
+                    }
+                    if (list.get(i).equals("right2")) {
+                        for (int k = 0; k < 2; k++) {
+                            TurnRight();
+                        }
+                    }
+                    if (list.get(i).equals("right3")) {
+                        for (int k = 0; k < 3; k++) {
+                            TurnRight();
+                        }
+                    }
+
+                    if (list.get(i).equals("nectar1")) {
+                        GetNectar();
+                    }
+                    if (list.get(i).equals("nectar2")) {
+                        for (int k = 0; k < 2; k++) {
+                            GetNectar();
+                        }
+                    }
+                    if (list.get(i).equals("nectar3")) {
+                        for (int k = 0; k < 3; k++) {
+                            GetNectar();
+                        }
+                    }
+                }
                 apply.setEnabled(false);
                 if (flower.getBackground() == flower0) {
                     System.out.println("true");
@@ -248,31 +298,231 @@ public class Level3Page extends Level1Page {
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = goForwardButton(timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerForward);
+                String codeMessage;
+                timesForward = (Integer) spinnerForward.getSelectedItem();
+                if (timesForward == 1) {
+                    codeMessage = "goForward();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesForward + " ; i++){\n" +
+                            "goForward()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
+                if (count >= 9) {
+                    list.add("forward" + timesForward);
+                    Button forward = new Button(Level3Page.this);
+                    forward.setTextSize(10);
+                    forward.setText(timesForward + " " + "GO FORWARD");
+                    forward.setBackgroundColor(Color.CYAN);
+                    layout2.addView(forward, params);
+                    count++;
+                    movementsCount++;
+                    movements.setText("Movements : " + movementsCount);
+                }
+
+                if (count < 9) {
+                    list.add("forward" + timesForward);
+                    Button forward = new Button(Level3Page.this);
+                    forward.setTextSize(10);
+                    forward.setText(timesForward + " " + "GO FORWARD");
+                    forward.setBackgroundColor(Color.CYAN);
+                    layout1.addView(forward, params);
+                    count++;
+                    movementsCount++;
+                    movements.setText("Movements : " + movementsCount);
+                }
             }
         });
 
         turnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = turnLeftButton(timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerLeft);
+                String codeMessage;
+                timesLeft = (Integer) spinnerLeft.getSelectedItem();
+                if (timesLeft == 1) {
+                    codeMessage = "turnLeft();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesLeft + " ; i++){\n" +
+                            "turnLeft()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
+                if (count >= 9) {
+                    list.add("left" + timesLeft);
+                    Button left = new Button(Level3Page.this);
+                    left.setTextSize(10);
+                    left.setText(timesLeft + " " + "TURN LEFT");
+                    left.setBackgroundColor(Color.CYAN);
+                    layout2.addView(left, params);
+                    count++;
+                    movementsCount++;
+                    movements.setText("Movements : " + movementsCount);
+                }
+                if (count < 9) {
+                    list.add("left" + timesLeft);
+                    Button left = new Button(Level3Page.this);
+                    left.setTextSize(10);
+                    left.setText(timesLeft + " " + "TURN LEFT");
+                    left.setBackgroundColor(Color.CYAN);
+                    layout1.addView(left, params);
+                    count++;
+                    movementsCount++;
+                    movements.setText("Movements : " + movementsCount);
+                }
             }
         });
 
         turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = turnRightButton(timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerRight);
+                String codeMessage;
+                timesRight = (Integer) spinnerRight.getSelectedItem();
+                if (timesRight == 1) {
+                    codeMessage = "turnRight();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesRight + " ; i++){\n" +
+                            "turnRight()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
+                if (count >= 9) {
+                    list.add("right" + timesRight);
+                    Button right = new Button(Level3Page.this);
+                    right.setTextSize(10);
+                    right.setText(timesRight + " " + "TURN RIGHT");
+                    right.setBackgroundColor(Color.CYAN);
+                    layout2.addView(right, params);
+                    count++;
+                    movementsCount++;
+                    movements.setText("Movements : " + movementsCount);
+                }
+                if (count < 9) {
+                    list.add("right" + timesRight);
+                    Button right = new Button(Level3Page.this);
+                    right.setTextSize(10);
+                    right.setText(timesRight + " " + "TURN RIGHT");
+                    right.setBackgroundColor(Color.CYAN);
+                    layout1.addView(right, params);
+                    count++;
+                    movementsCount++;
+                    movements.setText("Movements : " + movementsCount);
+                }
             }
         });
 
         getNectar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = getNectarButton(timesNectar, layout1, layout2, list, movementsCount, movements, spinnerNectar);
+                String codeMessage;
+                timesNectar = (Integer) spinnerNectar.getSelectedItem();
+                if (timesNectar == 1) {
+                    codeMessage = "getNectar();";
+                } else {
+                    codeMessage = "for(int i = 0 ; i < " + timesNectar + " ; i++){\n" +
+                            "getNectar()\n}";
+                }
+                SaveData(codeMessage);
+                setCodeMessage();
+                if (count >= 9) {
+                    list.add("nectar" + timesNectar);
+                    Button nectar = new Button(Level3Page.this);
+                    nectar.setTextSize(10);
+                    nectar.setText(timesNectar + " " + "GET NECTAR");
+                    nectar.setBackgroundColor(Color.CYAN);
+                    layout2.addView(nectar, params);
+                    count++;
+                    movementsCount++;
+                    movements.setText("Movements : " + movementsCount);
+                }
+                if (count < 9) {
+                    list.add("nectar" + timesNectar);
+                    Button nectar = new Button(Level3Page.this);
+                    nectar.setTextSize(10);
+                    nectar.setText(timesNectar + " " + "GET NECTAR");
+                    nectar.setBackgroundColor(Color.CYAN);
+                    layout1.addView(nectar, params);
+                    count++;
+                    movementsCount++;
+                    movements.setText("Movements : " + movementsCount);
+                }
             }
         });
 
+    }
+
+    public void reset() {
+        count = 0;
+        layout1.removeAllViewsInLayout();
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
+            list.remove(0);
+        }
+        if (!list.isEmpty()) {
+            System.out.println(list.get(0));
+        }
+        x = 0;
+        y = 0;
+        timesForward = 0;
+        timesRight = 0;
+        timesLeft = 0;
+        bee.setTranslationX(beeX);
+        bee.setTranslationY(beeY);
+        bee.setRotation(90);
+        apply.setEnabled(true);
+    }
+
+    public void GoForward() {
+        if (bee.getRotation() == 0) {
+            y -= (180);
+            bee.setTranslationY(y);
+
+            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
+
+        }
+
+        if (bee.getRotation() == 90) {
+            x += (200);
+            bee.setTranslationX(x);
+            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
+
+        }
+
+        if (bee.getRotation() == 270) {
+            x -= (200);
+            bee.setTranslationX(x);
+        }
+
+        if (bee.getRotation() == 180) {
+            y += (180);
+            bee.setTranslationY(y);
+            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
+
+        }
+
+        if (bee.getRotation() == -90) {
+            x -= (200);
+            bee.setTranslationX(x);
+            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
+
+        }
+
+    }
+
+    public void TurnRight() {
+
+        bee.setRotation(bee.getRotation() + (90));
+    }
+
+    public void TurnLeft() {
+
+        bee.setRotation(bee.getRotation() - (90));
+    }
+
+    public void GetNectar() {
+        if (bee.getX() == 600 && bee.getY() == 371) {
+            flower.setBackground(flower0);
+            System.out.println("çalıştı");
+        }
     }
 
     public void TryAgain() {
