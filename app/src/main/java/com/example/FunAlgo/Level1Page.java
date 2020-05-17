@@ -26,6 +26,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class Level1Page extends DefaultLevelPage implements ShowCodeI {
+    final private int[] targetArea = { 600, 184 };
+    final private int[] nonForbiddenAreaX = { 200 , 400 , 600 };
+    final private int[] nonForbiddenAreaY = { 184 , 184 , 184 };
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
@@ -139,7 +142,6 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
 
         sharedP = getSharedPreferences("isThis", MODE_PRIVATE);
         etS = sharedP.edit();
-
         isTryAgain = getSharedPreferences("isThis", MODE_PRIVATE).getBoolean("isTry", false);
         isGameOver = getSharedPreferences("isThis", MODE_PRIVATE).getBoolean("isOver", false);
         if (isTryAgain) {
@@ -148,7 +150,15 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             etS.commit();
         }
         if (isGameOver) {
+            // for arman achievements
+            et.putBoolean("finished1", true);
+            sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+            starsCount = sharedPreferences.getInt("starsCount", 1);
+            editor.putInt("starsCountLevel1", starsCount);
             finishedScreen(Level1Page.this, movementsCount, 2, 4);
+            et.commit();
+            //for finish screen
             etS.putBoolean("isOver", false);
             etS.commit();
         }
@@ -225,7 +235,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY);
+                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY,targetArea,nonForbiddenAreaX,nonForbiddenAreaY);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
             }
@@ -423,18 +433,26 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         code += sharedPref.getString("CODEMESSAGE", "") + "\n";
     }
 
-
     public class ApplyMove implements Runnable {
         ArrayList<String> list;
         ImageView bee;
         int changeX;
         int changeY;
-        public ApplyMove(ImageView bee, ArrayList<String> list, int changeX, int changeY){
+        int[] target;
+        int[] nonForbiddenAreaX;
+        int[] nonForbiddenAreaY;
+        boolean isForbiddenX;
+        boolean isForbiddenY;
+        public ApplyMove(ImageView bee, ArrayList<String> list, int changeX, int changeY, int[] target, int[] nonForbiddenAreaX, int[] nonForbiddenAreaY){
             this.bee = bee;
             this.list = list;
             this.changeX = changeX;
             this.changeY = changeY;
-
+            this.target = target;
+            this.nonForbiddenAreaX = nonForbiddenAreaX;
+            this.nonForbiddenAreaY = nonForbiddenAreaY;
+            isForbiddenX = false;
+            isForbiddenY = false;
         }
 
         public void run() {
@@ -481,27 +499,28 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                     }
                 } catch (InterruptedException e) {
                 }
-
-                if ((bee.getX() == 600) && (bee.getY() == 184)) {
+                if ((bee.getX() == target[0]) && (bee.getY() == target[1])) {
                     etS.putBoolean("isOver", true);
-                    et.putBoolean("finished1", true);
-                    sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
-                    editor = sharedPreferences.edit();
-                    starsCount = sharedPreferences.getInt("starsCount", 1);
-                    editor.putInt("starsCountLevel1", starsCount);
                     etS.commit();
                     Intent i = getIntent();
                     finish();
                     startActivity(i);
                 }
-                if (!((bee.getY() == 184) && ((bee.getX() == 0) || (bee.getX() == 200) || (bee.getX() == 400) || (bee.getX() == 600)))) {
+                for( int element : nonForbiddenAreaX){
+                    if(bee.getX() != element)
+                        isForbiddenX = true;
+                }
+                for ( int element : nonForbiddenAreaY){
+                    if(bee.getY() != element)
+                        isForbiddenY = true;
+                }
+                if (!(isForbiddenX && isForbiddenY) ) {
                     etS.putBoolean("isTry", true);
                     etS.commit();
                     Intent i = getIntent();
                     finish();
                     startActivity(i);
                 }
-
         }
     }
 

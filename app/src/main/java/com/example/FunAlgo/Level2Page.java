@@ -27,6 +27,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 public class Level2Page extends Level1Page {
+    final private int[] targetArea = { 400 , 8 };
+    final private int[] nonForbiddenAreaX = { 200 , 400 , 400 };
+    final private int[] nonForbiddenAreaY = { 368 , 188 , 8 };
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
@@ -68,8 +71,8 @@ public class Level2Page extends Level1Page {
     private int movementsCount;
     private Button show;
     private String code;
-    final static private int changeX = 180;
-    final static private int changeY = 200;
+    final static private int changeX = 200;
+    final static private int changeY = 180;
     //sharedPreferences to update and save levels
     private SharedPreferences sp;
     private SharedPreferences.Editor et;
@@ -136,6 +139,9 @@ public class Level2Page extends Level1Page {
         //SharedPreferences to save Level
         sp = getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
         et = sp.edit();
+
+        //targetArea
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,7 +213,7 @@ public class Level2Page extends Level1Page {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY);
+                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY,targetArea,nonForbiddenAreaX,nonForbiddenAreaY);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
             }

@@ -17,6 +17,8 @@ public class DefaultLevelPage extends AppCompatActivity {
     private int starsCount;
     private float x;
     private float y;
+    private SharedPreferences sharedP;
+
     public void TryAgain(Context context ) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
