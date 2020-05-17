@@ -97,7 +97,7 @@ public class LevelPage extends AppCompatActivity {
         button13.setEnabled(true);
         button14.setEnabled(false);
         button15.setEnabled(true);
-        button17.setEnabled(false);
+        button17.setEnabled(true);
         button18.setEnabled(true);
         button19.setEnabled(true);
         button20.setEnabled(true);

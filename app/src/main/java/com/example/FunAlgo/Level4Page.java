@@ -26,6 +26,9 @@ import androidx.appcompat.widget.AppCompatDrawableManager;
 import java.util.ArrayList;
 
 public class Level4Page extends Level1Page  {
+    final private int[] targetArea = { 600 , 11 };
+    final private int[] nonForbiddenAreaX = { 0, 200 , 200 , 200 , 400 , 400 , 600 };
+    final private int[] nonForbiddenAreaY = { 551,551 , 371 , 191 , 191 , 11 , 11 };
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
@@ -216,47 +219,11 @@ public class Level4Page extends Level1Page  {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).equals("forward1")) {
-                        GoForward();
-                    } else if (list.get(i).equals("forward2")) {
-                        for (int k = 0; k < 2; k++) {
-                            GoForward();
-                        }
-                    } else if (list.get(i).equals("forward3")) {
-                        for (int k = 0; k < 3; k++) {
-                            GoForward();
-
-                        }
-                    }
-                    if (list.get(i).equals("left1")) {
-                        TurnLeft();
-                    }
-                    if (list.get(i).equals("left2")) {
-                        for (int k = 0; k < 2; k++) {
-                            TurnLeft();
-                        }
-                    }
-                    if (list.get(i).equals("left3")) {
-                        for (int k = 0; k < 3; k++) {
-                            TurnLeft();
-                        }
-                    }
-                    if (list.get(i).equals("right1")) {
-                        TurnRight();
-                    }
-                    if (list.get(i).equals("right2")) {
-                        for (int k = 0; k < 2; k++) {
-                            TurnRight();
-                        }
-                    }
-                    if (list.get(i).equals("right3")) {
-                        for (int k = 0; k < 3; k++) {
-                            TurnRight();
-                        }
-                    }
-                }
                 apply.setEnabled(false);
+                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,600,0,371,0,null,null);
+                Thread t1 = new Thread(applyMove);
+                t1.start();
+/**
                 if ((bee.getX() == 600) && (bee.getY() == 11)) {
                     System.out.println("true");
                     isGameOver = true;
@@ -266,7 +233,7 @@ public class Level4Page extends Level1Page  {
                 } else {
                     TryAgain();
                 }
-
+*/
 /**
                 if (isGameOver == true) {
                     et.putBoolean("finished4", isGameOver);
