@@ -26,8 +26,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class Level5Page extends Level1Page  {
-
-
+    final private int[] targetArea = { 194 , 540 };
+    final private int[] nonForbiddenAreaX = { 394 , 394 , 594 , 194 , 194 };
+    final private int[] nonForbiddenAreaY = { 180 , 360 , 360 , 360 , 540 };
+    private TextView yellowText;
+    private TextView pinkText;
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
@@ -134,6 +137,10 @@ public class Level5Page extends Level1Page  {
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
         spinnerNectar = findViewById(R.id.spinnerNectar);
+        //text
+        pinkText = findViewById(R.id.level5pink);
+        yellowText = findViewById(R.id.level5yellow);
+
 
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
@@ -224,7 +231,11 @@ public class Level5Page extends Level1Page  {
             public void onClick(View v) {
                 //MoveLoop(list, bee, 200, 180, flower, flower2, flower0, flower00, 594,194,360,540);
                 apply.setEnabled(false);
+                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,flower,flower2,flower0,null,594,194,360,540,yellowText,pinkText);
+                Thread t1 = new Thread(applyMove);
+                t1.start();
 
+/**
                 if (flower.getBackground() == flower0 && flower2.getBackground() == flower00){
                     System.out.println("true");
                     isGameOver = true;
@@ -234,7 +245,8 @@ public class Level5Page extends Level1Page  {
                 } else {
                     TryAgain();
                 }
-
+*/
+                /**
                 if (isGameOver == true){
                     et.putBoolean("finished5", isGameOver);
                     finishedScreen(Level5Page.this, movementsCount,10,12);
@@ -243,6 +255,7 @@ public class Level5Page extends Level1Page  {
                     et.putInt("starsCountLevel5", starsCount);
                     et.commit();
                 }
+                 */
             }
         });
 

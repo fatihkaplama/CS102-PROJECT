@@ -26,7 +26,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class Level6Page extends Level1Page {
-
+    final private int[] targetArea = { 632 , 438 };
+    final private int[] nonForbiddenAreaX = { 472 , 312 , 152 , 152 , 152, 312 , 472 ,632};
+    final private int[] nonForbiddenAreaY = { 146 , 146 , 146 , 292 , 438, 438 , 438 , 438 };
+    private TextView yellowText;
+    private TextView pinkText;
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
@@ -130,6 +134,9 @@ public class Level6Page extends Level1Page {
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
         spinnerNectar = findViewById(R.id.spinnerNectar);
+        //text
+        pinkText = findViewById(R.id.level6pink);
+        yellowText = findViewById(R.id.level6yellow);
 
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
@@ -219,9 +226,12 @@ public class Level6Page extends Level1Page {
             @Override
             public void onClick(View v) {
                 //MoveLoop(list, bee, 160, 146, flower2, flower3, flower0, flower00, 312, 152, 146, 292);
-
                 apply.setEnabled(false);
+                ApplyMove applyMove = new ApplyMove(bee,list,160,146,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,flower2,flower3,flower0,null,312,152,146,292,yellowText,pinkText);
+                Thread t1 = new Thread(applyMove);
+                t1.start();
 
+/**
                 if (flower2.getBackground() == flower0 && flower3.getBackground() == flower00 && bee.getX() == 632 && bee.getY() == 438){
                     System.out.println("true");
                     isGameOver = true;
@@ -244,6 +254,7 @@ public class Level6Page extends Level1Page {
                     editor.putInt("starsCountLevel6", starsCount);
                     editor.commit();
                 }
+ */
             }
         });
 

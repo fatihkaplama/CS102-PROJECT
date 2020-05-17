@@ -87,7 +87,7 @@
             android:contentDescription="@string/bee"
             app:layout_column="1"
             app:layout_row="3"
-            app:srcCompat="@drawable/flower2" />
+            app:srcCompat="@drawable/pinkflowerr" />
 
         <ImageView
             android:id="@+id/bee"
@@ -106,7 +106,27 @@
             android:contentDescription="@string/honey"
             app:layout_column="3"
             app:layout_row="2"
-            app:srcCompat="@drawable/flower" />
+            app:srcCompat="@drawable/flowerr" />
+
+        <TextView
+            android:id="@+id/level5yellow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 1"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            app:layout_column="3"
+            app:layout_row="2" />
+
+        <TextView
+            android:id="@+id/level5pink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 2"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            app:layout_column="1"
+            app:layout_row="3" />
     </androidx.gridlayout.widget.GridLayout>
 
     <LinearLayout

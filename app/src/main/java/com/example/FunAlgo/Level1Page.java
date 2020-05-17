@@ -23,14 +23,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class Level1Page extends DefaultLevelPage implements ShowCodeI {
-    final private int[] targetArea = { 600, 184 };
-    final private int[] nonForbiddenAreaX = { 200 , 400 , 600 };
-    final private int[] nonForbiddenAreaY = { 184 , 184 , 184 };
+    final private int[] targetArea = {600, 184};
+    final private int[] nonForbiddenAreaX = {200, 400, 600};
+    final private int[] nonForbiddenAreaY = {184, 184, 184};
     private TextView nu;
     private boolean isSelected;
+    private boolean isSelected2;
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
@@ -239,7 +242,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,0,0,0,0,null);
+                ApplyMove applyMove = new ApplyMove(bee, list, changeX, changeY, targetArea, nonForbiddenAreaX, nonForbiddenAreaY, null, null, null, null, 0, 0, 0, 0, null, null);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
             }
@@ -412,23 +415,32 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         }
         return movementsCount;
     }
-    public void GetNectar(ImageView bee, ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2,final TextView nu) {
+
+    public void GetNectar(ImageView bee, ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2, final TextView nu, final TextView nu2) {
         if (bee.getX() == valueX1 && bee.getY() == valueY1) {
+            isSelected = true;
             System.out.println("çalıştı1");
-           // flower.setBackground(flower0);
+            // flower.setBackground(flower0);
             runOnUiThread(new Runnable() {
-                              @Override
-                              public void run() {
-                                  nu.setText("0");
-                              }
-                          });
+                @Override
+                public void run() {
+                    nu.setText("0");
+                }
+            });
         }
         if (bee.getX() == valueX2 && bee.getY() == valueY2) {
+            isSelected2 = true;
             System.out.println("çalıştı2");
-           // flower2.setBackground(flower00);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    nu2.setText("0");
+                }
+            });
+            // flower2.setBackground(flower00);
         }
+        System.out.print("almadı");
     }
-
 
 
     public void SaveData(String codeMessage) {
@@ -461,8 +473,10 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         int valueY1;
         int valueY2;
         TextView nu;
+        TextView nu2;
+
         public ApplyMove(ImageView bee, ArrayList<String> list, int changeX, int changeY, int[] target, int[] nonForbiddenAreaX, int[] nonForbiddenAreaY,
-        ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2, TextView nu){
+                         ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2, TextView nu, TextView nu2) {
             this.bee = bee;
             this.list = list;
             this.changeX = changeX;
@@ -470,7 +484,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             this.target = target;
             this.nonForbiddenAreaX = nonForbiddenAreaX;
             this.nonForbiddenAreaY = nonForbiddenAreaY;
-            isForbidden  = true ;
+            isForbidden = true;
             this.flower = flower;
             this.flower2 = flower2;
             this.flower0 = flower0;
@@ -480,138 +494,155 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             this.valueY1 = valueY1;
             this.valueY2 = valueY2;
             this.nu = nu;
+            this.nu2 = nu2;
         }
 
         public void run() {
-                try {
-                    for (int i = 0; i < list.size(); i++) {
-                        isForbidden = true;
-                        Thread.sleep(1000);
-                        if (list.get(i).equals("forward1")) {
+            try {
+                for (int i = 0; i < list.size(); i++) {
+                    isForbidden = true;
+                    Thread.sleep(1000);
+                    if (list.get(i).equals("forward1")) {
+                        GoForward(bee, changeX, changeY);
+                    } else if (list.get(i).equals("forward2")) {
+                        for (int k = 0; k < 2; k++) {
                             GoForward(bee, changeX, changeY);
-                        } else if (list.get(i).equals("forward2")) {
-                            for (int k = 0; k < 2; k++) {
-                                GoForward(bee, changeX, changeY);
-                            }
-                        } else if (list.get(i).equals("forward3")) {
-                            for (int k = 0; k < 3; k++) {
-                                GoForward(bee, changeX, changeY);
-                            }
                         }
-                        if (list.get(i).equals("left1")) {
+                    } else if (list.get(i).equals("forward3")) {
+                        for (int k = 0; k < 3; k++) {
+                            GoForward(bee, changeX, changeY);
+                        }
+                    }
+                    if (list.get(i).equals("left1")) {
+                        TurnLeft(bee);
+                    }
+                    if (list.get(i).equals("left2")) {
+                        for (int k = 0; k < 2; k++) {
                             TurnLeft(bee);
                         }
-                        if (list.get(i).equals("left2")) {
-                            for (int k = 0; k < 2; k++) {
-                                TurnLeft(bee);
-                            }
+                    }
+                    if (list.get(i).equals("left3")) {
+                        for (int k = 0; k < 3; k++) {
+                            TurnLeft(bee);
                         }
-                        if (list.get(i).equals("left3")) {
-                            for (int k = 0; k < 3; k++) {
-                                TurnLeft(bee);
-                            }
-                        }
-                        if (list.get(i).equals("right1")) {
+                    }
+                    if (list.get(i).equals("right1")) {
+                        TurnRight(bee);
+                    }
+                    if (list.get(i).equals("right2")) {
+                        for (int k = 0; k < 2; k++) {
                             TurnRight(bee);
                         }
-                        if (list.get(i).equals("right2")) {
-                            for (int k = 0; k < 2; k++) {
-                                TurnRight(bee);
-                            }
+                    }
+                    if (list.get(i).equals("right3")) {
+                        for (int k = 0; k < 3; k++) {
+                            TurnRight(bee);
                         }
-                        if (list.get(i).equals("right3")) {
-                            for (int k = 0; k < 3; k++) {
-                                TurnRight(bee);
-                            }
-                        }else if (list.get(i).equals("nectar1")) {
-                            GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2,nu);
-                            isSelected = true;
-                        } else if (list.get(i).equals("nectar2")) {
-                            for (int k = 0; k < 2; k++) {
-                                GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2,nu);
-                                isSelected = true;
-                            }
-                        } else if (list.get(i).equals("nectar3")) {
-                            for (int k = 0; k < 3; k++) {
-                                GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2,nu);
-                                isSelected = true;
-                            }
+                    } else if (list.get(i).equals("nectar1")) {
+                        GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2, nu, nu2);
+                    } else if (list.get(i).equals("nectar2")) {
+                        for (int k = 0; k < 2; k++) {
+                            GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2, nu, nu2);
                         }
-                        if (isSelected &&(bee.getX() == target[0]) && (bee.getY() == target[1])  ) {
+                    } else if (list.get(i).equals("nectar3")) {
+                        for (int k = 0; k < 3; k++) {
+                            GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2, nu, nu2);
+                        }
+                    }
+                    if (nu2 == null && nu == null) {
+                        if ((bee.getX() == target[0]) && (bee.getY() == target[1])) {
                             etS.putBoolean("isOver", true);
                             etS.commit();
                             Intent j = getIntent();
                             finish();
                             startActivity(j);
                         }
-                        for ( int t = 0; t < nonForbiddenAreaY.length; t++)
-                        {
-                            if((bee.getX() == nonForbiddenAreaX[t] && bee.getY() == nonForbiddenAreaY[t]))
-                                isForbidden = false;
-                        }
-                        if (isForbidden) {
-                            etS.putBoolean("isTry", true);
+                    }
+                    else if (nu2 == null && nu != null) {
+                        if (isSelected && (bee.getX() == target[0]) && (bee.getY() == target[1])) {
+                            etS.putBoolean("isOver", true);
                             etS.commit();
                             Intent j = getIntent();
                             finish();
                             startActivity(j);
-                            break;
                         }
                     }
-                } catch (InterruptedException e) {
+                    else if (nu2 != null && nu != null) {
+                        if (isSelected2 && isSelected&& (bee.getX() == target[0]) && (bee.getY() == target[1])) {
+                            etS.putBoolean("isOver", true);
+                            etS.commit();
+                            Intent j = getIntent();
+                            finish();
+                            startActivity(j);
+                        }
+                    }
+                    for (int t = 0; t < nonForbiddenAreaY.length; t++) {
+                        if ((bee.getX() == nonForbiddenAreaX[t] && bee.getY() == nonForbiddenAreaY[t]))
+                            isForbidden = false;
+                    }
+                    if (isForbidden) {
+                        etS.putBoolean("isTry", true);
+                        etS.commit();
+                        Intent j = getIntent();
+                        finish();
+                        startActivity(j);
+                        break;
+                    }
                 }
+            } catch (InterruptedException e) {
+            }
         }
     }
 
 /**
-    public void MoveLoop(ArrayList<String> list, ImageView bee, int changeX,
-                         int changeY, ImageView flower, ImageView flower2, Drawable flower0, Drawable
-                                 flower00,
-                         int valueX1, int valueX2, int valueY1, int valueY2) {
-        System.out.println("deneme");
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).equals("forward1")) {
-                GoForward(bee, changeX, changeY);
-            } else if (list.get(i).equals("forward2")) {
-                for (int k = 0; k < 2; k++) {
-                    GoForward(bee, changeX, changeY);
-                }
-            } else if (list.get(i).equals("forward3")) {
-                for (int k = 0; k < 3; k++) {
-                    GoForward(bee, changeX, changeY);
-                }
-            } else if (list.get(i).equals("left1")) {
-                TurnLeft(bee);
-            } else if (list.get(i).equals("left2")) {
-                for (int k = 0; k < 2; k++) {
-                    TurnLeft(bee);
-                }
-            } else if (list.get(i).equals("left3")) {
-                for (int k = 0; k < 3; k++) {
-                    TurnLeft(bee);
-                }
-            } else if (list.get(i).equals("right1")) {
-                TurnRight(bee);
-            } else if (list.get(i).equals("right2")) {
-                for (int k = 0; k < 2; k++) {
-                    TurnRight(bee);
-                }
-            } else if (list.get(i).equals("right3")) {
-                for (int k = 0; k < 3; k++) {
-                    TurnRight(bee);
-                }
-            } else if (list.get(i).equals("nectar1")) {
-                GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
-            } else if (list.get(i).equals("nectar2")) {
-                for (int k = 0; k < 2; k++) {
-                    GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
-                }
-            } else if (list.get(i).equals("nectar3")) {
-                for (int k = 0; k < 3; k++) {
-                    GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
-                }
-            }
-        }
-    }
+ public void MoveLoop(ArrayList<String> list, ImageView bee, int changeX,
+ int changeY, ImageView flower, ImageView flower2, Drawable flower0, Drawable
+ flower00,
+ int valueX1, int valueX2, int valueY1, int valueY2) {
+ System.out.println("deneme");
+ for (int i = 0; i < list.size(); i++) {
+ if (list.get(i).equals("forward1")) {
+ GoForward(bee, changeX, changeY);
+ } else if (list.get(i).equals("forward2")) {
+ for (int k = 0; k < 2; k++) {
+ GoForward(bee, changeX, changeY);
+ }
+ } else if (list.get(i).equals("forward3")) {
+ for (int k = 0; k < 3; k++) {
+ GoForward(bee, changeX, changeY);
+ }
+ } else if (list.get(i).equals("left1")) {
+ TurnLeft(bee);
+ } else if (list.get(i).equals("left2")) {
+ for (int k = 0; k < 2; k++) {
+ TurnLeft(bee);
+ }
+ } else if (list.get(i).equals("left3")) {
+ for (int k = 0; k < 3; k++) {
+ TurnLeft(bee);
+ }
+ } else if (list.get(i).equals("right1")) {
+ TurnRight(bee);
+ } else if (list.get(i).equals("right2")) {
+ for (int k = 0; k < 2; k++) {
+ TurnRight(bee);
+ }
+ } else if (list.get(i).equals("right3")) {
+ for (int k = 0; k < 3; k++) {
+ TurnRight(bee);
+ }
+ } else if (list.get(i).equals("nectar1")) {
+ GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
+ } else if (list.get(i).equals("nectar2")) {
+ for (int k = 0; k < 2; k++) {
+ GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
+ }
+ } else if (list.get(i).equals("nectar3")) {
+ for (int k = 0; k < 3; k++) {
+ GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
+ }
+ }
+ }
+ }
  */
 }

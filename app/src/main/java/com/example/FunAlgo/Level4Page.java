@@ -267,7 +267,7 @@ public class Level4Page extends Level1Page  {
                     TryAgain();
                 }
 
-
+/**
                 if (isGameOver == true) {
                     et.putBoolean("finished4", isGameOver);
                     finishedScreen(Level4Page.this, movementsCount,9,10);
@@ -277,6 +277,7 @@ public class Level4Page extends Level1Page  {
                     editor.putInt("starsCountLevel4", starsCount);
                     editor.commit();
                 }
+ */
             }
         });
 
