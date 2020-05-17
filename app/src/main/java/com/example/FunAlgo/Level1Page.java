@@ -398,60 +398,6 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         }
         return movementsCount;
     }
-
-    public void GoForward(ImageView bee, int changeX, int changeY) {
-
-        if (bee.getRotation() == 0) {
-            y -= (changeY);
-            bee.setTranslationY(y);
-            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
-
-        }
-
-        if (bee.getRotation() == 90) {
-            x += (changeX);
-            bee.setTranslationX(x);
-            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
-
-        }
-
-        if (bee.getRotation() == 180) {
-            y += (changeY);
-            bee.setTranslationY(y);
-            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
-        }
-
-        if (bee.getRotation() == -180) {
-            y += (changeY);
-            bee.setTranslationY(y);
-            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
-
-        }
-        if (bee.getRotation() == 270) {
-            x -= (changeX);
-            bee.setTranslationX(x);
-        }
-
-        if (bee.getRotation() == -90) {
-            x -= (changeX);
-            bee.setTranslationX(x);
-            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
-
-        }
-        System.out.println(bee.getX());
-        System.out.println(bee.getY());
-    }
-
-    public void TurnRight(ImageView bee) {
-
-        bee.setRotation(bee.getRotation() + (90));
-    }
-
-    public void TurnLeft(ImageView bee) {
-
-        bee.setRotation(bee.getRotation() - (90));
-    }
-
     public void GetNectar(ImageView bee, ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2) {
         if (bee.getX() == valueX1 && bee.getY() == valueY1) {
             System.out.println("çalıştı1");
@@ -463,21 +409,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         }
     }
 
-    public void TryAgain(Context context) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
-        Button menu = (Button) myView.findViewById(R.id.menubtn);
-        Button retry = (Button) myView.findViewById(R.id.retrybtn);
-        retry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recreate();
-            }
-        });
-        builder.setView(myView);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
+
 
     public void SaveData(String codeMessage) {
         SharedPreferences sharedPref = Level1Page.this.getPreferences(Context.MODE_PRIVATE);
@@ -502,6 +434,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             this.list = list;
             this.changeX = changeX;
             this.changeY = changeY;
+
         }
 
         public void run() {

@@ -11,8 +11,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class DefaultLevelPage extends AppCompatActivity {
     private int starsCount;
+    private float x;
+    private float y;
     public void TryAgain(Context context ) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
@@ -83,6 +87,60 @@ public class DefaultLevelPage extends AppCompatActivity {
             }
         });
 
-
     }
+
+    public void GoForward(ImageView bee, int changeX, int changeY) {
+
+        if (bee.getRotation() == 0) {
+            y -= (changeY);
+            bee.setTranslationY(y);
+            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
+
+        }
+
+        if (bee.getRotation() == 90) {
+            x += (changeX);
+            bee.setTranslationX(x);
+            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
+
+        }
+
+        if (bee.getRotation() == 180) {
+            y += (changeY);
+            bee.setTranslationY(y);
+            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
+        }
+
+        if (bee.getRotation() == -180) {
+            y += (changeY);
+            bee.setTranslationY(y);
+            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
+
+        }
+        if (bee.getRotation() == 270) {
+            x -= (changeX);
+            bee.setTranslationX(x);
+        }
+
+        if (bee.getRotation() == -90) {
+            x -= (changeX);
+            bee.setTranslationX(x);
+            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
+
+        }
+        System.out.println(bee.getX());
+        System.out.println(bee.getY());
+    }
+
+    public void TurnRight(ImageView bee) {
+
+        bee.setRotation(bee.getRotation() + (90));
+    }
+
+    public void TurnLeft(ImageView bee) {
+
+        bee.setRotation(bee.getRotation() - (90));
+    }
+
+
 }
