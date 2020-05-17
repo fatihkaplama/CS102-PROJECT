@@ -27,8 +27,9 @@ import java.util.ArrayList;
 
 public class Level3Page extends Level1Page {
     final private int[] targetArea = { 600 , 371 };
-    final private int[] nonForbiddenAreaX = { 0 , 200 , 400 , 600};
-    final private int[] nonForbiddenAreaY = { 371 , 371 , 371 , 371 };
+    final private int[] nonForbiddenAreaX = { 0 ,0 , 200 , 400 , 600};
+    final private int[] nonForbiddenAreaY = { 551 , 371 , 371 , 371 , 371 };
+    TextView nu;
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
@@ -110,6 +111,7 @@ public class Level3Page extends Level1Page {
         getNectar = findViewById(R.id.getNectar);
         show = findViewById(R.id.showCode_button);
         code = "";
+        nu = findViewById(R.id.textView);
 
         //volume
         isVolumeOn = true;
@@ -220,7 +222,7 @@ public class Level3Page extends Level1Page {
 
                 //apply.setEnabled(false);
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,flower,null,flower0,null,600,0,371,0);
+                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,flower,null,flower0,null,600,0,371,0,nu);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
                 /**

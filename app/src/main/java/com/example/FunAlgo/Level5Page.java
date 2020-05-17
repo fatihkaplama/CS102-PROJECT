@@ -222,9 +222,9 @@ public class Level5Page extends Level1Page  {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MoveLoop(list, bee, 200, 180, flower, flower2, flower0, flower00, 594,194,360,540);
-
+                //MoveLoop(list, bee, 200, 180, flower, flower2, flower0, flower00, 594,194,360,540);
                 apply.setEnabled(false);
+
                 if (flower.getBackground() == flower0 && flower2.getBackground() == flower00){
                     System.out.println("true");
                     isGameOver = true;

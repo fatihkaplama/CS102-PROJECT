@@ -29,6 +29,8 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
     final private int[] targetArea = { 600, 184 };
     final private int[] nonForbiddenAreaX = { 200 , 400 , 600 };
     final private int[] nonForbiddenAreaY = { 184 , 184 , 184 };
+    private TextView nu;
+    private boolean isSelected;
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
@@ -111,6 +113,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         movements = findViewById(R.id.movements);
         show = findViewById(R.id.showCode_button);
         code = "";
+        //flower
 
         //volume
         isVolumeOn = true;
@@ -135,6 +138,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
 
         isGameOver = false;
         isTryAgain = false;
+        isSelected = false;
 
         //SharedPreferences to save Level
         sp = getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
@@ -235,7 +239,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,0,0,0,0);
+                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,0,0,0,0,null);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
             }
@@ -408,14 +412,20 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         }
         return movementsCount;
     }
-    public void GetNectar(ImageView bee, ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2) {
+    public void GetNectar(ImageView bee, ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2,final TextView nu) {
         if (bee.getX() == valueX1 && bee.getY() == valueY1) {
             System.out.println("çalıştı1");
-            flower.setBackground(flower0);
+           // flower.setBackground(flower0);
+            runOnUiThread(new Runnable() {
+                              @Override
+                              public void run() {
+                                  nu.setText("0");
+                              }
+                          });
         }
         if (bee.getX() == valueX2 && bee.getY() == valueY2) {
             System.out.println("çalıştı2");
-            flower2.setBackground(flower00);
+           // flower2.setBackground(flower00);
         }
     }
 
@@ -441,8 +451,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         int[] target;
         int[] nonForbiddenAreaX;
         int[] nonForbiddenAreaY;
-        boolean isForbiddenX;
-        boolean isForbiddenY;
+        boolean isForbidden;
         ImageView flower;
         ImageView flower2;
         Drawable flower0;
@@ -451,8 +460,9 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         int valueX2;
         int valueY1;
         int valueY2;
+        TextView nu;
         public ApplyMove(ImageView bee, ArrayList<String> list, int changeX, int changeY, int[] target, int[] nonForbiddenAreaX, int[] nonForbiddenAreaY,
-        ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2){
+        ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2, TextView nu){
             this.bee = bee;
             this.list = list;
             this.changeX = changeX;
@@ -460,8 +470,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             this.target = target;
             this.nonForbiddenAreaX = nonForbiddenAreaX;
             this.nonForbiddenAreaY = nonForbiddenAreaY;
-            isForbiddenX = false;
-            isForbiddenY = false;
+            isForbidden  = true ;
             this.flower = flower;
             this.flower2 = flower2;
             this.flower0 = flower0;
@@ -470,11 +479,13 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             this.valueX2 = valueX2;
             this.valueY1 = valueY1;
             this.valueY2 = valueY2;
+            this.nu = nu;
         }
 
         public void run() {
                 try {
                     for (int i = 0; i < list.size(); i++) {
+                        isForbidden = true;
                         Thread.sleep(1000);
                         if (list.get(i).equals("forward1")) {
                             GoForward(bee, changeX, changeY);
@@ -513,49 +524,46 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                                 TurnRight(bee);
                             }
                         }else if (list.get(i).equals("nectar1")) {
-                            GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
+                            GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2,nu);
+                            isSelected = true;
                         } else if (list.get(i).equals("nectar2")) {
                             for (int k = 0; k < 2; k++) {
-                                GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
+                                GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2,nu);
+                                isSelected = true;
                             }
                         } else if (list.get(i).equals("nectar3")) {
                             for (int k = 0; k < 3; k++) {
-                                GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
+                                GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2,nu);
+                                isSelected = true;
                             }
+                        }
+                        if (isSelected &&(bee.getX() == target[0]) && (bee.getY() == target[1])  ) {
+                            etS.putBoolean("isOver", true);
+                            etS.commit();
+                            Intent j = getIntent();
+                            finish();
+                            startActivity(j);
+                        }
+                        for ( int t = 0; t < nonForbiddenAreaY.length; t++)
+                        {
+                            if((bee.getX() == nonForbiddenAreaX[t] && bee.getY() == nonForbiddenAreaY[t]))
+                                isForbidden = false;
+                        }
+                        if (isForbidden) {
+                            etS.putBoolean("isTry", true);
+                            etS.commit();
+                            Intent j = getIntent();
+                            finish();
+                            startActivity(j);
+                            break;
                         }
                     }
                 } catch (InterruptedException e) {
                 }
-                if ((bee.getX() == target[0]) && (bee.getY() == target[1])) {
-                    etS.putBoolean("isOver", true);
-                    etS.commit();
-                    Intent i = getIntent();
-                    finish();
-                    startActivity(i);
-                }
-                for( int element : nonForbiddenAreaX){
-                    if(bee.getX() != element) {
-                        isForbiddenX = true;
-                        break;
-                    }
-                }
-                for ( int element : nonForbiddenAreaY){
-                    if(bee.getY() != element) {
-                        isForbiddenY = true;
-                        break;
-                    }
-                }
-                if ((isForbiddenX && isForbiddenY) ) {
-                    etS.putBoolean("isTry", true);
-                    etS.commit();
-                    Intent i = getIntent();
-                    finish();
-                    startActivity(i);
-                }
         }
     }
 
-
+/**
     public void MoveLoop(ArrayList<String> list, ImageView bee, int changeX,
                          int changeY, ImageView flower, ImageView flower2, Drawable flower0, Drawable
                                  flower00,
@@ -605,4 +613,5 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             }
         }
     }
+ */
 }

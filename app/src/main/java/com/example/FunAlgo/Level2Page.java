@@ -28,8 +28,8 @@ import java.util.logging.Level;
 
 public class Level2Page extends Level1Page {
     final private int[] targetArea = { 400 , 8 };
-    final private int[] nonForbiddenAreaX = { 200 , 400 , 400 };
-    final private int[] nonForbiddenAreaY = { 368 , 188 , 8 };
+    final private int[] nonForbiddenAreaX = { 200 , 400 , 600 , 600 , 600 };
+    final private int[] nonForbiddenAreaY = { 368 , 368 , 368, 188 , 8 };
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
@@ -213,7 +213,7 @@ public class Level2Page extends Level1Page {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,0,0,0,0);
+                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,0,0,0,0,null);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
             }
