@@ -29,6 +29,9 @@ import java.util.ArrayList;
 import java.util.Timer;
 
 public class Level8Page extends Level1Page  {
+    final private int[] targetArea = { 532 , 249 };
+    final private int[] nonForbiddenAreaX = { 0 , 133 , 266 , 399 , 399 , 399, 399 , 266 , 133 , 133 , 0 ,532};
+    final private int[] nonForbiddenAreaY = { 491 ,491 , 491 , 491 , 370 , 249, 128 , 128, 128 , 249 , 249, 249};
     //variables
     private TextView movements;
     private Spinner spinnerForward;
@@ -237,62 +240,13 @@ public class Level8Page extends Level1Page  {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).equals("forward1")) {
-                        GoForward();
-                    } else if (list.get(i).equals("forward2")) {
-                        for (int k = 0; k < 2; k++) {
-                            GoForward();
-                        }
-                    } else if (list.get(i).equals("forward3")) {
-                        for (int k = 0; k < 3; k++) {
-                            GoForward();
-
-                        }
-                    }
-                    if (list.get(i).equals("left1")) {
-                        TurnLeft();
-                    }
-                    else if (list.get(i).equals("left2")) {
-                        for (int k = 0; k < 2; k++) {
-                            TurnLeft();
-                        }
-                    }
-                    else if (list.get(i).equals("left3")) {
-                        for (int k = 0; k < 3; k++) {
-                            TurnLeft();
-                        }
-                    }
-                    else if (list.get(i).equals("right1")) {
-                        TurnRight();
-                    }
-                    else if (list.get(i).equals("right2")) {
-                        for (int k = 0; k < 2; k++) {
-                            TurnRight();
-                        }
-                    }
-                    else if (list.get(i).equals("right3")) {
-                        for (int k = 0; k < 3; k++) {
-                            TurnRight();
-                        }
-                    }
-                    else if (list.get(i).equals("key1")){
-                        GetKey();
-                    }
-                    else if (list.get(i).equals("key2")) {
-                        for (int k = 0; k < 2; k++) {
-                            GetKey();
-                        }
-                    }
-                    else if (list.get(i).equals("key3")) {
-                        for (int k = 0; k < 3; k++) {
-                            GetKey();
-                        }
-                    }
-                }
                 apply.setEnabled(false);
+                ApplyMove applyMove = new ApplyMove(hero,list,133,121,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,0,0,0,0,null,null,key,266,128);
+                Thread t1 = new Thread(applyMove);
+                t1.start();
+
                 //finish the game if the necessary conditions are met
-                if (hero.getX() == 532 && hero.getY() == 249 && heroHasKey){
+                if (hero.getX() == 266 && hero.getY() == 128 && heroHasKey){
                     System.out.println("true");
                     isGameOver = true;
 
@@ -324,177 +278,34 @@ public class Level8Page extends Level1Page  {
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //creating the parameter for showButton
-                String codeMessage;
-                //to find out how many times the user will move forward
-                timesForward = (Integer) spinnerForward.getSelectedItem();
-                if (timesForward == 1) {
-                    codeMessage = "goForward();";
-                } else {
-                    codeMessage = "for(int i = 0 ; i < " + timesForward + " ; i++){\n" +
-                            "goForward()\n}";
-                }
-                SaveData(codeMessage);
-                setCodeMessage();
-                if (count >= 9){
-                    list.add("forward" + timesForward);
-                    Button forward = new Button(Level8Page.this);
-                    forward.setTextSize(10);
-                    forward.setText(timesForward + " " + "GO FORWARD");
-                    forward.setBackgroundColor(Color.CYAN);
-                    layout2.addView(forward, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                    System.out.println(movementsCount);
-                }
-                //if the number of buttons added is less than 9, add this button to the first layout
-                if (count < 9) {
-                    list.add("forward" + timesForward);
-                    Button forward = new Button(Level8Page.this);
-                    forward.setTextSize(10);
-                    forward.setText(timesForward + " " + "GO FORWARD");
-                    forward.setBackgroundColor(Color.CYAN);
-                    layout1.addView(forward, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                    System.out.println(movementsCount);
-                }
-            }
-        });
-        //when the user click the TURN LEFT button
-        turnLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //creating the parameter for showButton
-                String codeMessage;
-                //to find out how many times the user will turn left
-                timesLeft = (Integer) spinnerLeft.getSelectedItem();
-                if (timesLeft == 1) {
-                    codeMessage = "turnLeft();";
-                } else {
-                    codeMessage = "for(int i = 0 ; i < " + timesLeft + " ; i++){\n" +
-                            "turnLeft()\n}";
-                }
-                SaveData(codeMessage);
-                setCodeMessage();
-                if (count >= 9){
-                    list.add("left" + timesLeft);
-                    Button left = new Button(Level8Page.this);
-                    left.setTextSize(10);
-                    left.setText(timesLeft + " " + "TURN LEFT");
-                    left.setBackgroundColor(Color.CYAN);
-                    layout2.addView(left, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                    System.out.println(movementsCount);
-                }
-                //if the number of buttons added is less than 9, add this button to the first layout
-                if (count < 9) {
-                    list.add("left" + timesLeft);
-                    Button left = new Button(Level8Page.this);
-                    left.setTextSize(10);
-                    left.setText(timesLeft + " " + "TURN LEFT");
-                    left.setBackgroundColor(Color.CYAN);
-                    layout1.addView(left, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                    System.out.println(movementsCount);
-                }
-            }
-        });
-        //when the user click the TURN RIGHT button
-        turnRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //creating the parameter for showButton
-                String codeMessage;
-                //to find out how many times the user will turn right
-                timesRight = (Integer) spinnerRight.getSelectedItem();
-                if (timesRight == 1) {
-                    codeMessage = "turnRight();";
-                } else {
-                    codeMessage = "for(int i = 0 ; i < " + timesRight + " ; i++){\n" +
-                            "turnRight()\n}";
-                }
-                SaveData(codeMessage);
-                setCodeMessage();
-                if (count >= 9){
-                    list.add("right" + timesRight);
-                    Button right = new Button(Level8Page.this);
-                    right.setTextSize(10);
-                    right.setText(timesRight + " " + "TURN RIGHT");
-                    right.setBackgroundColor(Color.CYAN);
-                    layout2.addView(right, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                    System.out.println(movementsCount);
-                }
-                //if the number of buttons added is less than 9, add this button to the first layout
-                if (count < 9) {
-                    list.add("right" + timesRight);
-                    Button right = new Button(Level8Page.this);
-                    right.setTextSize(10);
-                    right.setText(timesRight + " " + "TURN RIGHT");
-                    right.setBackgroundColor(Color.CYAN);
-                    layout1.addView(right, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                    System.out.println(movementsCount);
-                }
-            }
-        });
-        //when the user click the GET KEY button
-        getKey.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //creating the parameter for showButton
-                String codeMessage;
-                //to find out how many times the key will be taken
-                timesKey = (Integer) spinnerKey.getSelectedItem();
-                if (timesKey == 1) {
-                    codeMessage = "turnRight();";
-                } else {
-                    codeMessage = "for(int i = 0 ; i < " + timesKey + " ; i++){\n" +
-                            "turnRight()\n}";
-                }
-                SaveData(codeMessage);
-                setCodeMessage();
-                //if the number of buttons added is more than 9, add this button to the second layout
-                if (count >= 9){
-                    list.add("key" + timesKey);
-                    Button nectar = new Button(Level8Page.this);
-                    nectar.setTextSize(10);
-                    nectar.setText(timesKey + " " + "GET KEY");
-                    nectar.setBackgroundColor(Color.CYAN);
-                    layout2.addView(nectar, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                    System.out.println(movementsCount);
-                }
-                //if the number of buttons added is less than 9, add this button to the first layout
-                if (count < 9){
-                    list.add("key" + timesKey);
-                    Button nectar = new Button(Level8Page.this);
-                    nectar.setTextSize(10);
-                    nectar.setText(timesKey + " " + "GET KEY");
-                    nectar.setBackgroundColor(Color.CYAN);
-                    layout1.addView(nectar, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                    System.out.println(movementsCount);
-                }
+                movementsCount = goForwardButton(timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerForward);
+
             }
         });
 
+        turnLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                movementsCount = turnLeftButton(timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerLeft);
+            }
+        });
+
+        turnRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                movementsCount = turnRightButton(timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerRight);
+            }
+        });
+
+        getKey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                movementsCount = getNectarButton(timesKey, layout1, layout2, list, movementsCount, movements, spinnerKey,"NECTAR");
+            }
+        });
     }
+
+
     /** This method is used to reset the game.
      * @param
      * @return

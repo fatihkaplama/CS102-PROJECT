@@ -231,7 +231,7 @@ public class Level5Page extends Level1Page  {
             public void onClick(View v) {
                 //MoveLoop(list, bee, 200, 180, flower, flower2, flower0, flower00, 594,194,360,540);
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,flower,flower2,flower0,null,594,194,360,540,yellowText,pinkText);
+                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,flower,flower2,flower0,null,594,194,360,540,yellowText,pinkText,null,0,0);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
 
@@ -284,7 +284,7 @@ public class Level5Page extends Level1Page  {
         getNectar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = getNectarButton(timesNectar, layout1, layout2, list, movementsCount, movements, spinnerNectar);
+                movementsCount = getNectarButton(timesNectar, layout1, layout2, list, movementsCount, movements, spinnerNectar,"NECTAR");
             }
         });
     }

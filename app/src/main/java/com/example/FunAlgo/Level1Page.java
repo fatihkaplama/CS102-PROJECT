@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -34,6 +35,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
     private TextView nu;
     private boolean isSelected;
     private boolean isSelected2;
+    private boolean heroHasKey;
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
@@ -242,7 +244,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee, list, changeX, changeY, targetArea, nonForbiddenAreaX, nonForbiddenAreaY, null, null, null, null, 0, 0, 0, 0, null, null);
+                ApplyMove applyMove = new ApplyMove(bee, list, changeX, changeY, targetArea, nonForbiddenAreaX, nonForbiddenAreaY, null, null, null, null, 0, 0, 0, 0, null, null,null,0,0);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
             }
@@ -380,7 +382,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         return movementsCount;
     }
 
-    public int getNectarButton(int timesNectar, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int movementsCount, TextView movements, Spinner spinnerNectar) {
+    public int getNectarButton(int timesNectar, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int movementsCount, TextView movements, Spinner spinnerNectar, String object) {
         String codeMessage;
         timesNectar = (Integer) spinnerNectar.getSelectedItem();
         if (timesNectar == 1) {
@@ -395,7 +397,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             list.add("nectar" + timesNectar);
             Button nectar = new Button(Level1Page.this);
             nectar.setTextSize(10);
-            nectar.setText(timesNectar + " " + "GET NECTAR");
+            nectar.setText(timesNectar + " " + "GET " + object);
             nectar.setBackgroundColor(Color.CYAN);
             layout2.addView(nectar, params);
             count++;
@@ -406,7 +408,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             list.add("nectar" + timesNectar);
             Button nectar = new Button(Level1Page.this);
             nectar.setTextSize(10);
-            nectar.setText(timesNectar + " " + "GET NECTAR");
+            nectar.setText(timesNectar + " " + "GET "+ object);
             nectar.setBackgroundColor(Color.CYAN);
             layout1.addView(nectar, params);
             count++;
@@ -416,7 +418,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         return movementsCount;
     }
 
-    public void GetNectar(ImageView bee, ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2, final TextView nu, final TextView nu2) {
+    public void GetNectar(ImageView bee, ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2, final TextView nu, final TextView nu2,final ImageView nu3, int valueX3, int valueY3) {
         if (bee.getX() == valueX1 && bee.getY() == valueY1) {
             isSelected = true;
             System.out.println("çalıştı1");
@@ -439,7 +441,16 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             });
             // flower2.setBackground(flower00);
         }
-        System.out.print("almadı");
+        if (bee.getX() == valueX3 && bee.getY() == valueY3) {
+            System.out.println("çalıştı1");
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    nu3.setVisibility(View.INVISIBLE);
+                    heroHasKey = true;
+                }
+            });
+        }        System.out.print("almadı");
     }
 
 
@@ -474,9 +485,11 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         int valueY2;
         TextView nu;
         TextView nu2;
-
+        ImageView nu3;
+        int valueX3;
+        int valueY3;
         public ApplyMove(ImageView bee, ArrayList<String> list, int changeX, int changeY, int[] target, int[] nonForbiddenAreaX, int[] nonForbiddenAreaY,
-                         ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2, TextView nu, TextView nu2) {
+                         ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2, TextView nu, TextView nu2, ImageView nu3, int valueX3,int valueY3) {
             this.bee = bee;
             this.list = list;
             this.changeX = changeX;
@@ -495,6 +508,9 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             this.valueY2 = valueY2;
             this.nu = nu;
             this.nu2 = nu2;
+            this.nu3 = nu3;
+            this.valueX3 = valueX3;
+            this.valueY3 = valueY3;
         }
 
         public void run() {
@@ -539,17 +555,25 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                             TurnRight(bee);
                         }
                     } else if (list.get(i).equals("nectar1")) {
-                        GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2, nu, nu2);
+                        GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2, nu, nu2,nu3,valueX3, valueY3);
                     } else if (list.get(i).equals("nectar2")) {
                         for (int k = 0; k < 2; k++) {
-                            GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2, nu, nu2);
+                            GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2, nu, nu2,nu3,valueX3, valueY3);
                         }
                     } else if (list.get(i).equals("nectar3")) {
                         for (int k = 0; k < 3; k++) {
-                            GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2, nu, nu2);
+                            GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2, nu, nu2,nu3,valueX3, valueY3);
+                        }
+                    }if(nu3 != null) {
+                        if (heroHasKey && (bee.getX() == target[0]) && (bee.getY() == target[1])) {
+                            etS.putBoolean("isOver", true);
+                            etS.commit();
+                            Intent j = getIntent();
+                            finish();
+                            startActivity(j);
                         }
                     }
-                    if (nu2 == null && nu == null) {
+                    else if (nu2 == null && nu == null) {
                         if ((bee.getX() == target[0]) && (bee.getY() == target[1])) {
                             etS.putBoolean("isOver", true);
                             etS.commit();
