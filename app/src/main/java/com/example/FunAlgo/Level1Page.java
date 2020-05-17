@@ -235,7 +235,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY,targetArea,nonForbiddenAreaX,nonForbiddenAreaY);
+                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,0,0,0,0);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
             }
@@ -443,7 +443,16 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         int[] nonForbiddenAreaY;
         boolean isForbiddenX;
         boolean isForbiddenY;
-        public ApplyMove(ImageView bee, ArrayList<String> list, int changeX, int changeY, int[] target, int[] nonForbiddenAreaX, int[] nonForbiddenAreaY){
+        ImageView flower;
+        ImageView flower2;
+        Drawable flower0;
+        Drawable flower00;
+        int valueX1;
+        int valueX2;
+        int valueY1;
+        int valueY2;
+        public ApplyMove(ImageView bee, ArrayList<String> list, int changeX, int changeY, int[] target, int[] nonForbiddenAreaX, int[] nonForbiddenAreaY,
+        ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2){
             this.bee = bee;
             this.list = list;
             this.changeX = changeX;
@@ -453,6 +462,14 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             this.nonForbiddenAreaY = nonForbiddenAreaY;
             isForbiddenX = false;
             isForbiddenY = false;
+            this.flower = flower;
+            this.flower2 = flower2;
+            this.flower0 = flower0;
+            this.flower00 = flower00;
+            this.valueX1 = valueX1;
+            this.valueX2 = valueX2;
+            this.valueY1 = valueY1;
+            this.valueY2 = valueY2;
         }
 
         public void run() {
@@ -494,6 +511,16 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                         if (list.get(i).equals("right3")) {
                             for (int k = 0; k < 3; k++) {
                                 TurnRight(bee);
+                            }
+                        }else if (list.get(i).equals("nectar1")) {
+                            GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
+                        } else if (list.get(i).equals("nectar2")) {
+                            for (int k = 0; k < 2; k++) {
+                                GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
+                            }
+                        } else if (list.get(i).equals("nectar3")) {
+                            for (int k = 0; k < 3; k++) {
+                                GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2);
                             }
                         }
                     }

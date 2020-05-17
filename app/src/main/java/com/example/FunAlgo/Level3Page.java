@@ -26,6 +26,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class Level3Page extends Level1Page {
+    final private int[] targetArea = { 600 , 371 };
+    final private int[] nonForbiddenAreaX = { 0 , 200 , 400 , 600};
+    final private int[] nonForbiddenAreaY = { 371 , 371 , 371 , 371 };
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
@@ -36,7 +39,6 @@ public class Level3Page extends Level1Page {
     private ArrayList<String> list;
     private ImageView bee;
     private ImageView flower;
-
     private Button goForward;
     private Button turnRight;
     private Button turnLeft;
@@ -214,10 +216,14 @@ public class Level3Page extends Level1Page {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MoveLoop(list, bee, 200, 180, flower, null, flower0, null, 600, 0, 371, 0);
+               // MoveLoop(list, bee, 200, 180, flower, null, flower0, null, 600, 0, 371, 0);
 
+                //apply.setEnabled(false);
                 apply.setEnabled(false);
-
+                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,flower,null,flower0,null,600,0,371,0);
+                Thread t1 = new Thread(applyMove);
+                t1.start();
+                /**
                 if (flower.getBackground() == flower0) {
                     System.out.println("true");
                     isGameOver = true;
@@ -240,6 +246,7 @@ public class Level3Page extends Level1Page {
                     editor.commit();
 
                 }
+                 */
             }
         });
 
