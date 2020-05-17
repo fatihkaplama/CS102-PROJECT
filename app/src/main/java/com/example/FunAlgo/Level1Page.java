@@ -541,7 +541,6 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                 if ((bee.getX() == 600) && (bee.getY() == 184)) {
                     etS.putBoolean("isOver", true);
                     et.putBoolean("finished1", true);
-                    finishedScreen(Level1Page.this, movementsCount, 4, 5);
                     sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
                     editor = sharedPreferences.edit();
                     starsCount = sharedPreferences.getInt("starsCount", 1);
