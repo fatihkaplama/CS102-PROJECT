@@ -507,14 +507,18 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                     startActivity(i);
                 }
                 for( int element : nonForbiddenAreaX){
-                    if(bee.getX() != element)
+                    if(bee.getX() != element) {
                         isForbiddenX = true;
+                        break;
+                    }
                 }
                 for ( int element : nonForbiddenAreaY){
-                    if(bee.getY() != element)
+                    if(bee.getY() != element) {
                         isForbiddenY = true;
+                        break;
+                    }
                 }
-                if (!(isForbiddenX && isForbiddenY) ) {
+                if ((isForbiddenX && isForbiddenY) ) {
                     etS.putBoolean("isTry", true);
                     etS.commit();
                     Intent i = getIntent();
