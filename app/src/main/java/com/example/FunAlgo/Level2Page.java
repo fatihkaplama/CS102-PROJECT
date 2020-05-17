@@ -206,27 +206,10 @@ public class Level2Page extends Level1Page {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MoveLoop(list, bee, changeX, changeY, null, null, null, null, 0, 0, 0, 0);
                 apply.setEnabled(false);
-                if ((bee.getX() == 400) && (bee.getY() == 8)) {
-                    System.out.println("true");
-                    isGameOver = true;
-                }
-                if (((bee.getX() == 180) && (bee.getY() == 368)) || ((bee.getX() == 360) && (bee.getY() == 368)) || ((bee.getX() == 360) && (bee.getY() == 188)) || ((bee.getX() == 360) && (bee.getY() == 8))) {
-                } else {
-                    TryAgain(Level2Page.this);
-                }
-
-
-                if (isGameOver == true) {
-                    et.putBoolean("finished2", isGameOver);
-                    finishedScreen(Level2Page.this, movementsCount, 4, 5);
-                    sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
-                    editor = sharedPreferences.edit();
-                    starsCount = sharedPreferences.getInt("starsCount", 1);
-                    editor.putInt("starsCountLevel2", starsCount);
-                    editor.commit();
-                }
+                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY);
+                Thread t1 = new Thread(applyMove);
+                t1.start();
             }
         });
 

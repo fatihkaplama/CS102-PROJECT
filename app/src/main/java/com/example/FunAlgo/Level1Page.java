@@ -225,7 +225,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove();
+                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
             }
@@ -493,6 +493,16 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
 
 
     public class ApplyMove implements Runnable {
+        ArrayList<String> list;
+        ImageView bee;
+        int changeX;
+        int changeY;
+        public ApplyMove(ImageView bee, ArrayList<String> list, int changeX, int changeY){
+            this.bee = bee;
+            this.list = list;
+            this.changeX = changeX;
+            this.changeY = changeY;
+        }
 
         public void run() {
                 try {
@@ -538,10 +548,10 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                     }
                 } catch (InterruptedException e) {
                 }
+
                 if ((bee.getX() == 600) && (bee.getY() == 184)) {
                     etS.putBoolean("isOver", true);
                     et.putBoolean("finished1", true);
-                    finishedScreen(Level1Page.this, movementsCount, 4, 5);
                     sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
                     editor = sharedPreferences.edit();
                     starsCount = sharedPreferences.getInt("starsCount", 1);
@@ -558,6 +568,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                     finish();
                     startActivity(i);
                 }
+
         }
     }
 
