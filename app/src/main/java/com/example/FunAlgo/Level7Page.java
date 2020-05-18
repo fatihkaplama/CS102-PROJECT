@@ -164,6 +164,7 @@ public class Level7Page extends Level1Page {
         sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
         et = sp.edit();
 
+        isFinished(Level7Page.this, "7", 11, 14);
         //when the user click the BACK button
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,7 +243,7 @@ public class Level7Page extends Level1Page {
             @Override
             public void onClick(View v) {
 
-                ApplyMove applyMove = new ApplyMove(hero,list,133,121,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,0,0,0,0,null,null,key,266,130);
+                ApplyMove applyMove = new ApplyMove(hero,list,133,121,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,0,0,0,0,null,null,key,266,130, movementsCount);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
 

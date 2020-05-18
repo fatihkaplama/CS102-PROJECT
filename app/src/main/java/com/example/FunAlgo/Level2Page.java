@@ -141,7 +141,7 @@ public class Level2Page extends Level1Page {
         et = sp.edit();
 
         //targetArea
-
+        isFinished(Level2Page.this, "2", 4, 5);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,7 +213,7 @@ public class Level2Page extends Level1Page {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,0,0,0,0,null,null,null,0,0);
+                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,0,0,0,0,null,null,null,0,0,movementsCount);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
             }

@@ -147,7 +147,7 @@ public class Level4Page extends Level1Page  {
         //SharedPreferences to save Level
         sp = getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
         et = sp.edit();
-
+        isFinished(Level4Page.this, "4", 9, 10);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -220,7 +220,7 @@ public class Level4Page extends Level1Page  {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,600,0,371,0,null,null,null,0,0);
+                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,600,0,371,0,null,null,null,0,0, movementsCount);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
 /**

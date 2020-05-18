@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.ArrayList;
 
@@ -97,7 +98,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         setContentView(R.layout.activity_level1_page);
         //starting activity
         Intent i = getIntent();
-        movementsCount = 0;
+
         //Views
         reset = findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
@@ -144,6 +145,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         isGameOver = false;
         isTryAgain = false;
         isSelected = false;
+        movementsCount = 0;
 
         //SharedPreferences to save Level
         sp = getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
@@ -151,26 +153,17 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
 
         sharedP = getSharedPreferences("isThis", MODE_PRIVATE);
         etS = sharedP.edit();
+        etS.clear();
         isTryAgain = getSharedPreferences("isThis", MODE_PRIVATE).getBoolean("isTry", false);
         isGameOver = getSharedPreferences("isThis", MODE_PRIVATE).getBoolean("isOver", false);
+        movementsCount = getSharedPreferences("isThis", MODE_PRIVATE).getInt("movements", 0);
+        isFinished(Level1Page.this, "1", 2 , 4);
         if (isTryAgain) {
             TryAgain(Level1Page.this);
             etS.putBoolean("isTry", false);
             etS.commit();
         }
-        if (isGameOver) {
-            // for arman achievements
-            et.putBoolean("finished1", true);
-            sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
-            editor = sharedPreferences.edit();
-            starsCount = sharedPreferences.getInt("starsCount", 1);
-            editor.putInt("starsCountLevel1", starsCount);
-            finishedScreen(Level1Page.this, movementsCount, 2, 4);
-            et.commit();
-            //for finish screen
-            etS.putBoolean("isOver", false);
-            etS.commit();
-        }
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -244,7 +237,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee, list, changeX, changeY, targetArea, nonForbiddenAreaX, nonForbiddenAreaY, null, null, null, null, 0, 0, 0, 0, null, null,null,0,0);
+                ApplyMove applyMove = new ApplyMove(bee, list, changeX, changeY, targetArea, nonForbiddenAreaX, nonForbiddenAreaY, null, null, null, null, 0, 0, 0, 0, null, null,null,0,0, movementsCount);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
             }
@@ -427,6 +420,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                 @Override
                 public void run() {
                     nu.setText("0");
+
                 }
             });
         }
@@ -466,9 +460,27 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         code += sharedPref.getString("CODEMESSAGE", "") + "\n";
     }
 
+    public void isFinished(Context context, String level, int lower, int upper){
+        if (isGameOver) {
+            // for arman achievements
+            System.out.println("Movements : " + movementsCount);
+            et.putBoolean("finished" + level, true);
+            sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+            starsCount = sharedPreferences.getInt("starsCount", 1);
+            editor.putInt("starsCountLevel" + level, starsCount);
+            finishedScreen(context, movementsCount, lower, upper);
+            et.commit();
+            //for finish screen
+            etS.putBoolean("isOver", false);
+            etS.commit();
+        }
+    }
+
     public class ApplyMove implements Runnable {
         ArrayList<String> list;
         ImageView bee;
+        int movements;
         int changeX;
         int changeY;
         int[] target;
@@ -489,7 +501,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         int valueX3;
         int valueY3;
         public ApplyMove(ImageView bee, ArrayList<String> list, int changeX, int changeY, int[] target, int[] nonForbiddenAreaX, int[] nonForbiddenAreaY,
-                         ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2, TextView nu, TextView nu2, ImageView nu3, int valueX3,int valueY3) {
+                         ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2, TextView nu, TextView nu2, ImageView nu3, int valueX3,int valueY3, int movements) {
             this.bee = bee;
             this.list = list;
             this.changeX = changeX;
@@ -511,6 +523,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             this.nu3 = nu3;
             this.valueX3 = valueX3;
             this.valueY3 = valueY3;
+            this.movements = movements;
         }
 
         public void run() {
@@ -530,6 +543,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                         }
                     }
                     if (list.get(i).equals("left1")) {
+
                         TurnLeft(bee);
                     }
                     if (list.get(i).equals("left2")) {
@@ -615,6 +629,9 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                 }
             } catch (InterruptedException e) {
             }
+            System.out.println("mov : " + movements);
+            etS.putInt("movements" , movements);
+            etS.commit();
         }
     }
 

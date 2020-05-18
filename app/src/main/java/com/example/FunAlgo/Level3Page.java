@@ -146,7 +146,7 @@ public class Level3Page extends Level1Page {
         //SharedPreferences to save Level
         sp = getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
         et = sp.edit();
-
+        isFinished(Level3Page.this, "3", 5, 6);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -222,17 +222,18 @@ public class Level3Page extends Level1Page {
 
                 //apply.setEnabled(false);
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,flower,null,flower0,null,600,0,371,0,nu,null,null,0,0);
+                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,flower,null,flower0,null,600,0,371,0,nu,null,null,0,0, movementsCount);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
-                /**
-                if (flower.getBackground() == flower0) {
+
+
+                /*if (nu.getText().toString() == "0") {
                     System.out.println("true");
                     isGameOver = true;
 
-                }
+                }*/
 
-                if (((bee.getX() == 0) && (bee.getY() == 371)) || ((bee.getX() == 200) && (bee.getY() == 371)) || ((bee.getX() == 400) && (bee.getY() == 371)) || ((bee.getX() == 600) && (bee.getY() == 371))) {
+                /*if (((bee.getX() == 0) && (bee.getY() == 371)) || ((bee.getX() == 200) && (bee.getY() == 371)) || ((bee.getX() == 400) && (bee.getY() == 371)) || ((bee.getX() == 600) && (bee.getY() == 371))) {
                 } else {
                     TryAgain();
                 }
@@ -247,8 +248,8 @@ public class Level3Page extends Level1Page {
                     editor.putInt("starsCountLevel3", starsCount);
                     editor.commit();
 
-                }
-                 */
+                }*/
+
             }
         });
 

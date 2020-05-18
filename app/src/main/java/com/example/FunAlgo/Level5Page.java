@@ -157,7 +157,7 @@ public class Level5Page extends Level1Page  {
         //SharedPreferences to save Level
         sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
         et = sp.edit();
-
+        isFinished(Level5Page.this, "5", 10, 12);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -231,7 +231,7 @@ public class Level5Page extends Level1Page  {
             public void onClick(View v) {
                 //MoveLoop(list, bee, 200, 180, flower, flower2, flower0, flower00, 594,194,360,540);
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,flower,flower2,flower0,null,594,194,360,540,yellowText,pinkText,null,0,0);
+                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,flower,flower2,flower0,null,594,194,360,540,yellowText,pinkText,null,0,0, movementsCount);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
 
