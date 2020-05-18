@@ -157,7 +157,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         isTryAgain = getSharedPreferences("isThis", MODE_PRIVATE).getBoolean("isTry", false);
         isGameOver = getSharedPreferences("isThis", MODE_PRIVATE).getBoolean("isOver", false);
         movementsCount = getSharedPreferences("isThis", MODE_PRIVATE).getInt("movements", 0);
-        isFinished(Level1Page.this, "1", 2 , 4);
+        isFinished(Level1Page.this, "1", 20 , 30);
         if (isTryAgain) {
             TryAgain(Level1Page.this);
             etS.putBoolean("isTry", false);
@@ -465,11 +465,13 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             // for arman achievements
             System.out.println("Movements : " + movementsCount);
             et.putBoolean("finished" + level, true);
+            finishedScreen(context, movementsCount, lower, upper);
             sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
             editor = sharedPreferences.edit();
-            starsCount = sharedPreferences.getInt("starsCount", 1);
+            starsCount = sharedPreferences.getInt("starsCount", 3);
             editor.putInt("starsCountLevel" + level, starsCount);
-            finishedScreen(context, movementsCount, lower, upper);
+            editor.commit();
+            System.out.println("level" + level + " stars " + starsCount);
             et.commit();
             //for finish screen
             etS.putBoolean("isOver", false);
