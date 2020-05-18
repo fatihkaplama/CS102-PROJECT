@@ -71,42 +71,9 @@ public class AchievementsPage extends AppCompatActivity {
         volumeoff = AppCompatDrawableManager.get().getDrawable(this, volumeoffID);
         wipeData = findViewById(R.id.button_wipeData);
 
-        //initialising the starsCountLevels
-        sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
-        starsCountLevel1 = sharedPreferences.getInt("starsCountLevel1", 0);
-        starsCountLevel2 = sharedPreferences.getInt("starsCountLevel2", 0);
-        starsCountLevel3 = sharedPreferences.getInt("starsCountLevel3", 0);
-        starsCountLevel4 = sharedPreferences.getInt("starsCountLevel4", 0);
-        starsCountLevel5 = sharedPreferences.getInt("starsCountLevel5", 0);
-        starsCountLevel6 = sharedPreferences.getInt("starsCountLevel6", 0);
-        starsCountLevel7 = sharedPreferences.getInt("starsCountLevel7", 0);
-        starsCountLevel8 = sharedPreferences.getInt("starsCountLevel8", 0);
-        starsCountLevel9 = sharedPreferences.getInt("starsCountLevel9", 0);
+        //creating the graph with datas
+        setMyGraph();
 
-        // creating the graph with graphlib library
-        Point[] points =
-                {
-                        new Point(1, starsCountLevel1), new Point(2, starsCountLevel2), new Point(3, starsCountLevel3),
-                        new Point(4, starsCountLevel4), new Point(5, starsCountLevel5), new Point(6, starsCountLevel6),
-                        new Point(7, starsCountLevel7), new Point(8, starsCountLevel8), new Point(9, starsCountLevel9)
-
-                };
-        
-        Label[] xLabels =
-                {
-                        new Label(1, "level1"), new Label(2, "level2"), new Label(3, "level3"),
-                        new Label(4, "level4"), new Label(5, "level5"), new Label(6, "level6"),
-                        new Label(7, "level7"), new Label(8, "level8"), new Label(9, "level9")
-                };
-
-        graph = new Graph.Builder()
-                .setWorldCoordinates(-1, 11, -1, 4)
-                .setXLabels(xLabels)
-                .setYTicks(new double[]{1, 2, 3,})
-                .addLineGraph(points, Color.RED)
-                .build();
-        GraphView graphView = findViewById(R.id.graph_view);
-        graphView.setGraph(graph);
         setTitle("Achievements");
         TextView textView = findViewById(R.id.graphAchievements_label);
         textView.setText("Your Achievements");
@@ -134,13 +101,60 @@ public class AchievementsPage extends AppCompatActivity {
                 }
             }
         });
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //initialising the starsCountLevels
+
         wipeData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 editor = sharedPreferences.edit();
-                editor.clear(); 
+                editor.clear();
                 editor.commit();
+                setMyGraph();
             }
         });
     }
+
+    public void setMyGraph() {
+        sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
+        starsCountLevel1 = sharedPreferences.getInt("starsCountLevel1", 0);
+        starsCountLevel2 = sharedPreferences.getInt("starsCountLevel2", 0);
+        starsCountLevel3 = sharedPreferences.getInt("starsCountLevel3", 0);
+        starsCountLevel4 = sharedPreferences.getInt("starsCountLevel4", 0);
+        starsCountLevel5 = sharedPreferences.getInt("starsCountLevel5", 0);
+        starsCountLevel6 = sharedPreferences.getInt("starsCountLevel6", 0);
+        starsCountLevel7 = sharedPreferences.getInt("starsCountLevel7", 0);
+        starsCountLevel8 = sharedPreferences.getInt("starsCountLevel8", 0);
+        starsCountLevel9 = sharedPreferences.getInt("starsCountLevel9", 0);
+        Point[] points =
+                {
+                        new Point(1, starsCountLevel1), new Point(2, starsCountLevel2), new Point(3, starsCountLevel3),
+                        new Point(4, starsCountLevel4), new Point(5, starsCountLevel5), new Point(6, starsCountLevel6),
+                        new Point(7, starsCountLevel7), new Point(8, starsCountLevel8), new Point(9, starsCountLevel9)
+
+                };
+
+        Label[] xLabels =
+                {
+                        new Label(1, "level1"), new Label(2, "level2"), new Label(3, "level3"),
+                        new Label(4, "level4"), new Label(5, "level5"), new Label(6, "level6"),
+                        new Label(7, "level7"), new Label(8, "level8"), new Label(9, "level9")
+                };
+
+        graph = new Graph.Builder()
+                .setWorldCoordinates(-1, 11, -1, 4)
+                .setXLabels(xLabels)
+                .setYTicks(new double[]{1, 2, 3,})
+                .addLineGraph(points, Color.RED)
+                .build();
+        GraphView graphView = findViewById(R.id.graph_view);
+        graphView.setGraph(graph);
+    }
+
 }
