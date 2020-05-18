@@ -69,6 +69,7 @@ public class PlayPage extends AppCompatActivity {
         b = findViewById(R.id.return_button_playPage);
         educationalMode = findViewById(R.id.educationalMode);
         settingsButton = findViewById(R.id.settings_button_playPage);
+        creativeMode = findViewById(R.id.creativeMode);
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +103,13 @@ public class PlayPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(PlayPage.this, SettingsPage.class);
+                startActivity(i);
+            }
+        });
+        creativeMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PlayPage.this, CreativeMode.class);
                 startActivity(i);
             }
         });

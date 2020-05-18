@@ -49,6 +49,12 @@
     <string name="Movements">Movements</string>
     <string name="get_key">get key</string>
     <string name="get_nectar">get nectar</string>
+    <string name="goClockwise">CLOCKWISE ↻</string>
+    <string name="goCounterClockwise">COUNTER CLOCKWISE ↺</string>
+    <string name="distance_creativeMode">DISTANCE</string>
+    <string name="degree_creative">DEGREE</string>
+    <string name="apply_button">APPLY</string>
+    <string name="reset_button">RESET</string>
     >>>>>>> Stashed changes
 
 </resources>

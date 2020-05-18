@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FirstPage"></activity>
+        <activity android:name=".CreativeMode"/>
+        <activity android:name=".FirstPage" />
         <activity android:name=".Level8Page" />
         <activity android:name=".Level7Page" />
         <activity android:name=".Level6Page" />
