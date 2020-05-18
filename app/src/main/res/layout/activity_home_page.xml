@@ -8,7 +8,6 @@
     android:background="@drawable/background3"
     tools:context=".HomePage">
 
-
     <Button
         android:id="@+id/settings_button_homePage"
         android:layout_width="40dp"

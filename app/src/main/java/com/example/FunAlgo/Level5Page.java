@@ -3,6 +3,7 @@ package com.example.FunAlgo;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -78,6 +79,8 @@ public class Level5Page extends Level1Page  {
     private int movementsCount;
     private Button show;
     private String code;
+    private int background;
+    private ConstraintLayout level5Page;
 
     public static ImageView getBee() {
         return bee;
@@ -91,6 +94,9 @@ public class Level5Page extends Level1Page  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level5_page);
+        level5Page = findViewById(R.id.level5_page_layout);
+        background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
+        level5Page.setBackgroundResource(background);
         //starting activity
         Intent i = getIntent();
         movementsCount = 0;

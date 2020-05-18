@@ -18,24 +18,24 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class PlayPage extends AppCompatActivity {
 
-    boolean isVolumeon;
-    String userName;
-    Drawable avatar;
-    ImageView user;
-    int avatarId;
-    TextView tv;
-    Button b;
-    Button educationalMode;
-    Button creativeMode;
-    Button quizMode;
-    Button settingsButton;
-    Button volume;
-    Drawable volumeon;
-    Drawable volumeoff;
-    int background;
-    int volumeOffID;
-    int volumeOnID;
-    ConstraintLayout playPageLayout;
+    private boolean isVolumeon;
+    private String userName;
+    private Drawable avatar;
+    private ImageView user;
+    private int avatarId;
+    private TextView tv;
+    private Button b;
+    private Button educationalMode;
+    private Button creativeMode;
+    private Button quizMode;
+    private Button settingsButton;
+    private Button volume;
+    private Drawable volumeon;
+    private Drawable volumeoff;
+    private int background;
+    private int volumeOffID;
+    private int volumeOnID;
+    private ConstraintLayout playPageLayout;
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

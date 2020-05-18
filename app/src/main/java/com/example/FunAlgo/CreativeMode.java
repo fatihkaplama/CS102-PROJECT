@@ -56,6 +56,7 @@ public class CreativeMode extends AppCompatActivity {
     private int buttonLimit;
     private LineView lineView;
     private int countOfPieces;
+    private int background;
 
     public int getButtonLimit() {
         return buttonLimit;
@@ -69,7 +70,7 @@ public class CreativeMode extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creative_mode);
-//        pencil = findViewById(R.id.pencil_creative);
+        background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         returnButton = findViewById(R.id.returnButton_creative);
         volumeButton = findViewById(R.id.volumeButton_creative);
         settingsButton = findViewById(R.id.settingButton_creative);
@@ -81,7 +82,6 @@ public class CreativeMode extends AppCompatActivity {
         linearLayout2 = findViewById(R.id.applyLayout2);
         lineView = findViewById(R.id.lineView);
         buttonLimit = 0;
-//        linearView = findViewById(R.id.linearView);
         spinnerDegrees = findViewById(R.id.degreeSpinner);
         spinnerDistance = findViewById(R.id.distanceSpinner);
         countOfPieces = 0;

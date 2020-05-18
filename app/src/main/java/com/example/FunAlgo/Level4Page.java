@@ -22,6 +22,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
 
@@ -76,12 +77,17 @@ public class Level4Page extends Level1Page  {
     // sharedPreferences for transport data to AchievementsPage
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    private int background;
+    private ConstraintLayout level4Page;
 
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level4_page);
+        level4Page = findViewById(R.id.level4_page_layout);
+        background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
+        level4Page.setBackgroundResource(background);
         //starting activity
         Intent i = getIntent();
         movementsCount = 0;

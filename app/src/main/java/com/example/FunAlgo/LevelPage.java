@@ -2,6 +2,7 @@ package com.example.FunAlgo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,41 +14,47 @@ import android.view.View;
 import android.widget.Button;
 
 public class LevelPage extends AppCompatActivity {
-    boolean isLevel1Finished;
-    boolean isLevel2Finished;
-    boolean isLevel3Finished;
-    boolean isLevel4Finished;
-    boolean isLevel5Finished;
-    boolean isLevel6Finished;
-    boolean isLevel7Finished;
-    boolean isVolumeOn;
-    Drawable volumeoff;
-    Drawable volumeon;
-    int volumeoffID;
-    int volumeonID;
-    Button volumeB;
-    Button button13;
-    Button button14;
-    Button button15;
-    Button button17;
-    Button button18;
-    Button button19;
-    Button button20;
-    Button button21;
-    Button button22;
+    private boolean isLevel1Finished;
+    private boolean isLevel2Finished;
+    private boolean isLevel3Finished;
+    private boolean isLevel4Finished;
+    private boolean isLevel5Finished;
+    private boolean isLevel6Finished;
+    private boolean isLevel7Finished;
+    private boolean isVolumeOn;
+    private Drawable volumeoff;
+    private Drawable volumeon;
+    private int volumeoffID;
+    private int volumeonID;
+    private Button volumeB;
+    private Button button13;
+    private Button button14;
+    private Button button15;
+    private Button button17;
+    private Button button18;
+    private Button button19;
+    private Button button20;
+    private Button button21;
+    private Button button22;
+    private int background;
+    private ConstraintLayout levelPage;
 
     // get settings return and volume
-    Button settingsB;
-    Button returnB;
+    private Button settingsB;
+    private Button returnB;
     //sharedPreferences
-    SharedPreferences sp;
-    SharedPreferences.Editor et;
+    private SharedPreferences sp;
+    private SharedPreferences.Editor et;
 
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_page);
+        levelPage = findViewById(R.id.level_page_layout);
+        background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
+        levelPage.setBackgroundResource(background);
+
         //get buttons
          button13 = (Button) findViewById(R.id.button13);
          button14 = (Button) findViewById(R.id.button14);

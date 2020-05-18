@@ -15,16 +15,16 @@ import android.widget.Button;
 import com.example.FunAlgo.ThemePage;
 
 public class SettingsPage extends ThemePage implements View.OnClickListener{
-    Button returnButton;
-    Button voiceButton;
-    Button themesButton;
-    Button musicsButton;
-    boolean isPressed;
-    AudioManager audioManager;
-    ConstraintLayout settingsPage;
-    int background;
-    int volumeOn, volumeOff;
-    SharedPreferences sharedPreferences;
+    private Button returnButton;
+    private Button voiceButton;
+    private Button themesButton;
+    private Button musicsButton;
+    private boolean isPressed;
+    private AudioManager audioManager;
+    private ConstraintLayout settingsPage;
+    private int background;
+    private int volumeOn, volumeOff;
+    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

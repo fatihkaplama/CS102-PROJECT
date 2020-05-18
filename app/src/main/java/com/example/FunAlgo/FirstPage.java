@@ -17,31 +17,31 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class FirstPage extends AppCompatActivity {
-    boolean isAvatarSelected;
-    boolean isVolumeOn;
-    ImageView user;
-    Button avatar1;
-    Button avatar2;
-    Button avatar3;
-    Button avatar4;
-    Button avatar5;
-    Button avatar6;
-    Button avatar7;
-    Button avatar8;
-    Button avatar9;
-    Button volume;
-    Button settings;
-    Button apply;
-    Button start;
-    int avatarID;
-    int volumeoffID;
-    int volumeonID;
-    int background;
-    ConstraintLayout mainPageLayout;
-    Drawable volumeoff;
-    Drawable volumeon;
-    Drawable avatar;
-    EditText nickname;
+    private boolean isAvatarSelected;
+    private boolean isVolumeOn;
+    private ImageView user;
+    private Button avatar1;
+    private Button avatar2;
+    private Button avatar3;
+    private Button avatar4;
+    private Button avatar5;
+    private Button avatar6;
+    private Button avatar7;
+    private Button avatar8;
+    private Button avatar9;
+    private Button volume;
+    private Button settings;
+    private Button apply;
+    private Button start;
+    private int avatarID;
+    private int volumeoffID;
+    private int volumeonID;
+    private int background;
+    private ConstraintLayout mainPageLayout;
+    private Drawable volumeoff;
+    private Drawable volumeon;
+    private Drawable avatar;
+    private EditText nickname;
 
     @SuppressLint("RestrictedApi")
     @Override

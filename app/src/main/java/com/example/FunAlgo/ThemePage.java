@@ -15,18 +15,18 @@ import android.widget.Button;
 
 
 public class ThemePage extends AppCompatActivity implements View.OnClickListener{
-    Button wallpaper1_button, wallpaper2_button, wallpaper3_button;
-    Button voiceButton;
-    Button returnButton;
-    boolean isPressed;
-    AudioManager audioManager;
-    ConstraintLayout themesPageLayout;
-    Intent intent;
-    int wallpaperID;
-    int rainbowTheme, orangeTheme, nightTheme;
-    int volumeOn, volumeOff;
+    private Button wallpaper1_button, wallpaper2_button, wallpaper3_button;
+    private Button voiceButton;
+    private Button returnButton;
+    private boolean isPressed;
+    private AudioManager audioManager;
+    private ConstraintLayout themesPageLayout;
+    private Intent intent;
+    private int wallpaperID;
+    private int rainbowTheme, orangeTheme, nightTheme;
+    private int volumeOn, volumeOff;
     private SharedPreferences.Editor editor;
-    int background;
+    private int background;
 
     public SharedPreferences getSharedPreferences() {
         return sharedPreferences;

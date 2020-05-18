@@ -3,6 +3,7 @@ package com.example.FunAlgo;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -80,12 +81,17 @@ public class Level3Page extends Level1Page {
     // sharedPreferences for transport data to AchievementsPage
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    private int background;
+    private ConstraintLayout level3Page;
 
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level3_page);
+        level3Page = findViewById(R.id.level3_page_layout);
+        background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
+        level3Page.setBackgroundResource(background);
         //starting activity
         Intent i = getIntent();
         movementsCount = 0;

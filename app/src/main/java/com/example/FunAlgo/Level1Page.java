@@ -3,6 +3,7 @@ package com.example.FunAlgo;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -79,6 +80,9 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
     private Button show;
     private String code;
     private boolean isTryAgain;
+    private int background;
+    private ConstraintLayout level1Page;
+
     final static private int changeX = 200;
     final static private int changeY = 180;
     //sharedPreferences to update and save levels
@@ -98,7 +102,9 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         setContentView(R.layout.activity_level1_page);
         //starting activity
         Intent i = getIntent();
-
+        level1Page = findViewById(R.id.level1_page_layout);
+        background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
+        level1Page.setBackgroundResource(background);
         //Views
         reset = findViewById(R.id.reset);
         apply = findViewById(R.id.apply);

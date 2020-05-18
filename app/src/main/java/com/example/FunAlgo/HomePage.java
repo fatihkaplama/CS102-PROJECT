@@ -17,19 +17,18 @@ import android.widget.TextView;
 
 public class HomePage extends FirstPage {
 
-    String userName;
-    Drawable avatar;
-    ImageView avatarPg;
-    int avatarId;
-    TextView tv;
-    Button b;
-    Button play;
-    Button settingsButton;
-    Button achievements;
-    int background;
-    int avatarID;
-
-    ConstraintLayout homePageLayout;
+    private String userName;
+    private Drawable avatar;
+    private ImageView avatarPg;
+    private int avatarId;
+    private TextView tv;
+    private Button b;
+    private Button play;
+    private Button settingsButton;
+    private Button achievements;
+    private int background;
+    private int avatarID;
+    private ConstraintLayout homePageLayout;
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
