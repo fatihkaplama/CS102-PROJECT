@@ -130,13 +130,11 @@ public class LineView extends View {
         return degree;
     }
     public int countOfMethod(){
-
         numberOfMethod++;
         return numberOfMethod;
     }
 
     public void countListStarter(){
-
         for( int index = 0; index < distance.size(); index++) {
             countList.add(count);
             booleanCheck.add(0);

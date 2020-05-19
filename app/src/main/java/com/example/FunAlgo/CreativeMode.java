@@ -1,46 +1,26 @@
 package com.example.FunAlgo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.ClipData;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Picture;
-import android.graphics.PointF;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.TranslateAnimation;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
-
 import com.example.creative.LineView;
 
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class CreativeMode extends AppCompatActivity {
-    private Button clockwise, counterClockwise, applyCreative, resetCreative, returnButton, volumeButton, settingsButton;
-    private PointF pointA, pointB;
-    private int starterX, starterY, pencilX, pencilY, startPointX;
-    private double getDistance, getDegree;
-    private ArrayList<Integer> listDegree;
-    private ArrayList<Integer> listDistance;
+    private Button clockwise, counterClockwise, applyCreative,
+                   resetCreative, returnButton, volumeButton, settingsButton;
     private LinearLayout linearLayout, linearLayout2;
-    private LinearLayout linearView;
     private String[] degrees = {"0", "30", "45","60", "90", "120", "180"};
     private String[] distance = {"10", "30", "60", "100", "200"};
     private int distanceGo, degreesTurn;
@@ -48,29 +28,20 @@ public class CreativeMode extends AppCompatActivity {
     private android.widget.Spinner spinnerDistance;
     private ArrayAdapter<String> dataAdapterForDistance;
     private ArrayAdapter<String> dataAdapterForDegrees;
-    private Paint paint;
-    private Canvas canvas;
-    private Bitmap bitmap;
-    private ImageView pencil;
-    private TranslateAnimation translateAnimation;
     private int buttonLimit;
     private LineView lineView;
     private int countOfPieces;
     private int background;
+    private ConstraintLayout creativeModeLayout;
 
-    public int getButtonLimit() {
-        return buttonLimit;
-    }
-
-    public void setButtonLimit(int buttonLimit) {
-        this.buttonLimit = buttonLimit;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creative_mode);
+        creativeModeLayout = findViewById(R.id.creativeMode_layout);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
+        creativeModeLayout.setBackgroundResource(background);
         returnButton = findViewById(R.id.returnButton_creative);
         volumeButton = findViewById(R.id.volumeButton_creative);
         settingsButton = findViewById(R.id.settingButton_creative);
@@ -95,8 +66,6 @@ public class CreativeMode extends AppCompatActivity {
         spinnerDegrees.setAdapter(dataAdapterForDegrees);
         spinnerDistance.setAdapter(dataAdapterForDistance);
 
-        listDegree = new ArrayList<Integer>();
-        listDistance = new ArrayList<Integer>();
 
         clockwise.setOnTouchListener(new MyTouchListener());
         counterClockwise.setOnTouchListener( new MyTouchListener());

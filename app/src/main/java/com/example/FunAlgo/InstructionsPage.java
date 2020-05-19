@@ -33,13 +33,17 @@ public class InstructionsPage extends AppCompatActivity {
     private int volumeOffID;
     private int volumeOnID;
     private Button volume;
-    private ConstraintLayout instructionspageLayout;
+    private ConstraintLayout instructionsPageLayout;
     @SuppressLint("RestrictedApi")
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructions_page);
+        instructionsPageLayout = findViewById(R.id.instructions_page_layout);
+        background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
+        instructionsPageLayout.setBackgroundResource(background);
+
         Intent i = getIntent();
         SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
 

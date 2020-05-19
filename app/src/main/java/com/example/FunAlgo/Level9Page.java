@@ -82,20 +82,21 @@ public class Level9Page extends Level1Page {
     private int movementsCount;
     private Button show;
     private String code;
-
     private SharedPreferences sp;
     private SharedPreferences.Editor et;
-
     private SharedPreferences sharedPreferencesA;
     private SharedPreferences.Editor editor;
     private int background;
     private ConstraintLayout level9Page;
+
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level9_page);
-
+        level9Page = findViewById(R.id.level9_page_layout);
+        background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
+        level9Page.setBackgroundResource(background);
         Intent i =getIntent();
         SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
 
