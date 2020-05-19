@@ -2,15 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/play_page_layout"
+    android:id="@+id/instructions_page_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background3"
-    tools:context=".PlayPage">
+    tools:context=".InstructionsPage">
 
 
     <Button
-        android:id="@+id/settings_button_playPage"
+        android:id="@+id/settings_button_instructionsPage"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/settings"
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.043" />
 
     <Button
-        android:id="@+id/volume_button_playPage"
+        android:id="@+id/volume_button_instructionsPage"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/volumeon"
@@ -34,7 +34,7 @@
         app:layout_constraintVertical_bias="0.043" />
 
     <Button
-        android:id="@+id/return_button_playPage"
+        android:id="@+id/return_button_instructionsPage"
         android:layout_width="45dp"
         android:layout_height="44dp"
         android:layout_marginStart="24dp"
@@ -47,37 +47,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <Button
-        android:id="@+id/creativeMode"
-        android:layout_width="142dp"
-        android:layout_height="41dp"
-        android:background="@drawable/button_design"
-        android:gravity="center"
-        android:text="Creative Mode"
-        android:textColor="#020103"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.737" />
-
-    <Button
-        android:id="@+id/educationalMode"
-        android:layout_width="142dp"
-        android:layout_height="41dp"
-        android:background="@drawable/button_design"
-        android:gravity="center"
-        android:text="Educational Mode"
-        android:textColor="#020103"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/logoo"
@@ -104,7 +73,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/user"
+        android:id="@+id/avatarH"
         android:layout_width="65dp"
         android:layout_height="53dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -113,4 +82,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.35" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/userName"
+        app:layout_constraintTop_toBottomOf="@+id/logoo">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The aim of FunAlgo is to teach fundamental of algorithm in a fun way.\n\n" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Educational Mode : The user tries to reach the gift in every level with harder algorithms.\n\n" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Creative Mode : The user tries to draw shapes in every level with harder algorithms. \n\n" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

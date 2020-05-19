@@ -21,6 +21,7 @@ public class LevelPage extends AppCompatActivity {
     private boolean isLevel5Finished;
     private boolean isLevel6Finished;
     private boolean isLevel7Finished;
+    private boolean isLevel8Finished;
     private boolean isVolumeOn;
     private Drawable volumeoff;
     private Drawable volumeon;
@@ -92,6 +93,8 @@ public class LevelPage extends AppCompatActivity {
         //getting info from Level 7 Page
         isLevel7Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished7", false);
 
+        //getting info from Level 8 Page
+        isLevel8Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished8", false);
         //volume
         volumeonID = R.drawable.volumeon;
         volumeoffID = R.drawable.volumeoff;
@@ -109,7 +112,7 @@ public class LevelPage extends AppCompatActivity {
         button19.setEnabled(true);
         button20.setEnabled(true);
         button21.setEnabled(true);
-        button22.setEnabled(false);
+        button22.setEnabled(true);
 
         if (isLevel1Finished){
             button14.setEnabled(true);
@@ -132,6 +135,10 @@ public class LevelPage extends AppCompatActivity {
 
         if (isLevel7Finished){
             button21.setEnabled(true);
+        }
+
+        if(isLevel8Finished){
+            button22.setEnabled(true);
         }
         //add clicklistener to buttons
         button13.setOnClickListener(new View.OnClickListener() {
@@ -196,8 +203,8 @@ public class LevelPage extends AppCompatActivity {
         button22.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent i = new Intent(levelPage.this, map9.class);
-                // startActivity(i);
+                 Intent i = new Intent(LevelPage.this, Level9Page.class);
+                 startActivity(i);
             }
         });
 

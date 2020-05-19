@@ -26,6 +26,7 @@ public class HomePage extends FirstPage {
     private Button play;
     private Button settingsButton;
     private Button achievements;
+    private Button instructions;
     private int background;
     private int avatarID;
     private ConstraintLayout homePageLayout;
@@ -49,6 +50,7 @@ public class HomePage extends FirstPage {
         play = findViewById(R.id.play2);
         settingsButton = findViewById(R.id.settings_button_homePage);
         achievements = findViewById(R.id.achievements);
+        instructions = findViewById(R.id.instructions);
 
         //get avatar from sharedPref
         avatarID = sharedPreferences.getInt("avatar", 0);
@@ -83,6 +85,12 @@ public class HomePage extends FirstPage {
             public void onClick(View v) {
                 Intent i = new Intent(HomePage.this, AchievementsPage.class);
                 startActivity(i);
+            }
+        });
+        instructions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomePage.this, InstructionsPage.class);
             }
         });
     }

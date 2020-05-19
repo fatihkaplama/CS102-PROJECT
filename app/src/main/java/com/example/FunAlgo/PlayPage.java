@@ -27,7 +27,6 @@ public class PlayPage extends AppCompatActivity {
     private Button b;
     private Button educationalMode;
     private Button creativeMode;
-    private Button quizMode;
     private Button settingsButton;
     private Button volume;
     private Drawable volumeon;
