@@ -91,6 +91,7 @@ public class HomePage extends FirstPage {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(HomePage.this, InstructionsPage.class);
+                startActivity(i);
             }
         });
     }

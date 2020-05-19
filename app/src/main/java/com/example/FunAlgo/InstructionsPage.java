@@ -43,10 +43,6 @@ public class InstructionsPage extends AppCompatActivity {
         Intent i = getIntent();
         SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
 
-        instructionspageLayout = findViewById(R.id.instructions_page_layout);
-        background = getSharedPreferences("ShareTheme", MODE_PRIVATE).getInt("theme",0);
-        instructionspageLayout.setBackgroundResource(background);
-
         userName = sharedPreferences.getString("nickname", "User");
         tv = findViewById(R.id.userName);
         tv.setText(userName);

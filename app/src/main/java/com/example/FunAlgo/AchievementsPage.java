@@ -81,7 +81,7 @@ public class AchievementsPage extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AchievementsPage.this, PlayPage.class);
+                Intent intent = new Intent(AchievementsPage.this, HomePage.class);
                 startActivity(intent);
             }
         });

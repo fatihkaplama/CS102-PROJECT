@@ -98,19 +98,25 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="The aim of FunAlgo is to teach fundamental of algorithm in a fun way.\n\n" />
+            android:text="The aim of FunAlgo is to teach fundamental of algorithm in a fun way.\n\n"
+            android:textColor="#000000"
+            android:textColorHighlight="#000000"
+            android:textColorHint="#000000"
+            android:textColorLink="#000000" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Educational Mode : The user tries to reach the gift in every level with harder algorithms.\n\n" />
+            android:text="Educational Mode : The user tries to reach the gift in every level with harder algorithms.\n\n"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Creative Mode : The user tries to draw shapes in every level with harder algorithms. \n\n" />
+            android:text="Creative Mode : The user tries to draw shapes in every level with harder algorithms. \n\n"
+            android:textColor="#000000" />
     </LinearLayout>
 
     <androidx.constraintlayout.widget.Barrier
