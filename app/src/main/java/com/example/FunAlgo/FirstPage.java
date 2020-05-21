@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class FirstPage extends AppCompatActivity {
+    //variables
     private boolean isAvatarSelected;
     private boolean isVolumeOn;
     private ImageView user;
@@ -48,13 +49,18 @@ public class FirstPage extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
-        nickname = findViewById(R.id.nickname);
-        mainPageLayout = findViewById(R.id.main_layout);
-        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.daybreaker);
-        mediaPlayer.start();
+        //to get the saved data
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         mainPageLayout.setBackgroundResource(background);
+
+        //for music
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.daybreaker);
+        mediaPlayer.start();
         isVolumeOn = true;
+
+        //defining variables
+        nickname = findViewById(R.id.nickname);
+        mainPageLayout = findViewById(R.id.main_layout);
         user = findViewById(R.id.user);
         avatar1 = findViewById(R.id.avatar1);
         avatar2 = findViewById(R.id.avatar2);
@@ -70,14 +76,15 @@ public class FirstPage extends AppCompatActivity {
         apply = findViewById(R.id.apply);
         start = findViewById(R.id.start);
         start.setEnabled(false);
+
+        //to change the volume PNG
         volumeonID = R.drawable.volumeon;
         volumeoffID = R.drawable.volumeoff;
         volumeon = AppCompatDrawableManager.get().getDrawable(this, volumeonID);
         volumeoff = AppCompatDrawableManager.get().getDrawable(this, volumeoffID);
 
-
-
-
+        //for user to select an avatar
+        //first avatar
         avatar1.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -88,8 +95,7 @@ public class FirstPage extends AppCompatActivity {
                 isAvatarSelected = true;
             }
         });
-
-
+        //second avatar
         avatar2.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -100,7 +106,7 @@ public class FirstPage extends AppCompatActivity {
                 isAvatarSelected = true;
             }
         });
-
+        //third avatar
         avatar3.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -111,7 +117,7 @@ public class FirstPage extends AppCompatActivity {
                 isAvatarSelected = true;
             }
         });
-
+        //fourth avatar
         avatar4.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -122,7 +128,7 @@ public class FirstPage extends AppCompatActivity {
                 isAvatarSelected = true;
             }
         });
-
+        //fifth avatar
         avatar5.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -133,7 +139,7 @@ public class FirstPage extends AppCompatActivity {
                 isAvatarSelected = true;
             }
         });
-
+        //sixth avatar
         avatar6.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -144,7 +150,7 @@ public class FirstPage extends AppCompatActivity {
                 isAvatarSelected = true;
             }
         });
-
+        //seventh avatar
         avatar7.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -155,7 +161,7 @@ public class FirstPage extends AppCompatActivity {
                 isAvatarSelected = true;
             }
         });
-
+        //eighth avatar
         avatar8.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -166,7 +172,7 @@ public class FirstPage extends AppCompatActivity {
                 isAvatarSelected = true;
             }
         });
-
+        //ninth avatar
         avatar9.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -178,9 +184,11 @@ public class FirstPage extends AppCompatActivity {
             }
         });
 
+        //when the user click the apply button
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //if the user enter a nickname and select an avatar, nickname and avatar selected by the user are saved
                 if (!nickname.getText().toString().isEmpty() && isAvatarSelected) {
                     SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -191,6 +199,7 @@ public class FirstPage extends AppCompatActivity {
                     Toast.makeText(FirstPage.this, "User was created", Toast.LENGTH_SHORT).show();
                     start.setEnabled(true);
                 }
+                //Otherwise, warning message appears
                 else {
                     Toast.makeText(FirstPage.this, "Please enter your nickname and select an avatar", Toast.LENGTH_SHORT).show();
                 }
@@ -198,16 +207,16 @@ public class FirstPage extends AppCompatActivity {
             }
         });
 
+        //when the user presses the start button, he switches to the Home Page
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(FirstPage.this, HomePage.class);
-               // i.putExtra("nickname", nickname.getText().toString());
-                //i.putExtra("avatar", avatarID);
                 startActivity(i);
             }
         });
 
+        //the user can turn on or off the sound when pressing the sound icon
         volume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,11 +232,11 @@ public class FirstPage extends AppCompatActivity {
             }
         });
 
+        //when the user presses the settings, he switches to the Settings Page
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FirstPage.this, SettingsPage.class);
-//                intent.putExtra("toSettingsPage", "MainActivity");
                 startActivity(intent);
             }
         });
