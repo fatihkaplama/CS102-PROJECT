@@ -31,13 +31,28 @@ import org.w3c.dom.ls.LSOutput;
 import java.util.ArrayList;
 
 public class Level1Page extends DefaultLevelPage implements ShowCodeI {
+    //variables
     final private int[] targetArea = {600, 184};
     final private int[] nonForbiddenAreaX = {200, 400, 600};
     final private int[] nonForbiddenAreaY = {184, 184, 184};
-    private TextView nu;
+    final static private int changeX = 200;
+    final static private int changeY = 180;
+    private int volumeoffID;
+    private int volumeonID;
+    private int count = 0;
+    private int timesForward;
+    private int movementsCount;
+    private int timesLeft;
+    private int timesRight;
+    private int background;
     private boolean isSelected;
     private boolean isSelected2;
     private boolean heroHasKey;
+    private boolean isVolumeOn;
+    private boolean isTryAgain;
+    private boolean isGameOver;
+    private int starsCount;
+    private TextView nu;
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
@@ -56,41 +71,29 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
     private Button info;
     private Button apply;
     private Button reset;
+    private Button show;
+    private ConstraintLayout level1Page;
     private LinearLayout layout1;
     private LinearLayout layout2;
     private LinearLayout.LayoutParams params;
-    private int volumeoffID;
-    private int volumeonID;
     private Drawable volumeoff;
     private Drawable volumeon;
     private float x;
     private float y;
-    private int count = 0;
-    private int timesForward;
-    private int timesLeft;
-    private int timesRight;
-    private int starsCount;
-    private boolean isGameOver;
     private float beeX;
     private float beeY;
     private float honeyX;
     private float honeyY;
-    private boolean isVolumeOn;
-    private int movementsCount;
-    private Button show;
     private String code;
-    private boolean isTryAgain;
-    private int background;
-    private ConstraintLayout level1Page;
 
-    final static private int changeX = 200;
-    final static private int changeY = 180;
     //sharedPreferences to update and save levels
     private SharedPreferences sp;
     private SharedPreferences.Editor et;
+
     // sharedPreferences for transport data to AchievementsPage
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+
     //sharedPreferences to move accordingly
     SharedPreferences sharedP;
     SharedPreferences.Editor etS;
@@ -105,7 +108,8 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         level1Page = findViewById(R.id.level1_page_layout);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         level1Page.setBackgroundResource(background);
-        //Views
+
+        //defining the variables
         reset = findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
         bee = findViewById(R.id.bee);
@@ -125,7 +129,6 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         movements = findViewById(R.id.movements);
         show = findViewById(R.id.showCode_button);
         code = "";
-        //flower
 
         //volume
         isVolumeOn = true;
@@ -163,14 +166,18 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         isTryAgain = getSharedPreferences("isThis", MODE_PRIVATE).getBoolean("isTry", false);
         isGameOver = getSharedPreferences("isThis", MODE_PRIVATE).getBoolean("isOver", false);
         movementsCount = getSharedPreferences("isThis", MODE_PRIVATE).getInt("movements", 0);
+
+        //to finish the level
         isFinished(Level1Page.this, "1", 20 , 30);
+
+        //if the user goes out of the way
         if (isTryAgain) {
             TryAgain(Level1Page.this);
             etS.putBoolean("isTry", false);
             etS.commit();
         }
 
-
+        //when the user presses the back button, he switches to Level Page
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,6 +186,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             }
         });
 
+        //when the user presses the settings, he switches to Settings
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,6 +195,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             }
         });
 
+        //the user can turn on or off the sound when pressing the sound icon
         volume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,6 +212,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             }
         });
 
+        //when the user presses the info, he can get information about level
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -214,6 +224,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             }
         });
 
+        //to show the current codes
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -230,25 +241,27 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             }
         });
 
+        //to reset the game
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //reset();
                 recreate();
                 code = "";
             }
         });
 
+        //to apply the activities selected by the user
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee, list, changeX, changeY, targetArea, nonForbiddenAreaX, nonForbiddenAreaY, null, null, null, null, 0, 0, 0, 0, null, null,null,0,0, movementsCount);
+                ApplyMove applyMove = new ApplyMove(bee, list, changeX, changeY, targetArea, nonForbiddenAreaX, nonForbiddenAreaY,0, 0, 0, 0, null, null,null,0,0, movementsCount);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
             }
         });
 
+        //when the user click the GO FORWARD
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -256,6 +269,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             }
         });
 
+        //when the user click the TURN LEFT
         turnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -263,6 +277,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             }
         });
 
+        //when the user click the TURN RIGHT
         turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -271,6 +286,10 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         });
     }
 
+    /** This method adds the GO FORWARD activity selected by the user to the layout
+     * @param, timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerForward
+     * @return number of movements
+     **/
     public int goForwardButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerForward) {
         String codeMessage;
         timesForward = (Integer) spinnerForward.getSelectedItem();
@@ -308,6 +327,10 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         return movementsCount;
     }
 
+    /** This method adds the TURN LEFT activity selected by the user to the layout
+     * @param, timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerLeft
+     * @return number of movements
+     **/
     public int turnLeftButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerLeft) {
         String codeMessage;
         timesLeft = (Integer) spinnerLeft.getSelectedItem();
@@ -344,6 +367,10 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         return movementsCount;
     }
 
+    /** This method adds the TURN RIGHT activity selected by the user to the layout
+     * @param, timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerRight
+     * @return number of movements
+     **/
     @SuppressLint("SetTextI18n")
     public int turnRightButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerRight) {
         String codeMessage;
@@ -381,6 +408,10 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         return movementsCount;
     }
 
+    /** This method adds the GET ITEM activity selected by the user to the layout
+     * @param, timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerNectar, object
+     * @return number of movements
+     **/
     public int getNectarButton(int timesNectar, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int movementsCount, TextView movements, Spinner spinnerNectar, String object) {
         String codeMessage;
         timesNectar = (Integer) spinnerNectar.getSelectedItem();
@@ -393,7 +424,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         SaveData(codeMessage);
         setCodeMessage();
         if (movementsCount >= 9) {
-            list.add("nectar" + timesNectar);
+            list.add(object + timesNectar);
             Button nectar = new Button(Level1Page.this);
             nectar.setTextSize(10);
             nectar.setText(timesNectar + " " + "GET " + object);
@@ -404,7 +435,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             movements.setText("Movements : " + movementsCount);
         }
         if (movementsCount < 9) {
-            list.add("nectar" + timesNectar);
+            list.add(object + timesNectar);
             Button nectar = new Button(Level1Page.this);
             nectar.setTextSize(10);
             nectar.setText(timesNectar + " " + "GET "+ object);
@@ -417,32 +448,31 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         return movementsCount;
     }
 
-    public void GetNectar(ImageView bee, ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2, final TextView nu, final TextView nu2,final ImageView nu3, int valueX3, int valueY3) {
+    /** This method allows the user to get the nectar
+     * if the user comes to the square which there is the nectar
+     * @param, bee, valueX1, valueX2, valueY1, valueY2, nu, nu2, nu3, valueX3, valueY3
+     * @return
+     **/
+    public void GetNectar(ImageView bee, int valueX1, int valueX2, int valueY1, int valueY2, final TextView nu, final TextView nu2,final ImageView nu3, int valueX3, int valueY3) {
         if (bee.getX() == valueX1 && bee.getY() == valueY1) {
             isSelected = true;
-            System.out.println("çalıştı1");
-            // flower.setBackground(flower0);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     nu.setText("0");
-
                 }
             });
         }
         if (bee.getX() == valueX2 && bee.getY() == valueY2) {
             isSelected2 = true;
-            System.out.println("çalıştı2");
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     nu2.setText("0");
                 }
             });
-            // flower2.setBackground(flower00);
         }
         if (bee.getX() == valueX3 && bee.getY() == valueY3) {
-            System.out.println("çalıştı1");
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -450,10 +480,13 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                     heroHasKey = true;
                 }
             });
-        }        System.out.print("almadı");
+        }
     }
 
-
+    /** This method saves the data
+     * @param, codeMessage
+     * @return
+     **/
     public void SaveData(String codeMessage) {
         SharedPreferences sharedPref = Level1Page.this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -461,55 +494,64 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         editor.commit();
     }
 
+    /** This method sets the code message
+     * @param
+     * @return
+     **/
     public void setCodeMessage() {
         SharedPreferences sharedPref = Level1Page.this.getPreferences(Context.MODE_PRIVATE);
         code += sharedPref.getString("CODEMESSAGE", "") + "\n";
     }
 
+    /** This method checks if the user finished the level
+     * @param, context, level, lower, upper
+     * @return
+     **/
     public void isFinished(Context context, String level, int lower, int upper){
         if (isGameOver) {
-            // for arman achievements
             System.out.println("Movements : " + movementsCount);
             et.putBoolean("finished" + level, true);
+            //for finish screen
             finishedScreen(context, movementsCount, lower, upper);
             sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
             editor = sharedPreferences.edit();
             starsCount = sharedPreferences.getInt("starsCount", 3);
             editor.putInt("starsCountLevel" + level, starsCount);
             editor.commit();
-            System.out.println("level" + level + " stars " + starsCount);
             et.commit();
-            //for finish screen
             etS.putBoolean("isOver", false);
             etS.commit();
         }
     }
 
+    //inner class
+    /**this class applies the actions selected by the user one by one
+     *
+     */
     public class ApplyMove implements Runnable {
-        ArrayList<String> list;
-        ImageView bee;
-        int movements;
-        int changeX;
-        int changeY;
-        int[] target;
-        int[] nonForbiddenAreaX;
-        int[] nonForbiddenAreaY;
-        boolean isForbidden;
-        ImageView flower;
-        ImageView flower2;
-        Drawable flower0;
-        Drawable flower00;
-        int valueX1;
-        int valueX2;
-        int valueY1;
-        int valueY2;
-        TextView nu;
-        TextView nu2;
-        ImageView nu3;
-        int valueX3;
-        int valueY3;
+        //variables
+        private ArrayList<String> list;
+        private ImageView bee;
+        private ImageView nu3;
+        private int movements;
+        private int changeX;
+        private int changeY;
+        private int valueX1;
+        private int valueX2;
+        private int valueY1;
+        private int valueY2;
+        private int valueX3;
+        private int valueY3;
+        private int[] target;
+        private int[] nonForbiddenAreaX;
+        private int[] nonForbiddenAreaY;
+        private boolean isForbidden;
+        private TextView nu;
+        private TextView nu2;
+
+        //constructor
         public ApplyMove(ImageView bee, ArrayList<String> list, int changeX, int changeY, int[] target, int[] nonForbiddenAreaX, int[] nonForbiddenAreaY,
-                         ImageView flower, ImageView flower2, Drawable flower0, Drawable flower00, int valueX1, int valueX2, int valueY1, int valueY2, TextView nu, TextView nu2, ImageView nu3, int valueX3,int valueY3, int movements) {
+                         int valueX1, int valueX2, int valueY1, int valueY2, TextView nu, TextView nu2, ImageView nu3, int valueX3,int valueY3, int movements) {
             this.bee = bee;
             this.list = list;
             this.changeX = changeX;
@@ -518,10 +560,6 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             this.nonForbiddenAreaX = nonForbiddenAreaX;
             this.nonForbiddenAreaY = nonForbiddenAreaY;
             isForbidden = true;
-            this.flower = flower;
-            this.flower2 = flower2;
-            this.flower0 = flower0;
-            this.flower00 = flower00;
             this.valueX1 = valueX1;
             this.valueX2 = valueX2;
             this.valueY1 = valueY1;
@@ -534,6 +572,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             this.movements = movements;
         }
 
+        //this method moves the user according to the number of activities
         public void run() {
             try {
                 for (int i = 0; i < list.size(); i++) {
@@ -541,52 +580,60 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                     Thread.sleep(1000);
                     if (list.get(i).equals("forward1")) {
                         GoForward(bee, changeX, changeY);
-                    } else if (list.get(i).equals("forward2")) {
+                    }
+                    else if (list.get(i).equals("forward2")) {
                         for (int k = 0; k < 2; k++) {
                             GoForward(bee, changeX, changeY);
                         }
-                    } else if (list.get(i).equals("forward3")) {
+                    }
+                    else if (list.get(i).equals("forward3")) {
                         for (int k = 0; k < 3; k++) {
                             GoForward(bee, changeX, changeY);
                         }
                     }
-                    if (list.get(i).equals("left1")) {
+                    else if (list.get(i).equals("left1")) {
 
                         TurnLeft(bee);
                     }
-                    if (list.get(i).equals("left2")) {
+                    else if (list.get(i).equals("left2")) {
                         for (int k = 0; k < 2; k++) {
                             TurnLeft(bee);
                         }
                     }
-                    if (list.get(i).equals("left3")) {
+                    else if (list.get(i).equals("left3")) {
                         for (int k = 0; k < 3; k++) {
                             TurnLeft(bee);
                         }
                     }
-                    if (list.get(i).equals("right1")) {
+                    else if (list.get(i).equals("right1")) {
                         TurnRight(bee);
                     }
-                    if (list.get(i).equals("right2")) {
+                    else if (list.get(i).equals("right2")) {
                         for (int k = 0; k < 2; k++) {
                             TurnRight(bee);
                         }
                     }
-                    if (list.get(i).equals("right3")) {
+                    else if (list.get(i).equals("right3")) {
                         for (int k = 0; k < 3; k++) {
                             TurnRight(bee);
                         }
-                    } else if (list.get(i).equals("nectar1")) {
-                        GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2, nu, nu2,nu3,valueX3, valueY3);
-                    } else if (list.get(i).equals("nectar2")) {
+                    }
+                    else if (list.get(i).equals("nectar1")) {
+                        GetNectar(bee, valueX1, valueX2, valueY1, valueY2, nu, nu2, nu3, valueX3, valueY3);
+                    }
+                    else if (list.get(i).equals("nectar2")) {
                         for (int k = 0; k < 2; k++) {
-                            GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2, nu, nu2,nu3,valueX3, valueY3);
+                            GetNectar(bee, valueX1, valueX2, valueY1, valueY2, nu, nu2, nu3, valueX3, valueY3);
                         }
-                    } else if (list.get(i).equals("nectar3")) {
+                    }
+                    else if (list.get(i).equals("nectar3")) {
                         for (int k = 0; k < 3; k++) {
-                            GetNectar(bee, flower, flower2, flower0, flower00, valueX1, valueX2, valueY1, valueY2, nu, nu2,nu3,valueX3, valueY3);
+                            GetNectar(bee, valueX1, valueX2, valueY1, valueY2, nu, nu2, nu3, valueX3, valueY3);
                         }
-                    }if(nu3 != null) {
+                    }
+
+                    //for the level where a key available
+                    if(nu3 != null) {
                         if (heroHasKey && (bee.getX() == target[0]) && (bee.getY() == target[1])) {
                             etS.putBoolean("isOver", true);
                             etS.commit();
@@ -595,6 +642,8 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                             startActivity(j);
                         }
                     }
+
+                    //for the level where no item is available
                     else if (nu2 == null && nu == null) {
                         if ((bee.getX() == target[0]) && (bee.getY() == target[1])) {
                             etS.putBoolean("isOver", true);
@@ -604,6 +653,8 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                             startActivity(j);
                         }
                     }
+
+                    //for the level where a nectar is available
                     else if (nu2 == null && nu != null) {
                         if (isSelected && (bee.getX() == target[0]) && (bee.getY() == target[1])) {
                             etS.putBoolean("isOver", true);
@@ -613,6 +664,8 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                             startActivity(j);
                         }
                     }
+
+                    //for the level where two nectar are available
                     else if (nu2 != null && nu != null) {
                         if (isSelected2 && isSelected&& (bee.getX() == target[0]) && (bee.getY() == target[1])) {
                             etS.putBoolean("isOver", true);
@@ -626,6 +679,8 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                         if ((bee.getX() == nonForbiddenAreaX[t] && bee.getY() == nonForbiddenAreaY[t]))
                             isForbidden = false;
                     }
+
+                    //if the user goes out of the way
                     if (isForbidden) {
                         etS.putBoolean("isTry", true);
                         etS.commit();
@@ -637,12 +692,11 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                 }
             } catch (InterruptedException e) {
             }
-            System.out.println("mov : " + movements);
             etS.putInt("movements" , movements);
             etS.commit();
         }
     }
-
+//silinecek
 /**
  public void MoveLoop(ArrayList<String> list, ImageView bee, int changeX,
  int changeY, ImageView flower, ImageView flower2, Drawable flower0, Drawable
