@@ -59,8 +59,28 @@ At this meeting, everyone shared their task and we made some changes by co-decis
 **Present:** Everyone   _**Absent:**_ 
 
 **Discussion:** 
-At this meeting, Fatih and Alperen showed the designs of the level pages and how they worked and stated that they solved a problem in the levels and shared the code with us. Arman and Hüseyin showed the Show Codes section. Deniz and Remzi said that they continue to design Creative Mode. We also designed the UML part of the project and completed the Detailed Design Report. Next meeting planned for (16.05.2020).
+At this meeting, Fatih and Alperen showed the designs of the level pages and how they worked and stated that they solved a problem in the levels and shared the code with us. Arman showed the Show Codes section. Deniz and Remzi said that they continue to design Creative Mode. We also designed the UML part of the project and completed the Detailed Design Report. Next meeting planned for (16.05.2020).
 
 **ToDo:** Fatih and Alperen will improve their levels page. Arman and Hüseyin will design Achievements Page. Deniz and Remzi will design Creative Mode.
+
+****
+### Meeting ~ (16.05.2020, 2 hour)
+****
+**Present:** Everyone   _**Absent:**_ 
+
+**Discussion:** 
+At this meeting, Fatih and Alperen showed the new level pages that include one by one movement of user object and how they worked. Also, they shared the code with us. Arman showed the Achievements Page including design. Deniz and Remzi said that they are still working on the design and coding of Creative Mode. Hüseyin showed the Level9 Page. We also created Default Level Page for better design and efficient code. Next meeting planned for (19.05.2020).
+
+**ToDo:** Fatih and Alperen will fix the errors of levels page. Arman will add reset button to Achievements Page. Hüseyin will design Instructions Page. Deniz and Remzi will add animation to Creative Mode.
+
+****
+### Meeting ~ (19.05.2020, 4 hour)
+****
+**Present:** Everyone   _**Absent:**_ 
+
+**Discussion:** 
+At this meeting, Fatih and Alperen showed the level pages and they solved a problem in the levels and shared the code with us. Arman showed the reset button on Achievements Page. Hüseyin showed the Instructions Page. Deniz and Remzi said that they finished Creative Mode with animation with just a few error. Fatih showed the Splash Screen. We also finished the recording video to presentation of FunAlgo. Deniz editted and uploaded the video.
+
+**ToDo:** We will solve the back button of Settings Page and music loop problem. Hüseyin will improve the design of Instructions Page.
 
 ****
