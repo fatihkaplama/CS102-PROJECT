@@ -1,7 +1,5 @@
-package com.example.FunAlgo;
+package com.example.menu;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
@@ -12,7 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.FunAlgo.ThemePage;
+import com.example.FunAlgo.R;
 
 public class SettingsPage extends ThemePage implements View.OnClickListener{
     private Button returnButton;

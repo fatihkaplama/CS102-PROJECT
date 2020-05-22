@@ -1,7 +1,6 @@
-package com.example.FunAlgo;
+package com.example.educational;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -24,12 +23,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.FunAlgo.R;
+import com.example.menu.SettingsPage;
+
 import java.util.ArrayList;
 
-public class Level6Page extends Level1Page {
-    final private int[] targetArea = { 632 , 438 };
-    final private int[] nonForbiddenAreaX = { 472 , 312 , 152 , 152 , 152, 312 , 472 ,632};
-    final private int[] nonForbiddenAreaY = { 146 , 146 , 146 , 292 , 438, 438 , 438 , 438 };
+public class Level5Page extends Level1Page  {
+    final private int[] targetArea = { 194 , 540 };
+    final private int[] nonForbiddenAreaX = { 394 , 394 , 594 , 194 , 194 };
+    final private int[] nonForbiddenAreaY = { 180 , 360 , 360 , 360 , 540 };
     private TextView yellowText;
     private TextView pinkText;
     private TextView movements;
@@ -40,9 +42,9 @@ public class Level6Page extends Level1Page {
     private Integer[] times = {1,2,3};
     private ArrayAdapter<Integer> timesAdapter;
     private ArrayList<String> list;
-    private ImageView bee;
+    private static ImageView bee;
+    private ImageView flower;
     private ImageView flower2;
-    private ImageView flower3;
     private Button goForward;
     private Button turnRight;
     private Button turnLeft;
@@ -56,6 +58,7 @@ public class Level6Page extends Level1Page {
     private LinearLayout layout1;
     private LinearLayout layout2;
     private LinearLayout.LayoutParams params;
+    private int starsCount;
     private int volumeoffID;
     private int volumeonID;
     private int flower0ID;
@@ -66,7 +69,6 @@ public class Level6Page extends Level1Page {
     private Drawable flower00;
     private float x;
     private float y;
-    private int starsCount;
     private int count = 0;
     private int timesForward;
     private int timesLeft;
@@ -79,22 +81,24 @@ public class Level6Page extends Level1Page {
     private int movementsCount;
     private Button show;
     private String code;
-    //sharedPreferences to update and save levels
-    private SharedPreferences sp;
-    private SharedPreferences.Editor et;
-    // sharedPreferences for transport data to AchievementsPage
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
     private int background;
-    private ConstraintLayout level6Page;
+    private ConstraintLayout level5Page;
+
+    public static ImageView getBee() {
+        return bee;
+    }
+
+    //sharedPreferences to update and save levels
+    SharedPreferences sp;
+    SharedPreferences.Editor et;
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level6_page);
-        level6Page = findViewById(R.id.level6_page_layout);
+        setContentView(R.layout.activity_level5_page);
+        level5Page = findViewById(R.id.level5_page_layout);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
-        level6Page.setBackgroundResource(background);
+        level5Page.setBackgroundResource(background);
         //starting activity
         Intent i = getIntent();
         movementsCount = 0;
@@ -102,8 +106,8 @@ public class Level6Page extends Level1Page {
         reset = findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
         bee = findViewById(R.id.bee);
+        flower = findViewById(R.id.flower);
         flower2 = findViewById(R.id.flower2);
-        flower3 = findViewById(R.id.flower3);
         goForward = findViewById(R.id.goForward);
         turnLeft = findViewById(R.id.turnLeft);
         turnRight = findViewById(R.id.turnRight);
@@ -121,6 +125,7 @@ public class Level6Page extends Level1Page {
         getNectar = findViewById(R.id.getNectar);
         show = findViewById(R.id.showCode_button);
         code = "";
+
         //volume
         isVolumeOn = true;
         volumeonID = R.drawable.volumeon;
@@ -141,8 +146,9 @@ public class Level6Page extends Level1Page {
         spinnerRight = findViewById(R.id.spinnerRight);
         spinnerNectar = findViewById(R.id.spinnerNectar);
         //text
-        pinkText = findViewById(R.id.level6pink);
-        yellowText = findViewById(R.id.level6yellow);
+        pinkText = findViewById(R.id.level5pink);
+        yellowText = findViewById(R.id.level5yellow);
+
 
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
@@ -150,7 +156,7 @@ public class Level6Page extends Level1Page {
         flower0ID = R.drawable.flower0;
         flower00ID = R.drawable.flower00;
         flower0 = AppCompatDrawableManager.get().getDrawable(this, flower0ID);
-        flower00 = AppCompatDrawableManager.get().getDrawable(this,flower00ID);
+        flower00 = AppCompatDrawableManager.get().getDrawable(this, flower00ID);
 
         beeX = bee.getTranslationX();
         beeY = bee.getTranslationY();
@@ -159,11 +165,11 @@ public class Level6Page extends Level1Page {
         //SharedPreferences to save Level
         sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
         et = sp.edit();
-        isFinished(Level6Page.this, "6", 12, 14);
+        isFinished(Level5Page.this, "5", 10, 12);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Level6Page.this,LevelPage.class);
+                Intent i = new Intent(Level5Page.this,LevelPage.class);
                 startActivity(i);
             }
         });
@@ -171,7 +177,7 @@ public class Level6Page extends Level1Page {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Level6Page.this, SettingsPage.class);
+                Intent i = new Intent(Level5Page.this, SettingsPage.class);
                 startActivity(i);
             }
         });
@@ -231,36 +237,33 @@ public class Level6Page extends Level1Page {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //MoveLoop(list, bee, 160, 146, flower2, flower3, flower0, flower00, 312, 152, 146, 292);
+                //MoveLoop(list, bee, 200, 180, flower, flower2, flower0, flower00, 594,194,360,540);
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,160,146,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,312,152,146,292,yellowText,pinkText,null,0,0, movementsCount);
+                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,594,194,360,540,yellowText,pinkText,null,0,0, movementsCount);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
 
 /**
-                if (flower2.getBackground() == flower0 && flower3.getBackground() == flower00 && bee.getX() == 632 && bee.getY() == 438){
+                if (flower.getBackground() == flower0 && flower2.getBackground() == flower00){
                     System.out.println("true");
                     isGameOver = true;
 
                 }
-                if (((bee.getX() == 472) && (bee.getY() == 146)) || ((bee.getX() == 312) && (bee.getY() == 146)) || ((bee.getX() == 152) && (bee.getY() == 146))) {
-                } else if (((bee.getX() == 152) && (bee.getY() == 292)) || ((bee.getX() == 152) && (bee.getY() == 438)) || ((bee.getX() == 312) && (bee.getY() == 438))) {
-                } else if (((bee.getX() == 472) && (bee.getY() == 438)) || ((bee.getX() == 632) && (bee.getY() == 438))) {
-                } else{
+                if (((bee.getX() == 394) && (bee.getY() == 180)) || ((bee.getX() == 394) && (bee.getY() == 360)) || ((bee.getX() == 594) && (bee.getY() == 360)) || ((bee.getX() == 194) && (bee.getY() == 360))|| ((bee.getX() == 194) && (bee.getY() == 540))) {
+                } else {
                     TryAgain();
                 }
-
-
+*/
+                /**
                 if (isGameOver == true){
-                    et.putBoolean("finished6", isGameOver);
-                    finishedScreen(Level6Page.this, movementsCount,12,14);
-                    sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
-                    editor = sharedPreferences.edit();
+                    et.putBoolean("finished5", isGameOver);
+                    finishedScreen(Level5Page.this, movementsCount,10,12);
+                    SharedPreferences sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
                     starsCount = sharedPreferences.getInt("starsCount", 1);
-                    editor.putInt("starsCountLevel6", starsCount);
-                    editor.commit();
+                    et.putInt("starsCountLevel5", starsCount);
+                    et.commit();
                 }
- */
+                 */
             }
         });
 
@@ -295,7 +298,7 @@ public class Level6Page extends Level1Page {
     }
 
     public void TryAgain() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Level6Page.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(Level5Page.this);
         View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
         Button menu = (Button) myView.findViewById(R.id.menubtn);
         Button retry = (Button) myView.findViewById(R.id.retrybtn);
@@ -310,17 +313,15 @@ public class Level6Page extends Level1Page {
         dialog.show();
     }
 
-    @Override
     public void SaveData(String codeMessage) {
-        SharedPreferences sharedPref = Level6Page.this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = Level5Page.this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("CODEMESSAGE", codeMessage);
         editor.commit();
     }
 
-    @Override
     public void setCodeMessage() {
-        SharedPreferences sharedPref = Level6Page.this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = Level5Page.this.getPreferences(Context.MODE_PRIVATE);
         code += sharedPref.getString("CODEMESSAGE", "") + "\n";
     }
 }

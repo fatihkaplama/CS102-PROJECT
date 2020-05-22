@@ -1,4 +1,4 @@
-package com.example.FunAlgo;
+package com.example.menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.example.FunAlgo.R;
 
 public class FirstPage extends AppCompatActivity {
     //variables
@@ -50,6 +52,7 @@ public class FirstPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
         //to get the saved data
+        mainPageLayout = findViewById(R.id.main_layout);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         mainPageLayout.setBackgroundResource(background);
 

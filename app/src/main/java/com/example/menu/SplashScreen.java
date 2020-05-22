@@ -1,4 +1,4 @@
-package com.example.FunAlgo;
+package com.example.menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,7 +10,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.example.FunAlgo.FirstPage;
 import com.example.FunAlgo.R;
 
 public class SplashScreen extends AppCompatActivity {

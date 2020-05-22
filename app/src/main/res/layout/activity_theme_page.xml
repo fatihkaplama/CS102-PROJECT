@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background3"
     android:theme="@style/AppTheme"
-    tools:context=".ThemePage">
+    tools:context="com.example.menu.ThemePage">
 
     <Button
         android:id="@+id/volume_button_themesPage"

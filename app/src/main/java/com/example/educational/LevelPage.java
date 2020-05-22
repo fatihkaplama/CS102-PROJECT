@@ -1,4 +1,4 @@
-package com.example.FunAlgo;
+package com.example.educational;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
@@ -12,6 +12,10 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.menu.PlayPage;
+import com.example.FunAlgo.R;
+import com.example.menu.SettingsPage;
 
 public class LevelPage extends AppCompatActivity {
     private boolean isLevel1Finished;

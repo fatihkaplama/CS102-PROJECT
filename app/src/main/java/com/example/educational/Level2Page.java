@@ -1,7 +1,5 @@
-package com.example.FunAlgo;
+package com.example.educational;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -24,8 +22,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.FunAlgo.R;
+import com.example.menu.SettingsPage;
+
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 public class Level2Page extends Level1Page {
     final private int[] targetArea = { 400 , 8 };

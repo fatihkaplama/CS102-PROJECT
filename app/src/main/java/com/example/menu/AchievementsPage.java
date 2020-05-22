@@ -1,4 +1,4 @@
-package com.example.FunAlgo;
+package com.example.menu;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.FunAlgo.R;
 import com.softmoore.android.graphlib.Graph;
 import com.softmoore.android.graphlib.GraphView;
 import com.softmoore.android.graphlib.Label;

@@ -1,4 +1,4 @@
-package com.example.FunAlgo;
+package com.example.creative;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import com.example.creative.LineView;
+
+import com.example.FunAlgo.R;
+import com.example.menu.SettingsPage;
 
 
 public class CreativeMode extends AppCompatActivity {

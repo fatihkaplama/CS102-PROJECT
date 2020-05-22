@@ -1,4 +1,4 @@
-package com.example.FunAlgo;
+package com.example.menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -8,6 +8,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.FunAlgo.R;
 
 public class MusicsPage extends AppCompatActivity  {
     private MediaPlayer music1;

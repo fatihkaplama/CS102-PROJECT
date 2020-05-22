@@ -1,9 +1,4 @@
-package com.example.FunAlgo;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatDrawableManager;
-import androidx.constraintlayout.widget.ConstraintLayout;
+package com.example.educational;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,26 +8,30 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
-import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Timer;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatDrawableManager;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-public class Level8Page extends Level1Page  {
-    final private int[] targetArea = { 532 , 249 };
-    final private int[] nonForbiddenAreaX = { 0 , 133 , 266 , 399 , 399 , 399, 399 , 266 , 133 , 133 , 0 ,532};
-    final private int[] nonForbiddenAreaY = { 491 ,491 , 491 , 491 , 370 , 249, 128 , 128, 128 , 249 , 249, 249};
+import com.example.FunAlgo.R;
+import com.example.menu.SettingsPage;
+
+import java.util.ArrayList;
+
+public class Level9Page extends Level1Page {
+    final private int[] targetArea = {665 , 128};
+    final private int[] nonForbiddenAreaX = {0 , 133 , 266 , 266 , 266 , 133 , 133 , 133 , 266 , 399 , 532 , 532 , 532 , 532 , 665};
+    final private int[] nonForbiddenAreaY = {491 , 491 , 491 , 370 , 249 , 249 , 128 , 7 , 7 , 7 , 7 , 128 , 249 , 370 , 128};
     //variables
     private TextView movements;
     private Spinner spinnerForward;
@@ -82,37 +81,35 @@ public class Level8Page extends Level1Page  {
     private int movementsCount;
     private Button show;
     private String code;
-    //sharedPreferences to update and save levels
     private SharedPreferences sp;
     private SharedPreferences.Editor et;
-    // sharedPreferences for transport data to AchievementsPage
     private SharedPreferences sharedPreferencesA;
     private SharedPreferences.Editor editor;
     private int background;
-    private ConstraintLayout level8Page;
+    private ConstraintLayout level9Page;
+
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level8_page);
-        level8Page = findViewById(R.id.level8_page_layout);
+        setContentView(R.layout.activity_level9_page);
+        level9Page = findViewById(R.id.level9_page_layout);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
-        level8Page.setBackgroundResource(background);
-        //starting activity
-        Intent i = getIntent();
+        level9Page.setBackgroundResource(background);
+        Intent i =getIntent();
         SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
-        //setting the avatar
-        avatarID = sharedPreferences.getInt("avatar", 0);
-        avatar = AppCompatDrawableManager.get().getDrawable(Level8Page.this, avatarID);
+
+        avatarID =sharedPreferences.getInt("avatar", 0);
+        avatar = AppCompatDrawableManager.get().getDrawable(Level9Page.this, avatarID);
         hero = findViewById(R.id.hero);
         hero.setBackground(avatar);
 
         movementsCount = 0;
-        //Views
-        reset = findViewById(R.id.reset);
+
+        reset =findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
         hero = findViewById(R.id.hero);
-        key = findViewById(R.id.key);
+        key= findViewById(R.id.key);
         prisoner = findViewById(R.id.prisoner);
         goForward = findViewById(R.id.goForward);
         turnLeft = findViewById(R.id.turnLeft);
@@ -130,8 +127,8 @@ public class Level8Page extends Level1Page  {
         movements = findViewById(R.id.movements);
         getKey = findViewById(R.id.getKey);
         show = findViewById(R.id.showCode_button);
-        code = "";
-        //volume
+        code ="";
+
         isVolumeOn = true;
         volumeonID = R.drawable.volumeon;
         volumeoffID = R.drawable.volumeoff;
@@ -139,7 +136,6 @@ public class Level8Page extends Level1Page  {
         volumeoff = AppCompatDrawableManager.get().getDrawable(this, volumeoffID);
         final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.daybreaker);
 
-        //spinner
         timesAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, times);
         timesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerForward.setAdapter(timesAdapter);
@@ -148,70 +144,64 @@ public class Level8Page extends Level1Page  {
         spinnerKey.setAdapter(timesAdapter);
         spinnerForward = findViewById(R.id.spinnerForward);
         spinnerLeft = findViewById(R.id.spinnerLeft);
-        spinnerRight = findViewById(R.id.spinnerRight);
+        spinnerRight = findViewById(R.id.spinnerKey);
         spinnerKey = findViewById(R.id.spinnerKey);
 
-        //to add the buttons to the linear layout
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
 
         princessID = R.drawable.princess;
-        princess = AppCompatDrawableManager.get().getDrawable(this, princessID);
+        princess = AppCompatDrawableManager.get().getDrawable(this,princessID);
         heroHasKey = false;
 
-        //to get the first location of the hero
         heroX = hero.getTranslationX();
         heroY = hero.getTranslationY();
 
         isGameOver = false;
 
-        //SharedPreferences to save Level
-        sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
+        sp= getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
         et = sp.edit();
 
-        //when the user click the BACK button
-        isFinished(Level8Page.this, "8", 14, 18);
-         back.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-        Intent i = new Intent(Level8Page.this,LevelPage.class);
-        startActivity(i);
-        }
+        isFinished(Level9Page.this, "9" , 17, 18);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Level9Page.this, LevelPage.class);
+                startActivity(i);
+            }
         });
 
-         //when the user click the SETTINGS button
-         settings.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-        Intent i = new Intent(Level8Page.this, SettingsPage.class);
-        startActivity(i);
-        }
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Level9Page.this, SettingsPage.class);
+                startActivity(i);
+            }
         });
 
-         //when the user click the VOLUME button
-         volume.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-        if(isVolumeOn){
-        volume.setBackground(volumeoff);
-        isVolumeOn = false;
-        mediaPlayer.pause();
-        }
-        else {
-        volume.setBackground(volumeon);
-        isVolumeOn = true;
-        mediaPlayer.start();;
-        }
-        }
+        volume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isVolumeOn){
+                    volume.setBackground(volumeoff);
+                    isVolumeOn = false;
+                    mediaPlayer.pause();
+                }
+                else {
+                    volume.setBackground(volumeon);
+                    isVolumeOn = true;
+                    mediaPlayer.start();
+                }
+            }
         });
-        //when the user click the INFO button
+
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Bee needs to reach to nectar. Help it with your algorithm!", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(),"user needs to get the keys to reach.", Toast.LENGTH_LONG);
                 View view = toast.getView();
                 view.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN);
-                toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL,0,0);
                 toast.show();
             }
         });
@@ -220,110 +210,84 @@ public class Level8Page extends Level1Page  {
             @Override
             public void onClick(View v) {
                 Toast toast;
-                if (code == "") {
+                if (code =="") {
                     toast = Toast.makeText(getApplicationContext(), "No code here yet.", Toast.LENGTH_LONG);
-                } else {
+                }
+                else {
                     toast = Toast.makeText(getApplicationContext(), code, Toast.LENGTH_LONG);
                 }
                 View view = toast.getView();
                 view.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-                toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL,0,0);
                 toast.show();
             }
         });
 
-        //when the user click the RESET button
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //reset();
                 recreate();
-                code = "";
+                code ="";
+
             }
         });
-
-        //when the user click the APPLY button
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(hero,list,133,121,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,0,0,0,0,null,null,key,266,128, movementsCount);
+                ApplyMove applyMove = new ApplyMove(hero,list,133,121,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,0,0,0,0,null,null,key,532,370, movementsCount);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
 
-                //finish the game if the necessary conditions are met
-                if (hero.getX() == 266 && hero.getY() == 128 && heroHasKey){
+                if(hero.getX() == 665 && hero.getY() == 128 && heroHasKey){
                     System.out.println("true");
                     isGameOver = true;
-
                 }
-                /*if (((hero.getX() == 0) && (hero.getY() == 393)) || ((hero.getX() == 133) && (hero.getY() == 393)) || ((hero.getX() == 266) && (hero.getY() == 393)))  {
-                } else if (((hero.getX() == 399) && (hero.getY() == 372)) || ((hero.getX() == 532) && (hero.getY() == 372)) || ((hero.getX() == 399) && (hero.getY() == 251))) {
-                } else if (((hero.getX() == 133) && (hero.getY() == 130)) || ((hero.getX() == 266) && (hero.getY() == 130)) || (hero.getX() == 399) && (hero.getY() == 130)) {
-                } else if ((hero.getX() == 532) && (hero.getY() == 130) || (hero.getX() == 665) && (hero.getY() == 130) || hero.getX() == 133 && hero.getY() == 9){
-                } else if ((hero.getX() == 532 && hero.getY() == 9) || (hero.getX() == 399) && (hero.getY() == 393)){
+
+                if(isGameOver == true){
+                    et.putBoolean("finished9", isGameOver);
+                    finishedScreen(Level9Page.this, movementsCount,23,27);
+                    sharedPreferencesA = getSharedPreferences("starsData",MODE_PRIVATE);
+                    editor = sharedPreferencesA.edit();
+                    starsCount = sharedPreferencesA.getInt("starsCount", 1);
+                    editor.putInt("starsCountLevel9", starsCount);
+                    editor.commit();
                 }
-                else{
-                    TryAgain();
-                }*/
-
-                //show the finish screen if the game is over
-
-                 if (isGameOver == true){
-                     et.putBoolean("finished8", isGameOver);
-                     finishedScreen(Level8Page.this, movementsCount,23,27);
-                     sharedPreferencesA = getSharedPreferences("starsData", MODE_PRIVATE);
-                     editor = sharedPreferencesA.edit();
-                     starsCount = sharedPreferencesA.getInt("starsCount", 1);
-                     editor.putInt("starsCountLevel8", starsCount);
-                     editor.commit();
-                 }
             }
         });
-        //when the user click the GO FORWARD button
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = goForwardButton(timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerForward);
-
+                movementsCount = goForwardButton(timesForward, layout1 , layout2 , list , count , movementsCount, movements , spinnerForward);
             }
         });
-
         turnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = turnLeftButton(timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerLeft);
+                movementsCount = turnLeftButton(timesForward, layout1 , layout2 , list ,count ,movementsCount, movements, spinnerLeft);
             }
         });
-
         turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = turnRightButton(timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerRight);
+                movementsCount = turnRightButton(timesForward, layout1 , layout2 , list , count , movementsCount , movements , spinnerRight);
             }
         });
-
         getKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = getNectarButton(timesKey, layout1, layout2, list, movementsCount, movements, spinnerKey,"NECTAR");
+                movementsCount = getNectarButton(timesKey, layout1 , layout2 , list , movementsCount , movements , spinnerKey , "NECTAR");
             }
         });
     }
-
-
-    /** This method is used to reset the game.
-     * @param
-     * @return
-     **/
     public void reset(){
-        count = 0;
+        count =0;
         layout1.removeAllViewsInLayout();
         int size = list.size();
-        for (int i = 0; i < size; i++){
+        for(int i =0; i< size; i++){
             list.remove(0);
         }
-        if (!list.isEmpty()){
+        if(!list.isEmpty()){
             System.out.println(list.get(0));
         }
         x = 0;
@@ -337,112 +301,80 @@ public class Level8Page extends Level1Page  {
         apply.setEnabled(true);
     }
 
-    /** This method is used to move the character forward according to its rotation.
-     * @param
-     * @return
-     **/
     public void GoForward(){
-        if (hero.getRotation() == 0){
-            y -= (121);
+        if(hero.getRotation() == 0){
+            y -=(121);
             hero.setTranslationY(y);
-            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
-
         }
-        if (hero.getRotation() == 90){
+        if(hero.getRotation() == 90){
             x += (133);
             hero.setTranslationX(x);
-
-            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
         }
-        if (hero.getRotation() == 360){
+        if(hero.getRotation() == 360){
             y -= (121);
             hero.setTranslationY(y);
-            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
         }
-        if (hero.getRotation() == 270){
+        if(hero.getRotation() == 270){
             x -= (133);
-            hero.setTranslationX(x);
+            hero.setTranslationY(x);
         }
-        if (hero.getRotation() == 180){
+        if(hero.getRotation() == 180){
             y += (121);
             hero.setTranslationY(y);
-            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
         }
-        if (hero.getRotation() == -270){
+        if(hero.getRotation() == -270){
             x += (133);
             hero.setTranslationX(x);
         }
-        if (hero.getRotation() == -90){
+        if(hero.getRotation() == -90){
             x -= (133);
             hero.setTranslationX(x);
-            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
         }
         System.out.println(hero.getX());
         System.out.println(hero.getY());
     }
-
-    /** This method is used to turn the character right.
-     * @param
-     * @return
-     **/
-    public void TurnRight(){
+    public void TurnRight () {
         hero.setRotation(hero.getRotation() + (90));
-
     }
 
-    /** This method is used to turn the character left.
-     * @param
-     * @return
-     **/
-    public void TurnLeft(){
+    public void TurnLeft () {
         hero.setRotation(hero.getRotation() - (90));
-
     }
 
-    /** This method is used to get the key.
-     * @param
-     * @return
-     **/
-    public void GetKey(){
-        if (hero.getX() == 0 && hero.getY() == 249) {
+    public void GetKey() {
+        if (hero.getX() == 532 && hero.getY() == 370) {
             key.setVisibility(View.INVISIBLE);
             heroHasKey = true;
         }
     }
+    public void TryAgain() {
 
-    /** This method is used to give an error message
-     * when the user goes the wrong place.
-     * @param
-     * @return
-     **/
-     public void TryAgain() {
-
-     AlertDialog.Builder builder = new AlertDialog.Builder(Level8Page.this);
-     View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
-     Button menu = (Button) myView.findViewById(R.id.menubtn);
-     Button retry = (Button) myView.findViewById(R.id.retrybtn);
-     retry.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-    recreate();
+        AlertDialog.Builder builder = new AlertDialog.Builder(Level9Page.this);
+        View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
+        Button menu = (Button) myView.findViewById(R.id.menubtn);
+        Button retry = (Button) myView.findViewById(R.id.retrybtn);
+        retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recreate();
+            }
+        });
+        builder.setView(myView);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
-    });
-     builder.setView(myView);
-     AlertDialog dialog = builder.create();
-     dialog.show();
-     }
 
     @Override
     public void SaveData(String codeMessage) {
-        SharedPreferences sharedPref = Level8Page.this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = Level9Page.this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("CODEMESSAGE", codeMessage);
         editor.commit();
     }
 
     @Override
-    public void setCodeMessage() {
-        SharedPreferences sharedPref = Level8Page.this.getPreferences(Context.MODE_PRIVATE);
-        code += sharedPref.getString("CODEMESSAGE", "") + "\n";
+    public void setCodeMessage () {
+        SharedPreferences sharedPref = Level9Page.this.getPreferences(Context.MODE_PRIVATE);
+        code += sharedPref.getString("CODE MESSAGE" , "") + "\n";
     }
 }

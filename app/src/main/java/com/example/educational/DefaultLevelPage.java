@@ -1,4 +1,4 @@
-package com.example.FunAlgo;
+package com.example.educational;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
+import com.example.menu.HomePage;
+import com.example.FunAlgo.R;
 
 public class DefaultLevelPage extends AppCompatActivity {
     private int starsCount;

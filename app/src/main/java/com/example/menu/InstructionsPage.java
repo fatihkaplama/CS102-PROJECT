@@ -1,4 +1,4 @@
-package com.example.FunAlgo;
+package com.example.menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -6,15 +6,15 @@ import androidx.appcompat.widget.AppCompatDrawableManager;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.View;
-import android.view.Display;
 import android.widget.Button;
+
+import com.example.FunAlgo.R;
 
 public class InstructionsPage extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.FunAlgo;
+package com.example.menu;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
@@ -9,12 +9,15 @@ import android.widget.TextView;
 import android.view.View;
 import android.os.Bundle;
 import android.content.Intent;
-import android.media.MediaPlayer;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.example.FunAlgo.R;
+import com.example.creative.CreativeMode;
+import com.example.educational.LevelPage;
 
 public class PlayPage extends AppCompatActivity {
 

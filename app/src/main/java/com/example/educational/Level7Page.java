@@ -1,7 +1,6 @@
-package com.example.FunAlgo;
+package com.example.educational;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -24,29 +23,31 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.FunAlgo.R;
+import com.example.menu.SettingsPage;
+
 import java.util.ArrayList;
 
-public class Level5Page extends Level1Page  {
-    final private int[] targetArea = { 194 , 540 };
-    final private int[] nonForbiddenAreaX = { 394 , 394 , 594 , 194 , 194 };
-    final private int[] nonForbiddenAreaY = { 180 , 360 , 360 , 360 , 540 };
-    private TextView yellowText;
-    private TextView pinkText;
+public class Level7Page extends Level1Page {
+    final private int[] targetArea = { 532 , 9 };
+    final private int[] nonForbiddenAreaX = { 0 , 133 , 266 , 399 , 399 , 399, 399 , 266 , 399 , 532 , 532};
+    final private int[] nonForbiddenAreaY = { 493 , 493 , 493 , 493 , 372 , 251, 130 , 130 , 130 , 130 , 9};
+    //variables
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
     private Spinner spinnerRight;
-    private Spinner spinnerNectar;
+    private Spinner spinnerKey;
     private Integer[] times = {1,2,3};
     private ArrayAdapter<Integer> timesAdapter;
     private ArrayList<String> list;
-    private static ImageView bee;
-    private ImageView flower;
-    private ImageView flower2;
+    private ImageView hero;
+    private ImageView key;
+    private ImageView prisoner;
     private Button goForward;
     private Button turnRight;
     private Button turnLeft;
-    private Button getNectar;
+    private Button getKey;
     private Button settings;
     private Button volume;
     private Button back;
@@ -56,56 +57,62 @@ public class Level5Page extends Level1Page  {
     private LinearLayout layout1;
     private LinearLayout layout2;
     private LinearLayout.LayoutParams params;
-    private int starsCount;
     private int volumeoffID;
     private int volumeonID;
-    private int flower0ID;
-    private int flower00ID;
+    private int princessID;
     private Drawable volumeoff;
     private Drawable volumeon;
-    private Drawable flower0;
-    private Drawable flower00;
+    private Drawable princess;
     private float x;
     private float y;
     private int count = 0;
+    private int starsCount;
     private int timesForward;
     private int timesLeft;
     private int timesRight;
-    private int timesNectar;
+    private int timesKey;
     private boolean isGameOver;
-    private float beeX;
-    private float beeY;
+    private float heroX;
+    private float heroY;
     private boolean isVolumeOn;
+    private boolean heroHasKey;
     private int movementsCount;
+    private int avatarID;
+    private Drawable avatar;
     private Button show;
     private String code;
-    private int background;
-    private ConstraintLayout level5Page;
-
-    public static ImageView getBee() {
-        return bee;
-    }
-
     //sharedPreferences to update and save levels
-    SharedPreferences sp;
-    SharedPreferences.Editor et;
+    private SharedPreferences sp;
+    private SharedPreferences.Editor et;
+    // sharedPreferences for transport data to AchievementsPage
+    private SharedPreferences sharedPreferencesA;
+    private SharedPreferences.Editor editor;
+    private int background;
+    private ConstraintLayout level7Page;
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level5_page);
-        level5Page = findViewById(R.id.level5_page_layout);
+        setContentView(R.layout.activity_level7_page);
+        level7Page = findViewById(R.id.level7_page_layout);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
-        level5Page.setBackgroundResource(background);
+        level7Page.setBackgroundResource(background);
         //starting activity
         Intent i = getIntent();
+        final SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
+
+        //setting the avatar
+        avatarID = sharedPreferences.getInt("avatar", 0);
+        avatar = AppCompatDrawableManager.get().getDrawable(Level7Page.this, avatarID);
+        hero = findViewById(R.id.hero);
+        hero.setBackground(avatar);
+
         movementsCount = 0;
         //Views
         reset = findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
-        bee = findViewById(R.id.bee);
-        flower = findViewById(R.id.flower);
-        flower2 = findViewById(R.id.flower2);
+        key = findViewById(R.id.key);
+        prisoner = findViewById(R.id.prisoner);
         goForward = findViewById(R.id.goForward);
         turnLeft = findViewById(R.id.turnLeft);
         turnRight = findViewById(R.id.turnRight);
@@ -118,9 +125,9 @@ public class Level5Page extends Level1Page  {
         spinnerForward = findViewById(R.id.spinnerForward);
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
-        spinnerNectar = findViewById(R.id.spinnerNectar);
+        spinnerKey = findViewById(R.id.spinnerKey);
         movements = findViewById(R.id.movements);
-        getNectar = findViewById(R.id.getNectar);
+        getKey = findViewById(R.id.getKey);
         show = findViewById(R.id.showCode_button);
         code = "";
 
@@ -138,48 +145,50 @@ public class Level5Page extends Level1Page  {
         spinnerForward.setAdapter(timesAdapter);
         spinnerRight.setAdapter(timesAdapter);
         spinnerLeft.setAdapter(timesAdapter);
-        spinnerNectar.setAdapter(timesAdapter);
+        spinnerKey.setAdapter(timesAdapter);
         spinnerForward = findViewById(R.id.spinnerForward);
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerRight);
-        spinnerNectar = findViewById(R.id.spinnerNectar);
-        //text
-        pinkText = findViewById(R.id.level5pink);
-        yellowText = findViewById(R.id.level5yellow);
+        spinnerKey = findViewById(R.id.spinnerKey);
 
-
+        //to add the buttons to the linear layout
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
 
-        flower0ID = R.drawable.flower0;
-        flower00ID = R.drawable.flower00;
-        flower0 = AppCompatDrawableManager.get().getDrawable(this, flower0ID);
-        flower00 = AppCompatDrawableManager.get().getDrawable(this, flower00ID);
+        princessID = R.drawable.princess;
+        princess = AppCompatDrawableManager.get().getDrawable(this, princessID);
+        heroHasKey = false;
 
-        beeX = bee.getTranslationX();
-        beeY = bee.getTranslationY();
+        //to get the first location of the hero
+        heroX = hero.getTranslationX();
+        heroY = hero.getTranslationY();
 
         isGameOver = false;
+
         //SharedPreferences to save Level
         sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
         et = sp.edit();
-        isFinished(Level5Page.this, "5", 10, 12);
+
+        isFinished(Level7Page.this, "7", 11, 14);
+        //when the user click the BACK button
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Level5Page.this,LevelPage.class);
+                Intent i = new Intent(Level7Page.this,LevelPage.class);
                 startActivity(i);
             }
         });
 
+        //when the user click the SETTINGS button
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Level5Page.this, SettingsPage.class);
+                Intent i = new Intent(Level7Page.this, SettingsPage.class);
                 startActivity(i);
             }
         });
 
+        //when the user click the VOLUME button
         volume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -196,6 +205,7 @@ public class Level5Page extends Level1Page  {
             }
         });
 
+        //when the user click the INFO button
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,6 +233,7 @@ public class Level5Page extends Level1Page  {
             }
         });
 
+        //when the user click the RESET button
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -232,39 +243,39 @@ public class Level5Page extends Level1Page  {
             }
         });
 
+        //when the user click the APPLY button
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //MoveLoop(list, bee, 200, 180, flower, flower2, flower0, flower00, 594,194,360,540);
-                apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,594,194,360,540,yellowText,pinkText,null,0,0, movementsCount);
+
+                ApplyMove applyMove = new ApplyMove(hero,list,133,121,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,0,0,0,0,null,null,key,266,130, movementsCount);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
 
-/**
-                if (flower.getBackground() == flower0 && flower2.getBackground() == flower00){
-                    System.out.println("true");
-                    isGameOver = true;
 
+                /*if (((hero.getX() == 0) && (hero.getY() == 393)) || ((hero.getX() == 133) && (hero.getY() == 393)) || ((hero.getX() == 266) && (hero.getY() == 393)))  {
+                } else if (((hero.getX() == 399) && (hero.getY() == 372)) || ((hero.getX() == 532) && (hero.getY() == 372)) || ((hero.getX() == 399) && (hero.getY() == 251))) {
+                } else if (((hero.getX() == 133) && (hero.getY() == 130)) || ((hero.getX() == 266) && (hero.getY() == 130)) || (hero.getX() == 399) && (hero.getY() == 130)) {
+                } else if ((hero.getX() == 532) && (hero.getY() == 130) || (hero.getX() == 665) && (hero.getY() == 130) || hero.getX() == 133 && hero.getY() == 9){
+                } else if ((hero.getX() == 532 && hero.getY() == 9) || (hero.getX() == 399) && (hero.getY() == 393)){
                 }
-                if (((bee.getX() == 394) && (bee.getY() == 180)) || ((bee.getX() == 394) && (bee.getY() == 360)) || ((bee.getX() == 594) && (bee.getY() == 360)) || ((bee.getX() == 194) && (bee.getY() == 360))|| ((bee.getX() == 194) && (bee.getY() == 540))) {
-                } else {
+                else{
                     TryAgain();
-                }
-*/
-                /**
+                }*/
+/**
+                //show the finish screen if the game is over
                 if (isGameOver == true){
-                    et.putBoolean("finished5", isGameOver);
-                    finishedScreen(Level5Page.this, movementsCount,10,12);
-                    SharedPreferences sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
-                    starsCount = sharedPreferences.getInt("starsCount", 1);
-                    et.putInt("starsCountLevel5", starsCount);
-                    et.commit();
+                    et.putBoolean("finished7", isGameOver);
+                    finishedScreen(Level7Page.this, movementsCount,11,14);
+                   sharedPreferencesA = getSharedPreferences("starsData", MODE_PRIVATE);
+                    starsCount = sharedPreferencesA.getInt("starsCount", 1);
+                    editor.putInt("starsCountLevel7", starsCount);
+                    editor.commit();
                 }
-                 */
+ */
             }
         });
-
+        //when the user click the GO FORWARD button
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -287,16 +298,119 @@ public class Level5Page extends Level1Page  {
             }
         });
 
-        getNectar.setOnClickListener(new View.OnClickListener() {
+        getKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = getNectarButton(timesNectar, layout1, layout2, list, movementsCount, movements, spinnerNectar,"NECTAR");
+                movementsCount = getNectarButton(timesKey, layout1, layout2, list, movementsCount, movements, spinnerKey,"NECTAR");
             }
         });
     }
 
+    /**
+     * @param
+     * @return
+     **/
+    public void reset(){
+        count = 0;
+        layout1.removeAllViewsInLayout();
+        int size = list.size();
+        for (int i = 0; i < size; i++){
+            list.remove(0);
+        }
+        if (!list.isEmpty()){
+            System.out.println(list.get(0));
+        }
+        x = 0;
+        y = 0;
+        timesForward = 0;
+        timesRight = 0;
+        timesLeft = 0;
+        hero.setTranslationX(heroX);
+        hero.setTranslationY(heroY);
+        hero.setRotation(90);
+        apply.setEnabled(true);
+    }
+
+    /** This method is used to move the character forward according to its rotation.
+     * @param
+     * @return
+     **/
+    public void GoForward(){
+        if (hero.getRotation() == 0){
+            y -= (121);
+            hero.setTranslationY(y);
+            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
+
+        }
+        if (hero.getRotation() == 90){
+            x += (133);
+            hero.setTranslationX(x);
+
+            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
+        }
+        if (hero.getRotation() == 360){
+            y -= (121);
+            hero.setTranslationY(y);
+            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
+        }
+        if (hero.getRotation() == 270){
+            x -= (133);
+            hero.setTranslationX(x);
+        }
+        if (hero.getRotation() == 180){
+            y += (121);
+            hero.setTranslationY(y);
+            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
+        }
+        if (hero.getRotation() == -270){
+            x += (133);
+            hero.setTranslationX(x);
+        }
+        if (hero.getRotation() == -90){
+            x -= (133);
+            hero.setTranslationX(x);
+            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
+        }
+        System.out.println(hero.getX());
+        System.out.println(hero.getY());
+    }
+
+    /** This method is used to turn the character right.
+     * @param
+     * @return
+     **/
+    public void TurnRight(){
+        hero.setRotation(hero.getRotation() + (90));
+
+    }
+
+    /** This method is used to turn the character left.
+     * @param
+     * @return
+     **/
+    public void TurnLeft(){
+        hero.setRotation(hero.getRotation() - (90));
+
+    }
+
+    /** This method is used to get the key.
+     * @param
+     * @return
+     **/
+    public void GetKey(){
+        if (hero.getX() == 266 && hero.getY() == 130) {
+            key.setVisibility(View.INVISIBLE);
+            heroHasKey = true;
+        }
+    }
+
+    /** This method is used to give an error message
+     * when the user goes the wrong place.
+     * @param
+     * @return
+     **/
     public void TryAgain() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Level5Page.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(Level7Page.this);
         View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
         Button menu = (Button) myView.findViewById(R.id.menubtn);
         Button retry = (Button) myView.findViewById(R.id.retrybtn);
@@ -311,15 +425,17 @@ public class Level5Page extends Level1Page  {
         dialog.show();
     }
 
+    @Override
     public void SaveData(String codeMessage) {
-        SharedPreferences sharedPref = Level5Page.this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = Level7Page.this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("CODEMESSAGE", codeMessage);
         editor.commit();
     }
 
+    @Override
     public void setCodeMessage() {
-        SharedPreferences sharedPref = Level5Page.this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = Level7Page.this.getPreferences(Context.MODE_PRIVATE);
         code += sharedPref.getString("CODEMESSAGE", "") + "\n";
     }
 }

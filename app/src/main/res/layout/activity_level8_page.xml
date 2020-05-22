@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background3"
     android:orientation="vertical"
-    tools:context=".Level8Page">
+    tools:context="com.example.educational.Level8Page">
 
     <Button
         android:id="@+id/settings"

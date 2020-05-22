@@ -1,7 +1,5 @@
-package com.example.FunAlgo;
+package com.example.educational;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -12,7 +10,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -25,8 +22,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-import org.w3c.dom.ls.LSOutput;
+import com.example.FunAlgo.R;
+import com.example.menu.SettingsPage;
+import com.example.interfaces.ShowCodeI;
 
 import java.util.ArrayList;
 

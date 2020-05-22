@@ -1,4 +1,4 @@
-package com.example.FunAlgo;
+package com.example.interfaces;
 
 import android.widget.Button;
 

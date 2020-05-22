@@ -1,4 +1,4 @@
-package com.example.FunAlgo;
+package com.example.educational;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -20,9 +20,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.example.FunAlgo.R;
+import com.example.menu.SettingsPage;
 
 import java.util.ArrayList;
 
