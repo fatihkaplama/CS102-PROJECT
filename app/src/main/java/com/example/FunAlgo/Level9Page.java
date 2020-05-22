@@ -236,7 +236,7 @@ public class Level9Page extends Level1Page {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(hero,list,133,121,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,0,0,0,0,null,null,key,532,370, movementsCount);
+                ApplyMove applyMove = new ApplyMove(hero,list,133,121,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,0,0,0,0,null,null,key,532,370, movementsCount);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
 
