@@ -233,7 +233,7 @@ public class Level6Page extends Level1Page {
             public void onClick(View v) {
                 //MoveLoop(list, bee, 160, 146, flower2, flower3, flower0, flower00, 312, 152, 146, 292);
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,160,146,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,flower2,flower3,flower0,null,312,152,146,292,yellowText,pinkText,null,0,0, movementsCount);
+                ApplyMove applyMove = new ApplyMove(bee,list,160,146,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,312,152,146,292,yellowText,pinkText,null,0,0, movementsCount);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
 

@@ -249,7 +249,7 @@ public class Level7Page extends Level1Page {
             @Override
             public void onClick(View v) {
 
-                ApplyMove applyMove = new ApplyMove(hero,list,133,121,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,0,0,0,0,null,null,key,266,130, movementsCount);
+                ApplyMove applyMove = new ApplyMove(hero,list,133,121,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,0,0,0,0,null,null,key,266,130, movementsCount);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
 

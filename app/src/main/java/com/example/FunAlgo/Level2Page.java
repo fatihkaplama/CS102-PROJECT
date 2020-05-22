@@ -219,7 +219,7 @@ public class Level2Page extends Level1Page {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,null,null,null,null,0,0,0,0,null,null,null,0,0,movementsCount);
+                ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,0,0,0,0,null,null,null,0,0,movementsCount);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
             }

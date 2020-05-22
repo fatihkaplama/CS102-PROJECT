@@ -228,7 +228,7 @@ public class Level3Page extends Level1Page {
 
                 //apply.setEnabled(false);
                 apply.setEnabled(false);
-                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,flower,null,flower0,null,600,0,371,0,nu,null,null,0,0, movementsCount);
+                ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,600,0,371,0,nu,null,null,0,0, movementsCount);
                 Thread t1 = new Thread(applyMove);
                 t1.start();
 
