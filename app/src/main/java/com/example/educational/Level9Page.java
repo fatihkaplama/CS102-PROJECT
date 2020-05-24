@@ -65,8 +65,6 @@ public class Level9Page extends Level1Page {
     private Drawable volumeon;
     private Drawable princess;
     private Drawable avatar;
-    private float x;
-    private float y;
     private int avatarID;
     private int count = 0;
     private int timesForward;
@@ -74,8 +72,6 @@ public class Level9Page extends Level1Page {
     private int timesRight;
     private int timesKey;
     private boolean isGameOver;
-    private float heroX;
-    private float heroY;
     private boolean isVolumeOn;
     private boolean heroHasKey;
     private int movementsCount;
@@ -154,15 +150,14 @@ public class Level9Page extends Level1Page {
         princess = AppCompatDrawableManager.get().getDrawable(this,princessID);
         heroHasKey = false;
 
-        heroX = hero.getTranslationX();
-        heroY = hero.getTranslationY();
-
         isGameOver = false;
 
         sp= getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
         et = sp.edit();
 
         isFinished(Level9Page.this, "9" , 17, 18);
+
+        //when the user presses the back button, he switches to Level Page
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,6 +166,7 @@ public class Level9Page extends Level1Page {
             }
         });
 
+        //when the user presses the settings, he switches to Settings
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,6 +175,7 @@ public class Level9Page extends Level1Page {
             }
         });
 
+        //the user can turn on or off the sound when pressing the sound icon
         volume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -195,6 +192,7 @@ public class Level9Page extends Level1Page {
             }
         });
 
+        //when the user presses the info, he can get information about level
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -206,6 +204,7 @@ public class Level9Page extends Level1Page {
             }
         });
 
+        //to show the current codes
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,147 +222,65 @@ public class Level9Page extends Level1Page {
             }
         });
 
+        //to reset the game
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 recreate();
                 code ="";
-
             }
         });
+
+        //to apply the activities selected by the user
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
+                //to create the object of the ApplyMove class
                 ApplyMove applyMove = new ApplyMove(hero,list,133,121,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,0,0,0,0,null,null,key,532,370, movementsCount);
                 Thread t1 = new Thread(applyMove);
-                t1.start();
+                t1.start(); //starting thread
 
-                if(hero.getX() == 665 && hero.getY() == 128 && heroHasKey){
-                    System.out.println("true");
-                    isGameOver = true;
-                }
-
-                if(isGameOver == true){
-                    et.putBoolean("finished9", isGameOver);
-                    finishedScreen(Level9Page.this, movementsCount,23,27);
-                    sharedPreferencesA = getSharedPreferences("starsData",MODE_PRIVATE);
-                    editor = sharedPreferencesA.edit();
-                    starsCount = sharedPreferencesA.getInt("starsCount", 1);
-                    editor.putInt("starsCountLevel9", starsCount);
-                    editor.commit();
-                }
             }
         });
+
+        //when the user click the GO FORWARD
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 movementsCount = goForwardButton(timesForward, layout1 , layout2 , list , count , movementsCount, movements , spinnerForward);
             }
         });
+
+        //when the user click the TURN LEFT
         turnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 movementsCount = turnLeftButton(timesForward, layout1 , layout2 , list ,count ,movementsCount, movements, spinnerLeft);
             }
         });
+
+        //when the user click the TURN RIGHT
         turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 movementsCount = turnRightButton(timesForward, layout1 , layout2 , list , count , movementsCount , movements , spinnerRight);
             }
         });
+
+        //when the user click the GET KEY
         getKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = getNectarButton(timesKey, layout1 , layout2 , list , movementsCount , movements , spinnerKey , "NECTAR");
+                movementsCount = getNectarButton(timesKey, layout1 , layout2 , list , movementsCount , movements , spinnerKey , "KEY");
             }
         });
     }
-    public void reset(){
-        count =0;
-        layout1.removeAllViewsInLayout();
-        int size = list.size();
-        for(int i =0; i< size; i++){
-            list.remove(0);
-        }
-        if(!list.isEmpty()){
-            System.out.println(list.get(0));
-        }
-        x = 0;
-        y = 0;
-        timesForward = 0;
-        timesRight = 0;
-        timesLeft = 0;
-        hero.setTranslationX(heroX);
-        hero.setTranslationY(heroY);
-        hero.setRotation(90);
-        apply.setEnabled(true);
-    }
 
-    public void GoForward(){
-        if(hero.getRotation() == 0){
-            y -=(121);
-            hero.setTranslationY(y);
-        }
-        if(hero.getRotation() == 90){
-            x += (133);
-            hero.setTranslationX(x);
-        }
-        if(hero.getRotation() == 360){
-            y -= (121);
-            hero.setTranslationY(y);
-        }
-        if(hero.getRotation() == 270){
-            x -= (133);
-            hero.setTranslationY(x);
-        }
-        if(hero.getRotation() == 180){
-            y += (121);
-            hero.setTranslationY(y);
-        }
-        if(hero.getRotation() == -270){
-            x += (133);
-            hero.setTranslationX(x);
-        }
-        if(hero.getRotation() == -90){
-            x -= (133);
-            hero.setTranslationX(x);
-        }
-        System.out.println(hero.getX());
-        System.out.println(hero.getY());
-    }
-    public void TurnRight () {
-        hero.setRotation(hero.getRotation() + (90));
-    }
-
-    public void TurnLeft () {
-        hero.setRotation(hero.getRotation() - (90));
-    }
-
-    public void GetKey() {
-        if (hero.getX() == 532 && hero.getY() == 370) {
-            key.setVisibility(View.INVISIBLE);
-            heroHasKey = true;
-        }
-    }
-    public void TryAgain() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(Level9Page.this);
-        View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
-        Button menu = (Button) myView.findViewById(R.id.menubtn);
-        Button retry = (Button) myView.findViewById(R.id.retrybtn);
-        retry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recreate();
-            }
-        });
-        builder.setView(myView);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
+    /** This method saves the data
+     * @param, codeMessage
+     * @return
+     **/
     @Override
     public void SaveData(String codeMessage) {
         SharedPreferences sharedPref = Level9Page.this.getPreferences(Context.MODE_PRIVATE);
@@ -372,6 +289,10 @@ public class Level9Page extends Level1Page {
         editor.commit();
     }
 
+    /** This method sets the code message
+     * @param
+     * @return
+     **/
     @Override
     public void setCodeMessage () {
         SharedPreferences sharedPref = Level9Page.this.getPreferences(Context.MODE_PRIVATE);

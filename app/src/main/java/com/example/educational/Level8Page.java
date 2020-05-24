@@ -29,10 +29,15 @@ import com.example.menu.SettingsPage;
 import java.util.ArrayList;
 
 public class Level8Page extends Level1Page  {
-    final private int[] targetArea = { 532 , 249 };
-    final private int[] nonForbiddenAreaX = { 0 , 133 , 266 , 399 , 399 , 399, 399 , 266 , 133 , 133 , 0 ,532};
-    final private int[] nonForbiddenAreaY = { 491 ,491 , 491 , 491 , 370 , 249, 128 , 128, 128 , 249 , 249, 249};
     //variables
+    //to determine the finish point
+    final private int[] targetArea = { 532 , 249 };
+
+    //to determine the X values that the user can go to
+    final private int[] nonForbiddenAreaX = { 0 , 133 , 266 , 399 , 399 , 399, 399 , 266 , 133 , 133 , 0 ,532};
+
+    //to determine the Y values that the user can go to
+    final private int[] nonForbiddenAreaY = { 491 ,491 , 491 , 491 , 370 , 249, 128 , 128, 128 , 249 , 249, 249};
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
@@ -65,8 +70,6 @@ public class Level8Page extends Level1Page  {
     private Drawable volumeon;
     private Drawable princess;
     private Drawable avatar;
-    private float x;
-    private float y;
     private int avatarID;
     private int count = 0;
     private int timesForward;
@@ -74,8 +77,6 @@ public class Level8Page extends Level1Page  {
     private int timesRight;
     private int timesKey;
     private boolean isGameOver;
-    private float heroX;
-    private float heroY;
     private boolean isVolumeOn;
     private boolean heroHasKey;
     private int movementsCount;
@@ -158,19 +159,15 @@ public class Level8Page extends Level1Page  {
         princess = AppCompatDrawableManager.get().getDrawable(this, princessID);
         heroHasKey = false;
 
-        //to get the first location of the hero
-        heroX = hero.getTranslationX();
-        heroY = hero.getTranslationY();
-
         isGameOver = false;
 
         //SharedPreferences to save Level
         sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
         et = sp.edit();
-
-        //when the user click the BACK button
         isFinished(Level8Page.this, "8", 14, 18);
-         back.setOnClickListener(new View.OnClickListener() {
+
+        //when the user presses the back button, he switches to Level Page
+        back.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
         Intent i = new Intent(Level8Page.this,LevelPage.class);
@@ -178,8 +175,8 @@ public class Level8Page extends Level1Page  {
         }
         });
 
-         //when the user click the SETTINGS button
-         settings.setOnClickListener(new View.OnClickListener() {
+        //when the user presses the settings, he switches to Settings
+        settings.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
         Intent i = new Intent(Level8Page.this, SettingsPage.class);
@@ -187,23 +184,24 @@ public class Level8Page extends Level1Page  {
         }
         });
 
-         //when the user click the VOLUME button
-         volume.setOnClickListener(new View.OnClickListener() {
+        //the user can turn on or off the sound when pressing the sound icon
+        volume.setOnClickListener(new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
-        if(isVolumeOn){
-        volume.setBackground(volumeoff);
-        isVolumeOn = false;
-        mediaPlayer.pause();
+            public void onClick(View v) {
+                if(isVolumeOn){
+                    volume.setBackground(volumeoff);
+                    isVolumeOn = false;
+                    mediaPlayer.pause();
         }
-        else {
-        volume.setBackground(volumeon);
-        isVolumeOn = true;
-        mediaPlayer.start();;
-        }
-        }
+                else {
+                    volume.setBackground(volumeon);
+                    isVolumeOn = true;
+                    mediaPlayer.start();;
+                }
+            }
         });
-        //when the user click the INFO button
+
+        //when the user presses the info, he can get information about level
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -215,6 +213,7 @@ public class Level8Page extends Level1Page  {
             }
         });
 
+        //to show the current codes
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -231,55 +230,29 @@ public class Level8Page extends Level1Page  {
             }
         });
 
-        //when the user click the RESET button
+        //to reset the game
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //reset();
                 recreate();
                 code = "";
             }
         });
 
-        //when the user click the APPLY button
+        //to apply the activities selected by the user
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
+                //to create the object of the ApplyMove class
                 ApplyMove applyMove = new ApplyMove(hero,list,133,121,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,0,0,0,0,null,null,key,266,128, movementsCount);
                 Thread t1 = new Thread(applyMove);
-                t1.start();
+                t1.start(); //starting thread
 
-                //finish the game if the necessary conditions are met
-                if (hero.getX() == 266 && hero.getY() == 128 && heroHasKey){
-                    System.out.println("true");
-                    isGameOver = true;
-
-                }
-                /*if (((hero.getX() == 0) && (hero.getY() == 393)) || ((hero.getX() == 133) && (hero.getY() == 393)) || ((hero.getX() == 266) && (hero.getY() == 393)))  {
-                } else if (((hero.getX() == 399) && (hero.getY() == 372)) || ((hero.getX() == 532) && (hero.getY() == 372)) || ((hero.getX() == 399) && (hero.getY() == 251))) {
-                } else if (((hero.getX() == 133) && (hero.getY() == 130)) || ((hero.getX() == 266) && (hero.getY() == 130)) || (hero.getX() == 399) && (hero.getY() == 130)) {
-                } else if ((hero.getX() == 532) && (hero.getY() == 130) || (hero.getX() == 665) && (hero.getY() == 130) || hero.getX() == 133 && hero.getY() == 9){
-                } else if ((hero.getX() == 532 && hero.getY() == 9) || (hero.getX() == 399) && (hero.getY() == 393)){
-                }
-                else{
-                    TryAgain();
-                }*/
-
-                //show the finish screen if the game is over
-
-                 if (isGameOver == true){
-                     et.putBoolean("finished8", isGameOver);
-                     finishedScreen(Level8Page.this, movementsCount,23,27);
-                     sharedPreferencesA = getSharedPreferences("starsData", MODE_PRIVATE);
-                     editor = sharedPreferencesA.edit();
-                     starsCount = sharedPreferencesA.getInt("starsCount", 1);
-                     editor.putInt("starsCountLevel8", starsCount);
-                     editor.commit();
-                 }
             }
         });
-        //when the user click the GO FORWARD button
+
+        //when the user click the GO FORWARD
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -288,6 +261,7 @@ public class Level8Page extends Level1Page  {
             }
         });
 
+        //when the user click the TURN LEFT
         turnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -295,6 +269,7 @@ public class Level8Page extends Level1Page  {
             }
         });
 
+        //when the user click the TURN RIGHT
         turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -302,135 +277,19 @@ public class Level8Page extends Level1Page  {
             }
         });
 
+        //when the user click the GET KEY
         getKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = getNectarButton(timesKey, layout1, layout2, list, movementsCount, movements, spinnerKey,"NECTAR");
+                movementsCount = getNectarButton(timesKey, layout1, layout2, list, movementsCount, movements, spinnerKey,"KEY");
             }
         });
     }
 
-
-    /** This method is used to reset the game.
-     * @param
+    /** This method saves the data
+     * @param, codeMessage
      * @return
      **/
-    public void reset(){
-        count = 0;
-        layout1.removeAllViewsInLayout();
-        int size = list.size();
-        for (int i = 0; i < size; i++){
-            list.remove(0);
-        }
-        if (!list.isEmpty()){
-            System.out.println(list.get(0));
-        }
-        x = 0;
-        y = 0;
-        timesForward = 0;
-        timesRight = 0;
-        timesLeft = 0;
-        hero.setTranslationX(heroX);
-        hero.setTranslationY(heroY);
-        hero.setRotation(90);
-        apply.setEnabled(true);
-    }
-
-    /** This method is used to move the character forward according to its rotation.
-     * @param
-     * @return
-     **/
-    public void GoForward(){
-        if (hero.getRotation() == 0){
-            y -= (121);
-            hero.setTranslationY(y);
-            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
-
-        }
-        if (hero.getRotation() == 90){
-            x += (133);
-            hero.setTranslationX(x);
-
-            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
-        }
-        if (hero.getRotation() == 360){
-            y -= (121);
-            hero.setTranslationY(y);
-            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
-        }
-        if (hero.getRotation() == 270){
-            x -= (133);
-            hero.setTranslationX(x);
-        }
-        if (hero.getRotation() == 180){
-            y += (121);
-            hero.setTranslationY(y);
-            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
-        }
-        if (hero.getRotation() == -270){
-            x += (133);
-            hero.setTranslationX(x);
-        }
-        if (hero.getRotation() == -90){
-            x -= (133);
-            hero.setTranslationX(x);
-            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
-        }
-        System.out.println(hero.getX());
-        System.out.println(hero.getY());
-    }
-
-    /** This method is used to turn the character right.
-     * @param
-     * @return
-     **/
-    public void TurnRight(){
-        hero.setRotation(hero.getRotation() + (90));
-
-    }
-
-    /** This method is used to turn the character left.
-     * @param
-     * @return
-     **/
-    public void TurnLeft(){
-        hero.setRotation(hero.getRotation() - (90));
-
-    }
-
-    /** This method is used to get the key.
-     * @param
-     * @return
-     **/
-    public void GetKey(){
-        if (hero.getX() == 0 && hero.getY() == 249) {
-            key.setVisibility(View.INVISIBLE);
-            heroHasKey = true;
-        }
-    }
-
-    /** This method is used to give an error message
-     * when the user goes the wrong place.
-     * @param
-     * @return
-     **/
-     public void TryAgain() {
-
-     AlertDialog.Builder builder = new AlertDialog.Builder(Level8Page.this);
-     View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
-     Button menu = (Button) myView.findViewById(R.id.menubtn);
-     Button retry = (Button) myView.findViewById(R.id.retrybtn);
-     retry.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-    recreate();
-    }
-    });
-     builder.setView(myView);
-     AlertDialog dialog = builder.create();
-     dialog.show();
-     }
-
     @Override
     public void SaveData(String codeMessage) {
         SharedPreferences sharedPref = Level8Page.this.getPreferences(Context.MODE_PRIVATE);
@@ -439,6 +298,10 @@ public class Level8Page extends Level1Page  {
         editor.commit();
     }
 
+    /** This method sets the code message
+     * @param
+     * @return
+     **/
     @Override
     public void setCodeMessage() {
         SharedPreferences sharedPref = Level8Page.this.getPreferences(Context.MODE_PRIVATE);

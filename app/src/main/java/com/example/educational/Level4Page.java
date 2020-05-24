@@ -29,8 +29,14 @@ import com.example.menu.SettingsPage;
 import java.util.ArrayList;
 
 public class Level4Page extends Level1Page  {
+    //variables
+    //to determine the finish point
     final private int[] targetArea = { 600 , 11 };
+
+    //to determine the X values that the user can go to
     final private int[] nonForbiddenAreaX = { 0, 200 , 200 , 200 , 400 , 400 , 600 };
+
+    //to determine the Y values that the user can go to
     final private int[] nonForbiddenAreaY = { 551,551 , 371 , 191 , 191 , 11 , 11 };
     private TextView movements;
     private Spinner spinnerForward;
@@ -40,7 +46,6 @@ public class Level4Page extends Level1Page  {
     private ArrayAdapter<Integer> timesAdapter;
     private ArrayList<String> list;
     private ImageView bee;
-    private ImageView honey;
     private Button goForward;
     private Button turnRight;
     private Button turnLeft;
@@ -67,10 +72,6 @@ public class Level4Page extends Level1Page  {
     private int timesLeft;
     private int timesRight;
     private boolean isGameOver;
-    private float beeX;
-    private float beeY;
-    private float honeyX;
-    private float honeyY;
     private boolean isVolumeOn;
     private int movementsCount;
     //sharedPreferences to update and save levels
@@ -97,7 +98,6 @@ public class Level4Page extends Level1Page  {
         reset = findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
         bee = findViewById(R.id.bee);
-        honey = findViewById(R.id.flower);
         goForward = findViewById(R.id.goForward);
         turnLeft = findViewById(R.id.turnLeft);
         turnRight = findViewById(R.id.turnRight);
@@ -134,28 +134,14 @@ public class Level4Page extends Level1Page  {
 
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
-        /*up = new Button(this);
-        left = new Button(this);
-        right = new Button(this);
-
-        up.setText("GO FORWARD");
-        up.setBackgroundColor(Color.CYAN);
-        left.setText("TURN LEFT");
-        left.setBackgroundColor(Color.CYAN);
-        right.setText("TURN RIGHT");
-        right.setBackgroundColor(Color.CYAN);*/
-
-
-        beeX = bee.getTranslationX();
-        beeY = bee.getTranslationY();
-        honeyX = honey.getTranslationX();
-        honeyY = honey.getTranslationY();
 
         isGameOver = false;
         //SharedPreferences to save Level
         sp = getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
         et = sp.edit();
         isFinished(Level4Page.this, "4", 9, 10);
+
+        //when the user presses the back button, he switches to Level Page
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,6 +150,7 @@ public class Level4Page extends Level1Page  {
             }
         });
 
+        //when the user presses the settings, he switches to Settings
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,6 +159,7 @@ public class Level4Page extends Level1Page  {
             }
         });
 
+        //the user can turn on or off the sound when pressing the sound icon
         volume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,6 +176,7 @@ public class Level4Page extends Level1Page  {
             }
         });
 
+        //when the user presses the info, he can get information about level
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -199,6 +188,7 @@ public class Level4Page extends Level1Page  {
             }
         });
 
+        //to show the current codes
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -215,249 +205,58 @@ public class Level4Page extends Level1Page  {
             }
         });
 
+        //to reset the game
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //reset();
                 recreate();
                 code = "";
             }
         });
 
+        //to apply the activities selected by the user
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
+                //to create the object of the ApplyMove class
                 ApplyMove applyMove = new ApplyMove(bee,list,200,180,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,600,0,371,0,null,null,null,0,0, movementsCount);
                 Thread t1 = new Thread(applyMove);
-                t1.start();
-/**
-                if ((bee.getX() == 600) && (bee.getY() == 11)) {
-                    System.out.println("true");
-                    isGameOver = true;
-
-                }
-                if (((bee.getX() == 200) && (bee.getY() == 551)) || ((bee.getX() == 200) && (bee.getY() == 371)) || ((bee.getX() == 200) && (bee.getY() == 191)) || ((bee.getX() == 400) && (bee.getY() == 191))|| ((bee.getX() == 400) && (bee.getY() == 11))|| ((bee.getX() == 600) && (bee.getY() == 11))) {
-                } else {
-                    TryAgain();
-                }
-*/
-/**
-                if (isGameOver == true) {
-                    et.putBoolean("finished4", isGameOver);
-                    finishedScreen(Level4Page.this, movementsCount,9,10);
-                    sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
-                    editor = sharedPreferences.edit();
-                    starsCount = sharedPreferences.getInt("starsCount", 1);
-                    editor.putInt("starsCountLevel4", starsCount);
-                    editor.commit();
-                }
- */
+                t1.start(); //starting thread
             }
         });
 
+        //when the user click the GO FORWARD
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String codeMessage;
-                timesForward = (Integer) spinnerForward.getSelectedItem();
-                if (timesForward == 1) {
-                    codeMessage = "goForward();";
-                } else {
-                    codeMessage = "for(int i = 0 ; i < " + timesForward + " ; i++){\n" +
-                            "goForward()\n}";
-                }
-                SaveData(codeMessage);
-                setCodeMessage();
-
-                if (count >= 9) {
-                    list.add("forward" + timesForward);
-                    Button forward = new Button(Level4Page.this);
-                    forward.setTextSize(10);
-                    forward.setText(timesForward + " " + "GO FORWARD");
-                    forward.setBackgroundColor(Color.CYAN);
-                    layout2.addView(forward, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                }
-
-                if (count < 9) {
-                    list.add("forward" + timesForward);
-                    Button forward = new Button(Level4Page.this);
-                    forward.setTextSize(10);
-                    forward.setText(timesForward + " " + "GO FORWARD");
-                    forward.setBackgroundColor(Color.CYAN);
-                    layout1.addView(forward, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                }
+                movementsCount = goForwardButton(timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerForward);
             }
         });
 
+        //when the user click the TURN LEFT
         turnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String codeMessage;
-                timesLeft = (Integer) spinnerLeft.getSelectedItem();
-                if (timesLeft == 1) {
-                    codeMessage = "turnLeft();";
-                } else {
-                    codeMessage = "for(int i = 0 ; i < " + timesLeft + " ; i++){\n" +
-                            "turnLeft()\n}";
-                }
-                SaveData(codeMessage);
-                setCodeMessage();
-                if (count >= 9) {
-                    list.add("left" + timesLeft);
-                    Button left = new Button(Level4Page.this);
-                    left.setTextSize(10);
-                    left.setText(timesLeft + " " + "TURN LEFT");
-                    left.setBackgroundColor(Color.CYAN);
-                    layout2.addView(left, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                }
-                if (count < 9) {
-                    list.add("left" + timesLeft);
-                    Button left = new Button(Level4Page.this);
-                    left.setTextSize(10);
-                    left.setText(timesLeft + " " + "TURN LEFT");
-                    left.setBackgroundColor(Color.CYAN);
-                    layout1.addView(left, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                }
+                movementsCount = turnLeftButton(timesLeft, layout1, layout2, list, count, movementsCount, movements, spinnerLeft);
             }
         });
 
+        //when the user click the TURN RIGHT
         turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String codeMessage;
-                timesRight = (Integer) spinnerRight.getSelectedItem();
-                if (timesRight == 1) {
-                    codeMessage = "turnRight();";
-                } else {
-                    codeMessage = "for(int i = 0 ; i < " + timesRight + " ; i++){\n" +
-                            "turnRight()\n}";
-                }
-                SaveData(codeMessage);
-                setCodeMessage();
-                if (count >= 9) {
-                    list.add("right" + timesRight);
-                    Button right = new Button(Level4Page.this);
-                    right.setTextSize(10);
-                    right.setText(timesRight + " " + "TURN RIGHT");
-                    right.setBackgroundColor(Color.CYAN);
-                    layout2.addView(right, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                }
-                if (count < 9) {
-                    list.add("right" + timesRight);
-                    Button right = new Button(Level4Page.this);
-                    right.setTextSize(10);
-                    right.setText(timesRight + " " + "TURN RIGHT");
-                    right.setBackgroundColor(Color.CYAN);
-                    layout1.addView(right, params);
-                    count++;
-                    movementsCount++;
-                    movements.setText("Movements : " + movementsCount);
-                }
+                movementsCount = turnRightButton(timesRight, layout1, layout2, list, count, movementsCount, movements, spinnerRight);
             }
         });
-    }
-
-    public void reset() {
-        count = 0;
-        layout1.removeAllViewsInLayout();
-        int size = list.size();
-        for (int i = 0; i < size; i++) {
-            list.remove(0);
-        }
-        if (!list.isEmpty()) {
-            System.out.println(list.get(0));
-        }
-        x = 0;
-        y = 0;
-        timesForward = 0;
-        timesRight = 0;
-        timesLeft = 0;
-        bee.setTranslationX(beeX);
-        bee.setTranslationY(beeY);
-        bee.setRotation(90);
-        apply.setEnabled(true);
-    }
-
-    public void GoForward() {
-        if (bee.getRotation() == 0) {
-            y -= (180);
-            bee.setTranslationY(y);
-
-            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
-
-        }
-
-        if (bee.getRotation() == 90) {
-            x += (200);
-            bee.setTranslationX(x);
-            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
-
-        }
-
-        if (bee.getRotation() == 180) {
-            y += (180);
-            bee.setTranslationY(y);
-            //bee.animate().translationY(y).setDuration(1000).setStartDelay(500);
-
-        }
-
-        if (bee.getRotation() == 270) {
-            x -= (200);
-            bee.setTranslationX(x);
-        }
-
-        if (bee.getRotation() == -90) {
-            x -= (200);
-            bee.setTranslationX(x);
-            //bee.animate().translationX(x).setDuration(1000).setStartDelay(500);
-
-        }
-        System.out.println( bee.getX());
-        System.out.println( bee.getY());
 
 
     }
 
-    public void TurnRight() {
-
-        bee.setRotation(bee.getRotation() + (90));
-    }
-
-    public void TurnLeft() {
-
-        bee.setRotation(bee.getRotation() - (90));
-    }
-    public void TryAgain() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Level4Page.this);
-        View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
-        Button menu = (Button) myView.findViewById(R.id.menubtn);
-        Button retry = (Button) myView.findViewById(R.id.retrybtn);
-        retry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recreate();
-            }
-        });
-        builder.setView(myView);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
+    /** This method saves the data
+     * @param, codeMessage
+     * @return
+     **/
     public void SaveData(String codeMessage) {
         SharedPreferences sharedPref = Level4Page.this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -465,6 +264,10 @@ public class Level4Page extends Level1Page  {
         editor.commit();
     }
 
+    /** This method sets the code message
+     * @param
+     * @return
+     **/
     public void setCodeMessage() {
         SharedPreferences sharedPref = Level4Page.this.getPreferences(Context.MODE_PRIVATE);
         code += sharedPref.getString("CODEMESSAGE", "") + "\n";

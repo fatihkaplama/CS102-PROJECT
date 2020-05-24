@@ -29,8 +29,14 @@ import com.example.menu.SettingsPage;
 import java.util.ArrayList;
 
 public class Level6Page extends Level1Page {
+    //variables
+    //to determine the finish point
     final private int[] targetArea = { 632 , 438 };
+
+    //to determine the X values that the user can go to
     final private int[] nonForbiddenAreaX = { 472 , 312 , 152 , 152 , 152, 312 , 472 ,632};
+
+    //to determine the Y values that the user can go to
     final private int[] nonForbiddenAreaY = { 146 , 146 , 146 , 292 , 438, 438 , 438 , 438 };
     private TextView yellowText;
     private TextView pinkText;
@@ -43,8 +49,6 @@ public class Level6Page extends Level1Page {
     private ArrayAdapter<Integer> timesAdapter;
     private ArrayList<String> list;
     private ImageView bee;
-    private ImageView flower2;
-    private ImageView flower3;
     private Button goForward;
     private Button turnRight;
     private Button turnLeft;
@@ -60,14 +64,8 @@ public class Level6Page extends Level1Page {
     private LinearLayout.LayoutParams params;
     private int volumeoffID;
     private int volumeonID;
-    private int flower0ID;
-    private int flower00ID;
     private Drawable volumeoff;
     private Drawable volumeon;
-    private Drawable flower0;
-    private Drawable flower00;
-    private float x;
-    private float y;
     private int starsCount;
     private int count = 0;
     private int timesForward;
@@ -75,8 +73,6 @@ public class Level6Page extends Level1Page {
     private int timesRight;
     private int timesNectar;
     private boolean isGameOver;
-    private float beeX;
-    private float beeY;
     private boolean isVolumeOn;
     private int movementsCount;
     private Button show;
@@ -104,8 +100,6 @@ public class Level6Page extends Level1Page {
         reset = findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
         bee = findViewById(R.id.bee);
-        flower2 = findViewById(R.id.flower2);
-        flower3 = findViewById(R.id.flower3);
         goForward = findViewById(R.id.goForward);
         turnLeft = findViewById(R.id.turnLeft);
         turnRight = findViewById(R.id.turnRight);
@@ -149,19 +143,13 @@ public class Level6Page extends Level1Page {
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
 
-        flower0ID = R.drawable.flower0;
-        flower00ID = R.drawable.flower00;
-        flower0 = AppCompatDrawableManager.get().getDrawable(this, flower0ID);
-        flower00 = AppCompatDrawableManager.get().getDrawable(this,flower00ID);
-
-        beeX = bee.getTranslationX();
-        beeY = bee.getTranslationY();
-
         isGameOver = false;
         //SharedPreferences to save Level
         sp = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE);
         et = sp.edit();
         isFinished(Level6Page.this, "6", 12, 14);
+
+        //when the user presses the back button, he switches to Level Page
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,6 +158,7 @@ public class Level6Page extends Level1Page {
             }
         });
 
+        //when the user presses the settings, he switches to Settings
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,6 +167,7 @@ public class Level6Page extends Level1Page {
             }
         });
 
+        //the user can turn on or off the sound when pressing the sound icon
         volume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,6 +184,7 @@ public class Level6Page extends Level1Page {
             }
         });
 
+        //when the user presses the info, he can get information about level
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -205,6 +196,7 @@ public class Level6Page extends Level1Page {
             }
         });
 
+        //to show the current codes
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -221,51 +213,29 @@ public class Level6Page extends Level1Page {
             }
         });
 
+        //to reset the game
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //reset();
                 recreate();
                 code = "";
             }
         });
 
+        //to apply the activities selected by the user
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //MoveLoop(list, bee, 160, 146, flower2, flower3, flower0, flower00, 312, 152, 146, 292);
                 apply.setEnabled(false);
+                //to create the object of the ApplyMove class
                 ApplyMove applyMove = new ApplyMove(bee,list,160,146,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,312,152,146,292,yellowText,pinkText,null,0,0, movementsCount);
                 Thread t1 = new Thread(applyMove);
-                t1.start();
+                t1.start(); //starting thread
 
-/**
-                if (flower2.getBackground() == flower0 && flower3.getBackground() == flower00 && bee.getX() == 632 && bee.getY() == 438){
-                    System.out.println("true");
-                    isGameOver = true;
-
-                }
-                if (((bee.getX() == 472) && (bee.getY() == 146)) || ((bee.getX() == 312) && (bee.getY() == 146)) || ((bee.getX() == 152) && (bee.getY() == 146))) {
-                } else if (((bee.getX() == 152) && (bee.getY() == 292)) || ((bee.getX() == 152) && (bee.getY() == 438)) || ((bee.getX() == 312) && (bee.getY() == 438))) {
-                } else if (((bee.getX() == 472) && (bee.getY() == 438)) || ((bee.getX() == 632) && (bee.getY() == 438))) {
-                } else{
-                    TryAgain();
-                }
-
-
-                if (isGameOver == true){
-                    et.putBoolean("finished6", isGameOver);
-                    finishedScreen(Level6Page.this, movementsCount,12,14);
-                    sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
-                    editor = sharedPreferences.edit();
-                    starsCount = sharedPreferences.getInt("starsCount", 1);
-                    editor.putInt("starsCountLevel6", starsCount);
-                    editor.commit();
-                }
- */
             }
         });
 
+        //when the user click the GO FORWARD
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -274,6 +244,7 @@ public class Level6Page extends Level1Page {
             }
         });
 
+        //when the user click the TURN LEFT
         turnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -281,6 +252,7 @@ public class Level6Page extends Level1Page {
             }
         });
 
+        //when the user click the TURN RIGHT
         turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -288,6 +260,7 @@ public class Level6Page extends Level1Page {
             }
         });
 
+        //when the user click the GET NECTAR
         getNectar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -296,22 +269,10 @@ public class Level6Page extends Level1Page {
         });
     }
 
-    public void TryAgain() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Level6Page.this);
-        View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
-        Button menu = (Button) myView.findViewById(R.id.menubtn);
-        Button retry = (Button) myView.findViewById(R.id.retrybtn);
-        retry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recreate();
-            }
-        });
-        builder.setView(myView);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
+    /** This method saves the data
+     * @param, codeMessage
+     * @return
+     **/
     @Override
     public void SaveData(String codeMessage) {
         SharedPreferences sharedPref = Level6Page.this.getPreferences(Context.MODE_PRIVATE);
@@ -320,6 +281,11 @@ public class Level6Page extends Level1Page {
         editor.commit();
     }
 
+
+    /** This method sets the code message
+     * @param
+     * @return
+     **/
     @Override
     public void setCodeMessage() {
         SharedPreferences sharedPref = Level6Page.this.getPreferences(Context.MODE_PRIVATE);

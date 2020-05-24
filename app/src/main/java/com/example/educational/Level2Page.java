@@ -28,8 +28,14 @@ import com.example.menu.SettingsPage;
 import java.util.ArrayList;
 
 public class Level2Page extends Level1Page {
+    //variables
+    //to determine the finish point
     final private int[] targetArea = { 400 , 8 };
+
+    //to determine the X values that the user can go to
     final private int[] nonForbiddenAreaX = { 200 , 400 , 400 , 400 , 400 };
+
+    //to determine the Y values that the user can go to
     final private int[] nonForbiddenAreaY = { 368 , 368 , 188, 188 , 8 };
     private TextView movements;
     private Spinner spinnerForward;
@@ -56,18 +62,12 @@ public class Level2Page extends Level1Page {
     private int volumeonID;
     private Drawable volumeoff;
     private Drawable volumeon;
-    private float x;
-    private float y;
     private int count = 0;
     private int starsCount;
     private int timesForward;
     private int timesLeft;
     private int timesRight;
     private boolean isGameOver;
-    private float beeX;
-    private float beeY;
-    private float honeyX;
-    private float honeyY;
     private boolean isVolumeOn;
     private int movementsCount;
     private Button show;
@@ -135,11 +135,6 @@ public class Level2Page extends Level1Page {
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
 
-        beeX = bee.getTranslationX();
-        beeY = bee.getTranslationY();
-        honeyX = honey.getTranslationX();
-        honeyY = honey.getTranslationY();
-
         isGameOver = false;
 
         //SharedPreferences to save Level
@@ -148,6 +143,8 @@ public class Level2Page extends Level1Page {
 
         //targetArea
         isFinished(Level2Page.this, "2", 4, 5);
+
+        //when the user presses the back button, he switches to Level Page
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,6 +153,7 @@ public class Level2Page extends Level1Page {
             }
         });
 
+        //when the user presses the settings, he switches to Settings
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,6 +162,7 @@ public class Level2Page extends Level1Page {
             }
         });
 
+        //the user can turn on or off the sound when pressing the sound icon
         volume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,6 +179,7 @@ public class Level2Page extends Level1Page {
             }
         });
 
+        //when the user presses the info, he can get information about level
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,6 +191,7 @@ public class Level2Page extends Level1Page {
             }
         });
 
+        //to show the current codes
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,6 +208,7 @@ public class Level2Page extends Level1Page {
             }
         });
 
+        //to reset the game
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -215,16 +217,19 @@ public class Level2Page extends Level1Page {
             }
         });
 
+        //to apply the activities selected by the user
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 apply.setEnabled(false);
+                //to create the object of the ApplyMove class
                 ApplyMove applyMove = new ApplyMove(bee,list,changeX,changeY,targetArea,nonForbiddenAreaX,nonForbiddenAreaY,0,0,0,0,null,null,null,0,0,movementsCount);
                 Thread t1 = new Thread(applyMove);
-                t1.start();
+                t1.start(); //starting thread
             }
         });
 
+        //when the user click the GO FORWARD
         goForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -232,23 +237,28 @@ public class Level2Page extends Level1Page {
             }
         });
 
+        //when the user click the TURN LEFT
         turnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = turnLeftButton(timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerLeft);
+                movementsCount = turnLeftButton(timesLeft, layout1, layout2, list, count, movementsCount, movements, spinnerLeft);
             }
         });
 
+        //when the user click the TURN RIGHT
         turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movementsCount = turnRightButton(timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerRight);
+                movementsCount = turnRightButton(timesRight, layout1, layout2, list, count, movementsCount, movements, spinnerRight);
             }
         });
 
     }
 
-
+    /** This method saves the data
+     * @param, codeMessage
+     * @return
+     **/
     public void SaveData(String codeMessage) {
         SharedPreferences sharedPref = Level2Page.this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -256,6 +266,10 @@ public class Level2Page extends Level1Page {
         editor.commit();
     }
 
+    /** This method sets the code message
+     * @param
+     * @return
+     **/
     public void setCodeMessage() {
         SharedPreferences sharedPref = Level2Page.this.getPreferences(Context.MODE_PRIVATE);
         code += sharedPref.getString("CODEMESSAGE", "") + "\n";

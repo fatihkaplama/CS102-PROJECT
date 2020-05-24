@@ -329,7 +329,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
      * @param, timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerLeft
      * @return number of movements
      **/
-    public int turnLeftButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerLeft) {
+    public int turnLeftButton(int timesLeft, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerLeft) {
         String codeMessage;
         timesLeft = (Integer) spinnerLeft.getSelectedItem();
         if (timesLeft == 1) {
@@ -370,7 +370,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
      * @return number of movements
      **/
     @SuppressLint("SetTextI18n")
-    public int turnRightButton(int timesForward, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerRight) {
+    public int turnRightButton(int timesRight, LinearLayout layout1, LinearLayout layout2, ArrayList<String> list, int count, int movementsCount, TextView movements, Spinner spinnerRight) {
         String codeMessage;
         timesRight = (Integer) spinnerRight.getSelectedItem();
         if (timesRight == 1) {
@@ -422,6 +422,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         SaveData(codeMessage);
         setCodeMessage();
         if (movementsCount >= 9) {
+            System.out.println("burası çalışıyor");
             list.add(object + timesNectar);
             Button nectar = new Button(Level1Page.this);
             nectar.setTextSize(10);
@@ -434,6 +435,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         }
         if (movementsCount < 9) {
             list.add(object + timesNectar);
+            System.out.println(list.toString());
             Button nectar = new Button(Level1Page.this);
             nectar.setTextSize(10);
             nectar.setText(timesNectar + " " + "GET "+ object);
@@ -452,6 +454,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
      * @return
      **/
     public void GetNectar(ImageView bee, int valueX1, int valueX2, int valueY1, int valueY2, final TextView nu, final TextView nu2,final ImageView nu3, int valueX3, int valueY3) {
+        System.out.println("workkkkk");
         if (bee.getX() == valueX1 && bee.getY() == valueY1) {
             isSelected = true;
             runOnUiThread(new Runnable() {
@@ -474,6 +477,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    System.out.println("çalıştımm");
                     nu3.setVisibility(View.INVISIBLE);
                     heroHasKey = true;
                 }
@@ -616,19 +620,26 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                             TurnRight(bee);
                         }
                     }
-                    else if (list.get(i).equals("nectar1")) {
+                    else if (list.get(i).equals("NECTAR1")) {
+                        System.out.println("çalıştım");
                         GetNectar(bee, valueX1, valueX2, valueY1, valueY2, nu, nu2, nu3, valueX3, valueY3);
                     }
-                    else if (list.get(i).equals("nectar2")) {
+                    else if (list.get(i).equals("NECTAR2")) {
                         for (int k = 0; k < 2; k++) {
                             GetNectar(bee, valueX1, valueX2, valueY1, valueY2, nu, nu2, nu3, valueX3, valueY3);
                         }
                     }
-                    else if (list.get(i).equals("nectar3")) {
+                    else if (list.get(i).equals("NECTAR3")) {
                         for (int k = 0; k < 3; k++) {
                             GetNectar(bee, valueX1, valueX2, valueY1, valueY2, nu, nu2, nu3, valueX3, valueY3);
                         }
                     }
+                    else if (list.get(i).equals("KEY1")) {
+                        for (int k = 0; k < 3; k++) {
+                            GetNectar(bee, valueX1, valueX2, valueY1, valueY2, nu, nu2, nu3, valueX3, valueY3);
+                        }
+                    }
+
 
                     //for the level where a key available
                     if(nu3 != null) {
