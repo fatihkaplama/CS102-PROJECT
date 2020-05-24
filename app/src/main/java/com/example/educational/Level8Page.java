@@ -205,7 +205,8 @@ public class Level8Page extends Level1Page  {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Bee needs to reach to nectar. Help it with your algorithm!", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(), "Hero wants to free princess. Help him with your algorithm!\n" +
+                        "Hint: Careful about hero's direction. Make sure it is forward before press to go forward button.", Toast.LENGTH_LONG);
                 View view = toast.getView();
                 view.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN);
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);

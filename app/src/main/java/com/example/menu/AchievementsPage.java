@@ -47,7 +47,7 @@ public class AchievementsPage extends AppCompatActivity {
     private int starsCountLevel8;
     private int starsCountLevel9;
     private SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    private SharedPreferences.Editor editor;
     private Button wipeData;
 
     @SuppressLint("RestrictedApi")
@@ -72,7 +72,7 @@ public class AchievementsPage extends AppCompatActivity {
         volumeoff = AppCompatDrawableManager.get().getDrawable(this, volumeoffID);
         wipeData = findViewById(R.id.button_wipeData);
 
-        //creating the graph with datas
+        //creating the graph with datas from the levels( according to stars numbers)
         setMyGraph();
 
         setTitle("Achievements");
@@ -122,6 +122,9 @@ public class AchievementsPage extends AppCompatActivity {
         });
     }
 
+    /**
+     * graphlib library set the graph  and its x and y variables according to shared-preferences outputs from other pages.
+     */
     public void setMyGraph() {
         sharedPreferences = getSharedPreferences("starsData", MODE_PRIVATE);
         starsCountLevel1 = sharedPreferences.getInt("starsCountLevel1", 0);

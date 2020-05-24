@@ -11,13 +11,14 @@ import android.widget.Button;
 
 import com.example.FunAlgo.R;
 
-public class MusicsPage extends AppCompatActivity  {
+public class MusicsPage extends AppCompatActivity {
     private MediaPlayer music1;
     private MediaPlayer music2;
     private MediaPlayer music3;
     private MediaPlayer music4;
     ConstraintLayout musicsPageLayout;
     Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +33,13 @@ public class MusicsPage extends AppCompatActivity  {
         //final ImageButton ibMute = findViewById(R.id.imageView3);
         //ibMute.setVisibility(View.INVISIBLE);
         musicsPageLayout = findViewById(R.id.musics_page_layout);
-        int myInt = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
+        int myInt = getSharedPreferences("ShareTheme", MODE_PRIVATE).getInt("theme", 0);
         musicsPageLayout.setBackgroundResource(myInt);
 
+        // creating musics and setting the loop true for each music so that musics will automatically play when they end.
         music1 = MediaPlayer.create(this, R.raw.glorious);
         music1.setLooping(true);
+
         music2 = MediaPlayer.create(this, R.raw.daybreaker);
         ((MediaPlayer) music2).setLooping(true);
 
@@ -51,13 +54,13 @@ public class MusicsPage extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 music1.start();
-                if(((MediaPlayer) music2).isPlaying() ) {
+                if (((MediaPlayer) music2).isPlaying()) {
                     ((MediaPlayer) music2).pause();
                 }
-                if(music3.isPlaying()){
+                if (music3.isPlaying()) {
                     music3.pause();
                 }
-                if(music4.isPlaying()){
+                if (music4.isPlaying()) {
                     music4.pause();
                 }
             }
@@ -66,13 +69,13 @@ public class MusicsPage extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 ((MediaPlayer) music2).start();
-                if(music1.isPlaying() ) {
+                if (music1.isPlaying()) {
                     music1.pause();
                 }
-                if(music3.isPlaying()){
+                if (music3.isPlaying()) {
                     music3.pause();
                 }
-                if(music4.isPlaying()){
+                if (music4.isPlaying()) {
                     music4.pause();
                 }
             }
@@ -81,13 +84,13 @@ public class MusicsPage extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 music3.start();
-                if(music1.isPlaying() ) {
+                if (music1.isPlaying()) {
                     music1.pause();
                 }
-                if(((MediaPlayer) music2).isPlaying()){
+                if (((MediaPlayer) music2).isPlaying()) {
                     ((MediaPlayer) music2).pause();
                 }
-                if(music4.isPlaying()){
+                if (music4.isPlaying()) {
                     music4.pause();
                 }
             }
@@ -96,13 +99,13 @@ public class MusicsPage extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 music4.start();
-                if(music1.isPlaying() ) {
+                if (music1.isPlaying()) {
                     music1.pause();
                 }
-                if(((MediaPlayer) music2).isPlaying()){
+                if (((MediaPlayer) music2).isPlaying()) {
                     ((MediaPlayer) music2).pause();
                 }
-                if(music3.isPlaying()){
+                if (music3.isPlaying()) {
                     music3.pause();
                 }
             }
