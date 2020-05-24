@@ -34,30 +34,30 @@ public class HomePage extends FirstPage {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //set Layout
         setContentView(R.layout.activity_home_page);
         Intent i = getIntent();
+        //get shared preferences for the common background
         SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
-
         homePageLayout = findViewById(R.id.home_page_layout);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         homePageLayout.setBackgroundResource(background);
-
-        //set nick name
+        //get nick name from sharedPref and set nickname
         userName = sharedPreferences.getString("nickname", "User");
         tv = findViewById(R.id.userName);
         tv.setText(userName);
+        // buttons
         b = findViewById(R.id.return_button_homePage);
         play = findViewById(R.id.play2);
         settingsButton = findViewById(R.id.settings_button_homePage);
         achievements = findViewById(R.id.achievements);
         instructions = findViewById(R.id.instructions);
-
-        //get avatar from sharedPref
+        //get avatar from sharedPref and set Avatar
         avatarID = sharedPreferences.getInt("avatar", 0);
         avatarPg = findViewById(R.id.avatarH);
         avatar = AppCompatDrawableManager.get().getDrawable(HomePage.this, avatarID);
         avatarPg.setBackground(avatar);
-
+        // go to FirstPage if click return button
         b.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -65,7 +65,7 @@ public class HomePage extends FirstPage {
                 startActivity(i);
             }
         });
-
+        // go to PlayPage if click play button
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +73,7 @@ public class HomePage extends FirstPage {
                 startActivity(i);
             }
         });
+        // go to SettingsPage if click return settings button
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +81,7 @@ public class HomePage extends FirstPage {
                 startActivity(i);
             }
         });
+        // go to Achievements if click return achievements button
         achievements.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +89,7 @@ public class HomePage extends FirstPage {
                 startActivity(i);
             }
         });
+        // go to Instruction  if click return Instruction button
         instructions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

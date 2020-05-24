@@ -84,3 +84,13 @@ At this meeting, Fatih and Alperen showed the level pages and they solved a prob
 **ToDo:** We will solve the back button of Settings Page and music loop problem. Hüseyin will improve the design of Instructions Page.
 
 ****
+****
+### Meeting ~ (22.05.2020, 4 hour)
+****
+**Present:** Everyone   _**Absent:**_ 
+
+**Discussion:** 
+At this meeting, we have discussed to do our detailed design  more detailed. Then we added methods which are in our classes to our detailed design. Also we wanted to do our code more neat so we have added new folders into java codes to separate our codes. Then, we fixed some minor bugs.
+
+**ToDo:** We will add last comments.
+****
