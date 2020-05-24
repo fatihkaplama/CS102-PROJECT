@@ -91,5 +91,6 @@ At this meeting, Fatih and Alperen showed the level pages and they solved a prob
 
 **Discussion:** 
 At this meeting, we have discussed to do our detailed design  more detailed. Then we added methods which are in our classes to our detailed design. Also we wanted to do our code more neat so we have added new folders into java codes to separate our codes. Then, we fixed some minor bugs.
+
 **ToDo:** We will add last comments.
 ****
