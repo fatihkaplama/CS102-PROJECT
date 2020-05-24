@@ -43,7 +43,6 @@ public class LevelPage extends AppCompatActivity {
     private Button button22;
     private int background;
     private ConstraintLayout levelPage;
-
     // get settings return and volume
     private Button settingsB;
     private Button returnB;
@@ -59,7 +58,6 @@ public class LevelPage extends AppCompatActivity {
         levelPage = findViewById(R.id.level_page_layout);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         levelPage.setBackgroundResource(background);
-
         //get buttons
          button13 = (Button) findViewById(R.id.button13);
          button14 = (Button) findViewById(R.id.button14);
@@ -70,33 +68,24 @@ public class LevelPage extends AppCompatActivity {
          button20 = (Button) findViewById(R.id.button20);
          button21 = (Button) findViewById(R.id.button21);
          button22 = (Button) findViewById(R.id.button22);
-
         // get settings return and volume
         settingsB = (Button) findViewById(R.id.settings_button_LevelPage);
         returnB = (Button) findViewById(R.id.return_button_LevelPage);
         volumeB = (Button) findViewById(R.id.volume_button_LevelPage);
-
         //getting information from Level 1 Page
         isLevel1Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished1",false);
-
         //getting info from Level 2 Page
         isLevel2Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished2",false);
-
         //getting info from Level 3 Page
         isLevel3Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished3",false);
-
         //getting info from Level 4 Page
         isLevel4Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished4",false);
-
         //getting info from Level 5 Page
         isLevel5Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished5",false);
-
         //getting info from Level 6 Page
         isLevel6Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished6",false);
-
         //getting info from Level 7 Page
         isLevel7Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished7", false);
-
         //getting info from Level 8 Page
         isLevel8Finished = getSharedPreferences("isFinishedBooleans",MODE_PRIVATE).getBoolean("finished8", false);
         //volume
@@ -117,7 +106,7 @@ public class LevelPage extends AppCompatActivity {
         button20.setEnabled(true);
         button21.setEnabled(true);
         button22.setEnabled(true);
-
+        // set Enabled level buttons accompished
         if (isLevel1Finished){
             button14.setEnabled(true);
         }
@@ -144,7 +133,7 @@ public class LevelPage extends AppCompatActivity {
         if(isLevel8Finished){
             button22.setEnabled(true);
         }
-        //add clicklistener to buttons
+        //add clicklistener to buttons to go to correct page
         button13.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
