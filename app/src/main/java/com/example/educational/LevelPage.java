@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -50,12 +51,13 @@ public class LevelPage extends AppCompatActivity {
     private SharedPreferences sp;
     private SharedPreferences.Editor et;
 
-    @SuppressLint("RestrictedApi")
+    @SuppressLint({"RestrictedApi", "SourceLockedOrientationActivity"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_page);
         levelPage = findViewById(R.id.level_page_layout);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         levelPage.setBackgroundResource(background);
         //get buttons

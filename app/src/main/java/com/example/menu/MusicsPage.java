@@ -3,7 +3,9 @@ package com.example.menu;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -19,10 +21,12 @@ public class MusicsPage extends AppCompatActivity {
     ConstraintLayout musicsPageLayout;
     Intent intent;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musics_page);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         Button b1 = findViewById(R.id.musıc_buton_musıc_page1);
         Button b2 = findViewById(R.id.button2);
         Button b3 = findViewById(R.id.musıc_buton_musıc_page3);

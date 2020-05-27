@@ -2,7 +2,9 @@ package com.example.menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
@@ -17,10 +19,12 @@ public class SplashScreen extends AppCompatActivity {
     private int progress;
     private Handler handler;
     private ImageView imageView;
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         handler = new Handler();
         progress = 0;
         progressBar = findViewById(R.id.progressBar);
