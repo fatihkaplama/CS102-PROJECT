@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -46,11 +47,12 @@ public class FirstPage extends AppCompatActivity {
     private Drawable avatar;
     private EditText nickname;
 
-    @SuppressLint("RestrictedApi")
+    @SuppressLint({"RestrictedApi", "SourceLockedOrientationActivity"})
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         //to get the saved data
         mainPageLayout = findViewById(R.id.main_layout);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -89,12 +90,13 @@ public class Level9Page extends Level1Page {
     private int background;
     private ConstraintLayout level9Page;
 
-    @SuppressLint("RestrictedApi")
+    @SuppressLint({"RestrictedApi", "SourceLockedOrientationActivity"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level9_page);
         level9Page = findViewById(R.id.level9_page_layout);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         level9Page.setBackgroundResource(background);
         //starting activity

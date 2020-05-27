@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 
 import android.annotation.SuppressLint;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -20,6 +21,10 @@ public class InstructionsPage extends AppCompatActivity {
 
     private boolean isVolumeon;
     private String userName;
+    private Drawable avatar;
+    private ImageView avatarPg;
+    private int avatarId;
+    private TextView tv;
     private Button b;
     private Button settingsButton;
     private int background;
@@ -30,32 +35,37 @@ public class InstructionsPage extends AppCompatActivity {
     private int volumeOnID;
     private Button volume;
     private ConstraintLayout instructionsPageLayout;
-    @SuppressLint("RestrictedApi")
+    @SuppressLint({"RestrictedApi", "SourceLockedOrientationActivity"})
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //set layout
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_instructions_page);
         instructionsPageLayout = findViewById(R.id.instructions_page_layout);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         instructionsPageLayout.setBackgroundResource(background);
 
         Intent i = getIntent();
-        //get shared preferences for background
         SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
-        //get username
+
         userName = sharedPreferences.getString("nickname", "User");
-        //buttons
+        tv = findViewById(R.id.userName);
+        tv.setText(userName);
         b= findViewById(R.id.return_button_instructionsPage);
         settingsButton = findViewById(R.id.settings_button_instructionsPage);
-        //volume
+
+        avatarID = sharedPreferences.getInt("avatar", 0);
+        avatarPg = findViewById(R.id.avatarH);
+        avatar = AppCompatDrawableManager.get().getDrawable(InstructionsPage.this,avatarID);
+        avatarPg.setBackground(avatar);
+
         volume = findViewById(R.id.volume_button_instructionsPage);
         volumeOnID = R.drawable.volumeon;
         volumeOffID = R.drawable.volumeoff;
         volumeon = AppCompatDrawableManager.get().getDrawable(this, volumeOnID);
         volumeoff = AppCompatDrawableManager.get().getDrawable(this, volumeOffID);
-        //goes to Home Page if click return button
+
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +73,7 @@ public class InstructionsPage extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        // goes to Settings Page if click settingsButton
+
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +81,6 @@ public class InstructionsPage extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        //volume
         volume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -30,12 +31,13 @@ public class HomePage extends FirstPage {
     private int background;
     private int avatarID;
     private ConstraintLayout homePageLayout;
-    @SuppressLint("RestrictedApi")
+    @SuppressLint({"RestrictedApi", "SourceLockedOrientationActivity"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //set Layout
         setContentView(R.layout.activity_home_page);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         Intent i = getIntent();
         //get shared preferences for the common background
         SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);

@@ -2,9 +2,11 @@ package com.example.menu;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
@@ -23,10 +25,12 @@ public class SettingsPage extends ThemePage implements View.OnClickListener{
     private int background;
     private int volumeOn, volumeOff;
     private SharedPreferences sharedPreferences;
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_page);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         settingsPage = findViewById(R.id.settings_page_layout);
         volumeOn = R.drawable.volumeon;
         volumeOff = R.drawable.volumeoff;

@@ -69,7 +69,7 @@
         android:layout_height="280dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@android:color/holo_blue_dark"
+        android:background="@drawable/layout2_design"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
@@ -96,7 +96,7 @@
         android:layout_height="280dp"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="16dp"
-        android:background="@android:color/holo_blue_dark"
+        android:background="@drawable/layout2_design"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent">
@@ -114,21 +114,24 @@
                 <Button
                     android:id="@+id/goForward"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/button_design"
                     android:text="@string/go_forward"
                     android:textSize="10sp" />
 
                 <Button
                     android:id="@+id/turnLeft"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/button_design"
                     android:text="@string/turn_left"
                     android:textSize="10sp" />
 
                 <Button
                     android:id="@+id/turnRight"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/button_design"
                     android:text="@string/turn_right"
                     android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -137,7 +140,8 @@
                 <Button
                     android:id="@+id/getKey"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/button_design"
                     android:text="@string/get_key"
                     android:textSize="10sp" />
 
@@ -159,7 +163,7 @@
                 <Spinner
                     android:id="@+id/spinnerLeft"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
                 <Spinner
@@ -181,13 +185,15 @@
         <Button
             android:id="@+id/apply"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/button_design"
             android:text="@string/apply" />
 
         <Button
             android:id="@+id/reset"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/button_design"
             android:text="@string/reset" />
 
 

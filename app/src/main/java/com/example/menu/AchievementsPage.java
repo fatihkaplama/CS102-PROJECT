@@ -3,6 +3,7 @@ package com.example.menu;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -50,11 +51,12 @@ public class AchievementsPage extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private Button wipeData;
 
-    @SuppressLint("RestrictedApi")
+    @SuppressLint({"RestrictedApi", "SourceLockedOrientationActivity"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements_page);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         Intent i = getIntent();
         AchievementsPageLayout = findViewById(R.id.achievements_page_layout);
         final MediaPlayer mediaPlayer = new MediaPlayer();
