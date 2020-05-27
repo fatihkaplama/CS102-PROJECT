@@ -34,6 +34,7 @@ Fatih ---> First Page, Level3 Page, Level4 Page, Level5 Page, Level6 Page, Level
 
   WHAT REMAINS TO BE DONE:
 We could not solve the volume button issue and we have received API errors when trying to add methods. Musics can be applied from    Musics Page, however we cannot mute the music in other pages.
+It is not compatible for all phones, we could not solve this issue.
 
   SYSTEM OVERVIEW:
 Software --> Android Studio 3.6.1
@@ -49,5 +50,11 @@ Non-Bundled Plugins: pl.charmas.parcelablegenerator
 
 Library --> graphlib
 
+  INSTRUCTIONS
+1) Go to Android Studio web page and download Anroid Studio.
+2) Clone the project repository from Github or import the project from zip file.
+3) Add to proper emulator ( It works properly for 1080x1920 resolution, i.e. Pixel 2 API R Emulator)
+4) Run the project
+Note: This application is suitable for the landscape mode and the phone must be in the rotate-off mode.
 
 Instructor: (David Davenport)   TA: (Laleh Eskandarian)
