@@ -101,13 +101,13 @@ public class LevelPage extends AppCompatActivity {
         // set buttons disabled
         button13.setEnabled(true);
         button14.setEnabled(false);
-        button15.setEnabled(true);
-        button17.setEnabled(true);
-        button18.setEnabled(true);
-        button19.setEnabled(true);
-        button20.setEnabled(true);
-        button21.setEnabled(true);
-        button22.setEnabled(true);
+        button15.setEnabled(false);
+        button17.setEnabled(false);
+        button18.setEnabled(false);
+        button19.setEnabled(false);
+        button20.setEnabled(false);
+        button21.setEnabled(false);
+        button22.setEnabled(false);
         // set Enabled level buttons accompished
         if (isLevel1Finished){
             button14.setEnabled(true);
@@ -234,5 +234,4 @@ public class LevelPage extends AppCompatActivity {
             }
         });
     }
-
 }
