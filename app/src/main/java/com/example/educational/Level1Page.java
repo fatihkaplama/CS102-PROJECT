@@ -191,7 +191,6 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
                 startActivity(i);
             }
         });
-
         //the user can turn on or off the sound when pressing the sound icon
         volume.setOnClickListener(new View.OnClickListener() {
             @Override

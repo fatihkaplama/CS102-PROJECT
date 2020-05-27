@@ -233,8 +233,8 @@
 
     <FrameLayout
         android:id="@+id/frame"
-        android:layout_width="300dp"
-        android:layout_height="280dp"
+        android:layout_width="800px"
+        android:layout_height="746px"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="6dp"
         android:background="@drawable/firstmap"
@@ -247,7 +247,7 @@
             android:id="@+id/bee"
             android:layout_width="75dp"
             android:layout_height="70dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="184px"
             android:contentDescription="@string/bee"
             android:rotation="90"
             app:srcCompat="@drawable/bee" />
@@ -256,8 +256,8 @@
             android:id="@+id/honey"
             android:layout_width="75dp"
             android:layout_height="70dp"
-            android:layout_marginStart="225dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginStart="600px"
+            android:layout_marginTop="184px"
             android:contentDescription="@string/honey"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/honeycombs" />
