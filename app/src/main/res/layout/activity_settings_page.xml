@@ -59,6 +59,7 @@
         android:layout_marginTop="36dp"
         android:background="@drawable/wallpaper8"
         android:text="@string/musics_button"
+        android:textColor="#131313"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

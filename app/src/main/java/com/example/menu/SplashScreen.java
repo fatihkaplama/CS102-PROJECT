@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import com.example.FunAlgo.R;
 
 public class SplashScreen extends AppCompatActivity {
+    //properties
     private ProgressBar progressBar;
     private int progress;
     private Handler handler;
@@ -25,12 +26,15 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        // Find all properties below in xml codes
         handler = new Handler();
         progress = 0;
         progressBar = findViewById(R.id.progressBar);
         imageView = findViewById(R.id.imageView);
         progressBar.setProgress(0);
 
+        // Animation loading
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.anim);
         imageView.startAnimation(animation);
         Thread thread = new Thread(new Runnable() {
@@ -52,7 +56,6 @@ public class SplashScreen extends AppCompatActivity {
                 }
 
                 if (progress == 100) {
-                    System.out.println("çalıştı");
                     Intent intent = new Intent(SplashScreen.this, FirstPage.class);
                     startActivity(intent);
                     finish();

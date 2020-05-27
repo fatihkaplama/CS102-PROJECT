@@ -18,6 +18,7 @@ import com.example.FunAlgo.R;
 
 
 public class ThemePage extends AppCompatActivity implements View.OnClickListener{
+    //properties
     private Button wallpaper1_button, wallpaper2_button, wallpaper3_button;
     private Button voiceButton;
     private Button returnButton;
@@ -29,17 +30,18 @@ public class ThemePage extends AppCompatActivity implements View.OnClickListener
     private int volumeOn, volumeOff;
     private SharedPreferences.Editor editor;
     private int background;
+    private SharedPreferences sharedPreferences;
 
-    public SharedPreferences getSharedPreferences() {
-        return sharedPreferences;
-    }
-
-    SharedPreferences sharedPreferences;
-
+    /** This method gets wallpaper
+     * @return wallpaperID
+     **/
     public int getWallpaperID() {
         return wallpaperID;
     }
 
+    /** This method sets wallpaper
+     * @param wallpaperID
+     **/
     public void setWallpaperID(int wallpaperID) {
         this.wallpaperID = wallpaperID;
     }
@@ -51,6 +53,8 @@ public class ThemePage extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme_page);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        // Find all properties below in xml codes
         rainbowTheme = R.drawable.background3;
         orangeTheme = R.drawable.back4;
         nightTheme = R.drawable.back5;
@@ -64,15 +68,19 @@ public class ThemePage extends AppCompatActivity implements View.OnClickListener
         wallpaper3_button = findViewById(R.id.wallpaper3_button);
         voiceButton = findViewById(R.id.volume_button_themesPage);
         returnButton = findViewById(R.id.return_button_themesPage);
+
+        // Sets all listeners
         wallpaper1_button.setOnClickListener(this);
         wallpaper2_button.setOnClickListener(this);
         wallpaper3_button.setOnClickListener(this);
         returnButton.setOnClickListener(this);
+
+        // Takes background image from shared preferences method
         editor = getSharedPreferences("ShareTheme",MODE_PRIVATE).edit();
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",rainbowTheme);
         themesPageLayout.setBackgroundResource(background);
 
-        voiceButton.setOnClickListener(new View.OnClickListener() {
+        voiceButton.setOnClickListener(new View.OnClickListener() { // Changing voice button
             @Override
             public void onClick(View v) {
                 if (isPressed) {
@@ -88,22 +96,22 @@ public class ThemePage extends AppCompatActivity implements View.OnClickListener
     }
 
     @Override
-    public void onClick(View v) {
-        if (v.getId() == wallpaper1_button.getId()) {
+    public void onClick(View v) { // When clicking the button
+        if (v.getId() == wallpaper1_button.getId()) { // Get & set wallpaper1
             themesPageLayout.setBackgroundResource(rainbowTheme);
             setWallpaperID(rainbowTheme);
             //getWindow().setBackgroundDrawableResource(R.drawable.wallpaper1);
         }
-        else if (v.getId() == wallpaper2_button.getId()) {
+        else if (v.getId() == wallpaper2_button.getId()) {  // Get & set wallpaper2
             themesPageLayout.setBackgroundResource(orangeTheme);
             setWallpaperID(orangeTheme);
 
         }
-        else if (v.getId() == wallpaper3_button.getId()) {
+        else if (v.getId() == wallpaper3_button.getId()) {  // Get & set wallpaper3
             themesPageLayout.setBackgroundResource(nightTheme);
             setWallpaperID(nightTheme);
         }
-        else if (v.getId() == returnButton.getId()){
+        else if (v.getId() == returnButton.getId()){ // Return Button
             editor.putInt("theme",getWallpaperID());
             editor.apply();
             Intent intent = new Intent(ThemePage.this, SettingsPage.class);

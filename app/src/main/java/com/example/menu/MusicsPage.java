@@ -19,6 +19,7 @@ import com.example.FunAlgo.R;
  * @28.04.2020
  */
 public class MusicsPage extends AppCompatActivity {
+    //properties
     private MediaPlayer music1;
     private MediaPlayer music2;
     private MediaPlayer music3;
@@ -32,6 +33,8 @@ public class MusicsPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musics_page);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        // Find all properties below in xml codes
         Button b1 = findViewById(R.id.musıc_buton_musıc_page1);
         Button b2 = findViewById(R.id.button2);
         Button b3 = findViewById(R.id.musıc_buton_musıc_page3);
@@ -39,13 +42,14 @@ public class MusicsPage extends AppCompatActivity {
         Button b5 = findViewById(R.id.return_button_musicsPage);
         Button ibVolume = findViewById(R.id.voice_button_musicsPage);
         final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.daybreaker);
-        //final ImageButton ibMute = findViewById(R.id.imageView3);
-        //ibMute.setVisibility(View.INVISIBLE);
+
+
+        // Takes background image from shared preferences method
         musicsPageLayout = findViewById(R.id.musics_page_layout);
         int myInt = getSharedPreferences("ShareTheme", MODE_PRIVATE).getInt("theme", 0);
         musicsPageLayout.setBackgroundResource(myInt);
 
-        // creating musics and setting the loop true for each music so that musics will automatically play when they end.
+        // Creating musics and setting the loop true for each music so that musics will automatically play when they end.
         music1 = MediaPlayer.create(this, R.raw.glorious);
         music1.setLooping(true);
 
@@ -61,7 +65,7 @@ public class MusicsPage extends AppCompatActivity {
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { // Choosing music 1
                 music1.start();
                 if (((MediaPlayer) music2).isPlaying()) {
                     ((MediaPlayer) music2).pause();
@@ -76,7 +80,7 @@ public class MusicsPage extends AppCompatActivity {
         });
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { // Choosing music 1
                 ((MediaPlayer) music2).start();
                 if (music1.isPlaying()) {
                     music1.pause();
@@ -91,7 +95,7 @@ public class MusicsPage extends AppCompatActivity {
         });
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { // Choosing music 1
                 music3.start();
                 if (music1.isPlaying()) {
                     music1.pause();
@@ -106,7 +110,7 @@ public class MusicsPage extends AppCompatActivity {
         });
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { // Choosing music 1
                 music4.start();
                 if (music1.isPlaying()) {
                     music1.pause();
@@ -119,7 +123,7 @@ public class MusicsPage extends AppCompatActivity {
                 }
             }
         });
-        b5.setOnClickListener(new View.OnClickListener() {
+        b5.setOnClickListener(new View.OnClickListener() { // Return Page
             @Override
             public void onClick(View v) {
                 finish();
