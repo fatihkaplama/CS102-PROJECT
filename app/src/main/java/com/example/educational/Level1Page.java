@@ -83,6 +83,8 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
     private float honeyX;
     private float honeyY;
     private String code;
+    private int buttonID;
+    private Drawable button;
 
     //sharedPreferences to update and save levels
     private SharedPreferences sp;
@@ -153,7 +155,8 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         isTryAgain = false;
         isSelected = false;
         movementsCount = 0;
-
+        buttonID = R.drawable.button_design;
+        button = AppCompatDrawableManager.get().getDrawable(this, buttonID);
         //SharedPreferences to save Level
         sp = getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
         et = sp.edit();
@@ -304,7 +307,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             Button forward = new Button(Level1Page.this);
             forward.setTextSize(10);
             forward.setText(timesForward + " " + "GO FORWARD");
-            forward.setBackgroundColor(Color.CYAN);
+            forward.setBackground(button);
             layout2.addView(forward, params);
             count++;
             movementsCount++;
@@ -316,7 +319,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             Button forward = new Button(Level1Page.this);
             forward.setTextSize(10);
             forward.setText(timesForward + " " + "GO FORWARD");
-            forward.setBackgroundColor(Color.CYAN);
+            forward.setBackground(button);
             layout1.addView(forward, params);
             count++;
             movementsCount++;
@@ -345,7 +348,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             Button left = new Button(Level1Page.this);
             left.setTextSize(10);
             left.setText(timesLeft + " " + "TURN LEFT");
-            left.setBackgroundColor(Color.CYAN);
+            left.setBackground(button);
             layout2.addView(left, params);
             count++;
             movementsCount++;
@@ -356,7 +359,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             Button left = new Button(Level1Page.this);
             left.setTextSize(10);
             left.setText(timesLeft + " " + "TURN LEFT");
-            left.setBackgroundColor(Color.CYAN);
+            left.setBackground(button);
             layout1.addView(left, params);
             count++;
             movementsCount++;
@@ -386,7 +389,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             Button right = new Button(Level1Page.this);
             right.setTextSize(10);
             right.setText(timesRight + " " + "TURN RIGHT");
-            right.setBackgroundColor(Color.CYAN);
+            right.setBackground(button);
             layout2.addView(right, params);
             count++;
             movementsCount++;
@@ -397,7 +400,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             Button right = new Button(Level1Page.this);
             right.setTextSize(10);
             right.setText(timesRight + " " + "TURN RIGHT");
-            right.setBackgroundColor(Color.CYAN);
+            right.setBackground(button);
             layout1.addView(right, params);
             count++;
             movementsCount++;
@@ -427,7 +430,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             Button nectar = new Button(Level1Page.this);
             nectar.setTextSize(10);
             nectar.setText(timesNectar + " " + "GET " + object);
-            nectar.setBackgroundColor(Color.CYAN);
+            nectar.setBackground(button);
             layout2.addView(nectar, params);
             count++;
             movementsCount++;
@@ -439,7 +442,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
             Button nectar = new Button(Level1Page.this);
             nectar.setTextSize(10);
             nectar.setText(timesNectar + " " + "GET "+ object);
-            nectar.setBackgroundColor(Color.CYAN);
+            nectar.setBackground(button);
             layout1.addView(nectar, params);
             count++;
             movementsCount++;
