@@ -49,7 +49,6 @@ public class SplashScreen extends AppCompatActivity {
                     }catch (InterruptedException e){
                         e.printStackTrace();
                     }
-
                 }
 
                 if (progress == 100) {
