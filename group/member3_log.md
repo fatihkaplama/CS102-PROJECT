@@ -20,5 +20,8 @@ On this page I will keep a weekly record of what I have done for the CS102 group
 + I created the AchievementsPage with the graphlib and code the graph as well as created the layout for it and linked it to other pages.
 + Added the data to the graph with shared preferences and also created a button to wipe to datas.
 ### ~ 18.05.2020 ~
++ This week i did not change anythink big in the project. Simply added more comments and javadocs.
++ Added more detailed information text for level 7,8,9
++ Added shared preferences to the avatar on the achievements page
 ****
 
