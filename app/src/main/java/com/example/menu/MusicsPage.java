@@ -13,6 +13,11 @@ import android.widget.Button;
 
 import com.example.FunAlgo.R;
 
+/**
+ * music page for enable user to chose a music from 4 musics
+ * @author Arman Engin Sucu
+ * @28.04.2020
+ */
 public class MusicsPage extends AppCompatActivity {
     private MediaPlayer music1;
     private MediaPlayer music2;

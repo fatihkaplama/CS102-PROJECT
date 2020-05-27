@@ -46,7 +46,7 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toEndOf="@+id/graphAchievements_label"
         app:layout_constraintTop_toBottomOf="@+id/achievementsPage_voice_button" />
 
@@ -61,15 +61,15 @@
         android:id="@+id/userName"
         android:layout_width="88dp"
         android:layout_height="29dp"
-        android:layout_marginStart="211dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="28dp"
         android:layout_marginBottom="362dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/user"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/user"
@@ -81,8 +81,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.321"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/batman" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.softmoore.android.graphlib.GraphView
         android:id="@+id/graph_view"
@@ -99,14 +98,13 @@
         android:id="@+id/graphAchievements_label"
         android:layout_width="290dp"
         android:layout_height="26dp"
-        android:layout_marginStart="210dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="252dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginEnd="221dp"
         android:gravity="center_horizontal"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName" />
+        app:layout_constraintTop_toBottomOf="@+id/user" />
 </androidx.constraintlayout.widget.ConstraintLayout>
