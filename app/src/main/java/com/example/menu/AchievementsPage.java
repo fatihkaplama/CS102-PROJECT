@@ -10,6 +10,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,9 +22,14 @@ import com.softmoore.android.graphlib.Graph;
 import com.softmoore.android.graphlib.GraphView;
 import com.softmoore.android.graphlib.Label;
 import com.softmoore.android.graphlib.Point;
-
+/**
+ * Achievements page informs user about the stars number for every level
+ * @author Arman Engin Sucu
+ * @version 13.05.2020
+ */
 
 public class AchievementsPage extends AppCompatActivity {
+    //variables
     private Button volume;
     private boolean isVolumeOn;
     private Drawable volumeoff;
@@ -32,11 +38,14 @@ public class AchievementsPage extends AppCompatActivity {
     private int volumeonID;
     private Button back;
     private String userName;
-    private int avatarId;
+    private int avatarID;
+    private Drawable avatar;
+    private ImageView avatarPg;
     private TextView tv;
     private int background;
     private ConstraintLayout AchievementsPageLayout;
     private Graph graph;
+    private MediaPlayer mediaPlayer;
     //For every level creating starsCountLevel
     private int starsCountLevel1;
     private int starsCountLevel2;
@@ -47,25 +56,41 @@ public class AchievementsPage extends AppCompatActivity {
     private int starsCountLevel7;
     private int starsCountLevel8;
     private int starsCountLevel9;
+    //for graph
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private Button wipeData;
+    //for avatar and nickname
+    private SharedPreferences sharedPreferencesUser;
+    private SharedPreferences.Editor editorUser;
 
     @SuppressLint({"RestrictedApi", "SourceLockedOrientationActivity"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //creating the achievements page from the layout
         setContentView(R.layout.activity_achievements_page);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        Intent i = getIntent();
-        AchievementsPageLayout = findViewById(R.id.achievements_page_layout);
-        final MediaPlayer mediaPlayer = new MediaPlayer();
-        mediaPlayer.start();
-        background = getSharedPreferences("ShareTheme", MODE_PRIVATE).getInt("theme", 0);
-        AchievementsPageLayout.setBackgroundResource(background);
-        userName = i.getStringExtra("nickname");
+
+        //getting data from home page about avatar and user name
+        sharedPreferencesUser = getSharedPreferences("data", MODE_PRIVATE);
+        //get user name from sharedPref and set userName
+        userName = sharedPreferencesUser.getString("nickname", "User");
         tv = findViewById(R.id.userName);
         tv.setText(userName);
+        //get avatar from sharedPref and set Avatar
+        avatarID = sharedPreferencesUser.getInt("avatar", 0);
+        avatarPg = findViewById(R.id.user);
+        avatar = AppCompatDrawableManager.get().getDrawable(AchievementsPage.this, avatarID);
+        avatarPg.setBackground(avatar);
+       //media player for sound
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.start();
+        //setting background with shared pref from theme page
+        AchievementsPageLayout = findViewById(R.id.achievements_page_layout);
+        background = getSharedPreferences("ShareTheme", MODE_PRIVATE).getInt("theme", 0);
+        AchievementsPageLayout.setBackgroundResource(background);
+
         volume = findViewById(R.id.achievementsPage_voice_button);
         back = findViewById(R.id.achievementsPage_back_button);
         volumeonID = R.drawable.volumeon;
