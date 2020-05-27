@@ -20,11 +20,6 @@ import com.example.FunAlgo.R;
 public class InstructionsPage extends AppCompatActivity {
 
     private boolean isVolumeon;
-    private String userName;
-    private Drawable avatar;
-    private ImageView avatarPg;
-    private int avatarId;
-    private TextView tv;
     private Button b;
     private Button settingsButton;
     private int background;
@@ -49,16 +44,8 @@ public class InstructionsPage extends AppCompatActivity {
         Intent i = getIntent();
         SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
 
-        userName = sharedPreferences.getString("nickname", "User");
-        tv = findViewById(R.id.userName);
-        tv.setText(userName);
         b= findViewById(R.id.return_button_instructionsPage);
         settingsButton = findViewById(R.id.settings_button_instructionsPage);
-
-        avatarID = sharedPreferences.getInt("avatar", 0);
-        avatarPg = findViewById(R.id.avatarH);
-        avatar = AppCompatDrawableManager.get().getDrawable(InstructionsPage.this,avatarID);
-        avatarPg.setBackground(avatar);
 
         volume = findViewById(R.id.volume_button_instructionsPage);
         volumeOnID = R.drawable.volumeon;
