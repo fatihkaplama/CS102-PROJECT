@@ -14,4 +14,7 @@ This week, I and my group members were trying to deal with github. It seemed so 
 ### ~ 11.05.2020~
 This week, I started to coding Instructions Page and I solved some problems on my pages.
 
+### ~ 18.05.2020~
+This week, I improved Instructions Page Layout according to group members' suggestions and I added some comments to it.
+
 ****
