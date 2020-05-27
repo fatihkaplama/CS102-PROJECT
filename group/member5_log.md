@@ -17,4 +17,6 @@ This week, I started to coding Instructions Page and I solved some problems on m
 ### ~ 18.05.2020~
 This week, I improved Instructions Page Layout according to group members' suggestions and I added some comments to it.
 
+### ~ 25.05.2020~
+This week, We tried to solve the bugs as a group and finish the whole project.
 ****
