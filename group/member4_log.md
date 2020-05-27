@@ -21,4 +21,6 @@ not solved it yet. The problem is that we could not animate lines we drew but we
 ### ~ 11.05.2020~
 This week, Although we are doing research how to implement animation of a pencil and of lines on Emulator, we have not 
 solved the problem but we hope we will solve it.
-****
+
+### ~ 18.05.2020~
+This week, I finally managed solving animation of shapes. So the creative mode finished. I think, it was worth to my effort
