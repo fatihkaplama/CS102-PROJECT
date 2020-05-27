@@ -94,3 +94,10 @@ At this meeting, we have discussed to do our detailed design  more detailed. The
 
 **ToDo:** We will add last comments.
 ****
+### Meeting ~ (28.05.2020, 8 hour)
+****
+**Present:** Everyone   _**Absent:**_ 
+
+**Discussion:** 
+At this meeting, Firstly, we have talked about the last layouts and codes of project and we have tried to fix the bugs. However, we couldn't make the project layouts compatible because we cannot run the project appropriately for every mobile phone.
+
