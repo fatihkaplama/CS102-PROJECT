@@ -8,7 +8,6 @@
     android:background="@drawable/background3"
     tools:context="com.example.menu.InstructionsPage">
 
-
     <Button
         android:id="@+id/settings_button_instructionsPage"
         android:layout_width="40dp"

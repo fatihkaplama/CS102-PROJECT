@@ -59,8 +59,8 @@ public class FirstPage extends AppCompatActivity {
         mainPageLayout.setBackgroundResource(background);
 
         //for music
-        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.daybreaker);
-        mediaPlayer.start();
+//        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.daybreaker);
+//        mediaPlayer.start();
         isVolumeOn = true;
 
         //defining variables
@@ -228,11 +228,11 @@ public class FirstPage extends AppCompatActivity {
                 if (isVolumeOn) {
                     volume.setBackground(volumeoff);
                     isVolumeOn = false;
-                    mediaPlayer.pause();
+//                    mediaPlayer.pause();
                 } else {
                     volume.setBackground(volumeon);
                     isVolumeOn = true;
-                    mediaPlayer.start();
+//                    mediaPlayer.start();
                 }
             }
         });

@@ -79,6 +79,7 @@ public class CreativeMode extends AppCompatActivity {
 
         // takes background image from shared preferences method
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
+        creativeModeLayout.setBackgroundResource(background);
 
 
         //sets count of pieces to 0

@@ -110,6 +110,5 @@ public class ThemePage extends AppCompatActivity implements View.OnClickListener
             Intent intent = new Intent(ThemePage.this, SettingsPage.class);
             startActivity(intent);
         }
-
     }
 }
