@@ -68,7 +68,6 @@ public class Level7Page extends Level1Page {
     private int princessID;
     private Drawable volumeoff;
     private Drawable volumeon;
-    private Drawable princess;
     private float x;
     private float y;
     private int count = 0;
@@ -161,7 +160,6 @@ public class Level7Page extends Level1Page {
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
 
         princessID = R.drawable.princess;
-        princess = AppCompatDrawableManager.get().getDrawable(this, princessID);
         heroHasKey = false;
         isGameOver = false;
 

@@ -81,10 +81,6 @@ public class Level5Page extends Level1Page  {
     private int background;
     private ConstraintLayout level5Page;
 
-    public static ImageView getBee() {
-        return bee;
-    }
-
     //sharedPreferences to update and save levels
     SharedPreferences sp;
     SharedPreferences.Editor et;
@@ -144,7 +140,6 @@ public class Level5Page extends Level1Page  {
         //text
         pinkText = findViewById(R.id.level5pink);
         yellowText = findViewById(R.id.level5yellow);
-
 
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);

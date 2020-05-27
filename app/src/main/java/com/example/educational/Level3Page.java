@@ -64,7 +64,6 @@ public class Level3Page extends Level1Page {
     private LinearLayout.LayoutParams params;
     private int volumeoffID;
     private int volumeonID;
-    private int flower0ID;
     private Drawable volumeoff;
     private Drawable volumeon;
     private int count = 0;
@@ -269,7 +268,6 @@ public class Level3Page extends Level1Page {
                 movementsCount = getNectarButton(timesNectar, layout1, layout2, list, movementsCount, movements, spinnerNectar,"NECTAR");
             }
         });
-
     }
 
     /** This method saves the data

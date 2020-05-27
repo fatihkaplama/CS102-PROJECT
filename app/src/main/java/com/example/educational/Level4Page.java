@@ -65,8 +65,6 @@ public class Level4Page extends Level1Page  {
     private int volumeonID;
     private Drawable volumeoff;
     private Drawable volumeon;
-    private float x;
-    private float y;
     private int starsCount;
     private int count = 0;
     private int timesForward;
