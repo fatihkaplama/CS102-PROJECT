@@ -23,7 +23,6 @@ public class InstructionsPage extends AppCompatActivity {
     private Button b;
     private Button settingsButton;
     private int background;
-    private int avatarID;
     private Drawable volumeon;
     private Drawable volumeoff;
     private int volumeOffID;
@@ -35,6 +34,7 @@ public class InstructionsPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //set layout
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_instructions_page);
         instructionsPageLayout = findViewById(R.id.instructions_page_layout);
@@ -42,17 +42,18 @@ public class InstructionsPage extends AppCompatActivity {
         instructionsPageLayout.setBackgroundResource(background);
 
         Intent i = getIntent();
+        //Get shared preferences for background
         SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
-
+        //buttons
         b= findViewById(R.id.return_button_instructionsPage);
         settingsButton = findViewById(R.id.settings_button_instructionsPage);
-
+        //volume
         volume = findViewById(R.id.volume_button_instructionsPage);
         volumeOnID = R.drawable.volumeon;
         volumeOffID = R.drawable.volumeoff;
         volumeon = AppCompatDrawableManager.get().getDrawable(this, volumeOnID);
         volumeoff = AppCompatDrawableManager.get().getDrawable(this, volumeOffID);
-
+        //go to home page if click return button
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +61,7 @@ public class InstructionsPage extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+        //go to settings page if click settings button
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +69,7 @@ public class InstructionsPage extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        //volume
         volume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
