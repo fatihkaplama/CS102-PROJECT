@@ -30,7 +30,7 @@ Alperen ---> Home Page, Level Page, Level1 Page, Level2 Page, Level8 Page (Java 
 Arman ---> Music Page, ShowCodeI Page, Achievements Page (Java code with layouts)
 Remzi ---> Level Page, Creative Mode (Java code with layouts)
 Hüseyin ---> Play Page, Level9 Page, Instructions Page(Java code with layouts)
-Fatih ---> First Page, Level3 Page, Level4 Page, Level5 Page, Level6 Page, Level7 Page (Java code with layouts)
+Fatih ---> First Page, Level3 Page, Level4 Page, Level5 Page, Level6 Page, Level7 Page, Splash Page (Java code with layouts)
 
   WHAT REMAINS TO BE DONE:
 We could not solve the volume button issue and we have received API errors when trying to add methods. Musics can be applied from    Musics Page, however we cannot mute the music in other pages.
