@@ -18,7 +18,7 @@ import android.widget.Button;
 import com.example.FunAlgo.R;
 
 public class InstructionsPage extends AppCompatActivity {
-
+    //properties
     private boolean isVolumeon;
     private Button b;
     private Button settingsButton;

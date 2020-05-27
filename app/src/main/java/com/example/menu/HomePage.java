@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.example.FunAlgo.R;
 
 public class HomePage extends FirstPage {
-
+    //properties
     private String userName;
     private Drawable avatar;
     private ImageView avatarPg;

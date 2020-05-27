@@ -21,7 +21,7 @@ import com.example.creative.CreativeMode;
 import com.example.educational.LevelPage;
 
 public class PlayPage extends AppCompatActivity {
-
+    //properties
     private boolean isVolumeon;
     private String userName;
     private Drawable avatar;

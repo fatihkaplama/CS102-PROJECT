@@ -15,6 +15,7 @@ import com.example.menu.HomePage;
 import com.example.FunAlgo.R;
 
 public class DefaultLevelPage extends AppCompatActivity {
+    //properties
     private int starsCount;
     private float x;
     private float y;

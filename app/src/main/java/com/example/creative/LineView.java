@@ -18,7 +18,6 @@ import androidx.annotation.RequiresApi;
 import java.util.ArrayList;
 
 public class LineView extends View {
-
     // properties
     private Paint paint = new Paint();
     private int[][] distanceArray = new int[ 30][ 40];
