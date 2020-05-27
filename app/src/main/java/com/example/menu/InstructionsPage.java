@@ -20,10 +20,6 @@ public class InstructionsPage extends AppCompatActivity {
 
     private boolean isVolumeon;
     private String userName;
-    private Drawable avatar;
-    private ImageView avatarPg;
-    private int avatarId;
-    private TextView tv;
     private Button b;
     private Button settingsButton;
     private int background;
@@ -39,31 +35,27 @@ public class InstructionsPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //set layout
         setContentView(R.layout.activity_instructions_page);
         instructionsPageLayout = findViewById(R.id.instructions_page_layout);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         instructionsPageLayout.setBackgroundResource(background);
 
         Intent i = getIntent();
+        //get shared preferences for background
         SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
-
+        //get username
         userName = sharedPreferences.getString("nickname", "User");
-        tv = findViewById(R.id.userName);
-        tv.setText(userName);
+        //buttons
         b= findViewById(R.id.return_button_instructionsPage);
         settingsButton = findViewById(R.id.settings_button_instructionsPage);
-
-        avatarID = sharedPreferences.getInt("avatar", 0);
-        avatarPg = findViewById(R.id.avatarH);
-        avatar = AppCompatDrawableManager.get().getDrawable(InstructionsPage.this,avatarID);
-        avatarPg.setBackground(avatar);
-
+        //volume
         volume = findViewById(R.id.volume_button_instructionsPage);
         volumeOnID = R.drawable.volumeon;
         volumeOffID = R.drawable.volumeoff;
         volumeon = AppCompatDrawableManager.get().getDrawable(this, volumeOnID);
         volumeoff = AppCompatDrawableManager.get().getDrawable(this, volumeOffID);
-
+        //goes to Home Page if click return button
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +63,7 @@ public class InstructionsPage extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+        // goes to Settings Page if click settingsButton
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +71,7 @@ public class InstructionsPage extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        //volume
         volume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

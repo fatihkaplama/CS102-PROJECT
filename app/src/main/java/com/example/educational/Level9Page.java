@@ -29,10 +29,14 @@ import com.example.menu.SettingsPage;
 import java.util.ArrayList;
 
 public class Level9Page extends Level1Page {
-    final private int[] targetArea = {665 , 128};
-    final private int[] nonForbiddenAreaX = {0 , 133 , 266 , 266 , 266 , 133 , 133 , 133 , 266 , 399 , 532 , 532 , 532 , 532 , 665};
-    final private int[] nonForbiddenAreaY = {491 , 491 , 491 , 370 , 249 , 249 , 128 , 7 , 7 , 7 , 7 , 128 , 249 , 370 , 128};
     //variables
+    //finish point
+    final private int[] targetArea = {665 , 128};
+    //the x coordinates that the user can go
+    final private int[] nonForbiddenAreaX = {0 , 133 , 266 , 266 , 266 , 133 , 133 , 133 , 266 , 399 , 532 , 532 , 532 , 532 , 665};
+    //the y coordinates that the user can go
+    final private int[] nonForbiddenAreaY = {491 , 491 , 491 , 370 , 249 , 249 , 128 , 7 , 7 , 7 , 7 , 128 , 249 , 370 , 128};
+
     private TextView movements;
     private Spinner spinnerForward;
     private Spinner spinnerLeft;
@@ -77,6 +81,7 @@ public class Level9Page extends Level1Page {
     private int movementsCount;
     private Button show;
     private String code;
+    //shared preferences to save levels and data to transport
     private SharedPreferences sp;
     private SharedPreferences.Editor et;
     private SharedPreferences sharedPreferencesA;
@@ -92,16 +97,17 @@ public class Level9Page extends Level1Page {
         level9Page = findViewById(R.id.level9_page_layout);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         level9Page.setBackgroundResource(background);
+        //starting activity
         Intent i =getIntent();
         SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
-
+        //setting avatar
         avatarID =sharedPreferences.getInt("avatar", 0);
         avatar = AppCompatDrawableManager.get().getDrawable(Level9Page.this, avatarID);
         hero = findViewById(R.id.hero);
         hero.setBackground(avatar);
 
         movementsCount = 0;
-
+        //Views
         reset =findViewById(R.id.reset);
         apply = findViewById(R.id.apply);
         hero = findViewById(R.id.hero);
@@ -124,14 +130,14 @@ public class Level9Page extends Level1Page {
         getKey = findViewById(R.id.getKey);
         show = findViewById(R.id.showCode_button);
         code ="";
-
+        //volume
         isVolumeOn = true;
         volumeonID = R.drawable.volumeon;
         volumeoffID = R.drawable.volumeoff;
         volumeon = AppCompatDrawableManager.get().getDrawable(this, volumeonID);
         volumeoff = AppCompatDrawableManager.get().getDrawable(this, volumeoffID);
         final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.daybreaker);
-
+        //spinner
         timesAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, times);
         timesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerForward.setAdapter(timesAdapter);
@@ -142,7 +148,7 @@ public class Level9Page extends Level1Page {
         spinnerLeft = findViewById(R.id.spinnerLeft);
         spinnerRight = findViewById(R.id.spinnerKey);
         spinnerKey = findViewById(R.id.spinnerKey);
-
+        //to add the buttons to layout
         list = new ArrayList<String>();
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 80);
 
@@ -151,7 +157,7 @@ public class Level9Page extends Level1Page {
         heroHasKey = false;
 
         isGameOver = false;
-
+        //shared preferences to save level
         sp= getSharedPreferences("isFinishedBooleans", MODE_PRIVATE);
         et = sp.edit();
 

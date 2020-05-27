@@ -42,8 +42,10 @@ public class PlayPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //set layout
         setContentView(R.layout.activity_play_page);
         Intent i =getIntent();
+        //get shared preferences for background
         SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
 
         playPageLayout =findViewById(R.id.play_page_layout);
@@ -60,19 +62,19 @@ public class PlayPage extends AppCompatActivity {
         avatar = AppCompatDrawableManager.get().getDrawable(PlayPage.this, avatarId);
         user = findViewById(R.id.user);
         user.setBackground(avatar);
-
+        //volume
         isVolumeon = true;
         volume = findViewById(R.id.volume_button_playPage);
         volumeOnID = R.drawable.volumeon;
         volumeOffID = R.drawable.volumeoff;
         volumeon = AppCompatDrawableManager.get().getDrawable(this, volumeOnID);
         volumeoff = AppCompatDrawableManager.get().getDrawable(this,volumeOffID);
-
+        //buttons
         b = findViewById(R.id.return_button_playPage);
         educationalMode = findViewById(R.id.educationalMode);
         settingsButton = findViewById(R.id.settings_button_playPage);
         creativeMode = findViewById(R.id.creativeMode);
-
+        //go to home page if click return button
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +96,7 @@ public class PlayPage extends AppCompatActivity {
                 }
             }
         });
+        //go to level page if click educational moe button
         educationalMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +104,7 @@ public class PlayPage extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        //go to settings page if click settings button
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +112,7 @@ public class PlayPage extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        //go to creative mode if click creative mode button
         creativeMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
