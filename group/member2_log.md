@@ -15,5 +15,6 @@ We decided to design the game. I looked some game examples in youtube to learn h
 We struggled to add delay movements since at the begginning bee is going to position without any delay. And I learned how to use multithreating. To do that, I had to read Big Java Late Objects and documentation about threats. After this, I figured how to add delay our program. But, I need to change lots of code. Then me and fatih recreated the code of whole game. We extend all level pages from level1page and we shortened our code. Me and fatih had to do a lot of work to shorten code. But, after changing code, the code of the game became more neat and nice.
 
 ### ~ 18.05.2020 ~
+I fixed some bugs in the levelPages, specificly level1,2,8. I add comments and I improved my code efficency and change same variable names.
 
 ****

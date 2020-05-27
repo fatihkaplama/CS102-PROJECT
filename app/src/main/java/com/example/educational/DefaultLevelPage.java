@@ -20,6 +20,10 @@ public class DefaultLevelPage extends AppCompatActivity {
     private float y;
     private SharedPreferences sharedP;
 
+    /**
+     * This level creates an TryAgain pop-up when the bee is out of the way
+     * @param context
+     */
     public void TryAgain(Context context ) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         View myView = getLayoutInflater().inflate(R.layout.tryagain, null);
@@ -35,6 +39,14 @@ public class DefaultLevelPage extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    /**
+     * This method creates finish screen when bee is in the target
+     * @param context
+     * @param movementsCount
+     * @param lower
+     * @param upper
+     */
     public void finishedScreen(final Context context, int movementsCount, int lower, int upper){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         View myView = getLayoutInflater().inflate(R.layout.finishscreen, null);
@@ -92,6 +104,12 @@ public class DefaultLevelPage extends AppCompatActivity {
 
     }
 
+    /**
+     * bee goes forward with this method
+     * @param bee
+     * @param changeX
+     * @param changeY
+     */
     public void GoForward(ImageView bee, int changeX, int changeY) {
 
         if (bee.getRotation() == 0) {
@@ -135,11 +153,19 @@ public class DefaultLevelPage extends AppCompatActivity {
         System.out.println(bee.getY());
     }
 
+    /**
+     * set rotation +90
+     * @param bee
+     */
     public void TurnRight(ImageView bee) {
 
         bee.setRotation(bee.getRotation() + (90));
     }
 
+    /**
+     * set rotation -90
+     * @param bee
+     */
     public void TurnLeft(ImageView bee) {
 
         bee.setRotation(bee.getRotation() - (90));

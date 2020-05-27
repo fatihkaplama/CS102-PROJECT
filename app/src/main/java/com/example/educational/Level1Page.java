@@ -77,12 +77,6 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
     private LinearLayout.LayoutParams params;
     private Drawable volumeoff;
     private Drawable volumeon;
-    private float x;
-    private float y;
-    private float beeX;
-    private float beeY;
-    private float honeyX;
-    private float honeyY;
     private String code;
     private int buttonID;
     private Drawable button;
