@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.DragEvent;
@@ -76,6 +77,7 @@ public class CreativeMode extends AppCompatActivity {
         lineView = findViewById(R.id.lineView);
         spinnerDegrees = findViewById(R.id.degreeSpinner);
         spinnerDistance = findViewById(R.id.distanceSpinner);
+        resetCreative.setEnabled(false);
 
         // takes background image from shared preferences method
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
@@ -119,6 +121,11 @@ public class CreativeMode extends AppCompatActivity {
         applyCreative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                applyCreative.setEnabled(false);
+                applyCreative.setBackgroundColor( getResources().getColor(R.color.holo_blue_dark));
+                resetCreative.setEnabled(true);
+
 
                 // handler object to obtain timer when drawing shapes
                 final Handler handler= new Handler();
@@ -232,7 +239,9 @@ public class CreativeMode extends AppCompatActivity {
                         // then new clockwise button is created and text is set
                         clockwise = new Button(CreativeMode.this);
                         clockwise.setText( "↻" + distanceGo + "u " + degreesTurn + "°");
+                        clockwise.setTextColor(Color.BLACK);
                         clockwise.setTextSize(10f);
+                        clockwise.setBackgroundColor( getResources().getColor(R.color.holo_blue_bright));
                         clockwise.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,95));
                         container.addView( clockwise);
                         clockwise.setVisibility(View.VISIBLE);
@@ -250,7 +259,9 @@ public class CreativeMode extends AppCompatActivity {
                         lineView.addListDistance( distanceGo);
                         counterClockwise = new Button(CreativeMode.this);
                         counterClockwise.setText( "↺" + distanceGo + "u " + ( 360 - degreesTurn)+ "°");
+                        counterClockwise.setTextColor(Color.BLACK);
                         counterClockwise.setTextSize(10f);
+                        counterClockwise.setBackgroundColor( getResources().getColor(R.color.holo_blue_bright));
                         counterClockwise.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,95));
                         container.addView( counterClockwise);
                         counterClockwise.setVisibility(View.VISIBLE);

@@ -24,7 +24,6 @@ public class ThemePage extends AppCompatActivity implements View.OnClickListener
     private boolean isPressed;
     private AudioManager audioManager;
     private ConstraintLayout themesPageLayout;
-    private Intent intent;
     private int wallpaperID;
     private int rainbowTheme, orangeTheme, nightTheme;
     private int volumeOn, volumeOff;

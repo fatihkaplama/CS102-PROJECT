@@ -89,14 +89,18 @@
             android:id="@+id/clockwise_creative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_bright"
             android:text="@string/goClockwise"
+            android:textColor="#0C0C0C"
             android:textSize="10sp" />
 
         <Button
             android:id="@+id/counterClockwise_creative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_bright"
             android:text="@string/goCounterClockwise"
+            android:textColor="#0C0C0C"
             android:textSize="10sp" />
 
         <LinearLayout
@@ -149,13 +153,17 @@
             android:id="@+id/applyCreative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/apply_button" />
+            android:background="@android:color/holo_blue_bright"
+            android:text="@string/apply_button"
+            android:textColor="#0C0C0C" />
 
         <Button
             android:id="@+id/resetCreative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/reset_button" />
+            android:background="@android:color/holo_blue_bright"
+            android:text="@string/reset_button"
+            android:textColor="#0C0C0C" />
 
     </LinearLayout>
 
