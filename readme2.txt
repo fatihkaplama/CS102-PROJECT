@@ -37,6 +37,20 @@ FunAlgo is an application that allows people to learn algorithm logic with an en
 #### What Remains To Be Done
 + We could not solve the volume button issue and we have received API errors when trying to add methods. Musics can be applied from Musics Page, however we cannot mute the music in other pages.
 
+#### System Overview
+Android Studio 3.6.1
+Build #AI-192.7142.36.36.6241897, built on February 27, 2020
+Runtime version: 1.8.0_212-release-1586-b04 amd64
+VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o
+Windows 10 10.0
+GC: ParNew, ConcurrentMarkSweep
+Memory: 1237M
+Cores: 8
+Registry: ide.new.welcome.screen.force=true
+Non-Bundled Plugins: pl.charmas.parcelablegenerator
+
+
+
 ****
 **Instructor:** _(David Davenport)_   **TA:**  _(Laleh Eskandarian)_
 ****
