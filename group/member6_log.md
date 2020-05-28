@@ -16,7 +16,11 @@ On this page I will keep a weekly record of what I have done for the CS102 group
 
  ### ~ 11.05.2020 ~
 + In this week, we have tried to add pencil animation which follows to the line. Although I have tried to animation pencil, it cannot follow the line properly. Also, we have tried to add Thread to draw line by line in time, but unfortunately it does not work as well.
+
 ### ~ 18.05.2020 ~
 + In this week, we finally manage to solve the animation of shapes and it works properly. I have changed layout a little bit, I have changed the button colors and so on. Also, I have added some comments.
+### ~ 25.05.2020~
++ This week, I have tried to add some comments and fix some bugs.
+
 
 ****
