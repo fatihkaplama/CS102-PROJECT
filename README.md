@@ -8,7 +8,7 @@ The information and code in this repository are submitted in partial fulfillment
 ### ~ AlgoMen ~
 
 ## Project Description
-_Include a concise description of your project here. Be sure to include the proposed users, the architecture (eg. desktop, web, mobile, embedded, etc.) & screenshots when available._
+  _FunAlgo is an application that allows people to learn algorithm logic with an entertaining way. Users can play games requiring basic structure of algorithms and also, they can draw different sorts of shapes on creative mode by using different algorithm steps. Moreover, FunAlgo includes different type of musics and themes that can be attractive for our main target audience. FunAlgo may be useful for adults but our target audience is children. FunAlgo is a mobile application and it is coded on Android._
 
 ## Project Status
 + **Group/project Selection:** completed (28/02/2020)
