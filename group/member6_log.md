@@ -21,6 +21,7 @@ On this page I will keep a weekly record of what I have done for the CS102 group
 + In this week, we finally manage to solve the animation of shapes and it works properly. I have changed layout a little bit, I have changed the button colors and so on. Also, I have added some comments.
 ### ~ 25.05.2020~
 + This week, I have tried to add some comments and fix some bugs.
++ Me and arman have written the readme2.txt 
 
 
 ****
