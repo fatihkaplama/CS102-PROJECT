@@ -1,5 +1,9 @@
 package com.example.educational;
-
+/**
+ *LevelPage class includes all level buttons
+ *@version 06.05.2020
+ *@author Alperen Alkan & Fatih Kaplama & Remzi Tepe
+ */
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -19,6 +23,7 @@ import com.example.FunAlgo.R;
 import com.example.menu.SettingsPage;
 
 public class LevelPage extends AppCompatActivity {
+    //properties
     private boolean isLevel1Finished;
     private boolean isLevel2Finished;
     private boolean isLevel3Finished;

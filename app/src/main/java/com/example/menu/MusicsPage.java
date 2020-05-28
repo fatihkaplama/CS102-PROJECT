@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -14,7 +13,7 @@ import android.widget.Button;
 import com.example.FunAlgo.R;
 
 /**
- * music page for enable user to chose a music from 4 musics
+ * Musics Page for enable user to chose a music from 4 musics
  * @author Arman Engin Sucu
  * @28.04.2020
  */
@@ -25,7 +24,6 @@ public class MusicsPage extends AppCompatActivity {
     private MediaPlayer music3;
     private MediaPlayer music4;
     ConstraintLayout musicsPageLayout;
-    Intent intent;
 
     @SuppressLint("SourceLockedOrientationActivity")
     @Override

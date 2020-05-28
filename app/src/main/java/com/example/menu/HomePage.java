@@ -1,5 +1,9 @@
 package com.example.menu;
-
+/**
+ *HomePage class includes main buttons
+ *@version 29.04.2020
+ *@author Alperen Alkan
+ */
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.constraintlayout.widget.ConstraintLayout;
 

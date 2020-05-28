@@ -1,4 +1,9 @@
 package com.example.educational;
+/**
+ *DefaultLevelPage class includes basics of movement and win & lose methods
+ *@version 14.05.2020
+ *@author Alperen Alkan & Fatih Kaplama
+ */
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +26,7 @@ public class DefaultLevelPage extends AppCompatActivity {
     private float y;
     private SharedPreferences sharedP;
 
+    //methods
     /**
      * This level creates an TryAgain pop-up when the bee is out of the way
      * @param context

@@ -1,5 +1,9 @@
 package com.example.educational;
-
+/**
+ *Level2Page class for level2
+ *@version 06.05.2020
+ *@author Alperen Alkan & Fatih Kaplama & Arman Engin Sucu
+ */
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -29,7 +33,7 @@ import com.example.menu.SettingsPage;
 import java.util.ArrayList;
 
 public class Level2Page extends Level1Page {
-    //variables
+    //properties
     //to determine the finish point
     final private int[] targetArea = { 400 , 8 };
 
@@ -257,6 +261,7 @@ public class Level2Page extends Level1Page {
 
     }
 
+    //methods
     /** This method saves the data
      * @param, codeMessage
      * @return

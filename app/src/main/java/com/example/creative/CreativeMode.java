@@ -1,7 +1,8 @@
 package com.example.creative;
-/*Creative Mode Main Class
-@version 13.05.2020
-@author Tepe_Remzi & Ozal_Deniz
+/**
+ *CreativeMode class includes layouts and buttons
+ *@version 14.05.2020
+ *@author Deniz Özal & Remzi Tepe
  */
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -168,24 +169,25 @@ public class CreativeMode extends AppCompatActivity {
         });
     }
 
-    /*Method to get Linear Layout
-    @return linearLayout
+    /**
+     * Method to get Linear Layout
+     * @return linearLayout
      */
     public LinearLayout getLinearLayout() {
         return linearLayout;
     }
 
-    /*
+    /**
     set Linear Layout asked
-    @param LinearLayout property
+    @param, LinearLayout property
     @return linear layout
      */
     public void setLinearLayout(LinearLayout linearLayout) {
         this.linearLayout = linearLayout;
     }
 
-    /*
-    it operates the action of dragging
+    /**
+     MyTouchListener inner class  operates the action of dragging
      */
     private final class MyTouchListener implements View.OnTouchListener{
 
@@ -204,8 +206,8 @@ public class CreativeMode extends AppCompatActivity {
         }
     }
 
-    /*
-    it operates the drag and drop event
+    /**
+     MyDragListener inner class operates the drag and drop event
      */
     class MyDragListener implements View.OnDragListener{
 

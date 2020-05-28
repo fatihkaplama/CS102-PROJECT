@@ -1,5 +1,9 @@
 package com.example.menu;
-
+/**
+ *FirstPage class is the the first page and it provides the user enter nickname and avatar selection
+ *@version 29.04.2020
+ *@author Fatih Kaplama
+ */
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -9,7 +13,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +23,7 @@ import android.widget.Toast;
 import com.example.FunAlgo.R;
 
 public class FirstPage extends AppCompatActivity {
-    //variables
+    //properties
     private boolean isAvatarSelected;
     private boolean isVolumeOn;
     private ImageView user;
@@ -57,10 +60,6 @@ public class FirstPage extends AppCompatActivity {
         mainPageLayout = findViewById(R.id.main_layout);
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         mainPageLayout.setBackgroundResource(background);
-
-        //for music
-//        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.daybreaker);
-//        mediaPlayer.start();
         isVolumeOn = true;
 
         //defining variables

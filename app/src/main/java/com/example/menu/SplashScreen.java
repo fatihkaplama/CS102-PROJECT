@@ -1,5 +1,9 @@
 package com.example.menu;
-
+/**
+ *SplashScreen is the first transition page when opening the game
+ *@version 14.05.2020
+ *@author Fatih Kaplama
+ */
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;

@@ -1,4 +1,9 @@
 package com.example.menu;
+/**
+ *PlayPage class includes buttons goes to creative and educational mode
+ *@version 02.05.2020
+ *@author Huseyin Uzun
+ */
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;

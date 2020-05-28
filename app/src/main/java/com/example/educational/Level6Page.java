@@ -1,6 +1,9 @@
 package com.example.educational;
-
-import androidx.appcompat.app.AlertDialog;
+/**
+ *Level6Page class for level6
+ *@version 08.05.2020
+ *@author Alperen Alkan & Fatih Kaplama & Arman Engin Sucu
+ */
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -30,7 +33,7 @@ import com.example.menu.SettingsPage;
 import java.util.ArrayList;
 
 public class Level6Page extends Level1Page {
-    //variables
+    //properties
     //to determine the finish point
     final private int[] targetArea = { 632 , 438 };
 
@@ -283,7 +286,7 @@ public class Level6Page extends Level1Page {
         editor.commit();
     }
 
-
+    //methods
     /** This method sets the code message
      * @param
      * @return

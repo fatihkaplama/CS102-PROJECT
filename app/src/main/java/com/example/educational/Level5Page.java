@@ -1,6 +1,9 @@
 package com.example.educational;
-
-import androidx.appcompat.app.AlertDialog;
+/**
+ *Level5Page class for level5
+ *@version 08.05.2020
+ *@author Alperen Alkan & Fatih Kaplama & Arman Engin Sucu
+ */
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -30,7 +33,7 @@ import com.example.menu.SettingsPage;
 import java.util.ArrayList;
 
 public class Level5Page extends Level1Page  {
-    //variables
+    //properties
     //to determine the finish point
     final private int[] targetArea = { 194 , 540 };
 
@@ -270,6 +273,7 @@ public class Level5Page extends Level1Page  {
         });
     }
 
+    //methods
     /** This method saves the data
      * @param, codeMessage
      * @return

@@ -29,7 +29,7 @@ import com.softmoore.android.graphlib.Point;
  */
 
 public class AchievementsPage extends AppCompatActivity {
-    //variables
+    //properties
     private Button volume;
     private boolean isVolumeOn;
     private Drawable volumeoff;
@@ -149,6 +149,7 @@ public class AchievementsPage extends AppCompatActivity {
         });
     }
 
+    //methods
     /**
      * graphlib library set the graph  and its x and y variables according to shared-preferences outputs from other pages.
      */

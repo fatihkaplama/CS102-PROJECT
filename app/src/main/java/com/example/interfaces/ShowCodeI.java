@@ -1,8 +1,12 @@
 package com.example.interfaces;
-
-import android.widget.Button;
+/**
+ *ShowCodeI interface for save data and set code methods
+ *@version 06.05.2020
+ *@author Arman Engin Sucu
+ */
 
 public interface ShowCodeI {
-    public void SaveData(String codeMessage);
-    public void setCodeMessage();
+    //methods
+    void SaveData(String codeMessage);
+    void setCodeMessage();
 }

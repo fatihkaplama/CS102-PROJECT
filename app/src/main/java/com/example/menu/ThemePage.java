@@ -1,6 +1,9 @@
 package com.example.menu;
-
-
+/**
+ *ThemePage class includes themes
+ *@version 28.04.2020
+ *@author Deniz Semih Özal
+ */
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -30,7 +33,6 @@ public class ThemePage extends AppCompatActivity implements View.OnClickListener
     private int volumeOn, volumeOff;
     private SharedPreferences.Editor editor;
     private int background;
-    private SharedPreferences sharedPreferences;
 
     /** This method gets wallpaper
      * @return wallpaperID

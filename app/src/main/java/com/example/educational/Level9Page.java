@@ -1,5 +1,9 @@
 package com.example.educational;
-
+/**
+ *Level9Page class for level9
+ *@version 10.05.2020
+ *@author Hüseyin Uzun & Arman Engin Sucu
+ */
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +24,6 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -30,7 +33,7 @@ import com.example.menu.SettingsPage;
 import java.util.ArrayList;
 
 public class Level9Page extends Level1Page {
-    //variables
+    //properties
     //finish point
     final private int[] targetArea = {665 , 128};
     //the x coordinates that the user can go
@@ -286,6 +289,7 @@ public class Level9Page extends Level1Page {
         });
     }
 
+    //methods
     /** This method saves the data
      * @param, codeMessage
      * @return

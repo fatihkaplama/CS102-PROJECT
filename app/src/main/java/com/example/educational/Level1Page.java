@@ -1,5 +1,9 @@
 package com.example.educational;
-
+/**
+ *Level1Page class includes button methods and this class is a super class of all other level pages
+ *@version 06.05.2020
+ *@author Alperen Alkan & Fatih Kaplama & Arman Engin Sucu
+ */
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -30,7 +34,7 @@ import com.example.interfaces.ShowCodeI;
 import java.util.ArrayList;
 
 public class Level1Page extends DefaultLevelPage implements ShowCodeI {
-    //variables
+    //properties
     final private int[] targetArea = {600, 184};
     final private int[] nonForbiddenAreaX = {200, 400, 600};
     final private int[] nonForbiddenAreaY = {184, 184, 184};
@@ -282,6 +286,7 @@ public class Level1Page extends DefaultLevelPage implements ShowCodeI {
         });
     }
 
+    //methods
     /** This method adds the GO FORWARD activity selected by the user to the layout
      * @param, timesForward, layout1, layout2, list, count, movementsCount, movements, spinnerForward
      * @return number of movements

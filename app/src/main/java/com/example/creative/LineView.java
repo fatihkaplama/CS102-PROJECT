@@ -1,8 +1,8 @@
 package com.example.creative;
-/*
-Line view class that generates all drawing operations
-@version 13.05.2020
-@authors Tepe_Remzi && Ozal_Deniz
+/**
+ *LineView class generates all drawing operations
+ *@version 14.05.2020
+ *@author Deniz Özal & Remzi Tepe
  */
 import android.content.Context;
 import android.graphics.Canvas;
@@ -134,17 +134,17 @@ public class LineView extends View {
         }
     }
 
-    /*
-    it calls onDraw method whenever it is called from creativeMode class
+    /**
+     This method calls onDraw method whenever it is called from creativeMode class
      */
     public void draw(){
         invalidate();
         requestLayout();
     }
 
-    /*
+    /**
     it adds distance to list distance array
-    @param int distances that the user add
+    @param, int distances that the user add
     @return distances
      */
     public int addListDistanceArray( int distances){
@@ -159,9 +159,9 @@ public class LineView extends View {
         return distances;
     }
 
-    /*
-    add distance distances to arrayList
-    @param distances integer value of distance
+    /**
+     This method add distance distances to arrayList
+    @param, distances integer value of distance
     @return distances integer value of distance
      */
     public int addListDistance( int distances){
@@ -169,9 +169,9 @@ public class LineView extends View {
         return distances;
     }
 
-    /*
-    add degrees degree to arrayList
-    @param degree integer value of degree
+    /**
+    This method add degrees degree to arrayList
+    @param, degree integer value of degree
     @return degree integer value of degree
      */
     public int addListDegree( int degree){
@@ -179,8 +179,8 @@ public class LineView extends View {
         return degree;
     }
 
-    /*
-    it counts the methods that is operated in creative mode
+    /**
+     * This method  counts the methods that is operated in creative mode
     @return numberOfMethod
      */
     public int countOfMethod(){
@@ -188,8 +188,8 @@ public class LineView extends View {
         return numberOfMethod;
     }
 
-    /*
-    it starts the count list with specified values in it.
+    /**
+     This method it starts the count list with specified values in it.
      */
     public void countListStarter(){
         for( int index = 0; index < distance.size(); index++) {
@@ -198,9 +198,9 @@ public class LineView extends View {
         }
     }
 
-    /*
+    /**
     it controls if the value is new or not
-    @param int order that is the order of the value
+    @param, int order that is the order of the value
     @return boolean true whether it is new
      */
     public boolean isNew( int order){

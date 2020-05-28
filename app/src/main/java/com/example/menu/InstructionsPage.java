@@ -1,4 +1,9 @@
 package com.example.menu;
+/**
+ *Instructions Page class includes instructions for FunAlgo
+ *@version 18.05.2020
+ *@author Huseyin Uzun & Fatih Kaplama
+ */
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -8,8 +13,6 @@ import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.View;
