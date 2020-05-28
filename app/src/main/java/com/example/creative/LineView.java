@@ -199,7 +199,7 @@ public class LineView extends View {
     }
 
     /**
-    it controls if the value is new or not
+    This method controls if the value is new or not
     @param, int order that is the order of the value
     @return boolean true whether it is new
      */
