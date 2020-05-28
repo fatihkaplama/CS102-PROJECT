@@ -17,4 +17,6 @@ We struggled to add delay movements since at the begginning bee is going to posi
 ### ~ 18.05.2020 ~
 I fixed some bugs in the levelPages, specificly level1,2,8. I add comments and I improved my code efficency and change same variable names.
 
+### ~ 25.05.2020~
+This week, We tried to solve the bugs as a group and finish the whole project and we try to develop our code organisation.
 ****
