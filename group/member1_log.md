@@ -17,3 +17,6 @@ This week I added the star counts feature to improve the functionality of the le
 
 ### ~ 18.05.2020 ~
 This week I added comments to the First page, Level 1,2,3,4,5,6,7,8 and 9 classes and made the code more understandable and organized. I also created new button and layout designs on the internet to make the button and layout views on the Level pages more attractive. Then I applied these designs to the buttons and layouts on the level pages. I applied the same designs to the background of the splash screen page. In addition, since our application is an application running in a horizontal position, the application was broken when the user used the phone in the vertical position. Therefore, I did some research on the Internet to edit the application orientation. Then I prevented the phone from turning automatically using a method I learned on the internet.
+
+### ~ 25.05.2020 ~
+This week I tried to solve some mistakes in the project. I did some research on the internet to make the project a file with APK extension with Alperen and finally, we did it. I have completed some shortcomings and added comments to some classes for the Final Code.
