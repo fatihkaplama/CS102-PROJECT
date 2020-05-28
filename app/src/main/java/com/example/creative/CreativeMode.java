@@ -12,15 +12,18 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.DragEvent;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.FunAlgo.R;
 import com.example.menu.SettingsPage;
@@ -36,9 +39,10 @@ public class CreativeMode extends AppCompatActivity {
     private Button returnButton;
     private Button volumeButton;
     private Button settingsButton;
+    private Button infoButton;
     private LinearLayout linearLayout, linearLayout2;
-    private String[] degrees = {"0", "30", "45","60", "90", "120", "180"};
-    private String[] distance = {"10", "30", "60", "100", "200"};
+    private String[] degrees = {"0", "30", "45","60", "90", "120","150", "180"};
+    private String[] distance = {"10", "30", "60", "100","150", "200"};
     private int distanceGo;
     private int degreesTurn;
     private int buttonLimit;
@@ -69,6 +73,7 @@ public class CreativeMode extends AppCompatActivity {
         returnButton = findViewById(R.id.returnButton_creative);
         volumeButton = findViewById(R.id.volumeButton_creative);
         settingsButton = findViewById(R.id.settingButton_creative);
+        infoButton = findViewById(R.id.info_creativeMode);
         clockwise = findViewById(R.id.clockwise_creative);
         counterClockwise = findViewById( R.id.counterClockwise_creative);
         applyCreative = findViewById(R.id.applyCreative);
@@ -78,7 +83,6 @@ public class CreativeMode extends AppCompatActivity {
         lineView = findViewById(R.id.lineView);
         spinnerDegrees = findViewById(R.id.degreeSpinner);
         spinnerDistance = findViewById(R.id.distanceSpinner);
-        resetCreative.setEnabled(false);
 
         // takes background image from shared preferences method
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
@@ -124,9 +128,7 @@ public class CreativeMode extends AppCompatActivity {
             public void onClick(View v) {
 
                 applyCreative.setEnabled(false);
-                applyCreative.setBackgroundColor( getResources().getColor(R.color.holo_blue_dark));
-                resetCreative.setEnabled(true);
-
+                applyCreative.setBackgroundResource(R.drawable.button_design2);
 
                 // handler object to obtain timer when drawing shapes
                 final Handler handler= new Handler();
@@ -148,6 +150,18 @@ public class CreativeMode extends AppCompatActivity {
                         handler.postDelayed( this, 100);
                     }
                 },100);
+            }
+        });
+
+        // when it is pressed, it gives info
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast = Toast.makeText(getApplicationContext(), "You can drag and drop buttons to the left by choosing distances and degrees ☺", Toast.LENGTH_LONG);
+                View view = toast.getView();
+                view.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN);
+                toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
             }
         });
 
@@ -243,7 +257,7 @@ public class CreativeMode extends AppCompatActivity {
                         clockwise.setText( "↻" + distanceGo + "u " + degreesTurn + "°");
                         clockwise.setTextColor(Color.BLACK);
                         clockwise.setTextSize(10f);
-                        clockwise.setBackgroundColor( getResources().getColor(R.color.holo_blue_bright));
+                        clockwise.setBackgroundResource(R.drawable.button_design);
                         clockwise.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,95));
                         container.addView( clockwise);
                         clockwise.setVisibility(View.VISIBLE);
@@ -263,7 +277,7 @@ public class CreativeMode extends AppCompatActivity {
                         counterClockwise.setText( "↺" + distanceGo + "u " + ( 360 - degreesTurn)+ "°");
                         counterClockwise.setTextColor(Color.BLACK);
                         counterClockwise.setTextSize(10f);
-                        counterClockwise.setBackgroundColor( getResources().getColor(R.color.holo_blue_bright));
+                        counterClockwise.setBackgroundResource(R.drawable.button_design);
                         counterClockwise.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,95));
                         container.addView( counterClockwise);
                         counterClockwise.setVisibility(View.VISIBLE);

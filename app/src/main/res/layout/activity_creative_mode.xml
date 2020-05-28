@@ -37,8 +37,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginRight="23dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="31dp"
         android:background="@drawable/volumeon"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -61,7 +60,7 @@
         android:id="@+id/applyLayout"
         android:layout_width="83dp"
         android:layout_height="288dp"
-        android:background="#C53B3B"
+        android:background="@drawable/layout2_design"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,8 +76,7 @@
         android:layout_width="163dp"
         android:layout_height="264dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:background="#3949AB"
+        android:background="@drawable/layout2_design"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +87,7 @@
             android:id="@+id/clockwise_creative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_bright"
+            android:background="@drawable/button_design"
             android:text="@string/goClockwise"
             android:textColor="#0C0C0C"
             android:textSize="10sp" />
@@ -98,7 +96,7 @@
             android:id="@+id/counterClockwise_creative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_bright"
+            android:background="@drawable/button_design"
             android:text="@string/goCounterClockwise"
             android:textColor="#0C0C0C"
             android:textSize="10sp" />
@@ -152,8 +150,8 @@
         <Button
             android:id="@+id/applyCreative"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_bright"
+            android:layout_height="42dp"
+            android:background="@drawable/button_design"
             android:text="@string/apply_button"
             android:textColor="#0C0C0C" />
 
@@ -161,7 +159,7 @@
             android:id="@+id/resetCreative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_bright"
+            android:background="@drawable/button_design"
             android:text="@string/reset_button"
             android:textColor="#0C0C0C" />
 
@@ -171,7 +169,7 @@
         android:id="@+id/applyLayout2"
         android:layout_width="83dp"
         android:layout_height="288dp"
-        android:background="#C53B3B"
+        android:background="@drawable/layout2_design"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -179,5 +177,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.723"></LinearLayout>
+
+    <Button
+        android:id="@+id/info_creativeMode"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/info"
+        app:layout_constraintEnd_toStartOf="@+id/volumeButton_creative"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
