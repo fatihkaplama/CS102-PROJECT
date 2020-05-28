@@ -192,6 +192,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/button_design"
                     android:text="@string/go_forward"
+                    android:textColor="#121111"
                     android:textSize="10sp" />
 
                 <Button
@@ -200,6 +201,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/button_design"
                     android:text="@string/turn_left"
+                    android:textColor="#121111"
                     android:textSize="10sp" />
 
                 <Button
@@ -208,6 +210,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/button_design"
                     android:text="@string/turn_right"
+                    android:textColor="#121111"
                     android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -218,6 +221,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/button_design"
                     android:text="get nectar"
+                    android:textColor="#121111"
                     android:textSize="10sp" />
 
             </LinearLayout>
@@ -261,6 +265,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/button_design"
+            android:textColor="#121111"
             android:text="@string/apply" />
 
         <Button
@@ -268,6 +273,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/button_design"
+            android:textColor="#121111"
             android:text="@string/reset" />
 
     </LinearLayout>
@@ -312,6 +318,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginBottom="65dp"
         android:background="@drawable/button_design"
+        android:textColor="#121111"
         android:gravity="center"
         android:text="@string/Movements"
         app:layout_constraintBottom_toTopOf="@id/guideline"

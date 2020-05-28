@@ -58,6 +58,7 @@
             android:layout_column="0"
             android:layout_margin="10dp"
             android:background="@drawable/button_design"
+            android:textColor="#121111"
             android:text="level 1" />
 
         <Button
@@ -68,6 +69,7 @@
             android:layout_column="1"
             android:layout_margin="10dp"
             android:background="@drawable/button_design"
+            android:textColor="#121111"
             android:text="Level 2" />
 
         <Button
@@ -78,8 +80,7 @@
             android:layout_column="2"
             android:layout_margin="10dp"
             android:background="@drawable/button_design"
-
-
+            android:textColor="#121111"
             android:text="Level 3" />
 
         <Button
@@ -90,6 +91,7 @@
             android:layout_column="0"
             android:layout_margin="10dp"
             android:background="@drawable/button_design"
+            android:textColor="#121111"
             android:text="Level 4" />
 
         <Button
@@ -100,7 +102,7 @@
             android:layout_column="1"
             android:layout_margin="10dp"
             android:background="@drawable/button_design"
-
+            android:textColor="#121111"
             android:text="Level 5" />
 
         <Button
@@ -111,7 +113,7 @@
             android:layout_column="2"
             android:layout_margin="10dp"
             android:background="@drawable/button_design"
-
+            android:textColor="#121111"
             android:text="Level 6" />
 
         <Button
@@ -122,7 +124,7 @@
             android:layout_column="0"
             android:layout_margin="10dp"
             android:background="@drawable/button_design"
-
+            android:textColor="#121111"
             android:text="Level 7" />
 
         <Button
@@ -133,6 +135,7 @@
             android:layout_column="1"
             android:layout_margin="10dp"
             android:background="@drawable/button_design"
+            android:textColor="#121111"
             android:text="Level 8" />
 
         <Button
@@ -143,6 +146,7 @@
             android:layout_column="2"
             android:layout_margin="10dp"
             android:background="@drawable/button_design"
+            android:textColor="#121111"
             android:text="Level 9" />
     </GridLayout>
 
