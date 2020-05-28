@@ -143,7 +143,7 @@ public class LineView extends View {
     }
 
     /**
-    it adds distance to list distance array
+    This method adds distance to list distance array
     @param, int distances that the user add
     @return distances
      */
