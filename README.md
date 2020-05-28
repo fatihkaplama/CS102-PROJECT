@@ -9,6 +9,8 @@ The information and code in this repository are submitted in partial fulfillment
 
 ## Project Description
    _FunAlgo is an application that allows people to learn algorithm logic with an entertaining way. Users can play games requiring basic structure of algorithms and also, they can draw different sorts of shapes on creative mode by using different algorithm steps. Users can see their achievements for each level. Moreover, FunAlgo includes different type of musics and themes that can be attractive for our main target audience. FunAlgo may be useful for adults but our target audience is children. FunAlgo is a mobile application and it is coded on Android._
+   ![educational](https://user-images.githubusercontent.com/63668011/83144433-025be100-a0fc-11ea-9255-cab384307156.png)
+
    
 
 ## Project Status
