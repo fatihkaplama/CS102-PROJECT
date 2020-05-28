@@ -23,5 +23,8 @@ On this page I will keep a weekly record of what I have done for the CS102 group
 + This week i did not change anythink big in the project. Simply added more comments and javadocs.
 + Added more detailed text to the information button for level 7,8,9
 + Added shared preferences to the avatar on the achievements page
+### ~ 25.05.2020 ~
++ Tried to solve the bugs for final code(such as mute button problem)
++ Also tried to make compatible app for all phone. Though some problems are fixed for other phones, few still carry on.
 ****
 
