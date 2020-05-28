@@ -16,8 +16,11 @@ The information and code in this repository are submitted in partial fulfillment
    
    Creative Mode
    
-   ![Instructions apge](https://user-images.githubusercontent.com/63668011/83145682-dfcac780-a0fd-11ea-8307-afab468b9f47.PNG)
-   Achievements Page
+   
+   Instructions Page:
+   
+   ![Instructions page](https://user-images.githubusercontent.com/63668011/83145682-dfcac780-a0fd-11ea-8307-afab468b9f47.PNG)
+
 
 
    
