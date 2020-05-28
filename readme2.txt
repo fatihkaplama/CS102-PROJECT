@@ -4,8 +4,6 @@
   Group: g3H / FUNALGO
   Title: FUNALGO
   Group Name: AlgoMen
-  
-![Instructions page](https://user-images.githubusercontent.com/63668011/83145682-dfcac780-a0fd-11ea-8307-afab468b9f47.PNG)
 
   PROJECT DESCRIPTIONS
 FunAlgo is an application that allows people to learn algorithm logic with an entertaining way. Users can play games requiring basic structure of algorithms and also, they can draw different sorts of shapes with creative mode by using different algorithm steps.
