@@ -12,6 +12,7 @@ The information and code in this repository are submitted in partial fulfillment
    
    Educational Mode
    
+   ![Educational Mode](https://user-images.githubusercontent.com/63668011/83145570-a7c38480-a0fd-11ea-89bb-6deb5b056bd8.PNG)
    Creative Mode
    
    Achievements Page
