@@ -40,14 +40,19 @@ public class CreativeMode extends AppCompatActivity {
     private Button volumeButton;
     private Button settingsButton;
     private Button infoButton;
+    private Button tortoiseButton, humanButton,tigerButton;
     private LinearLayout linearLayout, linearLayout2;
     private String[] degrees = {"0", "30", "45","60", "90", "120","150", "180"};
     private String[] distance = {"10", "30", "60", "100","150", "200"};
     private int distanceGo;
     private int degreesTurn;
     private int buttonLimit;
+
+
+
     private int countOfPieces;
     private int background;
+    private int delayTime;
     private android.widget.Spinner spinnerDegrees;
     private android.widget.Spinner spinnerDistance;
     private ArrayAdapter<String> dataAdapterForDistance;
@@ -61,13 +66,13 @@ public class CreativeMode extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // sets layout creative mode xml
+        // Sets layout creative mode xml
         setContentView(R.layout.activity_creative_mode);
 
-        // sets orientation to landscape
+        // Sets orientation to landscape
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        // find all properties below in xml codes
+        // Find all properties below in xml codes
         creativeModeLayout = findViewById(R.id.creativeMode_layout);
         creativeModeLayout.setBackgroundResource(background);
         returnButton = findViewById(R.id.returnButton_creative);
@@ -76,6 +81,9 @@ public class CreativeMode extends AppCompatActivity {
         infoButton = findViewById(R.id.info_creativeMode);
         clockwise = findViewById(R.id.clockwise_creative);
         counterClockwise = findViewById( R.id.counterClockwise_creative);
+        tortoiseButton = findViewById(R.id.tortoise_button);
+        humanButton = findViewById(R.id.human_creative);
+        tigerButton = findViewById(R.id.tiger_creative);
         applyCreative = findViewById(R.id.applyCreative);
         resetCreative = findViewById(R.id.resetCreative);
         linearLayout = findViewById(R.id.applyLayout);
@@ -84,18 +92,21 @@ public class CreativeMode extends AppCompatActivity {
         spinnerDegrees = findViewById(R.id.degreeSpinner);
         spinnerDistance = findViewById(R.id.distanceSpinner);
 
-        // takes background image from shared preferences method
+        // Setting default delay time
+        setDelayTime(75);
+
+        // Takes background image from shared preferences method
         background = getSharedPreferences("ShareTheme",MODE_PRIVATE).getInt("theme",0);
         creativeModeLayout.setBackgroundResource(background);
 
 
-        //sets count of pieces to 0
+        // Sets count of pieces to 0
         countOfPieces = 0;
 
-        // sets button limit to 0
+        // Sets button limit to 0
         buttonLimit = 0;
 
-        // adds data adapter for bot distance and degree options in order to show them as spinner
+        // Adds data adapter for bot distance and degree options in order to show them as spinner
         dataAdapterForDegrees = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, degrees);
         dataAdapterForDistance = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, distance);
 
@@ -105,11 +116,11 @@ public class CreativeMode extends AppCompatActivity {
         spinnerDegrees.setAdapter(dataAdapterForDegrees);
         spinnerDistance.setAdapter(dataAdapterForDistance);
 
-        // sets touch listener for both clockwise and counter clockwise buttons
+        // Sets touch listener for both clockwise and counter clockwise buttons
         clockwise.setOnTouchListener(new MyTouchListener());
         counterClockwise.setOnTouchListener( new MyTouchListener());
 
-        // sets drag listener to apply drag and drop action on those layouts
+        // Sets drag listener to apply drag and drop action on those layouts
         linearLayout.setOnDragListener(new MyDragListener());
         linearLayout2.setOnDragListener(new MyDragListener());
 
@@ -117,47 +128,71 @@ public class CreativeMode extends AppCompatActivity {
         resetCreative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // resets the whole layout
+                // Resets the whole layout
                 recreate();
             }
         });
 
-        // when all buttons added, the user pressed apply button and it draws the shapes asked user
+        // When all buttons added, the user pressed apply button and it draws the shapes asked user
         applyCreative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                // Unable apply button
                 applyCreative.setEnabled(false);
                 applyCreative.setBackgroundResource(R.drawable.button_design2);
 
-                // handler object to obtain timer when drawing shapes
+                // Handler object to obtain timer when drawing shapes
                 final Handler handler= new Handler();
 
-                // it starts count list starter which is a method from line view class
+                // It starts count list starter which is a method from line view class
                 lineView.countListStarter();
 
-                // it operates actions with specified time
+                // It operates actions with specified time
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        // it starts to count methods
+                        // It starts to count methods
                         lineView.countOfMethod();
 
-                        // it starts to draw the shapes from nothing with delaying
+                        // It starts to draw the shapes from nothing with delaying
                         lineView.draw();
 
-                        // it controls the delay time
-                        handler.postDelayed( this, 100);
+                        // It controls the delay time
+                        handler.postDelayed( this, getDelayTime());
                     }
-                },100);
+                },getDelayTime());
+            }
+        });
+        // When it is pressed, it works slowest mode
+        tortoiseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDelayTime(100);
+            }
+        });
+        // When it is pressed, it works middle speed mode
+        humanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDelayTime(75);
+            }
+        });
+        // When it is pressed, it works fastest mode
+        tigerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDelayTime(50);
             }
         });
 
-        // when it is pressed, it gives info
+
+        // When it is pressed, it gives info
         infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(getApplicationContext(), "You can drag and drop buttons to the left by choosing distances and degrees ☺", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(), "You can drag and drop buttons to the left by choosing distances and degrees. " +
+                                                                           "Also you can arrange the speed from tortoise, human and tiger ☺", Toast.LENGTH_LONG);
                 View view = toast.getView();
                 view.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN);
                 toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -165,7 +200,7 @@ public class CreativeMode extends AppCompatActivity {
             }
         });
 
-        // when it is pressed, it returns previous page
+        // When it is pressed, it returns previous page
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,7 +208,7 @@ public class CreativeMode extends AppCompatActivity {
             }
         });
 
-        // when it is pressed, it goes to setting page
+        // When it is pressed, it goes to setting page
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,6 +216,20 @@ public class CreativeMode extends AppCompatActivity {
                 startActivity( intent);
             }
         });
+    }
+    /**
+     * This method gets delayTime
+     * @return delayTime
+     */
+    public int getDelayTime() {
+        return delayTime;
+    }
+    /**
+     * This method sets delayTime
+     * @param, delayTime
+     */
+    public void setDelayTime(int delayTime) {
+        this.delayTime = delayTime;
     }
 
     /**
@@ -238,21 +287,21 @@ public class CreativeMode extends AppCompatActivity {
                     LinearLayout container = (LinearLayout)v;
                     if( view.getId() == R.id.clockwise_creative && v == getLinearLayout()){
                         buttonLimit++;
-                        if( buttonLimit == 8) // if limit exceed 8 it goes to second layout
+                        if( buttonLimit == 8) // If limit exceed 8 it goes to second layout
 
-                            // sets linear layout
+                            // Sets linear layout
                             setLinearLayout(linearLayout2);
 
-                        // convert spinner distance and degrees  to integer
+                        // Convert spinner distance and degrees  to integer
                         distanceGo = Integer.parseInt((String) spinnerDistance.getSelectedItem());
                         degreesTurn = Integer.parseInt((String) spinnerDegrees.getSelectedItem());
 
-                        // degrees and distances are added to their list in lineview class
+                        // Degrees and distances are added to their list in lineview class
                         lineView.addListDegree( degreesTurn);
                         lineView.addListDistanceArray( distanceGo);
                         lineView.addListDistance( distanceGo);
 
-                        // then new clockwise button is created and text is set
+                        // Then new clockwise button is created and text is set
                         clockwise = new Button(CreativeMode.this);
                         clockwise.setText( "↻" + distanceGo + "u " + degreesTurn + "°");
                         clockwise.setTextColor(Color.BLACK);
@@ -263,7 +312,7 @@ public class CreativeMode extends AppCompatActivity {
                         clockwise.setVisibility(View.VISIBLE);
                     }
 
-                    // it is same with the above but it is the situation if counter clockwise is dragged
+                    // It is same with the above but it is the situation if counter clockwise is dragged
                     else if( view.getId() == R.id.counterClockwise_creative && v == getLinearLayout()){
                         buttonLimit++;
                         if( buttonLimit == 8)

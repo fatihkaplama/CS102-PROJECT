@@ -56,6 +56,9 @@
     <string name="apply_button">APPLY</string>
     <string name="reset_button">RESET</string>
     <string name="_1">1</string>
+    <string name="tortoise" />
+    <string name="human" />
+    <string name="tiger" />
     >>>>>>> Stashed changes
 
 </resources>

@@ -188,4 +188,36 @@
         app:layout_constraintEnd_toStartOf="@+id/volumeButton_creative"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:layout_width="231dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/lineView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/tortoise_button"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:background="@drawable/tortoise"
+            android:text="@string/tortoise" />
+
+        <Button
+            android:id="@+id/human_creative"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:background="@drawable/human"
+            tools:text="@string/human" />
+
+        <Button
+            android:id="@+id/tiger_creative"
+            android:layout_width="83dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/tiger"
+            android:text="@string/tiger" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

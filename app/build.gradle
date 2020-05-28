@@ -34,4 +34,5 @@ dependencies {
     //implementation files('lib/graphlib-src.jar')
     //implementation files('lib/graphlib-0.0.1.jar')
     implementation files('libs/graphlib (1).jar')
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
