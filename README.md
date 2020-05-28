@@ -44,22 +44,17 @@ The information and code in this repository are submitted in partial fulfillment
 - [Deniz Semih Özal     21802414](group/member6_log.md)
 
 #### All Done So Far
-+ Deniz ---> Theme Page, Settings Page, (Java code with layouts)
-+ Alperen ---> Home Page, Level Page, Level1 Page, Level2 Page, Level8 Page (Java code with layouts)
-+ Arman ---> Music Page, ShowCodeI Page (Java code with layouts)
-+ Remzi ---> Level Page (Java code with layouts)
-+ Hüseyin ---> Play Page (Java code with layouts)
-+ Fatih ---> First Page, Level3 Page, Level4 Page, Level5 Page, Level6 Page, Level7 Page (Java code with layouts)
++ Deniz ---> Theme Page, Settings Page, Creative Mode(Java code with layouts)
++ Alperen ---> Home Page, Default Level Page, Level Page, Level1 Page, Level2 Page, Level3 Page, Level4 Page, Level5 Page, Level6 Page, Level7 Page, Level8 Page, Level9 Page (Java code with layouts)
++ Arman ---> Music Page, ShowCodeI Page, Achievements Page (Java code with layouts)
++ Remzi ---> Level Page, Creative Mode (Java code with layouts)
++ Hüseyin ---> Play Page, Level9 Page, Instructions Page(Java code with layouts)
++ Fatih ---> First Page, Default Level Page, Level Page, Level1 Page, Level2 Page, Level3 Page, Level4 Page, Level5 Page, Level6 Page, Level7 Page, Level8 Page, Level9 Page, Splash Page (Java code with layouts)
 
 #### What Remains To Be Done
-+ We are planning to add Creative Mode as well, now we are trying to add a pencil animation
-which follows the line simultaneously. 
-+ Level9 Page will be ready hopefully as well.
-+ Achievements Page is nearly done, now we are planning to getting data from the levels and store them
-in Achievements Page.
-+ Code efficiency and design are our main concern for now and we are tying to create more efficient, neat code.
-+ Comments will be added.
-
++ We could not solve the volume button issue and we have received API errors when trying to add methods.
++ Musics can be applied from    Musics Page, however we cannot mute the music in other pages.
++ It is not compatible for all phones, we could not solve this issue.
 
 ****
 **Instructor:** _(David Davenport)_   **TA:**  _(Laleh Eskandarian)_
