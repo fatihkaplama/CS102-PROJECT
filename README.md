@@ -14,9 +14,9 @@ _Include a concise description of your project here. Be sure to include the prop
 + **Group/project Selection:** completed (28/02/2020)
 + **Requirements:** completed (08/03/2020)
 + **UI Design:** completed (01/04/2020)
-+ **Detailed Design:** in progress
-+ **Implementation:** not started!
-+ **Reflections:** not yet!
++ **Detailed Design:** (22/05/2020)
++ **Implementation:** (27/05/2020)
++ **Reflections:** (27/05/2020)
 
 [Group Meetings Log](group/meetingslog.md)
 #### Group Members
