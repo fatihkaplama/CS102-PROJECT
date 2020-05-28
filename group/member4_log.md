@@ -24,3 +24,6 @@ solved the problem but we hope we will solve it.
 
 ### ~ 18.05.2020~
 This week, I finally managed solving animation of shapes. So the creative mode finished. I think, it was worth to my effort
+
+### ~ 25.05.2020~
+This week, We tried to solve the bugs as a group and finish the whole project.
