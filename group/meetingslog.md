@@ -99,5 +99,5 @@ At this meeting, we have discussed to do our detailed design  more detailed. The
 **Present:** Everyone   _**Absent:**_ 
 
 **Discussion:** 
-At this meeting, Firstly, we have talked about the last layouts and codes of project and we have tried to fix the bugs. However, we couldn't make the project layouts compatible because we cannot run the project appropriately for every mobile phone. The user can play the game and use every properties of application with last discussion and improvement.
+At this meeting, Firstly, we have talked about the last layouts and codes of project and we have tried to fix the bugs. However, we couldn't make the project layouts compatible because we cannot run the project appropriately for every mobile phone. The user can play the game and use every properties of application with last discussion and improvement. We separated two by two and each group finished the one part of the final project upload. The first group wrote the reflection. The second group wrote the readme 2 and the last group fixed the one bug. After the pushing  the works that we have done to GitHub, we uploaded the zip file to moodle. 
 
